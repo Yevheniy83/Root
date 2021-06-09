@@ -7,4 +7,7 @@ Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binar
 //----------------------------------------//
 Programming goals.
 * Studying price behavior based on a Binary code. 
-* Writing indicators related to price behavior based on Binary code
+Formulas: 
+**  The sum of units in one session. Sum of zeros in one session. Variables receiving knowledge. String 2786 & 2687
+
+* Writing indicators related to price behavior based on Binary code.
