@@ -5,7 +5,7 @@ Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binar
 * BID is used to transform the price into a binary code. You can also conduct transformation studies by ASK
 * The indicators are calculated in the conditions of a session change and are included in the function from the line 479
 * Expanding the collected data from vertical to horizontal position to facilitate analysis and writing to a binary file.Correction of the formation of a binary chain when the current session is closed and a new session is opened.Starting from the line 484 End of recording 691. 
-The received data is recorded in 3 binary files string
+The received data is recorded in 3 binary files 
 BodyHorizont_Bin.bin
 BodyHorizont_Price.bin
 BodyHorizont_Time.bin
