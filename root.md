@@ -8,19 +8,18 @@
 
 #property copyright "Yevheniy Kopanitskyy"
 #property link      ""
-#property version   "1.7.1"
+#property version   "1.7"
 #property strict
-//---Настройки индикатора под графиком
-//#property indicator_minimum -15
-//#property indicator_maximum 15
-//#property indicator_separate_window
-//#property indicator_buffers 2
-//#property indicator_color1 Blue
-//#property indicator_color2 Red
-//double buf_1[];
-//double buf_2[];
-//26.09.2019 - Расширена запись признака свитчь. Сейчас свичь пишется по 4 параметрам
-//------------------------------------
+
+
+//-----EXTERNAL VAR-----
+extern bool LongPosition=false;//Long
+extern bool ShortPosition=false;//Short
+extern bool BinIndWRITE=false;
+extern bool ALLtoARRAYWRITE=false;
+extern bool BODYHorizont=false;
+//--END---EXTERNAL VAR-----
+//------Импортирование библиотеки ТЕЛЕГРАММ - Отправка сообщений в канал------------------------------
 #import "Telegram4Mql.dll"
 string TelegramSendTextAsync(string apiKey,string chatId,string chatText);
 string TelegramSendText(string apiKey,string chatId,string chatText);
@@ -33,10 +32,10 @@ string TelegramSendDocument(string apiKey, string chatId, string filePath, strin
 string TelegramSendDocumentAsync(string apiKey,string chatId,string filePath,string caption="");
 //...
 #import
-long CHWPX;
-int IreceiveLevelresult;
-int NormalizaDigi=5;
-int im;
+//---END---Импортирование библиотеки ТЕЛЕГРАММ - Отправка сообщений в канал------------------------------
+
+
+//------ARRAYS-----
 double body[99999,20];
 //double BinaryKeys[9999,2000];
 int MaxMinArr[99999];
@@ -46,12 +45,14 @@ datetime PIPS_COL_DT[99999]; //Массив для времени цены
 double  PIPS_COL_Price[99999,6];//Массив для цены и индикаторов
 int bbb[1681,3];//Массив для записи классов сигнала
 int bbb_compare[9999,2,1681];//Поле 1 это индекс сигнала из основной базы, поле 2 Колличество повторений сигнала, Сигнал это страница
-int priceBEBO[100000,2];//Массив для просмотра бинарного поля цены, инициализирую числом 2
+//int priceBEBO[100000,2];//Массив для просмотра бинарного поля цены, инициализирую числом 2
 double AllAnalisysData[7205,20];
 datetime DT_AllAnalisysData[7205,1];
 double BodyHorizont_Bin[7210,2000];
 double BodyHorizont_Price[7210,2000];
 datetime BodyHorizont_Time[7210];
+double bodyAR[90000,50];//Массив для записи в переменные и Бин фаил
+datetime bodydt[90000];//массив для записи времени
 //int bintoarr[1441,1001];//запись параметров бинарного кода в массив.Запись массива раз в сутки в бинарный фаил
 //int IFb1;//Индекс 1 для массива bintoarr
 //int IFb2;//Индекс 2 для массива bintoarr
@@ -64,36 +65,115 @@ datetime BodyHorizont_Time[7210];
 //double temparrbid[1441,1001];
 //datetime temparrtime[1441];
 //datetime binrepit[32000,1001];//Запись повторов бинарных свечей
+double bodypips[99999,5];//Массив для анализа данных по методу Подсолнух
+double comp_bodypips[99999];//Массив для сапаставления и получения максимального значения
+//---END---ARRAYS----
+//------DOUBLE VARS-----
+double normalLevel;
+double center;
+double DoublspredPoint;
+double LEVELUP;
+double LEVELDOWN;
+double PriceZero;
+double CopenRes;
+double CcloseRes;
+double Level;
+double LEVELK=1;
+double Onda1;
+double CurPips;
+double price_Menus_one,pips_Menus_one;
+double restanteminimum;
+double restantemaximum;
+double Str_Pr_Bar=0;
+double Price1;
+double Price0;
+double price_minus;
+double price_plus;
+double BoolInd;//Bool сила
+double BearInd;
+double Maximum;//bool
+double Minimum;
+double IpaintFiboLineUP_2;
+double IpaintFiboLineUP_3;
+double IpaintFiboLineUP_5;
+double IpaintFiboLineUP_8;
+double IpaintFiboLineUP_13;
+double IpaintFiboLineUP_21;
+double IpaintFiboLineUP_34;
+double IpaintFiboLineUP_55;
+double IpaintFiboLineUP_89;
+double IpaintFiboLineUP_144;
+double IpaintFiboLineDOWN_2;
+double IpaintFiboLineDOWN_3;
+double IpaintFiboLineDOWN_5;
+double IpaintFiboLineDOWN_8;
+double IpaintFiboLineDOWN_13;
+double IpaintFiboLineDOWN_21;
+double IpaintFiboLineDOWN_34;
+double IpaintFiboLineDOWN_55;
+double IpaintFiboLineDOWN_89;
+double IpaintFiboLineDOWN_144;
+double HIGHT;
+double LOW;
+double CLOSE;
+double OPEN;
+double resOperandMax;
+double resOperandMin;
+//--END----DOUBLE VARS-----
 int k;
-int Writing;
-int ukazatel1Arr;
 int printdesc1;
 int printdesc2;
 int printdesc3;
 int printdesc4;
 int printdesc5, permis;
-datetime time_bar,time_BR,Bar_Tm=0;
+int LongShort;
+int Counter1;
+int Counter1_1;
+int Counter0;
+int Counter0_1;
+int Counter_Summa1;
+int Counter_Summa0;
+int zeroindex;
 int Counter=0;
-double Str_Pr_Bar=0;
+int TotaltuADDtoSELLTEXT,TotaltuADDtoBUYTEXT;
+int file_handle4;
+int iarw,BinInd3,BinInd3BO,BinInd3BE;
+int  spredpoints=15;
+int Handle;
+int MaxBinNumber_1Index;
+int MaxBinNumber_0Index;
+int MaxBinNumber_1;
+int MaxBinNumber_0;
+int mult=100000;
+int IndexMaximum;
+int IndexMinimum;
+int MaxInd_bodypips;
+int Switch1;
+int iaq,ibq;
+int ONE_BE;
+int IreceiveLevelresult;
+int NormalizaDigi=5;
+int im;
+//---END---INTEGER VARS-----
+//------STRING VARS-----
 string File_Name="File.csv";
 string FR_Nm=".csv";
-int Handle;
-int Handl_SZ;
-int x;
+string filename;
 string Sw_On;
-bool printvariable=false;
-double price_Menus_one,pips_Menus_one;
-double restanteminimum;
-double restantemaximum;
 string copy="copy";
 string SYmbol=Symbol();
-string FileName1=SYmbol+" MEMORYnature.txt";
-string FileName3=SYmbol+" MEMORYnature_FTP.txt";
-string FileName2=SYmbol+" MEMORYnature-ALLSIGNALS.txt";
+string RectanglLabel;
+string TextVisualIndicator;
+string Bo,Be;
+string Obiekt101="Obiekt101";
+string Obiektcampo1="100",Obiektcampo2="101",Obiektcampo3="102",Obiektcampo4="103",Obiektcampo5="104",Obiektcampo6="105",Obiektcampo7="106",Obiektcampo8="107",Obiektcampo9="108",Obiektcampo10="109",Obiektcampo11="110",Obiektcampo12="111",Obiektcampo13="112",Obiektcampo14="113",Obiektcampo15="114";
+//---END---STRING VARS-----
+//-----FILE NAMES-----
+//string FileName1=SYmbol+" MEMORYnature.txt";
+//string FileName3=SYmbol+" MEMORYnature_FTP.txt";
+//string FileName2=SYmbol+" MEMORYnature-ALLSIGNALS.txt";
 string FileName4=SYmbol+" Long&Short-Signals.txt";
-string FileName5=SYmbol+" LEVELS PRICE.txt";
-double bodyAR[90000,50];//Массив для записи в переменные и Бин фаил
-datetime bodydt[90000];//массив для записи времени
+//string FileName5=SYmbol+" LEVELS PRICE.txt";
 string FileName6=SYmbol+" indexarray.bin";
 string FileName7=SYmbol+" alltoarray.bin";
 string FileName8=SYmbol+" BinaryKeys_BIN.bin";
@@ -106,7 +186,7 @@ string FileName14=SYmbol+" PIPS_COLLECTION.txt";
 string FileName15=SYmbol+" PIPS_COL_DT.bin";
 string FileName16=SYmbol+" PIPS_COL_Price.bin";
 string FileName17=SYmbol+" DataCompare.txt";
-string FileName18=SYmbol+" priceBEBO.bin";//Фаил отгрузки и загрузки
+//string FileName18=SYmbol+" priceBEBO.bin";//Фаил отгрузки и загрузки
 string FileName19=SYmbol+" AllAnalisysData.bin";
 string FileName20=SYmbol+" DT_AllAnalisysData.bin";
 string FileName21=SYmbol+"BodyHorizont_Bin.bin";
@@ -114,146 +194,21 @@ string FileName22=SYmbol+"BodyHorizont_Price.bin";
 string FileName23=SYmbol+"BodyHorizont_Time.bin";
 string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
 string chatid="-1001177290832";//654751710 bot chat
-int SHIFT;
-double normalLevel;
-double center;
-double DoublspredPoint;
-double LEVELUP;
-double LEVELDOWN;
-int LongShort;
-int Counter1;
-int Counter1_1;
-int Counter0;
-int Counter0_1;
-int Counter_Summa1;
-int Counter_Summa0;
-int zeroindex;
-double Level;
-string filename;
-int pointsMASELL1;
-int pointsMASELL2;
-int pointsMABUY1;
-int pointsMABUY2;
-int TotaltuADDtoSELLTEXT,TotaltuADDtoBUYTEXT;
-int pointsRSIBUY1;
-int pointsRSISELL1;
-int pointsRSIBUY2;
-int pointsRSISELL2;
-int pointsRSIBUY3;
-int pointsRSISELL3;
-int pointsMACDBUY1;
-int pointsMACDSELL1;
-int pointsMACDBUY2;
-int pointsMACDSELL2;
-int pointsMACDBUY3;
-int pointsMACDSELL3;
-int pointsSTOCHSELL;
-int pointsSTOCHBUY;
-int file_handle4;
-double LEVELK=1;
-int iarw,BinInd3,BinInd3BO,BinInd3BE;
-int  spredpoints=15;
-double LEVELKMAX=50;
-int Procent=15;
-double PriceZero;
-double CopenRes;
-double CcloseRes;
+//--END---FILE NAMES-----
+//------DATETIME VARS-----
+datetime time_bar,time_BR,Bar_Tm=0;
+datetime BrTime;
+datetime bartimeresult;
+//---END---DATETIME VARS-----
+
+//------BOOL VARS-----
 bool write=true;
 bool writeall=true;
 bool write_Zero=true;
-int HL=2;
-int MaxBinNumber_1Index;
-int MaxBinNumber_0Index;
-int MaxBinNumber_1;
-int MaxBinNumber_0;
-string RectanglLabel;
-string TextVisualIndicator;
-int w1=0;
-int w2=0;
-double Onda1;
-double CurPips;
-int mult=100000;
-double Price1;
-double Price0;
-double price_minus;
-double price_plus;
-double BoolInd;//Bool сила
-double BearInd;
-double tik1;
-double tik2;
-int IndexMaximum;
-int IndexMinimum;
-double Maximum;//bool
-double Minimum;
-string objectdigit;
-string objectwolf="12000";
-double IpaintFiboLineUP_2;
-double IpaintFiboLineUP_3;
-double IpaintFiboLineUP_5;
-double IpaintFiboLineUP_8;
-double IpaintFiboLineUP_13;
-double IpaintFiboLineUP_21;
-double IpaintFiboLineUP_34;
-double IpaintFiboLineUP_55;
-double IpaintFiboLineUP_89;
-double IpaintFiboLineUP_144;
-int indexBody;
-int indexBinKey;
-int MaxInd_bodypips;
-double IpaintFiboLineDOWN_2;
-double IpaintFiboLineDOWN_3;
-double IpaintFiboLineDOWN_5;
-double IpaintFiboLineDOWN_8;
-double IpaintFiboLineDOWN_13;
-double IpaintFiboLineDOWN_21;
-double IpaintFiboLineDOWN_34;
-double IpaintFiboLineDOWN_55;
-double IpaintFiboLineDOWN_89;
-double IpaintFiboLineDOWN_144;
-datetime bartimeresult;
-string Bo,Be;
-extern bool LongPosition=false;//Long
-extern bool ShortPosition=false;//Short
-extern bool BinIndWRITE=false;
-extern bool ALLtoARRAYWRITE=false;
-extern bool BODYHorizont=false;
-//-----------------Построить модуль умножения Мультиплаера на % отката
-string Obiekt101="Obiekt101";
-double telo;
-datetime BrTime;
-double HIGHT;
-double LOW;
-double CLOSE;
-string Obiektcampo1="100",Obiektcampo2="101",Obiektcampo3="102",Obiektcampo4="103",Obiektcampo5="104",Obiektcampo6="105",Obiektcampo7="106",Obiektcampo8="107",Obiektcampo9="108",Obiektcampo10="109",Obiektcampo11="110",Obiektcampo12="111",Obiektcampo13="112",Obiektcampo14="113",Obiektcampo15="114";
-double OPEN;
-double resOperandMax;
-double resOperandMin;
-double bodypips[99999,5];//Массив для анализа данных по методу Подсолнух
-double comp_bodypips[99999];//Массив для сапаставления и получения максимального значения
-int Switch1;
-int iaq,ibq;
-int ass;
-int ONE_BE;
-//+------------------------------------------------------------------+
-//|                                                                  |
-//+------------------------------------------------------------------+
-/*double lotmultiplayer1;
-double lotmultiplayer2;
-double lotmultiplayer3;
-double lotmultiplayer4;
-double lotmultiplayer5;
-
-int LM1=3;
-int LM2=10;
-int LM3=30;
-int LM4=90;
-int LM5=270;*/
-//extern double NachalnDepozit=10000;
-//+--------------------End----------------------------------------------+
-//|                                                                  |
-//+------------------------------------------------------------------+
-/*------------------------------------------------------------*/
-
+//---END---BOOL VARS-----
+//------LONG VARS-----
+long CHWPX;
+//---END---LONG VARS-----
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
 //+------------------------------------------------------------------+
@@ -271,22 +226,16 @@ int init()
    ArrayInitialize(comp_bodypips,0);
    ArrayInitialize(PIPS_COL_DT,0);
    ArrayInitialize(PIPS_COL_Price,0);
-   ArrayInitialize(priceBEBO,2);//Массив инициализирую числом 2
-   ArrayInitialize(AllAnalisysData,1000);//Массив инициализирую числом 2
+// ArrayInitialize(priceBEBO,2);//Массив инициализирую числом 
+   ArrayInitialize(AllAnalisysData,1000);//Массив инициализирую числом 
    ArrayInitialize(BodyHorizont_Bin,10);
    ArrayInitialize(BodyHorizont_Price,10);
 
 //------------------------
 //---Инициализация Телеграм Бота
 
-//TelegramSendText(apikey,chatid,"//---TEST MODEIS ON---//");
-   TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.7");
-//TelegramSendScreen(apikey,chatid,"Tatiana_Bot_Initialized");
-//Comment(TelegramSendTextAsync(apikey, chatid, "test async"));
+TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.7");
 
-//string  subject="SHORT SIGNAL TEST";       // заголовок
-//string messageShort=" Open Short "+" Simbol "+" Time "+" "+"   DONATE FOR UPDATE PROJECT http://paypal.me/mql4Root ";
-//SendMail(subject,messageShort);
 //--Индикатор бинарный код - цель получение повторений индикатора
    Price1=0;
    Price0=0;
@@ -310,19 +259,6 @@ int init()
 //   }
 // return(0);
 //----------------------------------------
-
-//-----Параметры рисования индикатора
-
-//---- 2 индикаторных буффера использованы для счёта
-//SetIndexBuffer(0, buf_1);
-//SetIndexBuffer(1, buf_2);
-//---- Стиль исполнения графика
-//---- DRAW_ARROW - стрелки(символы)
-//SetIndexStyle (0, DRAW_HISTOGRAM, STYLE_SOLID, 3,clrBlue);
-//SetIndexStyle (1, DRAW_HISTOGRAM, STYLE_SOLID, 3,clrRed);
-//---- установка значений индикатора, которые не будут видимы на графике
-//SetIndexEmptyValue(0,0.0);
-//SetIndexEmptyValue(1,0.0);
 
 //---- завершение инициализации
 //--Работа с графиками---
@@ -1375,7 +1311,7 @@ int start()
       int Counter_Summa0_AR=0;
       for(int ik=1; ik<ikz; ik++)
         {
-         if(body[ik,1]==1)
+         if(body[ik,1]==1)//Проверить нужно ли установить перещёт с 0 - что находится в ячейке ik,1
            {
             Counter_Summa1_AR++;
            }
@@ -1442,7 +1378,8 @@ int start()
       IpaintFiboLineDOWN_55=NormalizeDouble((IpaintFiboLineDOWN_34-(normalLevel*55)),NormalizaDigi);
       IpaintFiboLineDOWN_89=NormalizeDouble((IpaintFiboLineDOWN_55-(normalLevel*89)),NormalizaDigi);
       IpaintFiboLineDOWN_144=NormalizeDouble((IpaintFiboLineDOWN_89-(normalLevel*144)),NormalizaDigi);
-
+      
+      //ДОБАВИТь расчёт ПИ для дальнейшей записи в массив и анализа
 
       //  FileSeek(file_handle5,0,SEEK_END);
       // FileWrite(file_handle5,Symbol(),"; ",iTime(Symbol(),0,1),";",one_BE," ;UP1;",LEVELUP," ;UP2;",IpaintFiboLineUP_2,";UP3;",IpaintFiboLineUP_3,";UP5;",IpaintFiboLineUP_5,";UP8;",IpaintFiboLineUP_8,";UP13;",IpaintFiboLineUP_13,";UP21;",IpaintFiboLineUP_21,";UP34;",IpaintFiboLineUP_34,";UP55;",IpaintFiboLineUP_55,";UP89;",IpaintFiboLineUP_89,";UP144;",IpaintFiboLineUP_144,";DOWN1;",LEVELDOWN,";DOWN2;",IpaintFiboLineDOWN_2,";DOWN3;",IpaintFiboLineDOWN_3,";DOWN5;",IpaintFiboLineDOWN_5,";DOWN8;",IpaintFiboLineDOWN_8,";DOWN13;",IpaintFiboLineDOWN_13,";DOWN21;",IpaintFiboLineDOWN_21,";DOWN34;",IpaintFiboLineDOWN_34,";DOWN55;",IpaintFiboLineDOWN_55,";DOWN89;",IpaintFiboLineDOWN_89,";DOWN144;",IpaintFiboLineDOWN_144,";");
@@ -1454,7 +1391,7 @@ int start()
 
       int inf;
       int ic;
-      for(ic=1; ic<99999; ic++)//Получаю число индекса при певом 0. Если 0 находится на позиции 3 то индексом будет 3
+      for(ic=1; ic<99999; ic++)//Получаю число индекса при первом 0. Если 0 находится на позиции 3 то индексом будет 3
         {
          if(body[ic,0]==10)
            {
@@ -1623,7 +1560,7 @@ int start()
       int ArM1=1;
       int ArM0=1;
       int Permis=1;
-      Print(If);
+      //Print(If);
 
       for(in1=1; in1<If; in1++)
         {
@@ -1679,7 +1616,7 @@ int start()
 
       MaxBinNumber_1=(ArrayMaximum_1[MaxBinNumber_1Index]);//Присваиваю полученное значение в переменную
       MaxBinNumber_0=(ArrayMaximum_0[MaxBinNumber_0Index]);//Присваиваю полученное значение в переменную
-      //---------запись индекса синапса в фаил-----------
+      
       //-------индикатор Компенсации
       int compensation_1,compensation_2;
       compensation_1=MaxMinArr[IndexMaximum]-MaxBinNumber_1; //bool
@@ -2680,7 +2617,7 @@ int start()
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
-   Bars_Z(Bid);
+   Bars_Z(Bid);//Здесь можно заменить на Ask и получать другие значения
    Text_OBJ_LABEL("Tx_FM",1,1,50,"l",28,"Wingdings",clrOrange);
 
 //+------------------------------------------------------------------+
@@ -2711,7 +2648,7 @@ void Bars_Z(double iBid)//Играем в Кафетерий
         {
          qt_C=Counter+qt;
          body[qt_C,0]=3;
-         body[qt_C,1]=1;//Çàìåíåî íà 0 áûëà åäåíèöà
+         body[qt_C,1]=1;
          body [qt_C,2]=2;
          body [qt_C,3]=Str_Pr_Bar+(qt+1)*Point;
          //body [qt_C,4]=TimeCurrent();//Записываю время тика.
@@ -2797,6 +2734,10 @@ void Bars_Z(double iBid)//Играем в Кафетерий
 void deinit()
   {
 
+
+
+
+
 //-------------------------------------------------------------------------
 //---
    Str_Pr_Bar=0;
@@ -2821,3 +2762,39 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 //---
   }
+
+//+------------------------------------------------------------------+
+//|                void op_MasD()                                    |
+//+------------------------------------------------------------------+
+//int MasD[500,3];
+//int Z_N=499;
+//int Ch_M=0;
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+//void op_MasD(int Cc_1,int Cc_0)
+//  {
+// Ch_M++;
+// MasD[Z_N,0]=(int)Time[1];
+// MasD[Z_N,1]=Cc_1;
+// MasD[Z_N,2]=Cc_0;
+// Z_N--;
+// if(Z_N<0)
+//  {
+//  Z_N+=1;
+// for(int qt=499; qt>1; qt--)
+//   {
+//   MasD[qt,0]=MasD[qt-1,0];
+//   MasD[qt,1]=MasD[qt-1,1];
+//   MasD[qt,2]=MasD[qt-1,2];
+// }
+//  MasD[0,0]=0;
+//  MasD[0,1]=0;
+//  MasD[0,2]=0;
+// }
+/**/
+//}
+/**/
+//+------------------------------------------------------------------+
+
+
