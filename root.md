@@ -761,7 +761,7 @@ int start()
                // ------ Processing 0 ------
                if(body[iaq,1]==0)// If in binary cell 1, then indicate the price higher - 0.00001
                  {
-                  
+
                   double price=body[iaq,0]-0.00001;// Get the price of the pointer
                   int findeprice=0;
                   int Break1=0;
@@ -776,7 +776,7 @@ int start()
                         findeprice=1;
                         Break1=1;
                         break;
-                        
+
                        }
                      if(Break1==1)
                        {
@@ -814,7 +814,7 @@ int start()
                // ------- If the price record in the array is in column 3 ------
                if(body[iaq,3]>0 && body[iaq,3]<3)
                  {
-                  
+
                   if(body[iaq,1]==1)// If there is 1 in a binary cell, then indicate the price above + 0.00001
                     {
                      double price=body[iaq,3]+0.00001;
@@ -831,118 +831,120 @@ int start()
                            findeprice=1;
                            Break1=1;
                            break;
-                          
+
                           }
                         if(Break1==1)
                           {
                            break;
                           }
                        }
-                     //---------------Если нет цены то дописывать цену ниже-----------------
+
+                     // ------- If there is no price, then add the price below ------
                      if(findeprice==0)//Если не найдена цена значит нужно добавить в массив запись
                        {
-                        for(ibq=1; ibq<99999; ibq++)//Perebor stolbca 1
+                        for(ibq=1; ibq<99999; ibq++)
                           {
-                           if(bodypips[ibq,0]==0)//Нахожу записаннйы  0 в массиве.Получаю индекс в массиве
+                           if(bodypips[ibq,0]==0)
                              {
 
-                              bodypips[ibq,0]=price;//Присваиваю цену в первую ящейку массива.Массив заполнен 0;
-                              bodypips[ibq,1]=bodypips[ibq,1]+1;//Увеличиваю значение массива + 1;
-                              Break2=1;//Присваиваю 1 так как вошли в тело
-                              break;//Выход по получению
+                              bodypips[ibq,0]=price;
+                              bodypips[ibq,1]=bodypips[ibq,1]+1;
+                              Break2=1;
+                              break;
 
                              }
-                           if(Break2==1)//выходим из тела функции перебора
+                           if(Break2==1)
                              {
-                              break;//Выход из перебора
+                              break;
                              }
                           }
                        }
                     }
-                  //----------Обработка 0----------------
-                  if(body[iaq,1]==0)//Если в бинарной ячейке 1 то указуваем на цену выше - 0,00001
+
+                  // ---------- Processing 0 ----------------
+                  if(body[iaq,1]==0)// If in binary cell 1, then indicate the price higher - 0.00001
                     {
-                     //Указываю на цену
-                     double price=body[iaq,3]-0.00001;//Получаю цену указателя
-                     int findeprice=0;//Найдено 0
-                     int Break1=0;//выход из перебора 1
-                     int Break2=0;//выход из перебора 2
-                     for(ibq=1; ibq<99999; ibq++)//Perebor stolbca 1
+
+                     double price=body[iaq,3]-0.00001;
+                     int findeprice=0;
+                     int Break1=0;
+                     int Break2=0;
+                     for(ibq=1; ibq<99999; ibq++)
                        {
-                        if(bodypips[ibq,0]==price)//Нахожу записанную цену в массиве.Получаю индекс в массиве
+                        if(bodypips[ibq,0]==price)
                           {
 
-                           //bodypips[ib,0]=price;//Присваиваю цену в первую ящейку массива.Массив заполнен 0;
-                           bodypips[ibq,1]=bodypips[ibq,1]+1;//Увеличиваю значение массива + 1;
-                           findeprice=1;//Присваиваю 1 так как вошли в тело
-                           Break1=1;//Присваиваю 1 так как вошли в тело
-                           break;//Выход по получению
-                           //добавить условие выхода из второго щетчика
+                           //bodypips[ib,0]=price;
+                           bodypips[ibq,1]=bodypips[ibq,1]+1;
+                           findeprice=1;
+                           Break1=1;
+                           break;
+
                           }
-                        if(Break1==1)//выходим из тела функции
+                        if(Break1==1)
                           {
-                           break;//Выход из перебора
+                           break;
                           }
                        }
-                     //---------------Если нет цены то дописывать цену ниже-----------------
-                     if(findeprice==0)//Если не найдена цена значит нужно добавить в массив запись
+
+                     // ------ If there is no price, then add the price below ------
+                     if(findeprice==0)
                        {
-                        for(ibq=1; ibq<99999; ibq++)//Perebor stolbca 1
+                        for(ibq=1; ibq<99999; ibq++)
                           {
-                           if(bodypips[ibq,0]==0)//Нахожу записаннйы  0 в массиве.Получаю индекс в массиве
+                           if(bodypips[ibq,0]==0)
                              {
 
-                              bodypips[ibq,0]=price;//Присваиваю цену в первую ящейку массива.Массив заполнен 0;
-                              bodypips[ibq,1]=bodypips[ibq,1]+1;//Увеличиваю значение массива + 1;
-                              Break2=1;//Присваиваю 1 так как вошли в тело
-                              break;//Выход по получению
+                              bodypips[ibq,0]=price;
+                              bodypips[ibq,1]=bodypips[ibq,1]+1;
+                              Break2=1;
+                              break;
 
                              }
-                           if(Break2==1)//выходим из тела функции перебора
+                           if(Break2==1)
                              {
-                              break;//Выход из перебора
+                              break;
                              }
                           }
                        }
 
                     }
-                  //---
+
                  }
-              }//if swith1=1
-           }//Перебор массива Боди
+              }
+           }
 
 
-         //----Получение индекса максимального значения по цене---
-         //Перебором массива присвоить значения в массив
+
          for(int ic=1; ic<99999; ic++)//Perebor stolbca 1
            {
-            comp_bodypips[ic]=bodypips[ic,1];//Присваиваю значение с массива 1 в массив 2
+            comp_bodypips[ic]=bodypips[ic,1];
             if(bodypips[ic,0]==0)
               {
-               break;//Выход из перебора если цена равна 0
+               break;
               }
 
            }
-         MaxInd_bodypips =ArrayMaximum(comp_bodypips,WHOLE_ARRAY,0);//Получаю индекс в массиве в котором наиболее максимально показал бинарный код на цену
-         //Print(" Index conteiner ", bodypips[MaxInd_bodypips,1]," Price conteiner ",bodypips[MaxInd_bodypips,0]," ",bodypips[3,0]," ",bodypips[3,1] );//," Body ",body[3,3]," ",body[3,1]," Body ",body[6,0]," ",body[6,1]
+         MaxInd_bodypips =ArrayMaximum(comp_bodypips,WHOLE_ARRAY,0);// Get the index in the array in which the binary code for the price showed the most
 
-         //-----Формула 2 - Если новая цена больше предыдущей то полученный максимум перевожу в пипсы и сумирую к предыдущей цене (цена+1) цене
-         //Если новая цена меньше предыдущей то полученный максимум перевожу в пипсы  и минусую от предыдущей цены (цена-1) цены.
-         //Полученный результат сравниваю с текущей ценой. Если цена поднялась и текущая цена меньше цены-1 плюс пипсы значит цена внутри
-         //Если цена опустилась и цена больше  цены-1 минус пипсы значит цена внутри Обусловлю 0
-         //Если цена поднялась и текущая цена больше цены-1 плюс пипсы значит цена снаружи
-         //Если цена опустилась и цена меньше  цены-1 минус пипсы значит цена снаружи и Обусловлю 1
-         double PipsPrice=NormalizeDouble(pips_Menus_one*Point,5);//Получаю пипсы в цене
-         //Print("pips_Menus_one ",pips_Menus_one," PipsPrice ",PipsPrice);
+         // ----- Formula 2 - If the new price is higher than the previous one, then the resulting maximum is translated into pips and summed up to the previous price (price + 1) price
+         // If the new price is less than the previous one, then the resulting maximum is translated into pips and minus the previous price (price-1) price.
+         // The obtained result is compared with the current price. If the price has risen and the current price is less than price-1 plus pips, then the price is inside
+         // If the price has dropped and the price is higher than the price-1 minus pips, then the price is inside I will Condition 0
+         // If the price has risen and the current price is higher than the price-1 plus pips, then the price is outside
+         // If the price has dropped and the price is less than price-1 minus pips, then the price is outside and I will Condition 1
+
+         double PipsPrice=NormalizeDouble(pips_Menus_one*Point,5);
+
 
          BinInd3BO=10;
          BinInd3BE=10;
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one)
            {
-            price_plus=price_Menus_one+PipsPrice;//Сумиравал к цене -1 пипсы максимума -1
-            //Print(" price_plus ",price_plus);
+            price_plus=price_Menus_one+PipsPrice;// Summed to the price -1 pips of the maximum -1
 
-            if(bodypips[MaxInd_bodypips,0]<price_plus)//Если текущая цена меньше Полученной цены с пипсами значит цена внутри присвоить 1
+
+            if(bodypips[MaxInd_bodypips,0]<price_plus)// If the current price is less than the Received price with pips, then the price inside is assigned 1
               {
                BinInd3=0;
                BinInd3BO=0;
@@ -950,7 +952,7 @@ int start()
                Bo="Bo_"+IntegerToString(BinInd3);
 
               }
-            if(bodypips[MaxInd_bodypips,0]>price_plus)//Если текущая цена меньше Полученной цены с пипсами значит цена внутри присвоить 1
+            if(bodypips[MaxInd_bodypips,0]>price_plus)
               {
                BinInd3=1;
                BinInd3BO=1;
@@ -961,14 +963,14 @@ int start()
 
          if(bodypips[MaxInd_bodypips,0]<price_Menus_one)
            {
-            price_minus=price_Menus_one-PipsPrice;//Отминусавал от цены -1 пипсы максимума -1
-            if(bodypips[MaxInd_bodypips,0]>price_minus)//Если текущая цена меньше Полученной цены с пипсами значит цена внутри присвоить 1
+            price_minus=price_Menus_one-PipsPrice;
+            if(bodypips[MaxInd_bodypips,0]>price_minus)
               {
                BinInd3=0;
                BinInd3BE=0;
                Be="Be_"+IntegerToString(BinInd3);
               }
-            if(bodypips[MaxInd_bodypips,0]<price_minus)//Если текущая цена меньше Полученной цены с пипсами значит цена внутри присвоить 1
+            if(bodypips[MaxInd_bodypips,0]<price_minus)
               {
                BinInd3=1;
                BinInd3BE=1;
@@ -976,12 +978,13 @@ int start()
               }
            }
 
-         //--------Сканер бинарного поля цены
-         //--------По приходу минуты пишем в массив изменения цены присваивая значение полученние индикатором
-         //--------------Фаза 1-------------//Вычисление. Получаю колличество пипсов пройденных ценой за период 1 и 2.
+
+         // -------- Binary price field scanner
+         // -------- When the minute arrives, write the price change to the array, assigning the value obtained by the indicator
+         // -------------- Phase 1 ------------- // Calculation. I get the number of pips traversed by the price for periods 1 and 2.
          Price1=Price0;
          Price0=bodypips[MaxInd_bodypips,0];
-         //Print(" Price1 ",Price1," Price0 ",Price0);
+
          if(Price1!=0 && Price0!=0)
            {
             if(Price1<Price0)
@@ -993,19 +996,17 @@ int start()
                CurPips=NormalizeDouble((Price1-Price0),5)*mult;
               }
 
-            //--------------Фаза 2-------------//Деление полученных пипсов на число инидкатора
+
+            // -------------- Phase 2 ------------- // Divide the received pips by the number of the indicator
             Onda1=NormalizeDouble(CurPips/bodypips[MaxInd_bodypips,1],2);
             Print(" CurPips ",CurPips," Onda1 ",Onda1);
 
            }
-         //----------------------------конец
-         //----Присвоить значения в массивы
 
-         //---Найдём посленюю запись------
          int indmas;//Index
          for(indmas=1; indmas<99999; indmas++)
            {
-            if(PIPS_COL_Price[indmas,0]==0)//В нулевую записываю цену
+            if(PIPS_COL_Price[indmas,0]==0)
               {
 
                break;
@@ -1014,49 +1015,46 @@ int start()
 
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one)
            {
-            PIPS_COL_Price[indmas,2]=0;//Тип бул
-            PIPS_COL_Price[indmas,3]=1;//Подтип 0/1
+            PIPS_COL_Price[indmas,2]=0;// Boolean type
+            PIPS_COL_Price[indmas,3]=1;// Subtype 0/1
            }
          if(bodypips[MaxInd_bodypips,0]<price_Menus_one)
            {
-            PIPS_COL_Price[indmas,2]=1;//Тип бер
-            PIPS_COL_Price[indmas,3]=0;//Подтип 0/1
+            PIPS_COL_Price[indmas,2]=1;//Bear type
+            PIPS_COL_Price[indmas,3]=0;// Subtype 0/1
            }
 
-         //-----Время-----
-         PIPS_COL_DT[indmas]=iTime(Symbol(),0,1);//записываю время
-         //-----Цена------
-         PIPS_COL_Price[indmas,0]=bodypips[MaxInd_bodypips,0];//В нулевую записываю цену
-         PIPS_COL_Price[indmas,1]=bodypips[MaxInd_bodypips,1];//Максимальное значение индекса-
 
+         //-----Time-----
+         PIPS_COL_DT[indmas]=iTime(Symbol(),0,1);// record the time
 
-         //int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
-         //if(file_handle15>0)
-         // {
+         //-----Price------
+         PIPS_COL_Price[indmas,0]=bodypips[MaxInd_bodypips,0];// Write the price to zero
+         PIPS_COL_Price[indmas,1]=bodypips[MaxInd_bodypips,1];// Maximum index value-
 
-         // FileSeek(file_handle15,0,SEEK_CUR);
+         //-----I write the received data into a Binary File for drawing data using the Histogram method
+         int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
+         if(file_handle15>0)
+           {
 
-         //FileWriteArray(file_handle15,PIPS_COL_DT,0,WHOLE_ARRAY);
-         // FileClose(file_handle15);
+            FileSeek(file_handle15,0,SEEK_CUR);
 
-         //  }
-         // int file_handle16=FileOpen(FileName16,FILE_READ|FILE_WRITE|FILE_BIN);
-         // if(file_handle16>0)
-         //  {
+            FileWriteArray(file_handle15,PIPS_COL_DT,0,WHOLE_ARRAY);
+            FileClose(file_handle15);
 
-         // FileSeek(file_handle16,0,SEEK_CUR);
+           }
+         int file_handle16=FileOpen(FileName16,FILE_READ|FILE_WRITE|FILE_BIN);
+         if(file_handle16>0)
+           {
 
-         //FileWriteArray(file_handle16,PIPS_COL_Price,0,WHOLE_ARRAY);
-         // FileClose(file_handle16);
+            FileSeek(file_handle16,0,SEEK_CUR);
 
-         //}
+            FileWriteArray(file_handle16,PIPS_COL_Price,0,WHOLE_ARRAY);
+            FileClose(file_handle16);
 
+           }
 
-
-         //Print(bodypips[MaxInd_bodypips,0]>price_plus,"   ",bodypips[MaxInd_bodypips,0]<price_plus);
-         //Print(bodypips[MaxInd_bodypips,0]>price_minus,"   ",bodypips[MaxInd_bodypips,0]<price_minus);
-
-         //-----------Принтинг Собраных значений в Фаил --------
+         // ------ Printing Collected Values ​​to File ------
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one && (bodypips[MaxInd_bodypips,0]>price_plus ||bodypips[MaxInd_bodypips,0]<price_plus))
            {
             int file_handle14=FileOpen(FileName14,FILE_READ|FILE_WRITE," ");
@@ -1083,9 +1081,7 @@ int start()
 
               }
            }
-        }//End funcions
-
-      //---------Отрисовка на графике 2 линий индикатора--------------
+        }
 
 
 
@@ -1279,15 +1275,9 @@ int start()
          Alert(" EA ERROR- RELOAD");
          ResetLastError();
         }
-      //---Библиотека
-      //Отсуда выводить данные в библиотеку.
-      //сбрасывать все переменные
-      //----
-      //-----
-      //Print(TelegramSendText(apikey, chatid, "test"));
-      //--
+
       im=im++;
-      //--замена функции на перещёт в массиве
+      //Compensation price calculation function
       int ikz;
       for(ikz=1; ikz<99999; ikz++)
         {
@@ -1300,7 +1290,7 @@ int start()
       int Counter_Summa0_AR=0;
       for(int ik=1; ik<ikz; ik++)
         {
-         if(body[ik,1]==1)//Проверить нужно ли установить перещёт с 0 - что находится в ячейке ik,1
+         if(body[ik,1]==1)
            {
             Counter_Summa1_AR++;
            }
@@ -1314,22 +1304,11 @@ int start()
            }
 
         }
-      //Print("Counter_Summa1_AR ",Counter_Summa1_AR," Counter_Summa0_AR ",Counter_Summa0_AR);
-      //Print();
-      int one_BE=Counter_Summa1_AR;
-      int zero_BE=Counter_Summa0_AR;
+
+      int one_BE=Counter_Summa1_AR;//Power of bears
+      int zero_BE=Counter_Summa0_AR;//Bull strength
       double Rez_BE=one_BE-zero_BE;
-      //Print("one_BE ",one_BE," zero_BE ",zero_BE," Rez_BE ",Rez_BE);
-      //-------Escritura de parametros de array al fichero binario
-      //if(Rez_BE==0 && one_BE<=60)
-      //{
-
-
-
-      //-----Запись Расщёта Уравней в фаил---//
-      //int file_handle5=FileOpen(FileName5,FILE_READ|FILE_WRITE," ");
-      //if(file_handle5>0)
-      // {
+      // ----- Calculation of Fibonacci levels -----
       RefreshRates();
       datetime IreceiveBarTime=iTime(Symbol(),0,1);
       bartimeresult=IreceiveBarTime;
@@ -1341,7 +1320,7 @@ int start()
       OPEN=iOpen(Symbol(),0,1);
       normalLevel=IreceiveLevelresult*Point;
       center=NormalizeDouble(HIGHT-((HIGHT-LOW)/2),NormalizaDigi);
-      //---Lines calculation------
+
       DoublspredPoint=spredpoints*Point();
       LEVELUP=NormalizeDouble((center+normalLevel),NormalizaDigi);//1
       LEVELDOWN=NormalizeDouble((center-normalLevel),NormalizaDigi);//1
@@ -1367,20 +1346,18 @@ int start()
       IpaintFiboLineDOWN_55=NormalizeDouble((IpaintFiboLineDOWN_34-(normalLevel*55)),NormalizaDigi);
       IpaintFiboLineDOWN_89=NormalizeDouble((IpaintFiboLineDOWN_55-(normalLevel*89)),NormalizaDigi);
       IpaintFiboLineDOWN_144=NormalizeDouble((IpaintFiboLineDOWN_89-(normalLevel*144)),NormalizaDigi);
+      // ---END-- Calculation of Fibonacci levels -----
+
 
       //ДОБАВИТь расчёт ПИ для дальнейшей записи в массив и анализа
 
-      //  FileSeek(file_handle5,0,SEEK_END);
-      // FileWrite(file_handle5,Symbol(),"; ",iTime(Symbol(),0,1),";",one_BE," ;UP1;",LEVELUP," ;UP2;",IpaintFiboLineUP_2,";UP3;",IpaintFiboLineUP_3,";UP5;",IpaintFiboLineUP_5,";UP8;",IpaintFiboLineUP_8,";UP13;",IpaintFiboLineUP_13,";UP21;",IpaintFiboLineUP_21,";UP34;",IpaintFiboLineUP_34,";UP55;",IpaintFiboLineUP_55,";UP89;",IpaintFiboLineUP_89,";UP144;",IpaintFiboLineUP_144,";DOWN1;",LEVELDOWN,";DOWN2;",IpaintFiboLineDOWN_2,";DOWN3;",IpaintFiboLineDOWN_3,";DOWN5;",IpaintFiboLineDOWN_5,";DOWN8;",IpaintFiboLineDOWN_8,";DOWN13;",IpaintFiboLineDOWN_13,";DOWN21;",IpaintFiboLineDOWN_21,";DOWN34;",IpaintFiboLineDOWN_34,";DOWN55;",IpaintFiboLineDOWN_55,";DOWN89;",IpaintFiboLineDOWN_89,";DOWN144;",IpaintFiboLineDOWN_144,";");
-      // FileClose(file_handle5);
-      // }
 
       k=0;
       ArrayInitialize(MaxMinArr,0);
-
+      // ----- Calculation of  Maximum , Minimum INDICARTOR
       int inf;
       int ic;
-      for(ic=1; ic<99999; ic++)//Получаю число индекса при первом 0. Если 0 находится на позиции 3 то индексом будет 3
+      for(ic=1; ic<99999; ic++)
         {
          if(body[ic,0]==10)
            {
@@ -1388,9 +1365,7 @@ int start()
            }
         }
       inf=ic-1;
-      //----------------------------
-      //if(body[1,0]>0|| body[1,1]>0 || body[1,3]>0)
-      // {
+
       int b1=(int)body[1,1];
       if(b1==1)
         {
@@ -1401,13 +1376,11 @@ int start()
          k=0;
         };
       MaxMinArr[1]=k;
-      //  }
+
       //-----------------------------
       int ina;
       for(ina=2; ina<=inf; ina++)
         {
-         //if(body[ina,0]>0|| body[ina,1]>0 || body[ina,3]>0)
-         //  {
 
          if(body[ina,1]==1)
            {
@@ -1418,29 +1391,20 @@ int start()
             k--;
            };
          MaxMinArr[ina]=k;
-         // }
+
         }
 
       //--Maximum - minimum INDEX ARRAY
-      IndexMaximum=ArrayMaximum(MaxMinArr,WHOLE_ARRAY,0);//Получаю максимальное число из массива
-      IndexMinimum=ArrayMinimum(MaxMinArr,WHOLE_ARRAY,0);//Получаю минимальное число из массива
+      IndexMaximum=ArrayMaximum(MaxMinArr,WHOLE_ARRAY,0);
+      IndexMinimum=ArrayMinimum(MaxMinArr,WHOLE_ARRAY,0);
       //--------Max Min Numbers
       Maximum=MathAbs(MaxMinArr[IndexMaximum]);//bool
       Minimum=MathAbs(MaxMinArr[IndexMinimum]);//bear
-      //---Последняя цифра показывает на тип сопротивления которое образовалось в нутри свечи---//
-      int LasData=MaxMinArr[inf];//Используется для индикатора дивергенции
-
-
-      //-------------Тест Отработка ошибок после перезборки ----------
-      //int file_handle17=FileOpen(FileName17,FILE_READ|FILE_WRITE," ");
-      //if(file_handle17>0)
-      //{
-
-      // FileSeek(file_handle17,0,SEEK_END);
-
-      //FileWrite(file_handle17,Symbol()," IndexMaximum ",IndexMaximum," IndexMinimum ",IndexMinimum," Maximum ", Maximum," Minimum ",Minimum," | ");
-      //FileClose(file_handle17);
-      // }
+      
+      // ---END Calculation of  Maximum , Minimum INDICARTOR
+      
+      // --- The last digit indicates the type of resistance that formed inside the candle --- //
+      int LasData=MaxMinArr[inf];// Used for the divergence indicator
 
       //-------Sinapsis de precios-------------------
 
