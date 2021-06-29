@@ -1349,9 +1349,6 @@ int start()
       // ---END-- Calculation of Fibonacci levels -----
 
 
-      //ДОБАВИТь расчёт ПИ для дальнейшей записи в массив и анализа
-
-
       k=0;
       ArrayInitialize(MaxMinArr,0);
       // ----- Calculation of  Maximum , Minimum INDICARTOR
@@ -1400,15 +1397,16 @@ int start()
       //--------Max Min Numbers
       Maximum=MathAbs(MaxMinArr[IndexMaximum]);//bool
       Minimum=MathAbs(MaxMinArr[IndexMinimum]);//bear
-      
+
       // ---END Calculation of  Maximum , Minimum INDICARTOR
-      
+
       // --- The last digit indicates the type of resistance that formed inside the candle --- //
       int LasData=MaxMinArr[inf];// Used for the divergence indicator
 
-      //-------Sinapsis de precios-------------------
 
-      double komp1[99999];//Массив для отображения синапса в записи
+      // -----Synapsys Indicator-----
+
+      double komp1[99999];// Array for displaying the synapse in the record
       ArrayInitialize(komp1,0);
       ArrayInitialize(kompa,10);
 
@@ -1426,7 +1424,7 @@ int start()
         }
 
 
-      int inr1=inr-1;//Определён конец заполненности массива
+      int inr1=inr-1;
 
       for(int inb=1; inb<inr1; inb++)
         {
@@ -1483,10 +1481,10 @@ int start()
          FileWrite(file_handle17,Symbol()," MinPriceSintezINDEX ",MinPriceSintezINDEX," MaxPriceSintezINDEX ",MaxPriceSintezINDEX);
          FileClose(file_handle17);
         }
+      // ---END--Synapsys Indicator-----
 
 
-
-      //---------------------Arrays
+      //-------Arrays------
       int ArrayMaximum_0[10000];//999999
       int ArrayMaximum_1[10000];//999999
       ArrayInitialize(ArrayMaximum_0,0);
@@ -1504,7 +1502,7 @@ int start()
         }
       //--------------
 
-      int If=i-1;//index encontrado con ultima inscripcion.
+      int If=i-1;
 
       //-------------------------------------
       int count_1=1;
@@ -1517,64 +1515,61 @@ int start()
 
       for(in1=1; in1<If; in1++)
         {
-         //Print("Nachalo ",in1);
-         //Print("Nachalo Permis ",Permis);1
+
          if(Permis==1)
            {
             if(body[in1,1]==body[in1+1,1] && body[in1,1]==1 && body[in1+1,1]==1)
               {
-               count_1++;//4,3,0//4/3
-               //Print("count_1 ",count_1);
+               count_1++;
+
               }
 
-            if(body[in1,1]!=body[in1+1,1] /*&& ((body[in1,1]==0 && body[in1+1,1]==1) ||(body[in1,1]==1 && body[in1+1,1]==0))*/)//1/0;0/1
+            if(body[in1,1]!=body[in1+1,1])
               {
-               //Print("acces 1");
-               //Print("Permis 1 ",Permis);
+
                ArrayMaximum_1[ArM1]=count_1;//4
-               ArM1++;//Увеличиваю значение индекса на 1 для ArrayMaximum_1
-               //  Print("ArM1 ",ArM1);
-               Permis=0;//Разришаю продолжить по щётчику с блоко нолей
-               //  Print("Permis 1 ",Permis);
+               ArM1++;
+
+               Permis=0;
+
                in1++;
                count_1=1;
-               //break;
+
               }
            }
-         //Print("Seredina Permis ",Permis);
+
          if(Permis==0)
            {
-            // Print("Переход ",in1);
+
             if(body[in1,1]==body[in1+1,1] && body[in1,1]==0 && body[in1+1,1]==0)
               {
-               count_0++;//2,3,0
+               count_0++;
               }
-            if(body[in1,1]!=body[in1+1,1] /*&& ((body[in1,1]==0 && body[in1+1,1]==1)||(body[in1,1]==1 && body[in1+1,1]==0))*/) // 1/0;0/1
+            if(body[in1,1]!=body[in1+1,1])
               {
                ArrayMaximum_0[ArM0]=count_0;
-               ArM0++;//Увеличиваю значение индекса на 1 для ArrayMaximum_0
-               Permis=1;//Разришаю продолжить по щётчику с блоко нолей
+               ArM0++;
+               Permis=1;
                count_0=1;
-               //break;
+
               }
 
            }
-         //Print("Конец ",in1);
-         //Print("Konec Permis ",Permis);
+
 
         }
 
-      MaxBinNumber_1Index=ArrayMaximum(ArrayMaximum_1,WHOLE_ARRAY,0);//Получаю Максимальное число из массива
-      MaxBinNumber_0Index=ArrayMaximum(ArrayMaximum_0,WHOLE_ARRAY,0);//Получаю минимальное значение из массива
+      MaxBinNumber_1Index=ArrayMaximum(ArrayMaximum_1,WHOLE_ARRAY,0);
+      MaxBinNumber_0Index=ArrayMaximum(ArrayMaximum_0,WHOLE_ARRAY,0);
 
-      MaxBinNumber_1=(ArrayMaximum_1[MaxBinNumber_1Index]);//Присваиваю полученное значение в переменную
-      MaxBinNumber_0=(ArrayMaximum_0[MaxBinNumber_0Index]);//Присваиваю полученное значение в переменную
+      MaxBinNumber_1=(ArrayMaximum_1[MaxBinNumber_1Index]);
+      MaxBinNumber_0=(ArrayMaximum_0[MaxBinNumber_0Index]);
 
-      //-------индикатор Компенсации
+      // ----- Compensation indicator-----
       int compensation_1,compensation_2;
-      compensation_1=MaxMinArr[IndexMaximum]-MaxBinNumber_1; //bool
-      compensation_2=MaxMinArr[IndexMinimum]+MaxBinNumber_0; //bear
-      //---------Test de los valores recibidos-----------
+      compensation_1=MaxMinArr[IndexMaximum]-MaxBinNumber_1;
+      compensation_2=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
+      // --------- Test of received values ​​--------
 
       //Print(" TIME ",iTime(Symbol(),0,1));
       //Print(" Counter_Summa0 ",Counter_Summa0," Counter_Summa1 ",Counter_Summa1);//OK
@@ -1587,11 +1582,10 @@ int start()
       //Print(" compensation_1 ",MaxMinArr[IndexMaximum]-MaxBinNumber_1," compensation_2 ",MaxMinArr[IndexMinimum]+MaxBinNumber_0);
       //Print("Bo ",Bo," Be ",Be);
       //Print("LasData ",LasData);
-
       //------resepcion de indice del 0
 
 
-      for(i=1; i<99999; i++)//Получаю число индекса при певом 0. Если 0 находится на позиции 3 то индексом будет 3
+      for(i=1; i<99999; i++)
         {
          if(MaxMinArr[i]==0)
            {
@@ -1610,34 +1604,29 @@ int start()
          FileClose(file_handle17);
         }
 
-      //-------------Обработка сигнала с класификацией и записью в массив bbb_compare-----------------//
+      // ------------- Signal processing with classification and writing to the bbb_compare array ----------------- //
       if(Rez_BE==0)
         {
-         int ibbb;// индекс который будет соответствавать странице в массиве.
+         int ibbb;
          for(ibbb=1; ibbb<1681; ibbb++)
            {
 
-            if(one_BE>15 && bbb[ibbb,0]==Maximum-MaxBinNumber_1 && bbb[ibbb,1]==MaxMinArr[IndexMinimum]+MaxBinNumber_0) //Получение цены по индексу Индикатор BoolN Если
+            if(one_BE>15 && bbb[ibbb,0]==Maximum-MaxBinNumber_1 && bbb[ibbb,1]==MaxMinArr[IndexMinimum]+MaxBinNumber_0)
               {
 
                int ibb;
-               //Print("indexbbb ",ibbb);
-               //---Можем писать класс из bbb  в виде bbb[i,2]
-               for(ibb=1; ibb<9999; ibb++)//Ищу столбец переборам
+
+               for(ibb=1; ibb<9999; ibb++)
                  {
-                  if(bbb_compare[ibb,0,ibbb]==0)//Indeks ibbb страница,ibb номер строки
+                  if(bbb_compare[ibb,0,ibbb]==0)
                     {
-                     //Print("bbb_compare[ibb,0,ibbb] ", bbb_compare[ibb,0,ibbb]);
-                     bbb_compare[ibb,0,ibbb]=iarw;//Пишу индекс сигнала  массивa  bintoarray в bbb_compare
-                     //Print("bbb_compare[ibb,0,ibbb] ", bbb_compare[ibb,0,ibbb]);
-                     //Print("ibb-1 ", ibb-1);
-                     //Print("iarw ", iarw);
-                     int SignalCuant=bbb_compare[1,1,ibbb];//Присваиваю значение в переменную для увеличения колличества записанных сигналов
-                     SignalCuant++;//Увеличиваю на 1
-                     //Print("SignalCuant", SignalCuant);
-                     bbb_compare[1,1,ibbb]=SignalCuant;//Присваиваю новое значение
-                     //Print("bbb_compare[1,1,ibbb]", bbb_compare[1,1,ibbb]);
-                     //---------------Записываю данные в массив с предварительным удалением данных.
+
+                     bbb_compare[ibb,0,ibbb]=iarw;
+                     int SignalCuant=bbb_compare[1,1,ibbb];
+                     SignalCuant++;
+
+                     bbb_compare[1,1,ibbb]=SignalCuant;
+
                      int file_handle13=FileOpen(FileName13,FILE_READ|FILE_WRITE|FILE_BIN);
                      //Print("HANDLE ",file_handle13);
                      if(file_handle13>0)
@@ -1655,74 +1644,15 @@ int start()
                     }
 
 
-                  //break;
+
                  }
               }
            }
         }
-      //--int file_handle4-запись синапсов в фаил----------
-
-      //FileOpen(FileName4,FILE_READ|FILE_WRITE," ");
-      //if(file_handle4>0)
-      //{
-      // FileSeek(file_handle4,0,SEEK_END);
-      // FileWrite(file_handle4,"___________________________________________________________");
-      // FileWrite(file_handle4,Symbol()," ",iTime(Symbol(),0,1)," SINAPS INDEX               |");
-
-      // for(int inc=1; inc<99999; inc++)
-      // {
-      // if(komp1[inc]>0)
-
-      //{
-      //  string sinaps_string=IntegerToString(inc,0);
-      //  FileWrite(file_handle4,sinaps_string,"                                                        |");
-      // }
-      // }
-
-      //-------------------------
-      //int inw;//index
-      // for(inw=1; inw<99999; inw++) //Поиск конца массива боди
-      // {
-      // if(body[inw,0]==10);
-      //  {
-      //   break;
-      //  }
-
-      //  }
-      //int ind1=inw-1;//Конец заполненного массива
-
-      // for(int ind=1; ind<ind1; ind++)
-      // {
-      // if(body[ind,0]>0  &&  body[ind+1,0]>0 && body[ind+2,0]>0)//Выход из массива по цене
-      // {
-      // if(body[ind,0]==body[ind+1,0] && body[ind+1,0]==body[ind+2,0] && body[ind,0]!=3 && body[ind+1,0]!=3)
-      //{
-      // if(body[ind,1]==0 && body[ind+1,1]==1 && body[ind+2,1]==1)
-      // {
-
-      //  Sw_On=IntegerToString(ind,0);
-
-      // FileWrite(file_handle4," switch on, position  ",Sw_On);
-      // }
-      // }
-      //  }
-
-
-
-
-      // }
-
-
-
-
-      // FileClose(file_handle4);
-
-
-      //}
 
 
       //-----------------------------------
-      //--Recepcion de precio por indice de 0
+
       if(body[zeroindex,0]>0 && body[zeroindex,0]<2)
         {
          PriceZero=body[zeroindex,0];//Цена первого 0
@@ -1739,20 +1669,7 @@ int start()
       Counter=0;
 
       ArrayInitialize(body,10);
-      //-------------------------------
-      //---Все зеро
-      //for(int i=1; i<122; i++)//Получаю число индекса при певом 0. Если 0 находится на позиции 3 то индексом будет 3
-      //if(MaxMinArr[i]==0)
-      // {
 
-      //Print("Zero position - ",i);
-      //}
-
-
-      //-------Indicador
-
-
-      //Print(iTime(Symbol(),0,1), " Index Zero ",zeroindex," Price ",PriceZero,"  ",body[1,1] );
       ///-----------------------------
       double operandopen=iOpen(Symbol(),PERIOD_M1,1);
       double operandclose=iClose(Symbol(),PERIOD_M1,1);
@@ -1762,7 +1679,7 @@ int start()
         {
          restantemaximum=NormalizeDouble(Maximum*Point,5);
          resOperandMax=operandopen-restantemaximum;
-         //Comment(resOperandMax," ",operandopen," ",IndexMaximum);
+
         }
       if(Minimum!=0)
         {
@@ -1770,8 +1687,8 @@ int start()
          resOperandMin=operandclose+restanteminimum;
         }
 
-      //,"  ",NormalizeDouble(IndexMinimum*Point,5));
-      //----Parte de indicador---SHORT
+
+
       if(resOperandMax==PriceZero && Maximum>0 && Minimum>0 && Rez_BE==0)
         {
 
@@ -1802,7 +1719,7 @@ int start()
             FileClose(file_handle4);
            }
 
-        }// Anadir excepcion de 10
+        }
 
       //---LONG Posicion
       if(resOperandMin==PriceZero && Maximum>0 && Minimum>0 && Rez_BE==0)
@@ -1835,12 +1752,6 @@ int start()
 
         }// Anadir excepcion de 10
 
-      // ---------------------------------
-
-
-
-      //Посмотреть какие значения возвращаются с переменных
-      //В отдельную тетрадь фиксирават все возможные значения которые получаются при фильтрации поточьных данных
       double Copen=iOpen(Symbol(),0,1);
       double Cclose=iClose(Symbol(),0,1);
       if(Copen>Cclose)
@@ -1854,8 +1765,6 @@ int start()
          CcloseRes=MinPriceSintez-Copen;
         }
 
-
-      //Print(" Bo ",Bo," Bе ",Be);
 
       file_handle17=FileOpen(FileName17,FILE_READ|FILE_WRITE," ");
       if(file_handle17>0)
@@ -1978,28 +1887,21 @@ int start()
             //operandclose
 
            }
-         //string MessageBB=" BEAR "+IntegerToString(MaxBinNumber_0,3)+" BOOL "+IntegerToString(MaxBinNumber_1,3);//Mensaje de indicador
-         //TelegramSendText(apikey,chatid,MessageBB);
+
         }
 
       int Result_Compensation=compensation_1+compensation_2;
-      //-----------отображение индикатора на графике
-      int CompensationForGrafik=compensation_2*(-1);
-      //--------------------------------------------
-      //-----отрисовка индикатора на графике в отдельном окне
-      //buf_1[i]=compensation_1;
-      // buf_2[i]=CompensationForGrafik;
 
-      //--------------------------------------------
-      //---------------------------------------------
+      int CompensationForGrafik=compensation_2*(-1);
+
       if((resOperandMin==PriceZero || resOperandMax==PriceZero) && Maximum>0 && Minimum>0 && Rez_BE==0)
         {
          file_handle4=FileOpen(FileName4,FILE_READ|FILE_WRITE," ");
          if(file_handle4>0)
            {
-            //---Индикатор смены направления-----
-            //Индикатор запоминает последнюю смену направления базируясь на индикаторе compensation
-            //Если присутсвует 0 в одном или другом индикаторе то меняется позиция в схорт или лонг
+            // --- Direction change indicator -----
+            // The indicator remembers the last change of direction based on the compensation indicator
+            // If there is 0 in one or the other indicator, then the position in short or long changes
 
             int Bear_Z,Bool_Z;
             int Switch_L_S;
@@ -2009,14 +1911,13 @@ int start()
             //--------------------------------------------
             if(((Bool_Z>0 && Bear_Z==0)||(Bool_Z==0 && Bear_Z<0)) && Rez_BE==0 && one_BE>=1 && one_BE<=60)
               {
-               Switch_L_S=1;//Позиция 1 означает открытие только лонговых ордеров
-               //Print(Switch_L_S," bool ",Bool_Z," bear ",Bear_Z);
+               Switch_L_S=1;// Position 1 means opening only long orders
 
               }
             if(((Bool_Z<0 && Bear_Z==0)||(Bool_Z==0 && Bear_Z>0)) && Rez_BE==0 && one_BE>=1 && one_BE<=60)
               {
-               Switch_L_S=2;//Позиция 2 означает открытие только шортов ордеров
-               //Print(Switch_L_S," bool ",Bool_Z," bear ",Bear_Z);
+               Switch_L_S=2;// Position 2 means opening only order shorts
+
 
               }
             if(Switch_L_S==1)
@@ -2027,26 +1928,26 @@ int start()
               {
                Text_Switch="Switch_L_S -- SHORT";
               }
-            //---финкция Запись цены в Журнал Рыночьных Событий
-            //---Записывается цены уровней UP5/8 i DOWSN5/8
-            double Price5ForWrite=0;//Переменная для вложения цены уровня 5
-            double Price8ForWrite=0;//Переменная для вложения цены уровня 8
-            if(Maximum-MaxBinNumber_1==0)//В переменные влаживаю цены DOWN 5/8
+            // --- function Record price in the Market Events Log
+            // --- The prices of the UP5 / 8 i DOWSN5 / 8 levels are recorded
+            double Price5ForWrite=0;
+            double Price8ForWrite=0;
+            if(Maximum-MaxBinNumber_1==0)
               {
                Price5ForWrite=IpaintFiboLineDOWN_5;
                Price8ForWrite=IpaintFiboLineDOWN_8;
               }
-            if(MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)//В переменные влаживаю цены UP 5/8
+            if(MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
               {
                Price5ForWrite=IpaintFiboLineUP_5;
                Price8ForWrite=IpaintFiboLineUP_8;
               }
 
-            BoolInd=NormalizeDouble((Maximum+MaxBinNumber_1)/(Minimum+MaxBinNumber_0),2);//Bool сила
-            BearInd=NormalizeDouble((Minimum+MaxBinNumber_0)/(Maximum+MaxBinNumber_1),2);//Bear сила
+            BoolInd=NormalizeDouble((Maximum+MaxBinNumber_1)/(Minimum+MaxBinNumber_0),2);//Bool
+            BearInd=NormalizeDouble((Minimum+MaxBinNumber_0)/(Maximum+MaxBinNumber_1),2);//Bear
             double SumaBoolBear=BoolInd+BearInd;
-            //-----запись номера индекса в базе данных-----//
-            //загружаю базу из файла в массив
+            // ----- record the index number in the database ----- //
+            // load base from file into array
             int file_handle7=FileOpen(FileName7,FILE_READ|FILE_BIN);
             if(file_handle7>0)
               {
@@ -2088,10 +1989,8 @@ int start()
             FileWrite(file_handle4,"¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
             FileClose(file_handle4);
            }
-         //--отправка второго сообщения на терминал телефона в mql4--//
-         // string SendMessage2=TimeToStr(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+" "+IntegerToString(MaxMinArr[IndexMaximum]-MaxBinNumber_1)+" "+IntegerToString(MaxMinArr[IndexMinimum]+MaxBinNumber_0);
-         //SendNotification(SendMessage2);
-         LongShort=10;//Переменная для записи 1 или нп в массив
+
+         LongShort=10;
          if(resOperandMin==PriceZero && Maximum>0 && Minimum>0 && one_BE>=1 && one_BE<=60 && Rez_BE==0)
            {
             TextVisualIndicator="LONG";
@@ -2120,42 +2019,35 @@ int start()
             SendNotification(message1);
             LongShort=0;
            }
-         //------Запись уравней в массив------------------------------
-         //---Условие записи в автоматическом режиме.Програма записывает в массив в последний пустой индекс
-         //---Ручьные дозаписи должны производится в суботу и воскресенье каждой недели
 
          RefreshRates();
 
-         //-----Отправка сигналов на емаил аккаунт---------
-
-         //---условие отправки сообщения. Большой сигнал определяет направление сигналу ++ -- служат для открытия сигнала
 
          if(one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0 && Rez_BE==0)
            {
-            LongPosition=true; //Ustanavlivaetsa znachenie tru esli poluchen signal v long
+            LongPosition=true;
             ShortPosition=false;
            }
          if(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0 && Rez_BE==0)
            {
-            ShortPosition=true; //Ustanavlivaetsa znachenie tru esli poluchen signal v short
+            ShortPosition=true;
             LongPosition=false;
            }
          //------------------------------------------------------------------------------
          if(one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0 && Rez_BE==0)
            {
-            ShortPosition=true; //Ustanavlivaetsa znachenie tru esli poluchen signal v long
+            ShortPosition=true;
             LongPosition=false;
            }
          if(one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0 && Rez_BE==0)
            {
-            LongPosition=true; //Ustanavlivaetsa znachenie tru esli poluchen signal v short
+            LongPosition=true;
             ShortPosition=false;
            }
-         //--------------------Отправка сообщения на емаил-----------------------------------------------------
 
          if(LongPosition==true && ((one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
            {
-            //--Otpravka informacii na ftp
+
             string  subject="From Tatiana - RootDiamond - LONG SIGNAL EURUSD";       // заголовок
             string messageLong="Open Long, "+" Simbol "+Symbol()+" Time "+TimeToString(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+" FONT "+IntegerToString(one_BE,0,0)+"/   DONATE PLEASE FOR UPDATE PROJECT http://paypal.me/mql4Root ";
 
@@ -2164,15 +2056,14 @@ int start()
             string Hora=TimeToString(iTime(Symbol(),0,1));
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency +" LONG - FOR ROOTDIAMOND, TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
-            //string message2=" ";
-            //SendNotification(message1);
+
             TelegramSendText(apikey,chatid,message1);
-            //Print(" LONG Signal Sended for RootDiamond = ",testT," if 0 send true, if  else not sended ");
+
 
            }
          if(ShortPosition==true && ((one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
            {
-            //--Otpravka informacii na ftp
+
             string  subject="From Tatiana - RootDiamond - SHORT SIGNAL EURUSD";       // заголовок
             string messageShort=" Open Short, "+" Simbol "+Symbol()+" Time "+TimeToString(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+" FONT "+IntegerToString(one_BE,0,0)+"/   DONATE PLEASE FOR UPDATE PROJECT http://paypal.me/mql4Root ";
 
@@ -2182,35 +2073,33 @@ int start()
             string Curency=Symbol();
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency + " SHORT - FOR ROOTDIAMOND, TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
-            //string message2=" ";
-            //SendNotification(message1);
+
             TelegramSendText(apikey,chatid,message1);
-            // Print(" SHORT Signal Sended for RootDiamond = ",testT," if 0 send true, if  else not sended ");
+
            }
-         //---Сигналы для RootDiamond 8-13
+
 
          if(((one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
            {
-            //--Otpravka informacii na ftp
+
             string  subject="From Tatiana - RootDiamond_8 - SHORT SIGNAL EURUSD";       // заголовок
             string messageShort=" Open Short, "+" Simbol "+Symbol()+" Time "+TimeToString(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+" FONT "+IntegerToString(one_BE,0,0)+"   DONATE PLEASE FOR UPDATE PROJECT http://paypal.me/mql4Root ";
 
             SendMail(subject,messageShort);
-            //string signalgroup=IntegerToString(zeroindex);
+
             string Curency=Symbol();
             string Hora=TimeToString(iTime(Symbol(),0,1));
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency+" SHORT - FOR ROOTDIAMOND_8 , TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
-            //string message2=" ";
-            //SendNotification(message1);
+
             int testT=TelegramSendText(apikey,chatid,message1);
-            //Print(" SHORT Signal Sended for RootDiamond_8 = ",testT," if 0 send true, if  else not sended ");
+
 
            }
          if(((one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
            {
-            //--Otpravka informacii na ftp
-            string  subject="From Tatiana - RootDiamond_8 - LONG SIGNAL EURUSD";       // заголовок
+
+            string  subject="From Tatiana - RootDiamond_8 - LONG SIGNAL EURUSD";
             string messageLong="Open Long, "+" Simbol "+Symbol()+" Time "+TimeToString(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+" LEVEL "+IntegerToString(one_BE,0,0)+"   DONATE PLEASE FOR UPDATE PROJECT http://paypal.me/mql4Root ";
 
             SendMail(subject,messageLong);
@@ -2219,33 +2108,14 @@ int start()
             string Curency=Symbol();
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency+" LONG - FOR ROOTDIAMOND_8 , TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
-            //string message2=" ";
-            //SendNotification(message1);
-            //int testT=TelegramSendText(apikey,chatid,message1);
-            //Print(" LONG Signal Sended for RootDiamond = ",testT," if 0 send true, if  else not sended ");
+
 
            }
 
 
-         //---------------
-         //---Отправка значений на телеграмм
-         //TextVisualIndicator="SHORT";
-         //Alert("SHORT");
-         //string signalgroup=IntegerToString(zeroindex);
-         //string Hora=TimeToString(iTime(Symbol(),0,1));
-         //string levelnotificacion=DoubleToString(one_BE);
-         //string message1=" TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion+" SHORT ";
-         //SendNotification(message1);
-         //TelegramSendText(apikey,chatid,message1);
 
-         //SendNotification("SHORT");
-         //SendNotification(Hora);
-         //SendNotification(levelnotificacion);
-
-         //---Подаваемые значения------
          if(one_BE>0 && Rez_BE==0)
            {
-            //---загрузка базы данных при инициализации---
             int file_handle6=FileOpen(FileName6,FILE_READ|FILE_BIN);
             if(file_handle6>0)
               {
@@ -2254,7 +2124,7 @@ int start()
                FileReadArray(file_handle6,bodydt,0,WHOLE_ARRAY);
                FileClose(file_handle6);
               }
-            //загружаю базу из файла в массив
+
             int file_handle7=FileOpen(FileName7,FILE_READ|FILE_BIN);
             if(file_handle7>0)
               {
@@ -2328,11 +2198,6 @@ int start()
             bodyAR[iar,29]=BearInd;
             //--------Лонг Шорт-----------
             bodyAR[iar,30]=LongShort;//0/1
-            //--------Ручьная запись- Тикеты Профит Лосс----------
-            //bodyAR[iar,31]=;//Тикеты
-            //bodyAR[iar,32]=;//Профит Лосс
-            // -- после ращета присваиваю данные в массив и пишу в дб
-            //Comment(" Informacion added to Array y DB ");
 
 
             FileDelete(FileName6,0);
@@ -2366,8 +2231,9 @@ int start()
       if(ALLtoARRAYWRITE==true)
         {
 
-         //----Запись  Массва  в Бинарный фаил всех показателей.
-         //----Каждую минутную сессию в массивы пишу время и данные с использаванием индекса.
+
+         // ---- Writing Mass to the Binary file of all indicators.
+         // ---- Every minute session I write time and data into arrays using an index.
          for(i=1; i<7205; i++)
            {
             if(AllAnalisysData[i,1]==1000)//получаю индекс заполненного элемента
@@ -2377,7 +2243,7 @@ int start()
 
            }
 
-         DT_AllAnalisysData[i,0]=iTime(Symbol(),0,1);//Записываю по индексу массива время свечи
+         DT_AllAnalisysData[i,0]=iTime(Symbol(),0,1);
 
          AllAnalisysData[i,0]=Counter_Summa0;
          AllAnalisysData[i,1]=Counter_Summa1;
@@ -2398,9 +2264,7 @@ int start()
          AllAnalisysData[i,16]=LasData;
 
 
-         //if(DayOfWeek()==5 && (TimeCurrent()>=D'23:45:00') && (TimeCurrent()<=D'23:46:00'))
-         //{
-         //Print(AllAnalisysData[i,14]);
+
          int file_handle19=FileOpen(FileName19,FILE_READ|FILE_WRITE|FILE_BIN);
          if(file_handle19>0)
            {
@@ -2544,25 +2408,25 @@ int start()
 
      }
 
-   if(Bar_Tm==0 && time_BR==Time[0])/*Åñëè âðåìÿ áàðà ðàâåí 0 È ïåðåìííàÿ ïîëó÷èëà îòêðûòèå ñâå÷è*/
+   if(Bar_Tm==0 && time_BR==Time[0])
      {
       Text_OBJ_LABEL("Tx_FM",1,1,50,"l",28,"Wingdings",clrWhite);
       return(0);
      }
 
-   if(Bar_Tm!=Time[0]) /*Åñëî áàð ÒÌ íå ðàâåí  îòêðûòèå ñå÷è*/
+   if(Bar_Tm!=Time[0])
      {
 
       Bar_Tm=Time[0];
       string File_Name_Close=TimeToStr(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+"-"+SYmbol+FR_Nm;
       int replacedC=StringReplace(File_Name_Close,":"," ");
       FileClose(replacedC);
-      filename=TimeToStr(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+"-"+SYmbol+FR_Nm;//Nombre del archivo que se guarda en la carpeta
-      string terminal_data_path=TerminalInfoString(TERMINAL_DATA_PATH); //la path de la terminal
+      filename=TimeToStr(iTime(Symbol(),0,1),TIME_DATE|TIME_MINUTES)+"-"+SYmbol+FR_Nm;
+      string terminal_data_path=TerminalInfoString(TERMINAL_DATA_PATH);
       File_Name=terminal_data_path+"\\MQL4\\Files\\digitscandlesALL\\"+filename;
 
       int replaced=StringReplace(File_Name,":"," ");
-      File_Name=DoubleToStr(Bar_Tm/60,0)+FR_Nm; /*ïàðàìåòð âðåìåíè*/
+      File_Name=DoubleToStr(Bar_Tm/60,0)+FR_Nm;
       Str_Pr_Bar=Bid;
       Handle=FileOpen(File_Name_Close,FILE_CSV|FILE_WRITE,";");
      }
@@ -2570,23 +2434,18 @@ int start()
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
-   Bars_Z(Bid);//Здесь можно заменить на Ask и получать другие значения
+   Bars_Z(Bid);
    Text_OBJ_LABEL("Tx_FM",1,1,50,"l",28,"Wingdings",clrOrange);
 
-//+------------------------------------------------------------------+
-//|                                                                  |
-//+------------------------------------------------------------------+
+
    return(0);
   }
-//+------------------------------------------------------------------+
-//|                                                                  |
-//+------------------------------------------------------------------+
 
 
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
-void Bars_Z(double iBid)//Играем в Кафетерий
+void Bars_Z(double iBid)
   {
 
    int Cqt=0;
@@ -2614,7 +2473,7 @@ void Bars_Z(double iBid)//Играем в Кафетерий
          // body [qt_C,6]=Low[0];
          // body [qt_C,7]=111;//TEST
          FileWrite(Handle,body[qt_C,0],body[qt_C,1],body[qt_C,2],body[qt_C,3],body[qt_C,4],body[qt_C,5],body[qt_C,6],body[qt_C,7]);
-         Counter1++;/*----Êîä îò Åâãåíèÿ----*/
+         Counter1++;
         }
       Counter=qt_C+1;
      }
@@ -2637,7 +2496,7 @@ void Bars_Z(double iBid)//Играем в Кафетерий
          // body [qt_C,5]=High[0];
          // body [qt_C,6]=Low[0];
          FileWrite(Handle,body[qt_C,0],body[qt_C,1],body[qt_C,2],body[qt_C,3],body[qt_C,4],body[qt_C,5],body[qt_C,6],body[qt_C,7]);
-         Counter0++;/*----Êîä îò Åâãåíèÿ----*/
+         Counter0++;
         }
       Counter=qt_C+1;
      }
@@ -2649,7 +2508,7 @@ void Bars_Z(double iBid)//Играем в Кафетерий
       //body [Counter,4]=TimeCurrent();//Записываю время тика.
       //bintoarr[IFb1,IFb2]=1;
       //bintoarrBID[IFb1,IFb2]=Bid;
-      Counter1_1++;/*----Êîä îò Åâãåíèÿ----*/
+      Counter1_1++;
      }
    else
      {
@@ -2659,7 +2518,7 @@ void Bars_Z(double iBid)//Играем в Кафетерий
       //bintoarr[IFb1,IFb2]=0;//пишу тик в бинарной интерпретации
       //bintoarrBID[IFb1,IFb2]=Bid;//пишу цену для тика
 
-      Counter0_1++;/*----Êîä îò Åâãåíèÿ----*/
+      Counter0_1++;
      }
    body [Counter,0]=iBid;
    body [Counter,3]=111;
@@ -2668,15 +2527,14 @@ void Bars_Z(double iBid)//Играем в Кафетерий
 // body [Counter,5]=High[0];
 // body [Counter,6]=Low[0];
 //body[Counter,7]=iTime(Symbol(),PERIOD_CURRENT,0);
-//Comment(bintoarr[IFb1,2]);//Мониторинг полученных данных в массив
+
    FileWrite(Handle,body[Counter,0],body[Counter,1],body[Counter,2],body[Counter,3],body[Counter,4],body[Counter,5],body[Counter,6],body[Counter,7]);
    Str_Pr_Bar=iBid;
 
-   /*---------------Êîäû îò Åâãåíèÿ----------------*/
-   Counter_Summa1 = Counter1+Counter1_1;/*Ùåò÷èê åäåíèö*/
-   Counter_Summa0 = Counter0+Counter0_1;/*Ùåò÷èê íàëåé*/
-//Print("bintoarr[IFb1,IFb2] ",bintoarr[IFb1,IFb2]," IFb1 ",IFb1," IFb2 ",IFb2);//мониторинг записи в массив
-//IFb2++;//Увеличивание значения индекса на 1 для записи в строку следующего параметра начало отщёта равно 0
+
+   Counter_Summa1 = Counter1+Counter1_1;
+   Counter_Summa0 = Counter0+Counter0_1;
+
 
 
 
@@ -2687,12 +2545,8 @@ void Bars_Z(double iBid)//Играем в Кафетерий
 void deinit()
   {
 
-
-
-
-
 //-------------------------------------------------------------------------
-//---
+
    Str_Pr_Bar=0;
    time_bar=0;
    time_BR=0;
