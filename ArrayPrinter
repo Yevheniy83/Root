@@ -1,0 +1,655 @@
+//+------------------------------------------------------------------+
+//|                                                 ArrayPrinter.mq4 |
+//|                        Copyright 2020, MetaQuotes Software Corp. |
+//|                                             https://www.mql5.com |
+//+------------------------------------------------------------------+
+#property copyright "Yevheniy Kopanitskyy"
+#property link      ""
+#property version   "1.00"
+#property strict
+double BodyHorizont_Bin[7210,2000];
+double BodyHorizont_Price[7210,2000];
+datetime BodyHorizont_Time[7210];
+double MBodyHorizont_Bin[36050,2000];
+double MBodyHorizont_Price[36050,2000];
+datetime MBodyHorizont_Time[36050];
+double PArticles_Bin[36050,500];
+double PArticles_BinTemp[36050,500];
+double PArticles_Price[36050,500];
+double PArticles_PriceTemp[36050,500];
+datetime PArticles_Time[36050,2];
+string SYmbol=Symbol();
+string FileName21=SYmbol+"BodyHorizont_Bin.bin";
+string FileName22=SYmbol+"BodyHorizont_Price.bin";
+string FileName23=SYmbol+"BodyHorizont_Time.bin";
+string FileName24=SYmbol+"МBodyHorizont_Bin.bin";
+string FileName25=SYmbol+"МBodyHorizont_Price.bin";
+string FileName26=SYmbol+"МBodyHorizont_Time.bin";
+string FileName27=SYmbol+"PArticles_Bin.bin";
+string FileName28=SYmbol+"PArticles_Price.bin";
+string FileName29=SYmbol+"PArticles_Time.bin";
+extern bool automaticprinte=false;
+extern bool AddToMBody=false;
+extern bool Particles=true;
+extern bool chek=false;
+extern bool chek1=false;
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+  {
+//---
+   ArrayInitialize(MBodyHorizont_Bin,10);
+   ArrayInitialize(MBodyHorizont_Price,10);
+   ArrayInitialize(MBodyHorizont_Time,10);
+   ArrayInitialize(PArticles_Bin,10);
+   ArrayInitialize(PArticles_Price,10);
+   ArrayInitialize(PArticles_Time,10);
+   ArrayInitialize(PArticles_BinTemp,10);
+//Загрузка массива при запуске
+//-----------------------------------------------------------------------------------
+
+   int file_handle17=FileOpen(FileName21,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle17>0)
+     {
+
+      FileSeek(file_handle17,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle17,BodyHorizont_Bin,0,WHOLE_ARRAY);
+      FileClose(file_handle17);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle18=FileOpen(FileName22,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle18>0)
+     {
+
+      FileSeek(file_handle18,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle18,BodyHorizont_Price,0,WHOLE_ARRAY);
+      FileClose(file_handle18);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle19=FileOpen(FileName23,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle19>0)
+     {
+
+      FileSeek(file_handle19,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle19,BodyHorizont_Time,0,WHOLE_ARRAY);
+      FileClose(file_handle19);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle20=FileOpen(FileName24,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle20>0)
+     {
+
+      FileSeek(file_handle20,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle20,MBodyHorizont_Bin,0,WHOLE_ARRAY);
+      FileClose(file_handle20);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle21=FileOpen(FileName25,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle21>0)
+     {
+
+      FileSeek(file_handle21,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle21,MBodyHorizont_Price,0,WHOLE_ARRAY);
+      FileClose(file_handle21);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle22=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle22>0)
+     {
+
+      FileSeek(file_handle22,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle22,MBodyHorizont_Time,0,WHOLE_ARRAY);
+      FileClose(file_handle22);
+     }
+//---
+//-----------------------------------------------------------------------------------
+
+   int file_handle23=FileOpen(FileName27,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle23>0)
+     {
+
+      FileSeek(file_handle23,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle23,PArticles_Bin,0,WHOLE_ARRAY);
+      FileClose(file_handle23);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle24=FileOpen(FileName28,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle24>0)
+     {
+
+      FileSeek(file_handle24,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle24,PArticles_Price,0,WHOLE_ARRAY);
+      FileClose(file_handle24);
+     }
+//-----------------------------------------------------------------------------------
+
+   int file_handle25=FileOpen(FileName29,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+   if(file_handle25>0)
+     {
+
+      FileSeek(file_handle25,0,SEEK_CUR);
+
+      uint test=FileReadArray(file_handle25,PArticles_Time,0,WHOLE_ARRAY);
+      FileClose(file_handle25);
+     }
+//Print("Ar test ",MBodyHorizont_Bin[152,20]);
+//---Печать массивов в фаил
+//-Определить с какой ячейки заполняется массив BodyHorizont_Bin с 0 или 1
+   if(automaticprinte==true)
+     {
+      for(int in=1; in<7210; in++)//Печатаю все данные в фаил по строкам
+        {
+         Sleep(500);
+         int ina;
+         for(ina=1; ina<2000; ina++) //Определяю конец строки
+           {
+            if(BodyHorizont_Bin[in,ina]==10)
+              {
+
+               break;//Конец строки
+
+              }
+
+           }
+         int inb;
+         //Print(ina);
+         Print(BodyHorizont_Time[in]);
+         for(inb=1; inb<ina; inb++)
+           {
+            Print("Bin Secuency ",BodyHorizont_Bin[in,inb]);
+           }
+         for(inb=1; inb<ina; inb++)
+           {
+            Print("Price Secuency ",BodyHorizont_Price[in,inb]);
+           }
+
+        }
+     }
+   if(automaticprinte==false)
+     {
+      int in=1;//Номер строки в массиве
+      int ina;
+      int inb;
+      for(ina=1; ina<2000; ina++) //Определяю конец строки
+        {
+         if(BodyHorizont_Bin[in,ina]==10)
+           {
+
+            break;//Конец строки
+
+           }
+
+        }
+      Print(ina);
+      Print(BodyHorizont_Time[in]);
+      for(inb=1; inb<ina; inb++)
+        {
+         Print("Bin Secuency ",BodyHorizont_Bin[in,inb]);
+        }
+      for(inb=1; inb<ina; inb++)
+        {
+         Print("Price Secuency ",BodyHorizont_Price[in,inb]);
+        }
+
+     }
+//Выбрать глубину массива для дозаписи и вывести на экран
+   int inc;
+   for(inc=1; inc<36050; inc++)
+     {
+      if(MBodyHorizont_Bin[inc,1]==10)//Индекс заполненности месячного массива
+        {
+         Print("START ADD MBODY INDEX - Max 36050 ",inc);
+         break;
+        }
+     }
+
+   int ind;
+   for(ind=1; ind<7210; ind++)
+     {
+      if(BodyHorizont_Bin[ind,1]==10)//Индекс загружаемого массива для обьеденения
+        {
+         Print(" Start ADD BODY INDEX - Max 7210 ",ind);
+
+         break;
+        }
+
+
+     }
+   int ControlInc=inc;
+
+   if(BodyHorizont_Bin[7209,1]!=10)
+     {
+      ind=7210;
+      Print(" Array BodyHorizont_Bin Full Loaded");
+
+     }
+//int swi=0;
+//if(inc-ind<=0)//Правило. Если колличество записываемых элементов меньше 0 то не писать в массив а вывести на печать оповещение
+//  {
+//   Print(" Small Array Manth SIZE FOR ADD NEW DATA ",inc-ind);
+//   swi=1;
+//  }
+   if(AddToMBody==true)
+     {
+      //Определение Конца текущего массива
+      //Дозагруска данных в массивы
+
+      int ini;
+      int inf=0;
+
+
+      for(ini=inc; ini<ind; ini++)//inc индекс старта записи  в массив месяца. inc+ind Индекс массива месяц + колличество элементов к заполнению
+        {
+
+         inf++;//Увеличиваю строку массива для перезаписи
+         //Print(" ini ",ini," inf ",inf);
+         int ine;
+         for(ine=1; ine<2000; ine++) //дозапись собранных элементов в месячный массив
+           {
+            MBodyHorizont_Bin[ini,ine]=BodyHorizont_Bin[inf,ine];
+            MBodyHorizont_Price[ini,ine]=BodyHorizont_Price[inf,ine];
+            MBodyHorizont_Time[ini]=BodyHorizont_Time[inf];
+           }
+
+        }
+
+      for(inc=1; inc<36050; inc++)
+        {
+         if(MBodyHorizont_Bin[inc,1]==10)//Индекс заполненности месячного массива
+           {
+            Print("END ADD MBODY INDEX - Max 36050 ",inc);
+            break;
+           }
+        }
+
+      if(inc>ControlInc)
+        {
+         FileDelete(SYmbol+"BodyHorizont_Bin.bin",0);
+         FileDelete(SYmbol+"BodyHorizont_Price.bin",0);
+         FileDelete(SYmbol+"BodyHorizont_Time.bin",0);
+         Print(" Files BodyHorizont_XXX Delited");
+        }
+      //-----------------------------------------------------------------------------------
+
+      file_handle20=FileOpen(FileName24,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+      if(file_handle20>0)
+        {
+
+         FileSeek(file_handle20,0,SEEK_CUR);
+
+         uint test=FileWriteArray(file_handle20,MBodyHorizont_Bin,0,WHOLE_ARRAY);
+         FileClose(file_handle20);
+        }
+      //-----------------------------------------------------------------------------------
+
+      file_handle21=FileOpen(FileName25,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+      if(file_handle21>0)
+        {
+
+         FileSeek(file_handle21,0,SEEK_CUR);
+
+         uint test=FileWriteArray(file_handle21,MBodyHorizont_Price,0,WHOLE_ARRAY);
+         FileClose(file_handle21);
+        }
+      //-----------------------------------------------------------------------------------
+
+      file_handle22=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+      if(file_handle22>0)
+        {
+
+         FileSeek(file_handle22,0,SEEK_CUR);
+
+         uint test=FileWriteArray(file_handle22,MBodyHorizont_Time,0,WHOLE_ARRAY);
+         FileClose(file_handle22);
+        }
+      //---
+
+     }
+
+   if(Particles==true)
+     {
+      //Разбор собранных данных на частицы.Точка разделения Бинарный синапс. где синапс цены выражается 01 при тойже цене.
+      //Класификация и отбор дублей в отдельный массив.
+      //Перебераем массив и определяем координаты синапса.Есть два варианта. Последовательный перебор или перебор с предварительным выделением синапсов с записью в массив
+      //Последавательный варриант.
+      //загрузка базы данных в массив для проведения анализа
+      //загрузка базы данных отсортированных элементов. Нужно знать время свечи с которой была взята частица.Максимальная длинна частицы 200 элементов
+      //Цикл определения синапса
+      int ing;
+      int inh;
+      //Проверяю заполненность массива
+      for(ing=1; ing<36050; ing++)
+        {
+         if(MBodyHorizont_Bin[ing,1]==10)
+           {
+            break;//inh содержит индекс конца массива
+           }
+
+        }
+
+      int inl;
+      int inm=1;//строка для записи
+      int inn=-1;//ячейка в записи
+      for(inh=1; inh<ing; inh++) //Перебираю построчно Массив хранящий собранные данные MBodyHorizont_Bin массив содержит данные одного месяца
+        {
+         //перебераю строку в поиске синапса.Пришла идея слаживать все синапсы во временный массив а после сортиравать на дубли
+         int ink;
+         for(ink=1; ink<2000; ink++)
+           {
+            if(MBodyHorizont_Bin[inh,ink]==10)//Конец строки
+              {
+
+               break;//ink содержит конец строки
+              }
+           }
+
+         bool permwr;//переключатель для разешения записи в массив
+         for(inl=1; inl<ink; inl++)//перебор подаваемой строки
+           {
+            //Print("TEST ",inl);
+            permwr=true;
+            inn++;//увеличиваю число ячейки для записи
+            if(inn==500)
+              {
+
+               Print("inn 500 true");
+              }
+            if(MBodyHorizont_Bin[inh,inl]==0 && MBodyHorizont_Bin[inh,inl+1]==1 && MBodyHorizont_Price[inh,inl]==MBodyHorizont_Price[inh,inl+1])//Условие по которому определяется синапс
+              {
+               //Print(" 0 ",MBodyHorizont_Bin[inh,inl]);
+               //Print(" 1 ",MBodyHorizont_Bin[inh,inl+1]);
+               //Print(" Price1 ",MBodyHorizont_Price[inh,inl]);
+               //Print(" Price2 ",MBodyHorizont_Price[inh,inl+1]);
+               //Print(" coordenada de sinaps " ," Line ",inh," Bin Position ",inl+1);//Печатаю координату в массиве где определён синапс
+               //Print(" Coordenada de tiempo " ,MBodyHorizont_Time[inh]);//Печатаю время в массиве где определён синапс
+               PArticles_BinTemp[inm,inn]=MBodyHorizont_Bin[inh,inl];//Записываю 0 по индексу inl
+               PArticles_PriceTemp[inm,inn]=MBodyHorizont_Price[inh,inl];//Записываю цену по индексу inl
+               permwr=false;
+               inm++;// устанавливаю номер строки +1
+               inn=0;// устанавливаю номер ячейки на 0
+               //Print("sw");
+               //inl=inl+1;
+               if(inm==99999)
+                 {
+                  Print("file PArticles_BinTemp.bin is ful");
+                  Alert("file PArticles_BinTemp.bin is ful");
+                  break;//Выход из цикла по заполненности массива
+                 }
+
+              }
+            //Print("str1 ",inh," yach ",inl);
+            //Print("str2 ",inm," yach ",inn);
+            if(permwr==true)//Коррекция записи в массивы
+              {
+               PArticles_BinTemp[inm,inn]=MBodyHorizont_Bin[inh,inl];//присваиваю параметр бинарного кода
+               PArticles_PriceTemp[inm,inn]=MBodyHorizont_Price[inh,inl];//присваиваю параметр цены
+              }
+            //Print(PArticles_BinTemp[inm,inn]);
+
+           }
+
+
+        }
+      if(chek==true)
+        {
+         int ino;
+         int inp;
+         int inq;
+         int inr;
+         for(inq=1; inq<36050; inq++)
+           {
+            if(PArticles_BinTemp[inq,1]==10)
+              {
+               // Print("glubina massiva Proverka ",inq);
+               break;
+              }
+
+           }
+         for(ino=1; ino<inq; ino++)//перебор подаваемой строки
+           {
+            for(inr=1; inr<500; inr++)
+              {
+               if(PArticles_BinTemp[ino,inr]==10)
+                 {
+                  // Print("dlinnaa massiva Proverka ",inr);
+                  break;
+                 }
+              }
+            Print("inr ",inr);
+            for(inp=1; inp<inr; inp++)//перебор подаваемой ячейки
+              {
+
+               Print("stroka ",ino," Znacheni ",PArticles_BinTemp[ino,inp]);
+
+              }
+
+
+           }
+        }//проверка
+      //-----------Сортировка собранных значений на дубли с использаванием цены и времени.Запись данных в фаил для вывидения на индикатор---------------
+      int ins;//Строка
+      int iny;//Ячейкa
+      int inv;//Проверка глубены
+      int inw;//Проверка длинны строки
+      int ias=0;//щётчик
+      int iad;
+      double temArr[500];
+
+      for(inv=1; inv<36050; inv++)
+        {
+         ArrayInitialize(temArr,10);
+         Print("Control array write PArticles_BinTemp[inv,0] ", PArticles_BinTemp[inv,0],"  ",PArticles_BinTemp[inv,1]);
+         if(PArticles_BinTemp[inv,1]!=10)
+           {
+            for(ins=0; ins<500; ins++) //Заполняю временный массив
+              {
+               temArr[ins]=PArticles_BinTemp[inv,ins];//Присваиваю значения во временный массив для сравнения с основным массивом.
+
+              }
+           }
+         //Перебираю массив в посках дубля
+         for(iny=inv+1; iny<36050; ins++) // строка
+           {
+            ias=0;
+            for(inw=0; inw<500; inw++) //Ячейки
+              {
+               if(PArticles_BinTemp[iny,inw]==temArr[inw])//Если соответствуют элементы. Должен получить число 499
+                 {
+                  ias++;
+
+                 }
+              }
+            //Если ias равен 499 то значения нужно удалить так как это дубль. Если не равен то пропустить
+            if(ias==499)
+              {
+               for(iad=0; iad<500; iad++) //Ячейки
+                 {
+                  PArticles_BinTemp[iny,ind]=10;//Заполняю массив числом 10 
+                 }
+              }
+
+
+           }//end
+
+
+        }//end
+      //--------------------------------------------------------
+      for(ins=1; ins<inv; ins++) //Перебераю строки в массиве
+        {
+
+        }
+      // int inaa;//длинна строки
+      // for(inaa=1; inaa<500; inaa++)
+      //  {
+      //  if(PArticles_BinTemp[ins,inaa]==10)
+      //   {
+      //    break;//Конец строки
+      //   }
+      // }
+
+      //--------------Вариант отфильтровки массива PArticles_BinTemp на дубли с заполнением числом 10 строки дубля-----------------------------------------
+
+
+      //-------------------------------------------------------
+      // if(inw==inaa)//Если колличество элементов 2 строк равны то сравнивать на не соответствие и записыать если нет соответствия
+      // {
+      // for(iny=1; iny<inw; iny++)
+      //  {
+
+      // if(PArticles_BinTemp[ins,iny]!=PArticles_Bin[ins,iny])//нужно найти дубли в исходном массиве//есть два типа филтрации по бинарному коду и с использаванием цены
+      //  {
+      // если нет соответсвия в базе значит дописать
+      //   int inx;//Строка
+      //   int inz;//Ячейкa
+      //  for(inx=1; inx<36050; inx++)
+      //    {
+      //    if(PArticles_Bin[inx,1]==10)
+      //     {
+      //      break;//глубина заполненности
+      //     }
+      //  }
+
+      // for(inz=0; inz<500; inz++)//дозаписываю элемент
+      //  {
+      //   PArticles_Bin[inx,inz]=PArticles_BinTemp[ins,inz];//дописал не существующий элемен в массиве
+      //   PArticles_Price[inx,inz]=PArticles_PriceTemp[ins,inz];//дописал не существующий элемен в массиве
+      //    }
+      //  for(inz=0; inz<500; inz++)//удаляю элементы числом 10
+      //   {
+      //   PArticles_BinTemp[ins,inz]=10;//дописал не существующий элемен в массиве
+      //  }
+      //   }
+      //  }
+      //  }
+
+
+      //По завершению отбора на не соответствие в строке и одинаковом колличестве елементов в массиве остатки дозаписать
+      //int inab;//строка
+      //int inac;//ячейка
+      //int inad;//ячейка
+      //for(inab=1; inab<36050; inab++)//удаляю элементы числом 10
+      //  {
+      //   if(PArticles_BinTemp[inab,1]!=10)//Если не заполнена 10 ячейка в массиве то пишем
+      //   {
+      //  for(inac=1; inac<36050; inac++)//удаляю элементы числом 10
+      //  {
+      // if(PArticles_Bin[inac,1]==10)
+      // {
+      //  break;
+      // }
+      // }
+
+      // if(inac==36049)
+      // {
+      //  Print(" PArticles_Bin LOADED FULL");
+      //  Alert(" PArticles_Bin LOADED FULL");
+      //  break;
+      // }
+      //for(inad=0; inad<500; inad++)//удаляю элементы числом 10
+      // {
+      // PArticles_Bin[inac,inad]=PArticles_BinTemp[inab,inad];
+      // PArticles_Price[inac,inad]=PArticles_PriceTemp[inab,inad];
+
+      //  }
+
+      //  }
+
+      // }
+      //запись данных в фаил
+      //-----------------------------------------------------------------------------------
+
+      file_handle23=FileOpen(FileName27,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+      if(file_handle23>0)
+        {
+
+         FileSeek(file_handle23,0,SEEK_CUR);
+
+         uint test=FileWriteArray(file_handle23,PArticles_Bin,0,WHOLE_ARRAY);
+         FileClose(file_handle23);
+        }
+      file_handle24=FileOpen(FileName28,FILE_READ|FILE_WRITE|FILE_BIN);//Загрузка
+      if(file_handle24>0)
+        {
+
+         FileSeek(file_handle24,0,SEEK_CUR);
+
+         uint test=FileWriteArray(file_handle24,PArticles_Price,0,WHOLE_ARRAY);
+         FileClose(file_handle24);
+        }
+      //---
+     }//end
+
+//Проверка заполненности и запись в фаил,последний этап отслеживания появление элемента в нутри рынка
+   if(chek1==true)
+     {
+      int ino;
+      int inp;
+      int inq;
+      int inr;
+      for(inq=1; inq<36050; inq++)
+        {
+         if(PArticles_Bin[inq,1]==10)
+           {
+            Print("glubina massiva BEZ DUBLEI ",inq);
+            break;
+           }
+
+        }
+      for(ino=1; ino<inq; ino++)//перебор подаваемой строки
+        {
+         for(inr=1; inr<500; inr++)
+           {
+            if(PArticles_Bin[ino,inr]==10)
+              {
+               // Print("dlinnaa massiva Proverka ",inr);
+               break;
+              }
+           }
+         Print("inr ",inr);
+         for(inp=1; inp<inr; inp++)//перебор подаваемой ячейки
+           {
+
+            Print("stroka ",ino," Znacheni ",PArticles_Bin[ino,inp]);
+
+           }
+
+
+        }
+     }//проверка
+//---
+   return(INIT_SUCCEEDED);
+  }
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+  {
+//---
+
+  }
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+  {
+//---Обьеденение в годовой массив
+  }
+//+------------------------------------------------------------------+
+
+
+//+------------------------------------------------------------------+
