@@ -1,4 +1,4 @@
-![ROOT INITIALIZATION](https://user-images.githubusercontent.com/60549361/129348378-b449a997-b259-442e-89ab-9febeb785723.png)
+![Скрипт](https://user-images.githubusercontent.com/60549361/129349476-c919b3b2-c0fe-4e92-97c5-38d0d4cf09dd.png)
 # Root
 Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binary code"
 * The body [] array writes information about the current session in 3 columns Example session 1 minute
