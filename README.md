@@ -1,3 +1,4 @@
+![ROOT INITIALIZATION](https://user-images.githubusercontent.com/60549361/129342031-a4de6a99-4b49-4260-b413-5f18273dc862.png)
 
 # Root
 Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binary code"
