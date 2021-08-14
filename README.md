@@ -4,6 +4,10 @@
 
 ![Diapositiva3](https://user-images.githubusercontent.com/60549361/129445492-dc37d052-27e8-4716-a667-e9a0995a08da.PNG)
 
+![Diapositiva4](https://user-images.githubusercontent.com/60549361/129449236-15c19d53-33e5-432c-ad43-ae800e9a45ba.PNG)
+
+![Diapositiva5](https://user-images.githubusercontent.com/60549361/129449239-76c48525-39dd-453d-8852-926ea16a4d9b.PNG)
+
 
 # Root
 Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binary code"
