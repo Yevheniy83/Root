@@ -1,4 +1,10 @@
 ![Скрипт](https://user-images.githubusercontent.com/60549361/129349476-c919b3b2-c0fe-4e92-97c5-38d0d4cf09dd.png)
+
+![Diapositiva2](https://user-images.githubusercontent.com/60549361/129445484-539e4546-01a4-4bff-a6d6-151183d7f889.PNG)
+
+![Diapositiva3](https://user-images.githubusercontent.com/60549361/129445492-dc37d052-27e8-4716-a667-e9a0995a08da.PNG)
+
+
 # Root
 Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binary code"
 * The body [] array writes information about the current session in 3 columns Example session 1 minute
