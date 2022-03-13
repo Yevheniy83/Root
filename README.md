@@ -8,6 +8,7 @@
 
 ![Diapositiva5](https://user-images.githubusercontent.com/60549361/129449239-76c48525-39dd-453d-8852-926ea16a4d9b.PNG)
 
+![Girasol](https://user-images.githubusercontent.com/60549361/158072512-a1919ef1-3226-4fb2-8e0a-56c2d1466b35.png)
 
 # Root
 Lines 2699-2793 -> Binary Converter- "The code transforms the price into a binary code"
