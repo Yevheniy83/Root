@@ -1,3 +1,15 @@
+Gratitude!
+
+Dear friends, first of all I express my gratitude to Mirzakorim Sanokulovich Norbekov for creating TinTuit. This wonderful device in my hands laid the foundation for the development of a mathematical algorithm for measuring market relations on the stock exchange. The algorithm has been developed by me for 7 years and has incorporated such principles as Binary code "Tintuit"
+Royal crown "Image of the spiral crown of the Queen of Spain"
+Sunflower "Natural growth"
+I am teaching a computer to analyze the market based on two principles. Binary code, in other words, the range of prices and the manifestation of the golden section.
+I invite everyone to get acquainted with TinTuit at the following link https://tintuit.ru/
+To view the image of the crown, follow this link https://www.joyeriaonline.com/blog/las-tiaras-de-la-reina-de-espana/
+To learn more about Sunflower follow the following link https://en.m.wikipedia.org/wiki/Helianthus
+
+IMAGES!
+
 ![Скрипт](https://user-images.githubusercontent.com/60549361/129349476-c919b3b2-c0fe-4e92-97c5-38d0d4cf09dd.png)
 
 ![Diapositiva2](https://user-images.githubusercontent.com/60549361/129445484-539e4546-01a4-4bff-a6d6-151183d7f889.PNG)
