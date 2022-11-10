@@ -1,4 +1,3 @@
-# Root
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
 //|                                             Nucleo   v 1.7.0.mq4 |
@@ -7,8 +6,8 @@
 
 
 #property copyright "Yevheniy Kopanitskyy"
-#property link      ""
-#property version   "1.7"
+#property link      "https://www.mql5.com/en/users/eugeniokp"
+#property version   "1.7.1"
 #property strict
 
 
@@ -21,25 +20,25 @@ extern bool BODYHorizont=false;
 //--END---EXTERNAL VAR-----
 
 //------Importing TELEGRAM library - Sending messages to a channel------------------------------
-#import "Telegram4Mql.dll"
-string TelegramSendTextAsync(string apiKey,string chatId,string chatText);
-string TelegramSendText(string apiKey,string chatId,string chatText);
-string TelegramSendScreenAsync(string apiKey,string chatId,string caption="");
-string TelegramSendScreen(string apiKey,string chatId,string caption="");
-string TelegramGetUpdates(string apiKey,string validUsers,bool confirmUpdates);
-string TelegramSendPhoto(string apiKey,string chatId,string filePath,string caption="");
-string TelegramSendPhotoAsync(string apiKey,string chatId,string filePath, string caption = "");
-string TelegramSendDocument(string apiKey, string chatId, string filePath, string caption = "");
-string TelegramSendDocumentAsync(string apiKey,string chatId,string filePath,string caption="");
+//#import "Telegram4Mql.dll"
+//string TelegramSendTextAsync(string apiKey,string chatId,string chatText);
+//string TelegramSendText(string apiKey,string chatId,string chatText);
+//string TelegramSendScreenAsync(string apiKey,string chatId,string caption="");
+//string TelegramSendScreen(string apiKey,string chatId,string caption="");
+//string TelegramGetUpdates(string apiKey,string validUsers,bool confirmUpdates);
+//string TelegramSendPhoto(string apiKey,string chatId,string filePath,string caption="");
+//string TelegramSendPhotoAsync(string apiKey,string chatId,string filePath, string caption = "");
+//string TelegramSendDocument(string apiKey, string chatId, string filePath, string caption = "");
+//string TelegramSendDocumentAsync(string apiKey,string chatId,string filePath,string caption="");
 //...
-#import
+//#import
 //---END---Importing TELEGRAM library - Sending messages to a channel------------------------------
 
 
 //------ARRAYS-----
-double body[99999,20];
+double body[99999,20];//m
 //double BinaryKeys[9999,2000];
-int MaxMinArr[99999];
+int MaxMinArr[99999];//m
 double kompa[10000];
 double kompa1[10000];
 datetime PIPS_COL_DT[99999];
@@ -54,6 +53,10 @@ double BodyHorizont_Price[7210,2000];
 datetime BodyHorizont_Time[7210];
 double bodyAR[90000,50];
 datetime bodydt[90000];
+double body_Plus[99999,20];//Массив для перезаписи
+double komp1[99999];// Array for displaying the synapse in the record
+int ArrayMaximum_0[10000];//999999
+int ArrayMaximum_1[10000];//999999
 //int bintoarr[1441,1001];//запись параметров бинарного кода в массив.Запись массива раз в сутки в бинарный фаил
 //int IFb1;//Индекс 1 для массива bintoarr
 //int IFb2;//Индекс 2 для массива bintoarr
@@ -94,6 +97,7 @@ double BoolInd;//Bool
 double BearInd;
 double Maximum;//bool
 double Minimum;
+double PipsDif;
 double IpaintFiboLineUP_2;
 double IpaintFiboLineUP_3;
 double IpaintFiboLineUP_5;
@@ -121,6 +125,9 @@ double OPEN;
 double resOperandMax;
 double resOperandMin;
 //--END----DOUBLE VARS-----
+int fgf;
+int fgi;
+int fgo;
 int k;
 int printdesc1;
 int printdesc2;
@@ -155,6 +162,8 @@ int ONE_BE;
 int IreceiveLevelresult;
 int NormalizaDigi=5;
 int im;
+int Bear_Z,Bool_Z;
+int Switch_L_S;
 //---END---INTEGER VARS-----
 //------STRING VARS-----
 string File_Name="File.csv";
@@ -177,24 +186,25 @@ string FileName4=SYmbol+" Long&Short-Signals.txt";
 //string FileName5=SYmbol+" LEVELS PRICE.txt";
 string FileName6=SYmbol+" indexarray.bin";
 string FileName7=SYmbol+" alltoarray.bin";
-string FileName8=SYmbol+" BinaryKeys_BIN.bin";
-string FileName9=SYmbol+" BinaryKeys_BID.bin";
-string FileName10=SYmbol+" BinaryKeys_TIME.bin";
+//string FileName8=SYmbol+" BinaryKeys_BIN.bin";
+//string FileName9=SYmbol+" BinaryKeys_BID.bin";
+//string FileName10=SYmbol+" BinaryKeys_TIME.bin";
 string FileName12="bbb.bin";
-string FileName11=SYmbol+" BinaryKeys-Repit_TIME.bin";//массив в котором хранятся повторы ключей по времени, если повтор был то фиксируется время открытия свечи
+//string FileName11=SYmbol+" BinaryKeys-Repit_TIME.bin";//массив в котором хранятся повторы ключей по времени, если повтор был то фиксируется время открытия свечи
 string FileName13="bbb_compare.bin";
 string FileName14=SYmbol+" PIPS_COLLECTION.txt";
 string FileName15=SYmbol+" PIPS_COL_DT.bin";
 string FileName16=SYmbol+" PIPS_COL_Price.bin";
 string FileName17=SYmbol+" DataCompare.txt";
 //string FileName18=SYmbol+" priceBEBO.bin";//Фаил отгрузки и загрузки
-string FileName19=SYmbol+" AllAnalisysData.bin";
+string FileName19=SYmbol+" AllAnalisysData.bin";//m
 string FileName20=SYmbol+" DT_AllAnalisysData.bin";
 string FileName21=SYmbol+"BodyHorizont_Bin.bin";
 string FileName22=SYmbol+"BodyHorizont_Price.bin";
 string FileName23=SYmbol+"BodyHorizont_Time.bin";
-string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
-string chatid="-1001177290832";//654751710 bot chat
+
+//string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
+//string chatid="-1001177290832";//654751710 bot chat
 //--END---FILE NAMES-----
 //------DATETIME VARS-----
 datetime time_bar,time_BR,Bar_Tm=0;
@@ -238,7 +248,7 @@ int init()
 
 // --- Initialization of the Telegram Bot
 
-   TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.7");
+   //TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.7");
 // ---END---Initialization of the Telegram Bot
 //--Индикатор бинарный код - цель получение повторений индикатора
    Price1=0;
@@ -372,7 +382,7 @@ int init()
      }
 //-----------------------------------------------------------------------------------
 
-   int file_handle19=FileOpen(FileName23,FILE_READ|FILE_WRITE|FILE_BIN);//Loading
+   int file_handle19=FileOpen(FileName23,FILE_READ|FILE_WRITE|FILE_BIN);//m
    if(file_handle19>0)
      {
 
@@ -456,7 +466,7 @@ int start()
               }
            }
          // ----- Defining a gap when opening a new bar-----
-         double PipsDif;
+         
          if(inx>1 && body[1,0]<3)// the first record in the array is skipped
            {
             if(BodyHorizont_Price[inx-1,fg-1]!=body[1,0])
@@ -491,11 +501,9 @@ int start()
               }
            }
          // ----- I overwrite arrays to add values -----
-         double body_Plus[99999,20];//Массив для перезаписи
+         
          // -----I transfer the values ​​of the body array to the body plus
-         int fgf;
-         int fgi;
-         int fgo;
+         
          if(inx>1)// the first record in the array is skipped
            {
             for(fgf=1; fgf<99999; fgf++)
@@ -977,7 +985,10 @@ int start()
                Be="Be_"+IntegerToString(BinInd3);
               }
            }
-
+         
+         //-----Rotation-----
+         //-----Ротация оси базируется на делении семечки подоснуха на 4 части.Присваиваются следующие индексы
+         //-----Be_0,Bo_0 (Снисходящий тренд, восходящий тренд).Bе_1,Bo_1 (Снисходящий тренд, восходящий тренд) 
 
          // -------- Binary price field scanner
          // -------- When the minute arrives, write the price change to the array, assigning the value obtained by the indicator
@@ -1023,7 +1034,7 @@ int start()
             PIPS_COL_Price[indmas,2]=1;//Bear type
             PIPS_COL_Price[indmas,3]=0;// Subtype 0/1
            }
-
+         
 
          //-----Time-----
          PIPS_COL_DT[indmas]=iTime(Symbol(),0,1);// record the time
@@ -1306,7 +1317,7 @@ int start()
         }
 
       int one_BE=Counter_Summa1_AR;//Power of bears
-      int zero_BE=Counter_Summa0_AR;//Bull strength
+      int zero_BE=Counter_Summa0_AR;//Power of Bull
       double Rez_BE=one_BE-zero_BE;
       // ----- Calculation of Fibonacci levels -----
       RefreshRates();
@@ -1406,7 +1417,7 @@ int start()
 
       // -----Synapsys Indicator-----
 
-      double komp1[99999];// Array for displaying the synapse in the record
+      
       ArrayInitialize(komp1,0);
       ArrayInitialize(kompa,10);
 
@@ -1485,8 +1496,7 @@ int start()
 
 
       //-------Arrays------
-      int ArrayMaximum_0[10000];//999999
-      int ArrayMaximum_1[10000];//999999
+      
       ArrayInitialize(ArrayMaximum_0,0);
       ArrayInitialize(ArrayMaximum_1,0);
       //---------------Contador  de ARRAY Identificacion de Index. Se identifica fin de relleno de datos
@@ -1776,6 +1786,8 @@ int start()
          FileClose(file_handle17);
         }
 
+
+      
       //if(BinIndWRITE==true)
       //{
       // int ih;//index
@@ -1903,8 +1915,7 @@ int start()
             // The indicator remembers the last change of direction based on the compensation indicator
             // If there is 0 in one or the other indicator, then the position in short or long changes
 
-            int Bear_Z,Bool_Z;
-            int Switch_L_S;
+            
             string Text_Switch="No Data";
             Bool_Z=Maximum-MaxBinNumber_1;
             Bear_Z=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
@@ -2000,7 +2011,7 @@ int start()
             string levelnotificacion1=IntegerToString(ONE_BE);
             string Comp1=IntegerToString(MaxMinArr[IndexMaximum]-MaxBinNumber_1);
             string Comp2=IntegerToString(MaxMinArr[IndexMinimum]+MaxBinNumber_0);
-            string message2=SYmbol+"-TIME "+Hora1+" SIGNAL NUMBER "+levelnotificacion1+" LONG "+" Comp1= "+Comp1+" Comp2= "+Comp2;
+            string message2=SYmbol+" TIME "+Hora1+" SIGNAL NUMBER "+levelnotificacion1+" LONG "+" BOOL-F= "+Comp1+" BEAR-F= "+Comp2;
             SendNotification(message2); //
             LongShort=1;
            }
@@ -2015,7 +2026,7 @@ int start()
             string levelnotificacion=IntegerToString(ONE_BE);
             string Comp1=IntegerToString(MaxMinArr[IndexMaximum]-MaxBinNumber_1);
             string Comp2=IntegerToString(MaxMinArr[IndexMinimum]+MaxBinNumber_0);
-            string message1=SYmbol+"-TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion+" SHORT "+" Comp1= "+Comp1+" Comp2= "+Comp2;
+            string message1=SYmbol+"-TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion+" SHORT "+" BOOL-F= "+Comp1+" BEAR-F= "+Comp2;
             SendNotification(message1);
             LongShort=0;
            }
@@ -2057,7 +2068,7 @@ int start()
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency +" LONG - FOR ROOTDIAMOND, TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
 
-            TelegramSendText(apikey,chatid,message1);
+            //TelegramSendText(apikey,chatid,message1);
 
 
            }
@@ -2074,7 +2085,7 @@ int start()
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency + " SHORT - FOR ROOTDIAMOND, TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
 
-            TelegramSendText(apikey,chatid,message1);
+            //TelegramSendText(apikey,chatid,message1);
 
            }
 
@@ -2092,7 +2103,7 @@ int start()
             string levelnotificacion=IntegerToString(ONE_BE);
             string message1=Curency+" SHORT - FOR ROOTDIAMOND_8 , TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion;
 
-            int testT=TelegramSendText(apikey,chatid,message1);
+            //int testT=TelegramSendText(apikey,chatid,message1);
 
 
            }
@@ -2571,3 +2582,7 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
   }
 
 //+------------------------------------------------------------------+
+
+
+//+------------------------------------------------------------------+
+
