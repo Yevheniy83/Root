@@ -271,26 +271,26 @@ string Obiektcampo1="100",Obiektcampo2="101",Obiektcampo3="102",Obiektcampo4="10
 //string FileName1=SYmbol+" MEMORYnature.txt";
 //string FileName3=SYmbol+" MEMORYnature_FTP.txt";
 //string FileName2=SYmbol+" MEMORYnature-ALLSIGNALS.txt";
-string FileName4=SYmbol+"1.8Long&Short-Signals.txt";
+string FileName4=SYmbol+"GITHUB - Long&Short-Signals.txt";
 //string FileName5=SYmbol+" LEVELS PRICE.txt";
-string FileName6=SYmbol+"1.8indexarray.bin";
-string FileName7=SYmbol+"1.8alltoarray.bin";
+string FileName6=SYmbol+"GITHUB - indexarray.bin";
+string FileName7=SYmbol+"GITHUB - alltoarray.bin";
 //string FileName8=SYmbol+" BinaryKeys_BIN.bin";
 //string FileName9=SYmbol+" BinaryKeys_BID.bin";
 //string FileName10=SYmbol+" BinaryKeys_TIME.bin";
-string FileName12="1.8bbb.bin";
+string FileName12="GITHUB - bbb.bin";
 //string FileName11=SYmbol+" BinaryKeys-Repit_TIME.bin";//массив в котором хранятся повторы ключей по времени, если повтор был то фиксируется время открытия свечи
-string FileName13="1.8bbb_compare.bin";
-string FileName14=SYmbol+"1.8PIPS_COLLECTION.txt";
-string FileName15=SYmbol+"1.8PIPS_COL_DT.bin";
-string FileName16=SYmbol+"1.8PIPS_COL_Price.bin";
-string FileName17=SYmbol+"1.8DataCompare.txt";
+string FileName13="GITHUB - bbb_compare.bin";
+string FileName14=SYmbol+"GITHUB - PIPS_COLLECTION.txt";
+string FileName15=SYmbol+"GITHUB - PIPS_COL_DT.bin";
+string FileName16=SYmbol+"GITHUB - PIPS_COL_Price.bin";
+string FileName17=SYmbol+"GITHUB - DataCompare.txt";
 //string FileName18=SYmbol+" priceBEBO.bin";//Фаил отгрузки и загрузки
-string FileName19=SYmbol+"1.8AllAnalisysData.bin";//m
-string FileName20=SYmbol+"1.8DT_AllAnalisysData.bin";
-string FileName21=SYmbol+"1.8BodyHorizont_Bin.bin";
-string FileName22=SYmbol+"1.8BodyHorizont_Price.bin";
-string FileName23=SYmbol+"1.8BodyHorizont_Time.bin";
+string FileName19=SYmbol+"GITHUB - AllAnalisysData.bin";//m
+string FileName20=SYmbol+"GITHUB - DT_AllAnalisysData.bin";
+string FileName21=SYmbol+"GITHUB - BodyHorizont_Bin.bin";
+string FileName22=SYmbol+"GITHUB - BodyHorizont_Price.bin";
+string FileName23=SYmbol+"GITHUB - BodyHorizont_Time.bin";
 
 //string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
 //string chatid="-1001177290832";//654751710 bot chat
@@ -2720,3 +2720,4 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 
 //+------------------------------------------------------------------+
+
