@@ -1,13 +1,13 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 1.7.1.mq4 |
+//|                                             Nucleo   v 1.7.2.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
 
 #property copyright "Yevheniy Kopanitskyy"
 #property link      "https://www.mql5.com/en/users/eugeniokp"
-#property version   "1.7.1"
+#property version   "1.7"
 #property strict
 
 
@@ -17,6 +17,7 @@ extern bool ShortPosition=false;//Short
 extern bool BinIndWRITE=false;
 extern bool ALLtoARRAYWRITE=false;
 extern bool BODYHorizont=false;
+
 //--END---EXTERNAL VAR-----
 
 //------Importing TELEGRAM library - Sending messages to a channel------------------------------
@@ -45,6 +46,7 @@ datetime PIPS_COL_DT[99999];
 double  PIPS_COL_Price[99999,6];
 int bbb[1681,3];
 int bbb_compare[9999,2,1681];
+int errorprint[50];
 //int priceBEBO[100000,2];
 double AllAnalisysData[7205,20];
 datetime DT_AllAnalisysData[7205,1];
@@ -125,6 +127,7 @@ double OPEN;
 double resOperandMax;
 double resOperandMin;
 //--END----DOUBLE VARS-----
+int Gx,Gy;
 int fgf;
 int fgi;
 int fgo;
@@ -164,7 +167,93 @@ int NormalizaDigi=5;
 int im;
 int Bear_Z,Bool_Z;
 int Switch_L_S;
+int Rez_BE,one_BE;
 //---END---INTEGER VARS-----
+//---Переменные индикатора Маховик Времени
+
+// Массивы для пересчётов
+int Sev[9,9];
+int Var1_Be_0;
+int Var1_Bo_0;
+int Var1_Be_1;
+int Var1_Bo_1;
+int Var2_Be_0;
+int Var2_Bo_0;
+int Var2_Be_1;
+int Var2_Bo_1;
+// Переменные для разрешений
+int sev;
+int yug;
+int zap;
+int vost;
+// Переменные для лица и изнанки
+int lic;
+int izn;
+//Подача данных из подсолнуха
+
+int Be_0=0;
+int Bo_0=0;
+int Be_1=0;
+int Bo_1=0;
+int Be_0_Asign=0;
+int Bo_0_Asign=0;
+int Be_1_Asign=0;
+int Bo_1_Asign=0;
+int CheFe=0;
+
+
+extern bool GAP=false;
+// Подача разрешений для сторон света
+int Sev_1;
+int Yug_1;
+int Vost_1;
+int Zap_1;
+// Разметка 4 переменных по 4 сторонам света с лицом и изнанкой и привязкой к Северной стороне как исходной позиции
+//Север
+//   Sev[1,1]=0; Be_0
+//   Sev[1,2]=0; Bo_0
+//   Sev[1,3]=0; Be_1
+//   Sev[1,4]=0; Bo_1
+// Изнанка
+//   Sev[1,5]=1; Bo_0
+//   Sev[1,6]=1; Be_0
+//   Sev[1,7]=1; Bo_1
+//   Sev[1,8]=1; Be_1
+
+//Юг
+//   Sev[1,1]=0; Be_1
+//   Sev[1,2]=0; Bo_1
+//   Sev[1,3]=0; Be_0
+//   Sev[1,4]=0; Bo_0
+// Изнанка
+//   Sev[1,5]=1; Bo_1
+//   Sev[1,6]=1; Be_1
+//   Sev[1,7]=1; Bo_0
+//   Sev[1,8]=1; Be_0
+
+//Запад
+//   Sev[1,1]=0; Bo_0
+//   Sev[1,2]=0; Be_1
+//   Sev[1,3]=0; Bo_1
+//   Sev[1,4]=0; Be_0
+// Изнанка
+//   Sev[1,5]=1; Be_1
+//   Sev[1,6]=1; Bo_0
+//   Sev[1,7]=1; Be_0
+//   Sev[1,8]=1; Bo_1
+
+//Восток
+//   Sev[1,1]=0; Bo_1
+//   Sev[1,2]=0; Be_0
+//   Sev[1,3]=0; Bo_0
+//   Sev[1,4]=0; Be_1
+// Изнанка
+//   Sev[1,5]=1; Be_0
+//   Sev[1,6]=1; Bo_1
+//   Sev[1,7]=1; Be_1
+//   Sev[1,8]=1; Bo_0
+
+//---
 //------STRING VARS-----
 string File_Name="File.csv";
 string FR_Nm=".csv";
@@ -182,26 +271,26 @@ string Obiektcampo1="100",Obiektcampo2="101",Obiektcampo3="102",Obiektcampo4="10
 //string FileName1=SYmbol+" MEMORYnature.txt";
 //string FileName3=SYmbol+" MEMORYnature_FTP.txt";
 //string FileName2=SYmbol+" MEMORYnature-ALLSIGNALS.txt";
-string FileName4=SYmbol+" Long&Short-Signals.txt";
+string FileName4=SYmbol+"1.8Long&Short-Signals.txt";
 //string FileName5=SYmbol+" LEVELS PRICE.txt";
-string FileName6=SYmbol+" indexarray.bin";
-string FileName7=SYmbol+" alltoarray.bin";
+string FileName6=SYmbol+"1.8indexarray.bin";
+string FileName7=SYmbol+"1.8alltoarray.bin";
 //string FileName8=SYmbol+" BinaryKeys_BIN.bin";
 //string FileName9=SYmbol+" BinaryKeys_BID.bin";
 //string FileName10=SYmbol+" BinaryKeys_TIME.bin";
-string FileName12="bbb.bin";
+string FileName12="1.8bbb.bin";
 //string FileName11=SYmbol+" BinaryKeys-Repit_TIME.bin";//массив в котором хранятся повторы ключей по времени, если повтор был то фиксируется время открытия свечи
-string FileName13="bbb_compare.bin";
-string FileName14=SYmbol+" PIPS_COLLECTION.txt";
-string FileName15=SYmbol+" PIPS_COL_DT.bin";
-string FileName16=SYmbol+" PIPS_COL_Price.bin";
-string FileName17=SYmbol+" DataCompare.txt";
+string FileName13="1.8bbb_compare.bin";
+string FileName14=SYmbol+"1.8PIPS_COLLECTION.txt";
+string FileName15=SYmbol+"1.8PIPS_COL_DT.bin";
+string FileName16=SYmbol+"1.8PIPS_COL_Price.bin";
+string FileName17=SYmbol+"1.8DataCompare.txt";
 //string FileName18=SYmbol+" priceBEBO.bin";//Фаил отгрузки и загрузки
-string FileName19=SYmbol+" AllAnalisysData.bin";//m
-string FileName20=SYmbol+" DT_AllAnalisysData.bin";
-string FileName21=SYmbol+"BodyHorizont_Bin.bin";
-string FileName22=SYmbol+"BodyHorizont_Price.bin";
-string FileName23=SYmbol+"BodyHorizont_Time.bin";
+string FileName19=SYmbol+"1.8AllAnalisysData.bin";//m
+string FileName20=SYmbol+"1.8DT_AllAnalisysData.bin";
+string FileName21=SYmbol+"1.8BodyHorizont_Bin.bin";
+string FileName22=SYmbol+"1.8BodyHorizont_Price.bin";
+string FileName23=SYmbol+"1.8BodyHorizont_Time.bin";
 
 //string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
 //string chatid="-1001177290832";//654751710 bot chat
@@ -248,7 +337,7 @@ int init()
 
 // --- Initialization of the Telegram Bot
 
-   //TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.7");
+//TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.7");
 // ---END---Initialization of the Telegram Bot
 //--Индикатор бинарный код - цель получение повторений индикатора
    Price1=0;
@@ -439,6 +528,7 @@ int start()
       int inx_1;
       for(inx_1=1; inx_1<99999; inx_1++)
         {
+        //Print("Body Init ",body[inx_1,0]);//Ошибок НЕТ
          if(body[inx_1,0]==10)// line number where writing to the array ended
            {
             break;
@@ -453,6 +543,8 @@ int start()
       // If the price is the same as in the body, then the new record is assigned the value of the last record of the body array. Horizon example Body 1 1.13200 and body horizon 0 1.13200 then change the value to 0
       // if the price in the body has decreased from the price of the bodyhorizon, then set 0; if it has risen, then set 1
       // define the end of the previous record in the BodyHorizont_Bin array through the pho loop
+     if(GAP==true)
+     {
       int fg;
       int swi=0;
       if(inx>1)// the first record in the array is skipped
@@ -466,19 +558,21 @@ int start()
               }
            }
          // ----- Defining a gap when opening a new bar-----
-         
+
          if(inx>1 && body[1,0]<3)// the first record in the array is skipped
            {
             if(BodyHorizont_Price[inx-1,fg-1]!=body[1,0])
               {
                if(BodyHorizont_Price[inx-1,fg-1]>body[1,0])// The closing price is higher than the opening price, which means the price has dropped
                  {
-                  PipsDif=(BodyHorizont_Price[inx-1,fg-1]-body[1,0])*100000;// Get the number of pips of the price difference
+                  PipsDif=NormalizeDouble(((NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5)-NormalizeDouble(body[1,0],5))*100000),0);// Get the number of pips of the price difference
+                  //Print(" PipsDIf 1 ",PipsDif);
                   swi=1;
                  }
                if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// The closing price is higher than the opening price, which means the price has dropped
                  {
-                  PipsDif=(body[1,0]-BodyHorizont_Price[inx-1,fg-1])*100000;// Get the number of pips of the price difference
+                  PipsDif=NormalizeDouble(((NormalizeDouble(body[1,0],5)- NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5))*100000),0);// Get the number of pips of the price difference
+                  //Print(" PipsDIf 2 ",PipsDif," body[1,0] ",body[1,0]," BodyHorizont_Price[inx-1,fg-1] ",BodyHorizont_Price[inx-1,fg-1]);
                   swi=2;
                  }
               }
@@ -490,20 +584,22 @@ int start()
               {
                if(BodyHorizont_Price[inx-1,fg-1]>body[1,3])// The closing price is higher than the opening price, which means the price has dropped
                  {
-                  PipsDif=(BodyHorizont_Price[inx-1,fg-1]-body[1,3])*100000;// Get the number of pips of the price difference
+                  PipsDif=NormalizeDouble(((NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5)-NormalizeDouble(body[1,3],5))*100000),0);// Get the number of pips of the price difference
+                  //Print(" PipsDIf 3 ",PipsDif);
                   swi=1;
                  }
                if(BodyHorizont_Price[inx-1,fg-1]<body[1,3])// The closing price is higher than the opening price, which means the price has dropped
                  {
-                  PipsDif=(body[1,3]-BodyHorizont_Price[inx-1,fg-1])*100000;// Get the number of pips of the price difference
+                  PipsDif=NormalizeDouble(((NormalizeDouble(body[1,3],5)-NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5))*100000),0);// Get the number of pips of the price difference
+                  //Print(" PipsDIf 4 ",PipsDif);
                   swi=2;
                  }
               }
            }
          // ----- I overwrite arrays to add values -----
-         
+
          // -----I transfer the values ​​of the body array to the body plus
-         
+
          if(inx>1)// the first record in the array is skipped
            {
             for(fgf=1; fgf<99999; fgf++)
@@ -520,6 +616,7 @@ int start()
            {
             for(fgi=1; fgi<fgf; fgi++)
               {
+               //Print("Line 613 ",body[fgi,fgo]);//ассмотреть масив по столбцам раздельно
                body_Plus[fgi,fgo]=body[fgi,fgo];
 
               }
@@ -539,6 +636,7 @@ int start()
 
                      body[fgw,0]=BodyHorizont_Price[inx-1,fg-1]+0.00001;// Assign price values
                      body[fgw,1]=1;// Assign binary code values
+                     Print("Body Init 2 ",body[fgw,0]);
                     }
                  }
               }
@@ -565,6 +663,7 @@ int start()
       int inx_2;
       for(inx_2=1; inx_2<inx_1; inx_2++)
         {
+         //Print(" Line 659 ",body[inx_2,0]);
          BodyHorizont_Bin[inx,inx_2]=body[inx_2,1];
         }
       // Assigning price values ​​to an array
@@ -621,6 +720,8 @@ int start()
             FileClose(file_handle23);
            }
         }
+        }//END GAP
+        
       //------Loading data from an array-----------
       // ----- testing process
       //-----Индексы
@@ -669,9 +770,18 @@ int start()
          // ----- BigPipsFinder indicator ------
          price_Menus_one=bodypips[MaxInd_bodypips,0];
          pips_Menus_one=bodypips[MaxInd_bodypips,1];
-
+         //Print("Price init 1  - ",bodypips[MaxInd_bodypips,0]);
          ArrayInitialize(bodypips,0);
          ArrayInitialize(comp_bodypips,0);
+         for(int imm=1; imm<99999; imm++)
+           {
+            //Print("body[imm,0] ",body[imm,0]);
+            if(body[imm,0]==10)
+              {
+               break;
+              }
+
+           }
          if(body[1,0]>0 && body[1,0]<3)
            {
             if(body[1,1]==1)// If there is 1 in a binary cell, then indicate the price above + 0.00001
@@ -727,6 +837,7 @@ int start()
                   int Break2=0;//exit from enumeration 1
                   for(ibq=1; ibq<99999; ibq++)//Perebor stolbca 1
                     {
+                     //Print("Price -7 ",price);
                      if(bodypips[ibq,0]==price)
                        {
 
@@ -751,7 +862,7 @@ int start()
                        {
                         if(bodypips[ibq,0]==0)
                           {
-
+                           //Print("Price -6 ",price);
                            bodypips[ibq,0]=price;
                            bodypips[ibq,1]=bodypips[ibq,1]+1;
                            Break2=1;
@@ -777,6 +888,7 @@ int start()
                   Switch1=1;
                   for(ibq=1; ibq<99999; ibq++)
                     {
+                     //Print("Price -5 ",price);
                      if(bodypips[ibq,0]==price)
                        {
                         //bodypips[ib,0]=price;
@@ -798,7 +910,7 @@ int start()
                        {
                         if(bodypips[ibq,0]==0)
                           {
-
+                           //Print("Price -4 ",price);
                            bodypips[ibq,0]=price;
                            bodypips[ibq,1]=bodypips[ibq,1]+1;
                            Break2=1;
@@ -825,12 +937,14 @@ int start()
 
                   if(body[iaq,1]==1)// If there is 1 in a binary cell, then indicate the price above + 0.00001
                     {
+
                      double price=body[iaq,3]+0.00001;
                      int findeprice=0;
                      int Break1=0;
                      int Break2=0;
                      for(ibq=1; ibq<99999; ibq++)
                        {
+                        //Print("Price -3 ",price);
                         if(bodypips[ibq,0]==price)
                           {
 
@@ -854,7 +968,7 @@ int start()
                           {
                            if(bodypips[ibq,0]==0)
                              {
-
+                              //Print("Price -2 ",price);
                               bodypips[ibq,0]=price;
                               bodypips[ibq,1]=bodypips[ibq,1]+1;
                               Break2=1;
@@ -879,6 +993,7 @@ int start()
                      int Break2=0;
                      for(ibq=1; ibq<99999; ibq++)
                        {
+                        //Print("Price -1 ",price);
                         if(bodypips[ibq,0]==price)
                           {
 
@@ -902,7 +1017,7 @@ int start()
                           {
                            if(bodypips[ibq,0]==0)
                              {
-
+                              //Print("Price ",price);
                               bodypips[ibq,0]=price;
                               bodypips[ibq,1]=bodypips[ibq,1]+1;
                               Break2=1;
@@ -927,13 +1042,15 @@ int start()
          for(int ic=1; ic<99999; ic++)//Perebor stolbca 1
            {
             comp_bodypips[ic]=bodypips[ic,1];
+            //Print("line 1031 ",bodypips[ic,1]);
+            //Print("line 1032 ",bodypips[ic,0]);
             if(bodypips[ic,0]==0)
               {
                break;
               }
 
            }
-         MaxInd_bodypips =ArrayMaximum(comp_bodypips,WHOLE_ARRAY,0);// Get the index in the array in which the binary code for the price showed the most
+         MaxInd_bodypips=ArrayMaximum(comp_bodypips,WHOLE_ARRAY,0);// Get the index in the array in which the binary code for the price showed the most
 
          // ----- Formula 2 - If the new price is higher than the previous one, then the resulting maximum is translated into pips and summed up to the previous price (price + 1) price
          // If the new price is less than the previous one, then the resulting maximum is translated into pips and minus the previous price (price-1) price.
@@ -958,6 +1075,8 @@ int start()
                BinInd3BO=0;
 
                Bo="Bo_"+IntegerToString(BinInd3);
+               //Подача значений на маховик
+               Bo_0=1;
 
               }
             if(bodypips[MaxInd_bodypips,0]>price_plus)
@@ -965,6 +1084,9 @@ int start()
                BinInd3=1;
                BinInd3BO=1;
                Bo="Bo_"+IntegerToString(BinInd3);
+               //Подача значений на маховик
+               Bo_1=1;
+
               }
            }
          //------------------------------------------------
@@ -977,18 +1099,25 @@ int start()
                BinInd3=0;
                BinInd3BE=0;
                Be="Be_"+IntegerToString(BinInd3);
+               //Подача значений на маховик
+               Be_0=1;
+
+
               }
             if(bodypips[MaxInd_bodypips,0]<price_minus)
               {
                BinInd3=1;
                BinInd3BE=1;
                Be="Be_"+IntegerToString(BinInd3);
+               //Подача значений на маховик
+               Be_1=1;
+
               }
            }
-         
+
          //-----Rotation-----
          //-----Ротация оси базируется на делении семечки подоснуха на 4 части.Присваиваются следующие индексы
-         //-----Be_0,Bo_0 (Снисходящий тренд, восходящий тренд).Bе_1,Bo_1 (Снисходящий тренд, восходящий тренд) 
+         //-----Be_0,Bo_0 (Снисходящий тренд, восходящий тренд).Bе_1,Bo_1 (Снисходящий тренд, восходящий тренд)
 
          // -------- Binary price field scanner
          // -------- When the minute arrives, write the price change to the array, assigning the value obtained by the indicator
@@ -1009,8 +1138,8 @@ int start()
 
 
             // -------------- Phase 2 ------------- // Divide the received pips by the number of the indicator
-            Onda1=NormalizeDouble(CurPips/bodypips[MaxInd_bodypips,1],2);
-            Print(" CurPips ",CurPips," Onda1 ",Onda1);
+            Onda1=NormalizeDouble(CurPips/bodypips[MaxInd_bodypips,1],5);
+            //Print(" CurPips ",CurPips," Onda1 ",Onda1);
 
            }
 
@@ -1034,7 +1163,7 @@ int start()
             PIPS_COL_Price[indmas,2]=1;//Bear type
             PIPS_COL_Price[indmas,3]=0;// Subtype 0/1
            }
-         
+
 
          //-----Time-----
          PIPS_COL_DT[indmas]=iTime(Symbol(),0,1);// record the time
@@ -1042,7 +1171,18 @@ int start()
          //-----Price------
          PIPS_COL_Price[indmas,0]=bodypips[MaxInd_bodypips,0];// Write the price to zero
          PIPS_COL_Price[indmas,1]=bodypips[MaxInd_bodypips,1];// Maximum index value-
-
+         //-----Часчёт Маховик Времени
+         for(int il=1; il<99999; il++)
+           {
+            //Print(bodypips[il,0]);
+            if(bodypips[il,0]==0)
+              {
+               break;
+              }
+           }
+         
+         //-----
+        
          //-----I write the received data into a Binary File for drawing data using the Histogram method
          int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
          if(file_handle15>0)
@@ -1093,14 +1233,9 @@ int start()
               }
            }
         }
+      
 
-
-
-      //---Были определены синапсные связи которые могут показывать на смену тенденции---//
-      //---Тип 1 Bo_0/Bo_1
-      //---Тип 2 Be_0/Be_1
-      //---Было выявленно чо нужно обратить внимание на цену каждого типа и индекс контейнера.
-
+      
 
 
       //Print(" IFb1 ",IFb1);
@@ -1316,9 +1451,9 @@ int start()
 
         }
 
-      int one_BE=Counter_Summa1_AR;//Power of bears
+      one_BE=Counter_Summa1_AR;//Power of bears
       int zero_BE=Counter_Summa0_AR;//Power of Bull
-      double Rez_BE=one_BE-zero_BE;
+      Rez_BE=one_BE-zero_BE;
       // ----- Calculation of Fibonacci levels -----
       RefreshRates();
       datetime IreceiveBarTime=iTime(Symbol(),0,1);
@@ -1417,7 +1552,7 @@ int start()
 
       // -----Synapsys Indicator-----
 
-      
+
       ArrayInitialize(komp1,0);
       ArrayInitialize(kompa,10);
 
@@ -1496,7 +1631,7 @@ int start()
 
 
       //-------Arrays------
-      
+
       ArrayInitialize(ArrayMaximum_0,0);
       ArrayInitialize(ArrayMaximum_1,0);
       //---------------Contador  de ARRAY Identificacion de Index. Se identifica fin de relleno de datos
@@ -1645,7 +1780,7 @@ int start()
                         FileSeek(file_handle13,0,SEEK_CUR);
 
                         uint test =FileWriteArray(file_handle13,bbb_compare,0,WHOLE_ARRAY);
-                        Print("WRITED ",test);
+                        //Print("WRITED ",test);
                         FileClose(file_handle13);
 
 
@@ -1787,7 +1922,7 @@ int start()
         }
 
 
-      
+
       //if(BinIndWRITE==true)
       //{
       // int ih;//index
@@ -1915,7 +2050,7 @@ int start()
             // The indicator remembers the last change of direction based on the compensation indicator
             // If there is 0 in one or the other indicator, then the position in short or long changes
 
-            
+
             string Text_Switch="No Data";
             Bool_Z=Maximum-MaxBinNumber_1;
             Bear_Z=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
@@ -2585,4 +2720,3 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 
 //+------------------------------------------------------------------+
-
