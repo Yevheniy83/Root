@@ -1,13 +1,13 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 1.7.2.mq4 |
+//|                                             Nucleo   v 1.8.2.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
 
 #property copyright "Yevheniy Kopanitskyy"
 #property link      "https://www.mql5.com/en/users/eugeniokp"
-#property version   "1.7"
+#property version   "1.8"
 #property strict
 
 
@@ -201,7 +201,7 @@ int Be_1_Asign=0;
 int Bo_1_Asign=0;
 int CheFe=0;
 
-
+extern bool Compens=true;
 extern bool GAP=false;
 // Подача разрешений для сторон света
 int Sev_1;
@@ -271,26 +271,26 @@ string Obiektcampo1="100",Obiektcampo2="101",Obiektcampo3="102",Obiektcampo4="10
 //string FileName1=SYmbol+" MEMORYnature.txt";
 //string FileName3=SYmbol+" MEMORYnature_FTP.txt";
 //string FileName2=SYmbol+" MEMORYnature-ALLSIGNALS.txt";
-string FileName4=SYmbol+"GITHUB - Long&Short-Signals.txt";
+string FileName4=SYmbol+"1.8Long&Short-Signals.txt";
 //string FileName5=SYmbol+" LEVELS PRICE.txt";
-string FileName6=SYmbol+"GITHUB - indexarray.bin";
-string FileName7=SYmbol+"GITHUB - alltoarray.bin";
+string FileName6=SYmbol+"1.8indexarray.bin";
+string FileName7=SYmbol+"1.8alltoarray.bin";
 //string FileName8=SYmbol+" BinaryKeys_BIN.bin";
 //string FileName9=SYmbol+" BinaryKeys_BID.bin";
 //string FileName10=SYmbol+" BinaryKeys_TIME.bin";
-string FileName12="GITHUB - bbb.bin";
+string FileName12="1.8bbb.bin";
 //string FileName11=SYmbol+" BinaryKeys-Repit_TIME.bin";//массив в котором хранятся повторы ключей по времени, если повтор был то фиксируется время открытия свечи
-string FileName13="GITHUB - bbb_compare.bin";
-string FileName14=SYmbol+"GITHUB - PIPS_COLLECTION.txt";
-string FileName15=SYmbol+"GITHUB - PIPS_COL_DT.bin";
-string FileName16=SYmbol+"GITHUB - PIPS_COL_Price.bin";
-string FileName17=SYmbol+"GITHUB - DataCompare.txt";
+string FileName13="1.8bbb_compare.bin";
+string FileName14=SYmbol+"1.8PIPS_COLLECTION.txt";
+string FileName15=SYmbol+"1.8PIPS_COL_DT.bin";
+string FileName16=SYmbol+"1.8PIPS_COL_Price.bin";
+string FileName17=SYmbol+"1.8DataCompare.txt";
 //string FileName18=SYmbol+" priceBEBO.bin";//Фаил отгрузки и загрузки
-string FileName19=SYmbol+"GITHUB - AllAnalisysData.bin";//m
-string FileName20=SYmbol+"GITHUB - DT_AllAnalisysData.bin";
-string FileName21=SYmbol+"GITHUB - BodyHorizont_Bin.bin";
-string FileName22=SYmbol+"GITHUB - BodyHorizont_Price.bin";
-string FileName23=SYmbol+"GITHUB - BodyHorizont_Time.bin";
+string FileName19=SYmbol+"1.8AllAnalisysData.bin";//m
+string FileName20=SYmbol+"1.8DT_AllAnalisysData.bin";
+string FileName21=SYmbol+"1.8BodyHorizont_Bin.bin";
+string FileName22=SYmbol+"1.8BodyHorizont_Price.bin";
+string FileName23=SYmbol+"1.8BodyHorizont_Time.bin";
 
 //string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
 //string chatid="-1001177290832";//654751710 bot chat
@@ -528,7 +528,7 @@ int start()
       int inx_1;
       for(inx_1=1; inx_1<99999; inx_1++)
         {
-        //Print("Body Init ",body[inx_1,0]);//Ошибок НЕТ
+         //Print("Body Init ",body[inx_1,0]);//Ошибок НЕТ
          if(body[inx_1,0]==10)// line number where writing to the array ended
            {
             break;
@@ -543,185 +543,185 @@ int start()
       // If the price is the same as in the body, then the new record is assigned the value of the last record of the body array. Horizon example Body 1 1.13200 and body horizon 0 1.13200 then change the value to 0
       // if the price in the body has decreased from the price of the bodyhorizon, then set 0; if it has risen, then set 1
       // define the end of the previous record in the BodyHorizont_Bin array through the pho loop
-     if(GAP==true)
-     {
-      int fg;
-      int swi=0;
-      if(inx>1)// the first record in the array is skipped
+      if(GAP==true)
         {
-         for(fg=1; fg<2000; fg++)
-           {
-            //Print("fg ",fg);
-            if(BodyHorizont_Bin[inx-1,fg]==10)
-              {
-               break;
-              }
-           }
-         // ----- Defining a gap when opening a new bar-----
-
-         if(inx>1 && body[1,0]<3)// the first record in the array is skipped
-           {
-            if(BodyHorizont_Price[inx-1,fg-1]!=body[1,0])
-              {
-               if(BodyHorizont_Price[inx-1,fg-1]>body[1,0])// The closing price is higher than the opening price, which means the price has dropped
-                 {
-                  PipsDif=NormalizeDouble(((NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5)-NormalizeDouble(body[1,0],5))*100000),0);// Get the number of pips of the price difference
-                  //Print(" PipsDIf 1 ",PipsDif);
-                  swi=1;
-                 }
-               if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// The closing price is higher than the opening price, which means the price has dropped
-                 {
-                  PipsDif=NormalizeDouble(((NormalizeDouble(body[1,0],5)- NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5))*100000),0);// Get the number of pips of the price difference
-                  //Print(" PipsDIf 2 ",PipsDif," body[1,0] ",body[1,0]," BodyHorizont_Price[inx-1,fg-1] ",BodyHorizont_Price[inx-1,fg-1]);
-                  swi=2;
-                 }
-              }
-           }
-
-         if(inx>1 && body[1,3]<3)// the first record in the array is skipped
-           {
-            if(BodyHorizont_Price[inx-1,fg-1]!=body[1,3])
-              {
-               if(BodyHorizont_Price[inx-1,fg-1]>body[1,3])// The closing price is higher than the opening price, which means the price has dropped
-                 {
-                  PipsDif=NormalizeDouble(((NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5)-NormalizeDouble(body[1,3],5))*100000),0);// Get the number of pips of the price difference
-                  //Print(" PipsDIf 3 ",PipsDif);
-                  swi=1;
-                 }
-               if(BodyHorizont_Price[inx-1,fg-1]<body[1,3])// The closing price is higher than the opening price, which means the price has dropped
-                 {
-                  PipsDif=NormalizeDouble(((NormalizeDouble(body[1,3],5)-NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5))*100000),0);// Get the number of pips of the price difference
-                  //Print(" PipsDIf 4 ",PipsDif);
-                  swi=2;
-                 }
-              }
-           }
-         // ----- I overwrite arrays to add values -----
-
-         // -----I transfer the values ​​of the body array to the body plus
-
+         int fg;
+         int swi=0;
          if(inx>1)// the first record in the array is skipped
            {
-            for(fgf=1; fgf<99999; fgf++)
+            for(fg=1; fg<2000; fg++)
               {
                //Print("fg ",fg);
-               if(body[fgf,0]==10)
+               if(BodyHorizont_Bin[inx-1,fg]==10)
                  {
                   break;
                  }
               }
-           }
-         // ----- I overwrite arrays -----------------
-         for(fgo=0; fgo<4; fgo++)
-           {
-            for(fgi=1; fgi<fgf; fgi++)
+            // ----- Defining a gap when opening a new bar-----
+
+            if(inx>1 && body[1,0]<3)// the first record in the array is skipped
               {
-               //Print("Line 613 ",body[fgi,fgo]);//ассмотреть масив по столбцам раздельно
-               body_Plus[fgi,fgo]=body[fgi,fgo];
-
-              }
-           }
-
-         // ----- Fill the array with GEP values-----
-
-         if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// If the price is the same in the arrays and the binary code is the same, then I skip the action
-           {
-            if(body[1,0]<3)
-              {
-               ArrayInitialize(body,10);
-               if(swi==2)
+               if(BodyHorizont_Price[inx-1,fg-1]!=body[1,0])
                  {
-                  for(int fgw=0; fgw<PipsDif+1; fgw++)
+                  if(BodyHorizont_Price[inx-1,fg-1]>body[1,0])// The closing price is higher than the opening price, which means the price has dropped
                     {
-
-                     body[fgw,0]=BodyHorizont_Price[inx-1,fg-1]+0.00001;// Assign price values
-                     body[fgw,1]=1;// Assign binary code values
-                     Print("Body Init 2 ",body[fgw,0]);
+                     PipsDif=NormalizeDouble(((NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5)-NormalizeDouble(body[1,0],5))*100000),0);// Get the number of pips of the price difference
+                     //Print(" PipsDIf 1 ",PipsDif);
+                     swi=1;
+                    }
+                  if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// The closing price is higher than the opening price, which means the price has dropped
+                    {
+                     PipsDif=NormalizeDouble(((NormalizeDouble(body[1,0],5)- NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5))*100000),0);// Get the number of pips of the price difference
+                     //Print(" PipsDIf 2 ",PipsDif," body[1,0] ",body[1,0]," BodyHorizont_Price[inx-1,fg-1] ",BodyHorizont_Price[inx-1,fg-1]);
+                     swi=2;
                     }
                  }
               }
+
+            if(inx>1 && body[1,3]<3)// the first record in the array is skipped
+              {
+               if(BodyHorizont_Price[inx-1,fg-1]!=body[1,3])
+                 {
+                  if(BodyHorizont_Price[inx-1,fg-1]>body[1,3])// The closing price is higher than the opening price, which means the price has dropped
+                    {
+                     PipsDif=NormalizeDouble(((NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5)-NormalizeDouble(body[1,3],5))*100000),0);// Get the number of pips of the price difference
+                     //Print(" PipsDIf 3 ",PipsDif);
+                     swi=1;
+                    }
+                  if(BodyHorizont_Price[inx-1,fg-1]<body[1,3])// The closing price is higher than the opening price, which means the price has dropped
+                    {
+                     PipsDif=NormalizeDouble(((NormalizeDouble(body[1,3],5)-NormalizeDouble(BodyHorizont_Price[inx-1,fg-1],5))*100000),0);// Get the number of pips of the price difference
+                     //Print(" PipsDIf 4 ",PipsDif);
+                     swi=2;
+                    }
+                 }
+              }
+            // ----- I overwrite arrays to add values -----
+
+            // -----I transfer the values ​​of the body array to the body plus
+
+            if(inx>1)// the first record in the array is skipped
+              {
+               for(fgf=1; fgf<99999; fgf++)
+                 {
+                  //Print("fg ",fg);
+                  if(body[fgf,0]==10)
+                    {
+                     break;
+                    }
+                 }
+              }
+            // ----- I overwrite arrays -----------------
+            for(fgo=0; fgo<4; fgo++)
+              {
+               for(fgi=1; fgi<fgf; fgi++)
+                 {
+                  //Print("Line 613 ",body[fgi,fgo]);//ассмотреть масив по столбцам раздельно
+                  body_Plus[fgi,fgo]=body[fgi,fgo];
+
+                 }
+              }
+
+            // ----- Fill the array with GEP values-----
+
+            if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// If the price is the same in the arrays and the binary code is the same, then I skip the action
+              {
+               if(body[1,0]<3)
+                 {
+                  ArrayInitialize(body,10);
+                  if(swi==2)
+                    {
+                     for(int fgw=0; fgw<PipsDif+1; fgw++)
+                       {
+
+                        body[fgw,0]=BodyHorizont_Price[inx-1,fg-1]+0.00001;// Assign price values
+                        body[fgw,1]=1;// Assign binary code values
+                        Print("Body Init 2 ",body[fgw,0]);
+                       }
+                    }
+                 }
+              }
+
+
+            // Comparison of 2 arrays, I correct the writing of the binary code in the BODY array
+            if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// If the price is the same in the arrays and the binary code is the same, then I skip the action
+              {
+               body[1,1]=1;// If the price in BODY is more than in BodyHorizont then I assign 1
+              }
+            if(BodyHorizont_Price[inx-1,fg-1]>body[1,0])// If the price is the same in the arrays and the binary code is the same, then I skip the action
+              {
+               body[1,1]=0;// If the price in BODY is less than in BodyHorizont then I assign 0
+              }
+            if(BodyHorizont_Price[inx-1,fg-1]==body[1,0] && BodyHorizont_Bin[inx-1,fg-1]!=body[1,1])// If the price is the same in the arrays and the binary code is the same, then I skip the action
+              {
+               body[1,1]=BodyHorizont_Bin[inx-1,fg-1];// If the price in the body is more than in the bodyhorizont, then I assign 1
+              }
            }
 
 
-         // Comparison of 2 arrays, I correct the writing of the binary code in the BODY array
-         if(BodyHorizont_Price[inx-1,fg-1]<body[1,0])// If the price is the same in the arrays and the binary code is the same, then I skip the action
+
+         int inx_2;
+         for(inx_2=1; inx_2<inx_1; inx_2++)
            {
-            body[1,1]=1;// If the price in BODY is more than in BodyHorizont then I assign 1
+            //Print(" Line 659 ",body[inx_2,0]);
+            BodyHorizont_Bin[inx,inx_2]=body[inx_2,1];
            }
-         if(BodyHorizont_Price[inx-1,fg-1]>body[1,0])// If the price is the same in the arrays and the binary code is the same, then I skip the action
-           {
-            body[1,1]=0;// If the price in BODY is less than in BodyHorizont then I assign 0
-           }
-         if(BodyHorizont_Price[inx-1,fg-1]==body[1,0] && BodyHorizont_Bin[inx-1,fg-1]!=body[1,1])// If the price is the same in the arrays and the binary code is the same, then I skip the action
-           {
-            body[1,1]=BodyHorizont_Bin[inx-1,fg-1];// If the price in the body is more than in the bodyhorizont, then I assign 1
-           }
-        }
-
-
-
-      int inx_2;
-      for(inx_2=1; inx_2<inx_1; inx_2++)
-        {
-         //Print(" Line 659 ",body[inx_2,0]);
-         BodyHorizont_Bin[inx,inx_2]=body[inx_2,1];
-        }
-      // Assigning price values ​​to an array
-      for(inx_2=1; inx_2<inx_1; inx_2++)
-        {
-
-         if(body[inx_2,0]<2 && body[inx_2,0]!=3)// Assign a value if the value in the 0 column is less than 0
-           {
-            BodyHorizont_Price[inx,inx_2]=body[inx_2,0];
-           }
-         if(body[inx_2,0]==3)// Assign a value if the 0 column has a value of 3
-           {
-            BodyHorizont_Price[inx,inx_2]=body[inx_2,3];
-           }
-
-        }
-
-
-      if(BODYHorizont==true)
-        {
-         // Writing arrays to a binary file
-         // --- ADD CHANGE FILE NAME TO x_FILE NAME
-         //------Writing the received data to a files-----------
-
-         int file_handle21=FileOpen(FileName21,FILE_READ|FILE_WRITE|FILE_BIN);
-         if(file_handle21>0)
+         // Assigning price values ​​to an array
+         for(inx_2=1; inx_2<inx_1; inx_2++)
            {
 
-            FileSeek(file_handle21,0,SEEK_CUR);
+            if(body[inx_2,0]<2 && body[inx_2,0]!=3)// Assign a value if the value in the 0 column is less than 0
+              {
+               BodyHorizont_Price[inx,inx_2]=body[inx_2,0];
+              }
+            if(body[inx_2,0]==3)// Assign a value if the 0 column has a value of 3
+              {
+               BodyHorizont_Price[inx,inx_2]=body[inx_2,3];
+              }
 
-            uint test=FileWriteArray(file_handle21,BodyHorizont_Bin,0,WHOLE_ARRAY);
-            FileClose(file_handle21);
            }
-         //-----------------------------------------------------------------------------------
 
-         int file_handle22=FileOpen(FileName22,FILE_READ|FILE_WRITE|FILE_BIN);
-         if(file_handle22>0)
+
+         if(BODYHorizont==true)
            {
+            // Writing arrays to a binary file
+            // --- ADD CHANGE FILE NAME TO x_FILE NAME
+            //------Writing the received data to a files-----------
 
-            FileSeek(file_handle22,0,SEEK_CUR);
+            int file_handle21=FileOpen(FileName21,FILE_READ|FILE_WRITE|FILE_BIN);
+            if(file_handle21>0)
+              {
 
-            uint test=FileWriteArray(file_handle22,BodyHorizont_Price,0,WHOLE_ARRAY);
-            FileClose(file_handle22);
+               FileSeek(file_handle21,0,SEEK_CUR);
+
+               uint test=FileWriteArray(file_handle21,BodyHorizont_Bin,0,WHOLE_ARRAY);
+               FileClose(file_handle21);
+              }
+            //-----------------------------------------------------------------------------------
+
+            int file_handle22=FileOpen(FileName22,FILE_READ|FILE_WRITE|FILE_BIN);
+            if(file_handle22>0)
+              {
+
+               FileSeek(file_handle22,0,SEEK_CUR);
+
+               uint test=FileWriteArray(file_handle22,BodyHorizont_Price,0,WHOLE_ARRAY);
+               FileClose(file_handle22);
+              }
+            //-----------------------------------------------------------------------------------
+
+            int file_handle23=FileOpen(FileName23,FILE_READ|FILE_WRITE|FILE_BIN);
+            if(file_handle23>0)
+              {
+
+               FileSeek(file_handle23,0,SEEK_CUR);
+
+               uint test=FileWriteArray(file_handle23,BodyHorizont_Time,0,WHOLE_ARRAY);
+               FileClose(file_handle23);
+              }
            }
-         //-----------------------------------------------------------------------------------
-
-         int file_handle23=FileOpen(FileName23,FILE_READ|FILE_WRITE|FILE_BIN);
-         if(file_handle23>0)
-           {
-
-            FileSeek(file_handle23,0,SEEK_CUR);
-
-            uint test=FileWriteArray(file_handle23,BodyHorizont_Time,0,WHOLE_ARRAY);
-            FileClose(file_handle23);
-           }
-        }
         }//END GAP
-        
+
       //------Loading data from an array-----------
       // ----- testing process
       //-----Индексы
@@ -1122,6 +1122,27 @@ int start()
          // -------- Binary price field scanner
          // -------- When the minute arrives, write the price change to the array, assigning the value obtained by the indicator
          // -------------- Phase 1 ------------- // Calculation. I get the number of pips traversed by the price for periods 1 and 2.
+         
+         // ----Модуль проверки конверсии перменных в модулях
+         string Var1Wr;
+         if(Var1_Bo_1==0)
+         {
+         Var1Wr="Bo_1";
+         }
+         if(Var1_Bo_0==0)
+         {
+         Var1Wr="Bo_0";
+         }
+          if(Var1_Be_0==0)
+         {
+         Var1Wr="Be_0";
+         }
+          if(Var1_Be_1==0)
+         {
+         Var1Wr="Be_1";
+         }
+         
+         
          Price1=Price0;
          Price0=bodypips[MaxInd_bodypips,0];
 
@@ -1180,9 +1201,4257 @@ int start()
                break;
               }
            }
-         
+         //---   Для вычисления полного цикла нужно иметь 2 переменные, Север и Юг
+         //---   Переменная, реальность 1для внешнего кольца не изменяется а остаётся постоянной константой. Счётчик при смене с севера на юг считает в обратном порядке.при смене с юга на север считает в правильном порядке.
+         //---   4 стороны плюс 2 переворота.1_2_3_4_0/1
+         //---   Второй набор 1_2_3_4_0/1 часовые 1,2
+         //---   Третий набор 1_2_3_4_0/1 часовые 3 и 4 1_0/1 отношение север юг
+         //---   UP_BeBo0-1_0/1_1_2_3_4_0/1_1_2_3_4_0/1_1_2_3_4_0/1
+
+
+         // Присваивание значений из подсолнуха. Нужно определить в какую из 4 переменных произведено присваивание.
+
+         // Исходное положение Свеча компинсации. Переустановка начений
+         if(/*Rez_BE==0 && one_BE>=15 && one_BE<=60 &&*/ Compens==true)
+           {
+            // Установка позиции маховика на Север
+            sev=1;// обработка события Север
+            zap=0;
+            yug=0;
+            vost=0;
+            // Установка Лица
+            lic=1;
+            izn=0;
+            // Снятие разрешение на установление севера
+            Compens=false;
+            // Установить значения массива на 0 и 1
+            // Лицо
+            Sev[1,1]=0;
+            Sev[1,2]=0;
+            Sev[1,3]=0;
+            Sev[1,4]=0;
+            // Изнанка
+            Sev[1,5]=1;
+            Sev[1,6]=1;
+            Sev[1,7]=1;
+            Sev[1,8]=1;
+            Var1_Be_0=0;
+            Var1_Bo_0=2;
+            Var1_Be_1=2;
+            Var1_Bo_1=2;
+            Print(" Last Pips Sincronization ",iTime(Symbol(),PERIOD_M1,0));
+
+            Gx=0;
+            Gy=0;
+            int file_handle14=FileOpen(FileName14,FILE_READ|FILE_WRITE," ");
+            if(file_handle14>0)
+              {
+
+
+               FileSeek(file_handle14,0,SEEK_END);
+               FileWrite(file_handle14,Symbol()," Start Time for flywheel ",iTime(Symbol(),0,1));
+               FileClose(file_handle14);
+
+              }
+            //Установка в 0 исходных переменных при лице
+
+            //Print(" Fly INIT ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]);
+            //Print(" Step 0 "," sev ",sev," zap ",zap," yug ",yug," vost ",vost );
+           }//Fin init
+         //Print("Step2 ",Be_0," -Be_0 ",Bo_0," -Bo_0 ",Be_1," -Be_1 ",Bo_1," -Bo_1 ");
+         //Print("Nueva ronda ",Var1_Be_0," Var1_Be_0 ",Var1_Bo_0," Var1_Bo_0 ",Var1_Be_1," Var1_Be_1 ",Var1_Bo_1," Var1_Bo_ ");
+         //одача значений
+         if(Be_0==1)
+           {
+            Var2_Be_0=1;
+            Var2_Bo_0=2;
+            Var2_Be_1=2;
+            Var2_Bo_1=2;
+            Be_0=0;
+            Bo_0=0;
+            Be_1=0;
+            Bo_1=0;
+
+           }
+         if(Bo_0==1)
+           {
+            Var2_Be_0=2;
+            Var2_Bo_0=1;
+            Var2_Be_1=2;
+            Var2_Bo_1=2;
+            Be_0=0;
+            Bo_0=0;
+            Be_1=0;
+            Bo_1=0;
+           }
+         if(Be_1==1)
+           {
+            Var2_Be_1=1;
+            Var2_Be_0=2;
+            Var2_Bo_0=2;
+            Var2_Bo_1=2;
+            Be_0=0;
+            Bo_0=0;
+            Be_1=0;
+            Bo_1=0;
+
+           }
+         if(Bo_1==1)
+           {
+            Var2_Bo_1=1;
+            Var2_Be_0=2;
+            Var2_Bo_0=2;
+            Var2_Be_1=2;
+            Be_0=0;
+            Bo_0=0;
+            Be_1=0;
+            Bo_1=0;
+
+           }
+
+         // Варианты вращение в правильной позиции. Смена строны производится мо методу переварота страницы в книге с лева на право или с права на лево
+         // Вращение производится базируясь на вторую переменную. После присваивания и расчёта значения из второй переменной перетекают в первую.
+         //Перед обработкой событий нужно выявить все правила для каждого направления.
+         //Переприсваивание значения в тойже плоскости и том же лице если выпало тоже самое значение.Пример Be_0 и Be_0
+         // Назначение переменной
+         if(Var1_Be_0==0 && Var2_Be_0==1)
+           {
+            Var1_Bo_0=0;
+            Var2_Be_0=1;
+
+           }
+         if(Var1_Be_0==2 && Var2_Be_0==1)
+           {
+            Var2_Be_0=1;
+
+           }
+         if(Var1_Bo_0==0 && Var2_Bo_0==1)
+           {
+            Var1_Be_0=0;
+            Var2_Bo_0=1;
+
+           }
+         if(Var1_Bo_0==2 && Var2_Bo_0==1)
+           {
+            Var2_Bo_0=1;
+
+           }
+         if(Var1_Be_1==0 && Var2_Be_1==1)
+           {
+            Var1_Bo_1=0;
+            Var2_Be_1=1;
+
+           }
+         if(Var1_Be_1==2 && Var2_Be_1==1)
+           {
+            Var2_Be_1=1;
+
+           }
+         if(Var1_Bo_1==0 && Var2_Bo_1==1)
+           {
+            Var1_Be_1=0;
+            Var2_Bo_1=1;
+
+           }
+         if(Var1_Bo_1==2 && Var2_Bo_1==1)
+           {
+            Var2_Bo_1=1;
+
+           }//CHeck ok
+
+
+         //Print("Step3 ",Var1_Be_0," Var1_Be_0 ",Var1_Bo_0," Var1_Bo_0 ",Var1_Be_1," Var1_Be_1 ",Var1_Bo_1," Var1_Bo_1 ");
+         //Print("Step4 ",Var2_Be_0," Var2_Be_0 ",Var2_Bo_0," Var2_Bo_0 ",Var2_Be_1," Var2_Be_1 ",Var2_Bo_1," Var2_Bo_1 ");
+         ArrayInitialize(errorprint,0);
+         bool ChekDIr=true;//еременная разрешающая 1 раз в цикл анализиравать блок направлений по компасу
+         string BlockNum="0";
+         // Правильная конфигурация Север
+         // 1
+         if(sev==1 && Var1_Be_0==0 && Var2_Bo_0==1 && ChekDIr==true)
+           {
+            Sev_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 1";
+            errorprint[1]=1;
+           }
+         // 2
+         if(sev==1 && Var1_Bo_0==0 && Var2_Be_0==1 && ChekDIr==true)
+           {
+            Sev_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 2";
+            errorprint[2]=1;
+           }
+         // 3
+         if(sev==1 && Var1_Be_1==0 && Var2_Bo_1==1 && ChekDIr==true)
+           {
+            Sev_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 3";
+            errorprint[3]=1;
+           }
+         // 4
+         if(sev==1 && Var1_Bo_1==0 && Var2_Be_1==1 && ChekDIr==true)
+           {
+            Sev_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 4";
+            errorprint[4]=1;
+           }
+         // 5
+         // Не правильная конфигурация
+         if(sev==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Севера *| на Запад «-
+           {
+            // разрешение на обработку события.
+            Zap_1=1;
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            Var2_Bo_0=1;
+            //Var2_Be_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 5";
+            errorprint[5]=1;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+            //Var1_Be_0=2;
+            //Var2_Bo_1=2;
+           }
+         // 6
+         if(sev==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Запад «-
+           {
+            // разрешение на обработку события.
+            Zap_1=1;
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            Var1_Bo_0=0;
+            //Var2_Be_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 6";
+            errorprint[6]=1;
+            //Var1_Bo_1=2;
+            //Var2_Be_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 7
+         if(sev==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
+           {
+            // разрешение на обработку события.
+            Vost_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            //Var1_Be_0=0;
+            Var2_Be_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="S 7";
+            errorprint[7]=1;
+            //Var1_Bo_0=2;
+            //Var2_Be_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 8
+         if(sev==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
+           {
+            // разрешение на обработку события.
+            Vost_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            //Var2_Bo_0=1;
+            Var1_Be_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="S 8";
+            errorprint[8]=1;
+            //Var1_Be_1=2;
+            //Var2_Bo_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 9
+         if(sev==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Юг .|
+           {
+            Sev_1=1;
+            // разрешение на обработку события.
+            Yug_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+
+            //Var1_Be_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 9";
+            errorprint[9]=1;
+            //Var1_Bo_0=2;
+            //Var2_Bo_1=2;
+           }
+         // 10
+         if(sev==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Севера *|  на Юг .|
+           {
+            Sev_1=1;
+            // разрешение на обработку события.
+            Yug_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+
+            //Var1_Be_1=0;
+            //Var2_Bo_1=1;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 10";
+            errorprint[10]=1;
+            //Var1_Bo_1=2;
+            //Var2_Bo_0=2;
+           }
+         // 11
+         if(sev==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
+           {
+            Sev_1=1;
+            // разрешение на обработку события.
+            Yug_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Var2_Be_0=1;
+            //Var1_Bo_0=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 11";
+            errorprint[11]=1;
+            //Var1_Be_0=2;
+            //Var2_Be_1=2;
+           }
+         // 12
+         if(sev==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
+           {
+            Sev_1=1;
+            // разрешение на обработку события.
+            Yug_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+
+            //Var2_Be_1=1;
+            //Var1_Bo_1=0;
+
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="S 12";
+            errorprint[12]=1;
+            //Var1_Be_1=2;
+            //Var2_Be_0=2;
+           }
+
+         //__________________________________
+         // Правильная конфигурация Запад
+         if(zap==1 && Var1_Be_0==0 && Var2_Bo_0==1 && ChekDIr==true)
+           {
+            Zap_1=1;// разрешение на обработку события.
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 1";
+            errorprint[13]=1;
+
+           }
+         // 2
+         if(zap==1 && Var1_Bo_0==0 && Var2_Be_0==1 && ChekDIr==true)
+           {
+            Zap_1=1;// разрешение на обработку события.
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 2";
+            errorprint[14]=1;
+           }
+         // 3
+         if(zap==1 && Var1_Be_1==0 && Var2_Bo_1==1 && ChekDIr==true)
+           {
+            Zap_1=1;// разрешение на обработку события.
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 3";
+            errorprint[5]=1;
+           }
+         // 4
+         if(zap==1 && Var1_Bo_1==0 && Var2_Be_1==1 && ChekDIr==true)
+           {
+            Zap_1=1;// разрешение на обработку события.
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 4";
+            errorprint[16]=1;
+           }
+         // 5
+         // Не правильная конфигурация
+         if(zap==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Эг |. Смещение против часовой стрелки.
+           {
+            // разрешение на обработку события.
+            Yug_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Var2_Be_0=1;
+            Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 5";
+            errorprint[17]=1;
+            //Var1_Be_0=2;
+            //Var2_Bo_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 6
+         if(zap==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Эг |. Смещение против часовой стрелки.
+           {
+            // разрешение на обработку события.
+            Yug_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            Var1_Bo_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 6";
+            errorprint[18]=1;
+            //Var1_Bo_1=2;
+            //Var2_Be_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 7
+         if(zap==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Севера *| Смещение по часовой стрелке
+           {
+            // разрешение на обработку события.
+            Sev_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            Var2_Be_0=1;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 7";
+            errorprint[19]=1;
+            //Var1_Bo_0=2;
+            //Var2_Be_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 8
+         if(zap==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Севера *| Смещение по часовой стрелке
+           {
+            // разрешение на обработку события.
+            Sev_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Var2_Be_0=1;
+            Var1_Be_0=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 8";
+            errorprint[20]=1;
+            //Var2_Be_1=2;
+            //Var2_Bo_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+
+           }
+         // 9
+         if(zap==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
+           {
+            Zap_1=1;
+            // разрешение на обработку события.
+            Vost_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var1_Be_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 9";
+            errorprint[21]=1;
+            //Var1_Bo_0=2;
+            //Var2_Bo_1=2;
+
+           }
+         // 10
+         if(zap==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
+           {
+            Zap_1=1;
+            // разрешение на обработку события.
+            Vost_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var1_Be_1=0;
+            //Var2_Bo_1=1;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 10";
+            errorprint[22]=1;
+            //Var1_Bo_1=2;
+            //Var2_Bo_0=2;
+           }
+         // 11
+         if(zap==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
+           {
+            Zap_1=1;
+            // разрешение на обработку события.
+            Vost_1=0;
+            //Запрет для 3 направлений
+
+            Sev_1=0;
+            Yug_1=0;
+            //Var2_Be_0=1;
+            //Var1_Bo_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 11";
+            errorprint[23]=1;
+            //Var1_Be_0=2;
+            //Var2_Be_1=2;
+           }
+         // 12
+         if(zap==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
+           {
+            Zap_1=1;
+            // разрешение на обработку события.
+            Vost_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var2_Be_1=1;
+            //Var1_Bo_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Z 12";
+            errorprint[24]=1;
+            //Var1_Be_1=2;
+            //Var2_Be_0=2;
+           }
+         //__________________________________
+
+         // Правильная конфигурация Восток
+         if(vost==1 && Var1_Be_0==0 && Var2_Bo_0==1 && ChekDIr==true)
+           {
+            Vost_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 1";
+            errorprint[25]=1;
+           }
+         // 2
+         if(vost==1 && Var1_Bo_0==0 && Var2_Be_0==1 && ChekDIr==true)
+           {
+            Vost_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 2";
+            errorprint[26]=1;
+           }
+         // 3
+         if(vost==1 && Var1_Be_1==0 && Var2_Bo_1==1 && ChekDIr==true)
+           {
+            Vost_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 3";
+            errorprint[27]=1;
+           }
+         // 4
+         if(vost==1 && Var1_Bo_1==0 && Var2_Be_1==1 && ChekDIr==true)
+           {
+            Vost_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 4";
+            errorprint[28]=1;
+           }
+         // 5
+         // Не правильная конфигурация
+         if(vost==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Востока -» на Север *| . 9 часов
+           {
+            // разрешение на обработку события.
+            Sev_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            Var2_Bo_0=1;
+            //Var1_Bo_0=0;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="V 5";
+            errorprint[29]=1;
+            //Var1_Be_0=2;
+            //Var2_Bo_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 6
+         if(vost==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Востока -» на Север *|   9 часов
+           {
+            // разрешение на обработку события.
+            Sev_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            Var1_Bo_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="V 6";
+            errorprint[30]=1;
+            //Var1_Bo_1=2;
+            //Var2_Be_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 7
+         if(vost==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Юг .|  3 часа
+           {
+            // разрешение на обработку события.
+            Yug_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Var1_Be_0=0;
+            Var2_Be_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="V 7";
+            errorprint[31]=1;
+            //Var1_Bo_0=2;
+            //Var2_Be_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 8
+         if(vost==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Юг .|  3 часа
+           {
+            // разрешение на обработку события.
+            Yug_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Var2_Be_0=1;
+            Var1_Be_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="V 8";
+            errorprint[32]=1;
+            //Var1_Be_1=2;
+            //Var2_Bo_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 9
+         if(vost==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
+           {
+            Vost_1=1;
+            // разрешение на обработку события.
+            Zap_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var1_Be_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 9";
+            errorprint[33]=1;
+            //Var1_Bo_0=2;
+            //Var2_Bo_1=2;
+           }
+         // 10
+         if(vost==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Востока -» на Запад «- 6 часов
+           {
+            Vost_1=1;
+            // разрешение на обработку события.
+            Zap_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var1_Be_1=0;
+            //Var2_Bo_1=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 10";
+            errorprint[34]=1;
+            //Var1_Bo_1=2;
+            //Var2_Bo_0=2;
+           }
+         // 11
+         if(vost==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
+           {
+            Vost_1=1;
+            // разрешение на обработку события.
+            Zap_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var2_Be_0=1;
+            //Var1_Bo_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 11";
+            errorprint[35]=1;
+            //Var1_Be_0=2;
+            //Var2_Be_1=2;
+           }
+         // 12
+         if(vost==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
+           {
+            Vost_1=1;
+            // разрешение на обработку события.
+            Zap_1=0;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Yug_1=0;
+            //Var2_Be_1=1;
+            //Var1_Bo_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="V 12";
+            errorprint[36]=1;
+            //Var1_Be_1=2;
+            //Var2_Be_0=2;
+           }
+         //__________________________________
+         // Правильная конфигурация Юг
+         // 1
+         if(yug==1 && Var1_Be_0==0 && Var2_Bo_0==1 && ChekDIr==true)
+           {
+            Yug_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 1";
+            errorprint[37]=1;
+
+           }
+         // 2
+         if(yug==1 && Var1_Bo_0==0 && Var2_Be_0==1 && ChekDIr==true)
+           {
+            Yug_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 2";
+            errorprint[38]=1;
+           }
+         // 3
+         if(yug==1 && Var1_Be_1==0 && Var2_Bo_1==1 && ChekDIr==true)
+           {
+            Yug_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 3";
+            errorprint[39]=1;
+           }
+         // 4
+         if(yug==1 && Var1_Bo_1==0 && Var2_Be_1==1 && ChekDIr==true)
+           {
+            Yug_1=1;// разрешение на обработку события.
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Sev_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 4";
+            errorprint[40]=1;
+           }
+         // 5
+         // Не правильная конфигурация
+         if(yug==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Юга на .| на Восток -» 9 часов
+           {
+            // разрешение на обработку события.
+            Vost_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            Var2_Bo_0=1;
+            //Var1_Bo_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="Y 5";
+            errorprint[41]=1;
+            //Var1_Be_0=2;
+            //Var2_Bo_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 6
+         if(yug==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Юга на .| на Восток -» 9 часов
+           {
+            // разрешение на обработку события.
+            Vost_1=1;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Sev_1=0;
+            Yug_1=0;
+            Var1_Bo_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="Y 6";
+            errorprint[42]=1;
+            //Var1_Bo_1=2;
+            //Var2_Be_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 7
+         if(yug==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на  Запад «- 3 часа
+           {
+            // разрешение на обработку события.
+            Zap_1=1;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Var1_Be_0=0;
+            Var2_Be_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 7";
+            errorprint[43]=1;
+            //Var1_Bo_0=2;
+            //Var2_Be_1=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 8
+         if(yug==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Запад «- 3 часа
+           {
+            // разрешение на обработку события.
+            Zap_1=1;
+            //Запрет для 3 направлений
+            Sev_1=0;
+            Vost_1=0;
+            Yug_1=0;
+            //Var2_Be_0=1;
+            Var1_Be_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 8";
+            errorprint[44]=1;
+            //Var1_Be_1=2;
+            //Var2_Bo_0=2;
+            CheFe=1;
+            if(CheFe==1 && lic==1)
+              {
+               izn=1;
+               lic=0;
+               CheFe=0;
+              }
+            if(CheFe==1 && izn==1)
+              {
+               izn=0;
+               lic=1;
+               CheFe=0;
+              }
+           }
+         // 9
+         if(yug==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
+           {
+            Yug_1=1;
+            // разрешение на обработку события.
+            Sev_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+
+            //Var1_Be_0=0;
+            //Var2_Bo_0=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 9";
+            errorprint[45]=1;
+            //Var1_Bo_0=2;
+            //Var2_Bo_1=2;
+           }
+         // 10
+         if(yug==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Юга на .| на Север *| 6 часов
+           {
+            Yug_1=1;
+            // разрешение на обработку события.
+            Sev_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+
+            //Var1_Be_1=0;
+            //Var2_Bo_1=1;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 10";
+            errorprint[46]=1;
+            //Var1_Bo_1=2;
+            //Var2_Bo_0=2;
+           }
+         // 11
+         if(yug==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
+           {
+            Yug_1=1;
+            // разрешение на обработку события.
+            Sev_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+
+            //Var2_Be_0=1;
+            //Var1_Bo_0=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=1;
+            ChekDIr=false;
+            BlockNum="Y 11";
+            errorprint[47]=1;
+            //Var1_Be_0=2;
+            //Var2_Be_1=2;
+           }
+         // 12
+         if(yug==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
+           {
+            // разрешение на обработку события.
+            Sev_1=0;
+            //Запрет для 3 направлений
+            Zap_1=0;
+            Vost_1=0;
+            Yug_1=1;
+            //Var2_Be_1=1;
+            //Var1_Bo_1=0;
+            //Проверка значения направления
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            ChekDIr=false;
+            BlockNum="Y 12";
+            errorprint[48]=1;
+            //Var1_Be_1=2;
+            //Var2_Be_0=2;
+           }
+
+         //Проверка шаг 3
+         string napravlenie;
+         if(Sev_1==1)
+           {
+            napravlenie="Sev_1";
+           }
+         if(Yug_1==1)
+           {
+            napravlenie="Yug_1";
+           }
+         if(Zap_1==1)
+           {
+            napravlenie="Zap_1";
+           }
+         if(Vost_1==1)
+           {
+            napravlenie="Vost_1";
+           }
+         //Print(napravlenie);
+         // 4 направления в которых вложены 2 стороны и 8 регистров. В сумме 768 регистров
+         // ечать ошибок блока разрешений для индикатора Семечка
+         //for(int gh=1;gh<49;gh++)
+         //{
+         //Print("index ",gh);
+         //Print("errorprint ",errorprint[gh]);
+
+         //}
+         //Поведение северной стороны
+         if(Sev_1==1)
+           {
+            //Подача значения на Лицо номер 1
+            //1 Be_0 && Bo_0
+            if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 2
+            //1 Bo_0 && Be_0
+            if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
+              {
+               //1/1 Bo_0 && Be_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 3
+            //1 Be_1 && Bo_1
+            if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
+              {
+               //1/1 Be_1 && Bo_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 4
+            //1 Bo_1 && Be_1
+            if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
+              {
+               //1/1 Bo_1 && Be_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_0 - Be_1 ------------------1
+            if(lic==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_1 - Be_0 ------------------
+
+            if(lic==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Bo_0 - Bo_1 ------------------1
+
+            if(lic==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+            //------ Bo_1 - Bo_0 ------------------
+
+            if(lic==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+           }// Sever фин
+         //_____________________________________
+         // Поведение Юг
+         if(Yug_1==1)
+           {
+            //Подача значения на Лицо номер 1
+            //1 Be_0 && Bo_0
+            if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 2
+            //1 Bo_0 && Be_0
+            if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
+              {
+               //1/1 Bo_0 && Be_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 3
+            //1 Be_1 && Bo_1
+            if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
+              {
+               //1/1 Be_1 && Bo_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 4
+            //1 Bo_1 && Be_1
+            if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
+              {
+               //1/1 Bo_1 && Be_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_0 - Be_1 ------------------1
+            if(lic==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_1 - Be_0 ------------------
+
+            if(lic==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Bo_0 - Bo_1 ------------------1
+
+            if(lic==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+            //------ Bo_1 - Bo_0 ------------------
+
+            if(lic==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+           }// Yug фин
+         //___________________________________
+         // Поведение Запад
+         if(Zap_1==1)
+           {
+            //Подача значения на Лицо номер 1
+            //1 Be_0 && Bo_0
+            if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 2
+            //1 Bo_0 && Be_0
+            if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
+              {
+               //1/1 Bo_0 && Be_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 3
+            //1 Be_1 && Bo_1
+            if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
+              {
+               //1/1 Be_1 && Bo_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 4
+            //1 Bo_1 && Be_1
+            if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
+              {
+               //1/1 Bo_1 && Be_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_0 - Be_1 ------------------1
+            if(lic==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_1 - Be_0 ------------------
+
+            if(lic==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Bo_0 - Bo_1 ------------------1
+
+            if(lic==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+            //------ Bo_1 - Bo_0 ------------------
+
+            if(lic==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+           }// Zapad фин
+
+         //___________________________________
+         // Поведение Восток
+         if(Vost_1==1)
+           {
+            //Подача значения на Лицо номер 1
+            //1 Be_0 && Bo_0
+            if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 2
+            //1 Bo_0 && Be_0
+            if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
+              {
+               //1/1 Bo_0 && Be_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 3
+            //1 Be_1 && Bo_1
+            if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
+              {
+               //1/1 Be_1 && Bo_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gy++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //Подача значения на Лицо номер 4
+            //1 Bo_1 && Be_1
+            if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
+              {
+              bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+            if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
+              {
+               //1/1 Bo_1 && Be_1
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gy--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_0 - Be_1 ------------------1
+            if(lic==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,4]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_0==0 && Var2_Be_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,7]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=0;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Be_1 - Be_0 ------------------
+
+            if(lic==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,2]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,4]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+            if(izn==1 && Var1_Be_1==0 && Var2_Be_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               //1/1 Be_0 && Bo_0
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,5]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,7]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=0;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+            //------ Bo_0 - Bo_1 ------------------1
+
+            if(lic==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,1]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_0==0 && Var2_Bo_1==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,6]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,6]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=2;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=0;
+                  //----------
+                  Gx--;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+
+            //------ Bo_1 - Bo_0 ------------------
+
+            if(lic==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
+              {
+               bool BlockPermis=true;
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,3]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,1]=0;
+                  lic=0;//Смена Стороны
+                  izn=1;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// lic==1 фин
+
+
+            if(izn==1 && Var1_Bo_1==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
+              {
+               bool BlockPermis=true;
+               //1/1 Be_0 && Bo_0
+               // Сравнение состояния 2 регистров лица и изнанки по поданному значению
+               if(Sev[1,8]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+                 {
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+               if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  Sev[1,6]=0;
+                  lic=1;//Смена Стороны
+                  izn=0;//Смена Стороны
+                  //Перераспределение разрешений переменных
+                  Var1_Be_0=2;
+                  Var1_Bo_0=0;
+                  Var1_Be_1=2;
+                  Var1_Bo_1=2;
+                  //----------
+                  Gx++;
+                  Var2_Be_0=2;
+                  Var2_Bo_0=2;
+                  Var2_Be_1=2;
+                  Var2_Bo_1=2;
+                  BlockPermis=false;
+                 }
+              }// izn==1 фин
+
+           }// Vostok фин
+         //Праверка шаг 4
+         string face;
+         if(lic==1)
+           {
+            face="lic";
+           }
+         if(izn==1)
+           {
+            face="izn";
+           }
          //-----
-        
          //-----I write the received data into a Binary File for drawing data using the Histogram method
          int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
          if(file_handle15>0)
@@ -1214,7 +5483,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," TIME ",iTime(Symbol(),0,1)," PRICE ",bodypips[MaxInd_bodypips,0]," INDEX CONTEINER ",bodypips[MaxInd_bodypips,1]," BinInd 3 ",Bo," Onda1UP ",Onda1);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," PR ",bodypips[MaxInd_bodypips,0]," B 3 ",Bo,"Face",face,"Dir",napravlenie," Var1Wr ",Var1Wr," BlockNum ",BlockNum," Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," O ",Onda1, " X ",Gx," Y ",Gy," I CONT ",bodypips[MaxInd_bodypips,1]);
                FileClose(file_handle14);
 
               }
@@ -1227,15 +5496,21 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," TIME ",iTime(Symbol(),0,1)," PRICE ",bodypips[MaxInd_bodypips,0]," INDEX CONTEINER ",bodypips[MaxInd_bodypips,1]," BinInd 3 ",Be," Onda1DOWN ",Onda1);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," PR ",bodypips[MaxInd_bodypips,0]," B 3 ",Be,"Face",face,"Dir",napravlenie," Var1Wr ",Var1Wr," BlockNum ",BlockNum," Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," O ",Onda1, " X ",Gx," Y ",Gy," I CONT ",bodypips[MaxInd_bodypips,1]);
                FileClose(file_handle14);
 
               }
            }
         }
-      
+      Print(" PR ",bodypips[MaxInd_bodypips,0]);
 
-      
+      Comment(" Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8], " X ",Gx," Y ",Gy);
+
+      //---Были определены синапсные связи которые могут показывать на смену тенденции---//
+      //---Тип 1 Bo_0/Bo_1
+      //---Тип 2 Be_0/Be_1
+      //---Было выявленно чо нужно обратить внимание на цену каждого типа и индекс контейнера.
+
 
 
       //Print(" IFb1 ",IFb1);
@@ -2720,4 +6995,3 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 
 //+------------------------------------------------------------------+
-
