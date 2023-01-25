@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 1.8.2.mq4 |
+//|                                             Nucleo   v 1.8.3.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -47,6 +47,7 @@ double  PIPS_COL_Price[99999,6];
 int bbb[1681,3];
 int bbb_compare[9999,2,1681];
 int errorprint[50];
+int errorprint2[150];
 //int priceBEBO[100000,2];
 double AllAnalisysData[7205,20];
 datetime DT_AllAnalisysData[7205,1];
@@ -1122,27 +1123,27 @@ int start()
          // -------- Binary price field scanner
          // -------- When the minute arrives, write the price change to the array, assigning the value obtained by the indicator
          // -------------- Phase 1 ------------- // Calculation. I get the number of pips traversed by the price for periods 1 and 2.
-         
+
          // ----Модуль проверки конверсии перменных в модулях
          string Var1Wr;
          if(Var1_Bo_1==0)
-         {
-         Var1Wr="Bo_1";
-         }
+           {
+            Var1Wr="Bo_1";
+           }
          if(Var1_Bo_0==0)
-         {
-         Var1Wr="Bo_0";
-         }
-          if(Var1_Be_0==0)
-         {
-         Var1Wr="Be_0";
-         }
-          if(Var1_Be_1==0)
-         {
-         Var1Wr="Be_1";
-         }
-         
-         
+           {
+            Var1Wr="Bo_0";
+           }
+         if(Var1_Be_0==0)
+           {
+            Var1Wr="Be_0";
+           }
+         if(Var1_Be_1==0)
+           {
+            Var1Wr="Be_1";
+           }
+
+
          Price1=Price0;
          Price0=bodypips[MaxInd_bodypips,0];
 
@@ -1192,7 +1193,7 @@ int start()
          //-----Price------
          PIPS_COL_Price[indmas,0]=bodypips[MaxInd_bodypips,0];// Write the price to zero
          PIPS_COL_Price[indmas,1]=bodypips[MaxInd_bodypips,1];// Maximum index value-
-         //-----Часчёт Маховик Времени
+         //-----Расчёт Маховик Времени
          for(int il=1; il<99999; il++)
            {
             //Print(bodypips[il,0]);
@@ -1260,7 +1261,7 @@ int start()
            }//Fin init
          //Print("Step2 ",Be_0," -Be_0 ",Bo_0," -Bo_0 ",Be_1," -Be_1 ",Bo_1," -Bo_1 ");
          //Print("Nueva ronda ",Var1_Be_0," Var1_Be_0 ",Var1_Bo_0," Var1_Bo_0 ",Var1_Be_1," Var1_Be_1 ",Var1_Bo_1," Var1_Bo_ ");
-         //одача значений
+         //Подача значений
          if(Be_0==1)
            {
             Var2_Be_0=1;
@@ -1444,6 +1445,7 @@ int start()
             Vost_1=0;
             Yug_1=0;
             Var2_Bo_0=1;
+            Var2_Bo_1=2;
             //Var2_Be_0=1;
             //Проверка значения направления
             sev=0;
@@ -1478,6 +1480,7 @@ int start()
             Vost_1=0;
             Yug_1=0;
             Var1_Bo_0=0;
+            Var1_Bo_1=2;
             //Var2_Be_0=0;
             //Проверка значения направления
             sev=0;
@@ -1514,6 +1517,7 @@ int start()
             Yug_1=0;
             //Var1_Be_0=0;
             Var2_Be_0=1;
+            Var2_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1549,6 +1553,7 @@ int start()
             Yug_1=0;
             //Var2_Bo_0=1;
             Var1_Be_0=0;
+            Var1_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1628,7 +1633,7 @@ int start()
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            Sev_1=0;
+            //Sev_1=0;
             //Var2_Be_0=1;
             //Var1_Bo_0=0;
             //Проверка значения направления
@@ -1745,6 +1750,7 @@ int start()
             Sev_1=0;
             //Var2_Be_0=1;
             Var2_Bo_0=1;
+            Var2_Bo_1=2;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1779,6 +1785,7 @@ int start()
             Vost_1=0;
             Sev_1=0;
             Var1_Bo_0=0;
+            Var1_Bo_1=2;
             //Var2_Bo_0=1;
             //Проверка значения направления
             sev=0;
@@ -1814,6 +1821,7 @@ int start()
             Vost_1=0;
             Yug_1=0;
             Var2_Be_0=1;
+            Var2_Be_1=2;
             //Var2_Bo_0=1;
             //Проверка значения направления
             sev=1;
@@ -1850,6 +1858,7 @@ int start()
             Yug_1=0;
             //Var2_Be_0=1;
             Var1_Be_0=0;
+            Var1_Be_1=2;
             //Проверка значения направления
             sev=1;
             zap=0;
@@ -2046,6 +2055,7 @@ int start()
             Vost_1=0;
             Yug_1=0;
             Var2_Bo_0=1;
+            Var2_Bo_1=2;
             //Var1_Bo_0=0;
             //Проверка значения направления
             sev=1;
@@ -2081,6 +2091,7 @@ int start()
             Vost_1=0;
             Yug_1=0;
             Var1_Bo_0=0;
+            Var1_Bo_1=2;
             //Var2_Bo_0=1;
             //Проверка значения направления
             sev=1;
@@ -2117,6 +2128,7 @@ int start()
             Sev_1=0;
             //Var1_Be_0=0;
             Var2_Be_0=1;
+            Var2_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -2152,6 +2164,7 @@ int start()
             Sev_1=0;
             //Var2_Be_0=1;
             Var1_Be_0=0;
+            Var1_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -2346,6 +2359,7 @@ int start()
             Sev_1=0;
             Yug_1=0;
             Var2_Bo_0=1;
+            Var2_Bo_1=2;
             //Var1_Bo_0=0;
             //Проверка значения направления
             sev=0;
@@ -2381,6 +2395,7 @@ int start()
             Sev_1=0;
             Yug_1=0;
             Var1_Bo_0=0;
+            Var1_Bo_1=2;
             //Var2_Bo_0=1;
             //Проверка значения направления
             sev=0;
@@ -2417,6 +2432,7 @@ int start()
             Yug_1=0;
             //Var1_Be_0=0;
             Var2_Be_0=1;
+            Var2_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -2452,6 +2468,7 @@ int start()
             Yug_1=0;
             //Var2_Be_0=1;
             Var1_Be_0=0;
+            Var1_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -2594,6 +2611,7 @@ int start()
          //Print("index ",gh);
          //Print("errorprint ",errorprint[gh]);
 
+         ArrayInitialize(errorprint2,0);
          //}
          //Поведение северной стороны
          if(Sev_1==1)
@@ -2621,6 +2639,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[1]=1;//Proverka zapuska bloka
                  }
                if(Sev[1,2]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2639,6 +2658,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[2]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -2664,6 +2684,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[3]=1;
                  }
                if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2682,6 +2703,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[4]=1;
                  }
               }// izn==1 фин
 
@@ -2709,6 +2731,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[5]=1;
                  }
                if(Sev[1,1]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2727,6 +2750,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[6]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -2752,6 +2776,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[6]=1;
                  }
                if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2770,6 +2795,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[7]=1;
                  }
               }// izn==1 фин
 
@@ -2777,7 +2803,7 @@ int start()
             //1 Be_1 && Bo_1
             if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,4]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -2797,6 +2823,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[8]=1;
                  }
                if(Sev[1,4]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2815,6 +2842,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[9]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -2840,6 +2868,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[10]=1;
                  }
                if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2858,6 +2887,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[11]=1;
                  }
               }// izn==1 фин
 
@@ -2865,7 +2895,7 @@ int start()
             //1 Bo_1 && Be_1
             if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,3]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -2885,6 +2915,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[12]=1;
                  }
                if(Sev[1,3]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2903,6 +2934,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[13]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -2928,6 +2960,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[14]=1;
                  }
                if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2946,6 +2979,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[15]=1;
                  }
               }// izn==1 фин
 
@@ -2971,6 +3005,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[16]=1;
                  }
                if(Sev[1,3]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2989,6 +3024,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[17]=1;
                  }
               }// lic==1 фин
 
@@ -3015,6 +3051,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[18]=1;
                  }
                if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3033,6 +3070,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[19]=1;
                  }
               }// izn==1 фин
 
@@ -3059,6 +3097,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[20]=1;
                  }
                if(Sev[1,1]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3077,6 +3116,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[21]=1;
                  }
               }// lic==1 фин
 
@@ -3103,6 +3143,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[22]=1;
                  }
                if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3121,6 +3162,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[23]=1;
                  }
               }// izn==1 фин
 
@@ -3147,6 +3189,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[24]=1;
                  }
                if(Sev[1,4]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3165,6 +3208,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[25]=1;
                  }
               }// lic==1 фин
 
@@ -3192,6 +3236,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[26]=1;
                  }
                if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3210,6 +3255,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[27]=1;
                  }
               }// izn==1 фин
 
@@ -3237,6 +3283,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[28]=1;
                  }
                if(Sev[1,2]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3255,6 +3302,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[29]=1;
                  }
               }// lic==1 фин
 
@@ -3282,6 +3330,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[30]=1;
                  }
                if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3300,6 +3349,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[31]=1;
                  }
               }// izn==1 фин
 
@@ -3313,7 +3363,7 @@ int start()
             //1 Be_0 && Bo_0
             if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,4]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -3333,6 +3383,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[32]=1;
                  }
                if(Sev[1,4]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3351,6 +3402,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[33]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -3376,6 +3428,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[34]=1;
                  }
                if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3394,6 +3447,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[35]=1;
                  }
               }// izn==1 фин
 
@@ -3401,7 +3455,7 @@ int start()
             //1 Bo_0 && Be_0
             if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,3]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -3421,6 +3475,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[36]=1;
                  }
                if(Sev[1,3]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3439,6 +3494,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[37]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -3464,6 +3520,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[38]=1;
                  }
                if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3482,6 +3539,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[39]=1;
                  }
               }// izn==1 фин
 
@@ -3489,7 +3547,7 @@ int start()
             //1 Be_1 && Bo_1
             if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,2]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -3509,6 +3567,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[40]=1;
                  }
                if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3527,6 +3586,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[41]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -3552,6 +3612,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[42]=1;
                  }
                if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3570,6 +3631,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[43]=1;
                  }
               }// izn==1 фин
 
@@ -3577,7 +3639,7 @@ int start()
             //1 Bo_1 && Be_1
             if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,1]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -3597,6 +3659,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[44]=1;
                  }
                if(Sev[1,1]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3615,6 +3678,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[45]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -3640,6 +3704,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[46]=1;
                  }
                if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3658,6 +3723,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[47]=1;
                  }
               }// izn==1 фин
 
@@ -3683,6 +3749,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[48]=1;
                  }
                if(Sev[1,1]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3701,6 +3768,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[49]=1;
                  }
               }// lic==1 фин
 
@@ -3727,6 +3795,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[50]=1;
                  }
                if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3745,6 +3814,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[51]=1;
                  }
               }// izn==1 фин
 
@@ -3771,6 +3841,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[52]=1;
                  }
                if(Sev[1,3]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3789,6 +3860,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[53]=1;
                  }
               }// lic==1 фин
 
@@ -3815,6 +3887,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[54]=1;
                  }
                if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3833,6 +3906,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[55]=1;
                  }
               }// izn==1 фин
 
@@ -3859,6 +3933,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[56]=1;
                  }
                if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3877,6 +3952,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[57]=1;
                  }
               }// lic==1 фин
 
@@ -3904,6 +3980,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[58]=1;
                  }
                if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3922,6 +3999,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[59]=1;
                  }
               }// izn==1 фин
 
@@ -3949,6 +4027,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[60]=1;
                  }
                if(Sev[1,4]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3967,6 +4046,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[61]=1;
                  }
               }// lic==1 фин
 
@@ -3994,6 +4074,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[62]=1;
                  }
                if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4012,6 +4093,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[63]=1;
                  }
               }// izn==1 фин
 
@@ -4025,7 +4107,7 @@ int start()
             //1 Be_0 && Bo_0
             if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,1]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4045,6 +4127,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[64]=1;
                  }
                if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4063,6 +4146,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[65]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -4088,6 +4172,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[66]=1;
                  }
                if(Sev[1,6]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4106,6 +4191,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[67]=1;
                  }
               }// izn==1 фин
 
@@ -4113,7 +4199,7 @@ int start()
             //1 Bo_0 && Be_0
             if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,4]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4133,6 +4219,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[68]=1;
                  }
                if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4151,6 +4238,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[69]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -4176,6 +4264,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[70]=1;
                  }
                if(Sev[1,7]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4194,6 +4283,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[71]=1;
                  }
               }// izn==1 фин
 
@@ -4201,7 +4291,7 @@ int start()
             //1 Be_1 && Bo_1
             if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,3]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4221,6 +4311,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[72]=1;
                  }
                if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4239,6 +4330,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[73]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -4264,6 +4356,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[74]=1;
                  }
                if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4282,6 +4375,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[75]=1;
                  }
               }// izn==1 фин
 
@@ -4289,7 +4383,7 @@ int start()
             //1 Bo_1 && Be_1
             if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,2]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4309,6 +4403,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[76]=1;
                  }
                if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4327,6 +4422,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[77]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -4352,6 +4448,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[78]=1;
                  }
                if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4370,6 +4467,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[79]=1;
                  }
               }// izn==1 фин
 
@@ -4395,6 +4493,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[80]=1;
                  }
                if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4413,6 +4512,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[81]=1;
                  }
               }// lic==1 фин
 
@@ -4439,6 +4539,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[82]=1;
                  }
                if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4457,6 +4558,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[83]=1;
                  }
               }// izn==1 фин
 
@@ -4483,6 +4585,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[84]=1;
                  }
                if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4501,6 +4604,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[85]=1;
                  }
               }// lic==1 фин
 
@@ -4527,6 +4631,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[86]=1;
                  }
                if(Sev[1,7]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4545,6 +4650,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[87]=1;
                  }
               }// izn==1 фин
 
@@ -4571,6 +4677,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[88]=1;
                  }
                if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4589,6 +4696,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[89]=1;
                  }
               }// lic==1 фин
 
@@ -4616,6 +4724,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[90]=1;
                  }
                if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4634,6 +4743,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[91]=1;
                  }
               }// izn==1 фин
 
@@ -4661,6 +4771,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[92]=1;
                  }
                if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4679,6 +4790,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[93]=1;
                  }
               }// lic==1 фин
 
@@ -4706,6 +4818,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[94]=1;
                  }
                if(Sev[1,6]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4724,6 +4837,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[95]=1;
                  }
               }// izn==1 фин
 
@@ -4738,7 +4852,7 @@ int start()
             //1 Be_0 && Bo_0
             if(lic==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,3]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4758,6 +4872,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[96]=1;
                  }
                if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4776,6 +4891,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[97]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -4801,6 +4917,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[98]=1;
                  }
                if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4819,6 +4936,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[99]=1;
                  }
               }// izn==1 фин
 
@@ -4826,7 +4944,7 @@ int start()
             //1 Bo_0 && Be_0
             if(lic==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,2]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4846,6 +4964,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[100]=1;
                  }
                if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4864,6 +4983,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[101]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -4889,6 +5009,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[102]=1;
                  }
                if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4907,6 +5028,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[103]=1;
                  }
               }// izn==1 фин
 
@@ -4914,7 +5036,7 @@ int start()
             //1 Be_1 && Bo_1
             if(lic==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,1]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -4934,6 +5056,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[104]=1;
                  }
                if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4952,6 +5075,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[105]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -4977,6 +5101,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[106]=1;
                  }
                if(Sev[1,6]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -4995,6 +5120,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[107]=1;
                  }
               }// izn==1 фин
 
@@ -5002,7 +5128,7 @@ int start()
             //1 Bo_1 && Be_1
             if(lic==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Лица
               {
-              bool BlockPermis=true;
+               bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
                if(Sev[1,4]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
@@ -5022,6 +5148,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[108]=1;
                  }
                if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5040,6 +5167,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[109]=1;
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -5065,6 +5193,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[110]=1;
                  }
                if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5083,6 +5212,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[111]=1;
                  }
               }// izn==1 фин
 
@@ -5108,6 +5238,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[112]=1;
                  }
                if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5126,6 +5257,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[113]=1;
                  }
               }// lic==1 фин
 
@@ -5152,6 +5284,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[114]=1;
                  }
                if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5170,6 +5303,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[115]=1;
                  }
               }// izn==1 фин
 
@@ -5196,6 +5330,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[116]=1;
                  }
                if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5214,6 +5349,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[117]=1;
                  }
               }// lic==1 фин
 
@@ -5240,6 +5376,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[118]=1;
                  }
                if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5258,6 +5395,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[119]=1;
                  }
               }// izn==1 фин
 
@@ -5284,6 +5422,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[120]=1;
                  }
                if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5302,6 +5441,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[121]=1;
                  }
               }// lic==1 фин
 
@@ -5329,6 +5469,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[122]=1;
                  }
                if(Sev[1,6]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5347,6 +5488,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[123]=1;
                  }
               }// izn==1 фин
 
@@ -5374,6 +5516,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[124]=1;
                  }
                if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5392,6 +5535,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[125]=1;
                  }
               }// lic==1 фин
 
@@ -5419,6 +5563,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[126]=1;
                  }
                if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -5437,6 +5582,7 @@ int start()
                   Var2_Be_1=2;
                   Var2_Bo_1=2;
                   BlockPermis=false;
+                  errorprint2[127]=1;
                  }
               }// izn==1 фин
 
@@ -5452,6 +5598,17 @@ int start()
             face="izn";
            }
          //-----
+         //--Проверка на колличество входов в блоки
+         int err2=0;
+         for(int yk=0; yk<150; yk++)
+           {
+            if(errorprint2[yk]==1)
+              {
+               err2++;
+              }
+           }
+         string Sterr2;
+         Sterr2=IntegerToString(err2);
          //-----I write the received data into a Binary File for drawing data using the Histogram method
          int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
          if(file_handle15>0)
@@ -5483,7 +5640,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," PR ",bodypips[MaxInd_bodypips,0]," B 3 ",Bo,"Face",face,"Dir",napravlenie," Var1Wr ",Var1Wr," BlockNum ",BlockNum," Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," O ",Onda1, " X ",Gx," Y ",Gy," I CONT ",bodypips[MaxInd_bodypips,1]);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," PR ",bodypips[MaxInd_bodypips,0]," B 3 ",Bo,"Face",face,"Dir",napravlenie," Var1Wr ",Var1Wr," BlockNum ",BlockNum," Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," O ",Onda1, " X ",Gx," Y ",Gy," I CONT ",bodypips[MaxInd_bodypips,1]," ERR2 ", Sterr2);
                FileClose(file_handle14);
 
               }
@@ -5496,7 +5653,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," PR ",bodypips[MaxInd_bodypips,0]," B 3 ",Be,"Face",face,"Dir",napravlenie," Var1Wr ",Var1Wr," BlockNum ",BlockNum," Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," O ",Onda1, " X ",Gx," Y ",Gy," I CONT ",bodypips[MaxInd_bodypips,1]);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," PR ",bodypips[MaxInd_bodypips,0]," B 3 ",Be,"Face",face,"Dir",napravlenie," Var1Wr ",Var1Wr," BlockNum ",BlockNum," Fly ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," O ",Onda1, " X ",Gx," Y ",Gy," I CONT ",bodypips[MaxInd_bodypips,1]," ERR2 ", Sterr2);
                FileClose(file_handle14);
 
               }
