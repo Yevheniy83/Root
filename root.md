@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 1.8.4.mq4 |
+//|                                             Nucleo   v 1.8.5.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -1368,6 +1368,8 @@ int start()
          string BlockNum="0";
          // Правильная конфигурация Север
          // 1
+         // Правильная конфигурация Север
+         // 1
          if(sev==1 && Var1_Be_0==0 && Var2_Bo_0==1 && ChekDIr==true)
            {
             Sev_1=1;// разрешение на обработку события.
@@ -1440,34 +1442,21 @@ int start()
          if(sev==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Севера *| на Запад «-
            {
             // разрешение на обработку события.
-            Zap_1=1;
+            Vost_1=1;
             Sev_1=0;
-            Vost_1=0;
+            Zap_1=0;
             Yug_1=0;
-            Var2_Bo_0=1;
-            Var2_Bo_1=2;
-            //Var2_Be_0=1;
+            
             //Проверка значения направления
             sev=0;
-            zap=1;
+            zap=0;
             yug=0;
-            vost=0;
+            vost=1;
             ChekDIr=false;
             BlockNum="S 5";
             errorprint[5]=1;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
             //Var1_Be_0=2;
             //Var2_Bo_1=2;
            }
@@ -1479,9 +1468,7 @@ int start()
             Sev_1=0;
             Vost_1=0;
             Yug_1=0;
-            Var1_Bo_0=0;
-            Var1_Bo_1=2;
-            //Var2_Be_0=0;
+            
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -1492,19 +1479,8 @@ int start()
             errorprint[6]=1;
             //Var1_Bo_1=2;
             //Var2_Be_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 7
          if(sev==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
@@ -1515,9 +1491,7 @@ int start()
             Zap_1=0;
             Sev_1=0;
             Yug_1=0;
-            //Var1_Be_0=0;
-            Var2_Be_0=1;
-            Var2_Be_1=2;
+            
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1528,19 +1502,8 @@ int start()
             errorprint[7]=1;
             //Var1_Bo_0=2;
             //Var2_Be_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 8
          if(sev==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
@@ -1551,9 +1514,7 @@ int start()
             Zap_1=0;
             Sev_1=0;
             Yug_1=0;
-            //Var2_Bo_0=1;
-            Var1_Be_0=0;
-            Var1_Be_1=2;
+            
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1564,36 +1525,22 @@ int start()
             errorprint[8]=1;
             //Var1_Be_1=2;
             //Var2_Bo_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 9
          if(sev==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Юг .|
            {
-            Sev_1=1;
+            Yug_1=1;
             // разрешение на обработку события.
-            Yug_1=0;
+            Sev_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-
-            //Var1_Be_0=0;
-            //Var2_Bo_0=1;
             //Проверка значения направления
-            sev=1;
+            sev=0;
             zap=0;
-            yug=0;
+            yug=1;
             vost=0;
             ChekDIr=false;
             BlockNum="S 9";
@@ -1604,9 +1551,9 @@ int start()
          // 10
          if(sev==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Севера *|  на Юг .|
            {
-            Sev_1=1;
+            Yug_1=1;
             // разрешение на обработку события.
-            Yug_1=0;
+            Sev_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
@@ -1614,9 +1561,9 @@ int start()
             //Var1_Be_1=0;
             //Var2_Bo_1=1;
             //Проверка значения направления
-            sev=1;
+            sev=0;
             zap=0;
-            yug=0;
+            yug=1;
             vost=0;
             ChekDIr=false;
             BlockNum="S 10";
@@ -1627,19 +1574,17 @@ int start()
          // 11
          if(sev==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
            {
-            Sev_1=1;
+            Yug_1=1;
             // разрешение на обработку события.
-            Yug_1=0;
+            Sev_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            //Sev_1=0;
-            //Var2_Be_0=1;
-            //Var1_Bo_0=0;
+             
             //Проверка значения направления
-            sev=1;
+            sev=0;
             zap=0;
-            yug=0;
+            yug=1;
             vost=0;
             ChekDIr=false;
             BlockNum="S 11";
@@ -1650,20 +1595,16 @@ int start()
          // 12
          if(sev==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
            {
-            Sev_1=1;
+            Yug_1=1;
             // разрешение на обработку события.
-            Yug_1=0;
+            Sev_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-
-            //Var2_Be_1=1;
-            //Var1_Bo_1=0;
-
             //Проверка значения направления
-            sev=1;
+            sev=0;
             zap=0;
-            yug=0;
+            yug=1;
             vost=0;
             ChekDIr=false;
             BlockNum="S 12";
@@ -1748,10 +1689,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Sev_1=0;
-            //Var2_Be_0=1;
-            Var2_Bo_0=1;
-            Var2_Bo_1=2;
-            //Проверка значения направления
+           //Проверка значения направления
             sev=0;
             zap=0;
             yug=1;
@@ -1761,55 +1699,28 @@ int start()
             errorprint[17]=1;
             //Var1_Be_0=2;
             //Var2_Bo_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 6
          if(zap==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Эг |. Смещение против часовой стрелки.
            {
             // разрешение на обработку события.
-            Yug_1=1;
+            Sev_1=1;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            Sev_1=0;
-            Var1_Bo_0=0;
-            Var1_Bo_1=2;
-            //Var2_Bo_0=1;
-            //Проверка значения направления
-            sev=0;
+            Yug_1=0;
+           //Проверка значения направления
+            sev=1;
             zap=0;
-            yug=1;
+            yug=0;
             vost=0;
             ChekDIr=false;
             BlockNum="Z 6";
             errorprint[18]=1;
-            //Var1_Bo_1=2;
-            //Var2_Be_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 7
          if(zap==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Севера *| Смещение по часовой стрелке
@@ -1820,10 +1731,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Yug_1=0;
-            Var2_Be_0=1;
-            Var2_Be_1=2;
-            //Var2_Bo_0=1;
-            //Проверка значения направления
+           //Проверка значения направления
             sev=1;
             zap=0;
             yug=0;
@@ -1831,75 +1739,45 @@ int start()
             ChekDIr=false;
             BlockNum="Z 7";
             errorprint[19]=1;
-            //Var1_Bo_0=2;
-            //Var2_Be_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 8
          if(zap==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Севера *| Смещение по часовой стрелке
            {
             // разрешение на обработку события.
-            Sev_1=1;
+            Yug_1=1;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            Yug_1=0;
+            Sev_1=0;
             //Var2_Be_0=1;
-            Var1_Be_0=0;
-            Var1_Be_1=2;
-            //Проверка значения направления
-            sev=1;
+           //Проверка значения направления
+            sev=0;
             zap=0;
-            yug=0;
+            yug=1;
             vost=0;
             ChekDIr=false;
             BlockNum="Z 8";
             errorprint[20]=1;
-            //Var2_Be_1=2;
-            //Var2_Bo_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
 
            }
          // 9
          if(zap==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
            {
-            Zap_1=1;
+            Vost_1=1;
             // разрешение на обработку события.
-            Vost_1=0;
+            Yug_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
-            Yug_1=0;
-            //Var1_Be_0=0;
-            //Var2_Bo_0=1;
+            Zap_1=0;
             //Проверка значения направления
             sev=0;
-            zap=1;
+            zap=0;
             yug=0;
-            vost=0;
+            vost=1;
             ChekDIr=false;
             BlockNum="Z 9";
             errorprint[21]=1;
@@ -1910,19 +1788,17 @@ int start()
          // 10
          if(zap==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
            {
-            Zap_1=1;
+            Vost_1=1;
             // разрешение на обработку события.
-            Vost_1=0;
+            Zap_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-            //Var1_Be_1=0;
-            //Var2_Bo_1=1;
-            //Проверка значения направления
+           //Проверка значения направления
             sev=0;
-            zap=1;
+            zap=0;
             yug=0;
-            vost=0;
+            vost=1;
             ChekDIr=false;
             BlockNum="Z 10";
             errorprint[22]=1;
@@ -1932,20 +1808,17 @@ int start()
          // 11
          if(zap==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
            {
-            Zap_1=1;
+            Vost_1=1;
             // разрешение на обработку события.
-            Vost_1=0;
+            Zap_1=0;
             //Запрет для 3 направлений
-
             Sev_1=0;
             Yug_1=0;
-            //Var2_Be_0=1;
-            //Var1_Bo_0=0;
-            //Проверка значения направления
+           //Проверка значения направления
             sev=0;
-            zap=1;
+            zap=0;
             yug=0;
-            vost=0;
+            vost=1;
             ChekDIr=false;
             BlockNum="Z 11";
             errorprint[23]=1;
@@ -1955,19 +1828,17 @@ int start()
          // 12
          if(zap==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
            {
-            Zap_1=1;
+            Vost_1=1;
             // разрешение на обработку события.
-            Vost_1=0;
+            Zap_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-            //Var2_Be_1=1;
-            //Var1_Bo_1=0;
             //Проверка значения направления
             sev=0;
-            zap=1;
+            zap=0;
             yug=0;
-            vost=0;
+            vost=1;
             ChekDIr=false;
             BlockNum="Z 12";
             errorprint[24]=1;
@@ -2049,37 +1920,23 @@ int start()
          if(vost==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Востока -» на Север *| . 9 часов
            {
             // разрешение на обработку события.
-            Sev_1=1;
+            Sev_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            Yug_1=0;
-            Var2_Bo_0=1;
-            Var2_Bo_1=2;
-            //Var1_Bo_0=0;
-            //Проверка значения направления
-            sev=1;
+            Yug_1=1;
+           //Проверка значения направления
+            sev=0;
             zap=0;
-            yug=0;
+            yug=1;
             vost=0;
             ChekDIr=false;
             BlockNum="V 5";
             errorprint[29]=1;
             //Var1_Be_0=2;
             //Var2_Bo_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 6
          if(vost==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Востока -» на Север *|   9 часов
@@ -2090,9 +1947,6 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Yug_1=0;
-            Var1_Bo_0=0;
-            Var1_Bo_1=2;
-            //Var2_Bo_0=1;
             //Проверка значения направления
             sev=1;
             zap=0;
@@ -2101,57 +1955,28 @@ int start()
             ChekDIr=false;
             BlockNum="V 6";
             errorprint[30]=1;
-            //Var1_Bo_1=2;
-            //Var2_Be_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
            }
          // 7
          if(vost==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Юг .|  3 часа
            {
             // разрешение на обработку события.
-            Yug_1=1;
+            Sev_1=1;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            Sev_1=0;
-            //Var1_Be_0=0;
-            Var2_Be_0=1;
-            Var2_Be_1=2;
+            Yug_1=0;
             //Проверка значения направления
-            sev=0;
+            sev=1;
             zap=0;
-            yug=1;
+            yug=0;
             vost=0;
             ChekDIr=false;
             BlockNum="V 7";
             errorprint[31]=1;
-            //Var1_Bo_0=2;
-            //Var2_Be_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+           
+            
            }
          // 8
          if(vost==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Юг .|  3 часа
@@ -2162,9 +1987,6 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Sev_1=0;
-            //Var2_Be_0=1;
-            Var1_Be_0=0;
-            Var1_Be_1=2;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -2173,109 +1995,84 @@ int start()
             ChekDIr=false;
             BlockNum="V 8";
             errorprint[32]=1;
-            //Var1_Be_1=2;
-            //Var2_Bo_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+             
+            
            }
          // 9
          if(vost==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
            {
-            Vost_1=1;
+            Zap_1=1;
             // разрешение на обработку события.
-            Zap_1=0;
+            Yug_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
-            Yug_1=0;
-            //Var1_Be_0=0;
-            //Var2_Bo_0=1;
+            Vost_1=0;
             //Проверка значения направления
             sev=0;
-            zap=0;
+            zap=1;
             yug=0;
-            vost=1;
+            vost=0;
             ChekDIr=false;
             BlockNum="V 9";
             errorprint[33]=1;
-            //Var1_Bo_0=2;
-            //Var2_Bo_1=2;
            }
          // 10
          if(vost==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Востока -» на Запад «- 6 часов
            {
-            Vost_1=1;
+            Zap_1=1;
             // разрешение на обработку события.
-            Zap_1=0;
+            Yug_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
-            Yug_1=0;
-            //Var1_Be_1=0;
-            //Var2_Bo_1=1;
+            Vost_1=0;
             //Проверка значения направления
             sev=0;
-            zap=0;
+            zap=1;
             yug=0;
-            vost=1;
+            vost=0;
             ChekDIr=false;
             BlockNum="V 10";
             errorprint[34]=1;
-            //Var1_Bo_1=2;
-            //Var2_Bo_0=2;
+           
            }
          // 11
          if(vost==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
            {
-            Vost_1=1;
+            Zap_1=1;
             // разрешение на обработку события.
-            Zap_1=0;
+            Vost_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-            //Var2_Be_0=1;
-            //Var1_Bo_0=0;
             //Проверка значения направления
             sev=0;
-            zap=0;
+            zap=1;
             yug=0;
-            vost=1;
+            vost=0;
             ChekDIr=false;
             BlockNum="V 11";
             errorprint[35]=1;
-            //Var1_Be_0=2;
-            //Var2_Be_1=2;
+           
            }
          // 12
          if(vost==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
            {
-            Vost_1=1;
+            Zap_1=1;
             // разрешение на обработку события.
-            Zap_1=0;
+            Vost_1=0;
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-            //Var2_Be_1=1;
-            //Var1_Bo_1=0;
+            
             //Проверка значения направления
             sev=0;
-            zap=0;
+            zap=1;
             yug=0;
-            vost=1;
+            vost=0;
             ChekDIr=false;
             BlockNum="V 12";
             errorprint[36]=1;
-            //Var1_Be_1=2;
-            //Var2_Be_0=2;
+          
            }
          //__________________________________
          // Правильная конфигурация Юг
@@ -2353,37 +2150,23 @@ int start()
          if(yug==1 && Var1_Be_0==0 && Var2_Bo_1==1 && ChekDIr==true)  //Смещение по регистру с Юга на .| на Восток -» 9 часов
            {
             // разрешение на обработку события.
-            Vost_1=1;
+            Zap_1=1;
             //Запрет для 3 направлений
-            Zap_1=0;
+            Vost_1=0;
             Sev_1=0;
             Yug_1=0;
-            Var2_Bo_0=1;
-            Var2_Bo_1=2;
-            //Var1_Bo_0=0;
+          
             //Проверка значения направления
             sev=0;
-            zap=0;
+            zap=1;
             yug=0;
-            vost=1;
+            vost=0;
             ChekDIr=false;
             BlockNum="Y 5";
             errorprint[41]=1;
-            //Var1_Be_0=2;
-            //Var2_Bo_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+         
+            
+            
            }
          // 6
          if(yug==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Юга на .| на Восток -» 9 часов
@@ -2394,9 +2177,6 @@ int start()
             Zap_1=0;
             Sev_1=0;
             Yug_1=0;
-            Var1_Bo_0=0;
-            Var1_Bo_1=2;
-            //Var2_Bo_0=1;
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -2405,57 +2185,31 @@ int start()
             ChekDIr=false;
             BlockNum="Y 6";
             errorprint[42]=1;
-            //Var1_Bo_1=2;
-            //Var2_Be_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
+            
            }
          // 7
          if(yug==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на  Запад «- 3 часа
            {
             // разрешение на обработку события.
-            Zap_1=1;
-            //Запрет для 3 направлений
+            Vost_1=1;
+            //Запрет для 3 нап равлений
             Sev_1=0;
-            Vost_1=0;
+            Zap_1=0;
             Yug_1=0;
-            //Var1_Be_0=0;
-            Var2_Be_0=1;
-            Var2_Be_1=2;
+            
             //Проверка значения направления
             sev=0;
-            zap=1;
+            zap=0;
             yug=0;
-            vost=0;
+            vost=1;
             ChekDIr=false;
             BlockNum="Y 7";
             errorprint[43]=1;
-            //Var1_Bo_0=2;
-            //Var2_Be_1=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+            
+            
+            
            }
          // 8
          if(yug==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Запад «- 3 часа
@@ -2466,9 +2220,7 @@ int start()
             Sev_1=0;
             Vost_1=0;
             Yug_1=0;
-            //Var2_Be_0=1;
-            Var1_Be_0=0;
-            Var1_Be_1=2;
+       
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -2477,112 +2229,105 @@ int start()
             ChekDIr=false;
             BlockNum="Y 8";
             errorprint[44]=1;
-            //Var1_Be_1=2;
-            //Var2_Bo_0=2;
-            CheFe=1;
-            if(CheFe==1 && lic==1)
-              {
-               izn=1;
-               lic=0;
-               CheFe=0;
-              }
-            if(CheFe==1 && izn==1)
-              {
-               izn=0;
-               lic=1;
-               CheFe=0;
-              }
+           
+            
+            
            }
          // 9
          if(yug==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
            {
-            Yug_1=1;
+            Sev_1=1;
             // разрешение на обработку события.
-            Sev_1=0;
+            Yug_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
 
-            //Var1_Be_0=0;
-            //Var2_Bo_0=1;
             //Проверка значения направления
-            sev=0;
+            sev=1;
             zap=0;
-            yug=1;
+            yug=0;
             vost=0;
             ChekDIr=false;
             BlockNum="Y 9";
             errorprint[45]=1;
-            //Var1_Bo_0=2;
-            //Var2_Bo_1=2;
+            
+            
            }
          // 10
          if(yug==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Юга на .| на Север *| 6 часов
            {
-            Yug_1=1;
+            Sev_1=1;
             // разрешение на обработку события.
-            Sev_1=0;
+            Yug_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-
-            //Var1_Be_1=0;
-            //Var2_Bo_1=1;
             //Проверка значения направления
-            sev=0;
+            sev=1;
             zap=0;
-            yug=1;
+            yug=0;
             vost=0;
             ChekDIr=false;
             BlockNum="Y 10";
             errorprint[46]=1;
-            //Var1_Bo_1=2;
-            //Var2_Bo_0=2;
+            
+            
            }
          // 11
          if(yug==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
            {
-            Yug_1=1;
+            Sev_1=1;
             // разрешение на обработку события.
-            Sev_1=0;
+            Yug_1=0;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
 
-            //Var2_Be_0=1;
-            //Var1_Bo_0=0;
-            //Проверка значения направления
-            sev=0;
+           //Проверка значения направления
+            sev=1;
             zap=0;
-            yug=1;
-            vost=1;
+            yug=0;
+            vost=0;
             ChekDIr=false;
             BlockNum="Y 11";
             errorprint[47]=1;
-            //Var1_Be_0=2;
-            //Var2_Be_1=2;
+			
+            
+          
            }
          // 12
          if(yug==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
            {
             // разрешение на обработку события.
-            Sev_1=0;
+            Sev_1=1;
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-            Yug_1=1;
-            //Var2_Be_1=1;
-            //Var1_Bo_1=0;
+            Yug_1=0;
+         
             //Проверка значения направления
-            sev=0;
+            sev=1;
             zap=0;
-            yug=1;
+            yug=0;
             vost=0;
             ChekDIr=false;
             BlockNum="Y 12";
             errorprint[48]=1;
-            //Var1_Be_1=2;
-            //Var2_Be_0=2;
+			//
+            //if(CheFe==1 && lic==1)
+              //{
+               //izn=1;
+               //lic=0;
+               //CheFe=0;
+              //}
+            //if(CheFe==1 && izn==1)
+              //{
+               //izn=0;
+               //lic=1;
+               //CheFe=0;
+              //}
+           
            }
 
          //Проверка шаг 3
@@ -7152,4 +6897,3 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 
 //+------------------------------------------------------------------+
-
