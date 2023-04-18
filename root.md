@@ -1213,7 +1213,7 @@ int start()
          // Присваивание значений из подсолнуха. Нужно определить в какую из 4 переменных произведено присваивание.
 
          // Исходное положение Свеча компинсации. Переустановка начений
-         if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && Maximum>0 && Minimum>0 && Rez_BE==0&& Compens==true)
+         if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && Maximum>0 && Minimum>0 && Rez_BE==0&& Compens==true)
            {
             // Установка позиции маховика на Север
             sev=1;// обработка события Север
