@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 1.9.1.mq4 |
+//|                                             Nucleo   v 1.9.2.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -239,6 +239,34 @@ string z_BlockNum="0";
 int z_errorprint[150];
 int z_errorprint2[150];
 int z_Gx,z_Gy;
+//Массивы для регистра суммы обьёмав в 8 частях куба
+int kubo_1=0;
+int kubo_2=0;
+int kubo_3=0;
+int kubo_4=0;
+int kubo_5=0;
+int kubo_6=0;
+int kubo_7=0;
+int kubo_8=0;
+string Text_Kubo_1="0";
+string Text_Kubo_2="0";
+string Text_Kubo_3="0";
+string Text_Kubo_4="0";
+string Text_Kubo_5="0";
+string Text_Kubo_6="0";
+string Text_Kubo_7="0";
+string Text_Kubo_8="0";
+//Класификация части куба
+// kube_1 - Be_o_x_Lic / Bo_0_Z_izn
+// kube_2 - Bo_o_x_Lic / Bo_0_Z_lic
+// kube_3 - Be_1_x_Lic / Bo_1_Z_lic
+// kube_4 - Bo_1_x_Lic / Be_0_Z_izn
+// kube_5 - Be_o_x_izn / Bo_0_Z_lic
+// kube_6 - Bo_o_x_izn / Be_0_Z_izn
+// kube_7 - Be_1_x_izn / Bo_1_Z_izn
+// kube_8 - Bo_o_x_izn / Be_1_Z_lic
+
+
 
 extern bool Compens=true;
 extern bool GAP=false;
@@ -354,11 +382,109 @@ long CHWPX;
 int init()
   {
 // --- REVISIONS --- //
-//---1.7.1
+//---1.9.1
 // --- Added enabling and disabling writing to arrays ALLtoARRAYWRITE
 // --- Added enabling and disabling recording to BODYHorizont arrays
 // --- Added changing the ONE_be variable to int in the cycle of transferring messages to telegrams and writing data to a file
 
+//-------imag fibanachi-----
+   string   Kubo_Img="\\Images\\Kubo_Mql4.bmp";
+//-----------------------
+   string obiekt501="501";
+   ObjectDelete(0,obiekt501);
+   ObjectDelete(obiekt501);
+   ObjectCreate(obiekt501,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt501,OBJPROP_BMPFILE,Kubo_Img);
+   ObjectSetInteger(0,obiekt501,OBJPROP_XDISTANCE,CHWPX+1450);
+   ObjectSetInteger(0,obiekt501,OBJPROP_YDISTANCE,330);
+
+   string obiekt502="502";
+   ObjectDelete(0,obiekt502);
+
+   ObjectDelete(obiekt502);
+   ObjectCreate(obiekt502,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
+   ObjectSetInteger(0,obiekt502,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt502,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt502,OBJPROP_XDISTANCE,CHWPX+1565);
+   ObjectSetInteger(0,obiekt502,OBJPROP_YDISTANCE,450);
+
+   string obiekt503="503";
+   ObjectDelete(0,obiekt503);
+
+   ObjectDelete(obiekt503);
+   ObjectCreate(obiekt503,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
+   ObjectSetInteger(0,obiekt503,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt503,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt503,OBJPROP_XDISTANCE,CHWPX+1665);
+   ObjectSetInteger(0,obiekt503,OBJPROP_YDISTANCE,450);
+
+   string obiekt504="504";
+   ObjectDelete(0,obiekt504);
+
+   ObjectDelete(obiekt504);
+   ObjectCreate(obiekt504,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
+   ObjectSetInteger(0,obiekt504,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt504,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt504,OBJPROP_XDISTANCE,CHWPX+1665);
+   ObjectSetInteger(0,obiekt504,OBJPROP_YDISTANCE,540);
+
+   string obiekt505="505";
+   ObjectDelete(0,obiekt505);
+
+   ObjectDelete(obiekt505);
+   ObjectCreate(obiekt505,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
+   ObjectSetInteger(0,obiekt505,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt505,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt505,OBJPROP_XDISTANCE,CHWPX+1565);
+   ObjectSetInteger(0,obiekt505,OBJPROP_YDISTANCE,540);
+
+   string obiekt506="506";
+   ObjectDelete(0,obiekt506);
+
+   ObjectDelete(obiekt506);
+   ObjectCreate(obiekt506,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
+   ObjectSetInteger(0,obiekt506,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt506,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt506,OBJPROP_XDISTANCE,CHWPX+1710);
+   ObjectSetInteger(0,obiekt506,OBJPROP_YDISTANCE,350);
+
+   string obiekt507="507";
+   ObjectDelete(0,obiekt507);
+
+   ObjectDelete(obiekt507);
+   ObjectCreate(obiekt507,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
+   ObjectSetInteger(0,obiekt507,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt507,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt507,OBJPROP_XDISTANCE,CHWPX+1610);
+   ObjectSetInteger(0,obiekt507,OBJPROP_YDISTANCE,350);
+
+   string obiekt508="508";
+   ObjectDelete(0,obiekt508);
+
+   ObjectDelete(obiekt508);
+   ObjectCreate(obiekt508,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
+   ObjectSetInteger(0,obiekt508,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt508,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt508,OBJPROP_XDISTANCE,CHWPX+1510);
+   ObjectSetInteger(0,obiekt508,OBJPROP_YDISTANCE,520);
+
+   string obiekt509="509";
+   ObjectDelete(0,obiekt509);
+
+   ObjectDelete(obiekt509);
+   ObjectCreate(obiekt509,OBJ_LABEL,0,BrTime,HIGHT+0.00015);
+   ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
+   ObjectSetInteger(0,obiekt509,OBJPROP_COLOR,clrRed);
+   ObjectSetInteger(0,obiekt509,OBJPROP_FONTSIZE,9);
+   ObjectSetInteger(0,obiekt509,OBJPROP_XDISTANCE,CHWPX+1760);
+   ObjectSetInteger(0,obiekt509,OBJPROP_YDISTANCE,500);
 
 // --- initialization of arrays-----
    ArrayInitialize(body,10);
@@ -1294,7 +1420,7 @@ int start()
             // Установка Лица
             z_lic=1;
             z_izn=0;
-            
+
             z_Gx=0;
             z_Gy=0;
             z_Sev[1,1]=0;
@@ -1310,7 +1436,7 @@ int start()
             z_Var1_Bo_0=2;
             z_Var1_Be_1=2;
             z_Var1_Bo_1=2;
-            
+
             int file_handle14=FileOpen(FileName14,FILE_READ|FILE_WRITE," ");
             if(file_handle14>0)
               {
@@ -1513,7 +1639,7 @@ int start()
             Sev_1=0;
             Zap_1=0;
             Yug_1=0;
-            
+
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1523,7 +1649,7 @@ int start()
             BlockNum="S 5";
             errorprint[5]=1;
             Var1_Be_0=2;
-			Var1_Be_1=0;
+            Var1_Be_1=0;
            }
          // 6
          if(sev==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Запад «-
@@ -1533,7 +1659,7 @@ int start()
             Sev_1=0;
             Vost_1=0;
             Yug_1=0;
-            
+
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -1542,10 +1668,10 @@ int start()
             ChekDIr=false;
             BlockNum="S 6";
             errorprint[6]=1;
-           Var1_Bo_1=2;
-		   Var1_Bo_0=0;
-            
-            
+            Var1_Bo_1=2;
+            Var1_Bo_0=0;
+
+
            }
          // 7
          if(sev==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
@@ -1556,7 +1682,7 @@ int start()
             Zap_1=1;
             Sev_1=0;
             Yug_1=0;
-            
+
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -1566,8 +1692,8 @@ int start()
             BlockNum="S 7";
             errorprint[7]=1;
             Var1_Bo_0=2;
-			Var1_Bo_1=0;
-            
+            Var1_Bo_1=0;
+
            }
          // 8
          if(sev==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
@@ -1578,7 +1704,7 @@ int start()
             Zap_1=0;
             Sev_1=0;
             Yug_1=0;
-            
+
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1588,9 +1714,9 @@ int start()
             BlockNum="S 8";
             errorprint[8]=1;
             Var1_Be_1=2;
-			Var1_Be_0=0;
-            
-            
+            Var1_Be_0=0;
+
+
            }
          // 9
          if(sev==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *| на Юг .|
@@ -1610,10 +1736,10 @@ int start()
             BlockNum="S 9";
             errorprint[9]=1;
             Var1_Bo_0=2;
-			Var1_Be_1=0;
-			
-			
-			
+            Var1_Be_1=0;
+
+
+
            }
          // 10
          if(sev==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Севера *|  на Юг .|
@@ -1636,8 +1762,8 @@ int start()
             BlockNum="S 10";
             errorprint[10]=1;
             Var1_Bo_1=2;
-			Var1_Be_0=0;
-			
+            Var1_Be_0=0;
+
            }
          // 11
          if(sev==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
@@ -1648,7 +1774,7 @@ int start()
             //Запрет для 3 направлений
             Zap_1=0;
             Vost_1=0;
-             
+
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -1658,7 +1784,7 @@ int start()
             BlockNum="S 11";
             errorprint[11]=1;
             Var1_Be_0=2;
-			Var1_Bo_1=0;
+            Var1_Bo_1=0;
            }
          // 12
          if(sev==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
@@ -1678,7 +1804,7 @@ int start()
             BlockNum="S 12";
             errorprint[12]=1;
             Var1_Be_1=2;
-			Var1_Bo_0=0;
+            Var1_Bo_0=0;
            }
 
          //__________________________________
@@ -1757,7 +1883,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Sev_1=1;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=1;
             zap=0;
             yug=0;
@@ -1766,9 +1892,9 @@ int start()
             BlockNum="Z 5";
             errorprint[17]=1;
             Var1_Be_0=2;
-			Var1_Be_1=0;
-            
-            
+            Var1_Be_1=0;
+
+
            }
          // 6
          if(zap==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Эг |. Смещение против часовой стрелки.
@@ -1779,7 +1905,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Yug_1=1;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=0;
             zap=0;
             yug=1;
@@ -1788,8 +1914,8 @@ int start()
             BlockNum="Z 6";
             errorprint[18]=1;
             Var1_Bo_1=2;
-			Var1_Bo_0=0;
-            
+            Var1_Bo_0=0;
+
            }
          // 7
          if(zap==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Севера *| Смещение по часовой стрелке
@@ -1800,7 +1926,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Yug_1=1;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=0;
             zap=0;
             yug=1;
@@ -1809,8 +1935,8 @@ int start()
             BlockNum="Z 7";
             errorprint[19]=1;
             Var1_Bo_0=2;
-			Var1_Bo_1=0;
-            
+            Var1_Bo_1=0;
+
            }
          // 8
          if(zap==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на Севера *| Смещение по часовой стрелке
@@ -1822,7 +1948,7 @@ int start()
             Vost_1=0;
             Sev_1=1;
             //Var2_Be_0=1;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=1;
             zap=0;
             yug=0;
@@ -1831,8 +1957,8 @@ int start()
             BlockNum="Z 8";
             errorprint[20]=1;
             Var1_Be_1=2;
-			Var1_Be_0=0;
-            
+            Var1_Be_0=0;
+
 
            }
          // 9
@@ -1852,8 +1978,8 @@ int start()
             ChekDIr=false;
             BlockNum="Z 9";
             errorprint[21]=1;
-           Var1_Bo_0=2;
-		   Var1_Be_1=0;
+            Var1_Bo_0=2;
+            Var1_Be_1=0;
 
            }
          // 10
@@ -1865,7 +1991,7 @@ int start()
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=0;
             zap=0;
             yug=0;
@@ -1874,7 +2000,7 @@ int start()
             BlockNum="Z 10";
             errorprint[22]=1;
             Var1_Bo_1=2;
-			Var1_Be_0=0;
+            Var1_Be_0=0;
            }
          // 11
          if(zap==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
@@ -1885,7 +2011,7 @@ int start()
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=0;
             zap=0;
             yug=0;
@@ -1894,7 +2020,7 @@ int start()
             BlockNum="Z 11";
             errorprint[23]=1;
             Var1_Be_0=2;
-			Var1_Bo_1=0;
+            Var1_Bo_1=0;
            }
          // 12
          if(zap==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Запада «- на ВОсток -» Смещение 180 градусов
@@ -1914,7 +2040,7 @@ int start()
             BlockNum="Z 12";
             errorprint[24]=1;
             Var1_Be_1=2;
-			Var1_Bo_0=0;
+            Var1_Bo_0=0;
            }
          //__________________________________
 
@@ -1996,7 +2122,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Yug_1=1;
-           //Проверка значения направления
+            //Проверка значения направления
             sev=0;
             zap=0;
             yug=1;
@@ -2005,9 +2131,9 @@ int start()
             BlockNum="V 5";
             errorprint[29]=1;
             Var1_Be_0=2;
-			Var1_Be_1=0;
-            
-            
+            Var1_Be_1=0;
+
+
            }
          // 6
          if(vost==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Востока -» на Север *|   9 часов
@@ -2027,8 +2153,8 @@ int start()
             BlockNum="V 6";
             errorprint[30]=1;
             Var1_Bo_1=2;
-			Var1_Bo_0=0;
-            
+            Var1_Bo_0=0;
+
            }
          // 7
          if(vost==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Юг .|  3 часа
@@ -2047,9 +2173,9 @@ int start()
             ChekDIr=false;
             BlockNum="V 7";
             errorprint[31]=1;
-           Var1_Bo_0=2;
-		   Var1_Bo_1=0;
-            
+            Var1_Bo_0=2;
+            Var1_Bo_1=0;
+
            }
          // 8
          if(vost==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Юг .|  3 часа
@@ -2068,9 +2194,9 @@ int start()
             ChekDIr=false;
             BlockNum="V 8";
             errorprint[32]=1;
-             Var1_Be_1=2;
-			 Var1_Be_0=0;
-            
+            Var1_Be_1=2;
+            Var1_Be_0=0;
+
            }
          // 9
          if(vost==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
@@ -2089,8 +2215,8 @@ int start()
             ChekDIr=false;
             BlockNum="V 9";
             errorprint[33]=1;
-			Var1_Bo_0=2;
-			Var1_Be_1=0;
+            Var1_Bo_0=2;
+            Var1_Be_1=0;
            }
          // 10
          if(vost==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Востока -» на Запад «- 6 часов
@@ -2109,8 +2235,8 @@ int start()
             ChekDIr=false;
             BlockNum="V 10";
             errorprint[34]=1;
-           Var1_Bo_1=2;
-		   Var1_Be_0=0;
+            Var1_Bo_1=2;
+            Var1_Be_0=0;
            }
          // 11
          if(vost==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
@@ -2129,9 +2255,9 @@ int start()
             ChekDIr=false;
             BlockNum="V 11";
             errorprint[35]=1;
-           Var1_Be_0=2;
-		   Var1_Bo_1=0;
-		   
+            Var1_Be_0=2;
+            Var1_Bo_1=0;
+
            }
          // 12
          if(vost==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
@@ -2142,7 +2268,7 @@ int start()
             //Запрет для 3 направлений
             Sev_1=0;
             Yug_1=0;
-            
+
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -2152,7 +2278,7 @@ int start()
             BlockNum="V 12";
             errorprint[36]=1;
             Var1_Be_1=2;
-			Var1_Bo_0=0;
+            Var1_Bo_0=0;
            }
          //__________________________________
          // Правильная конфигурация Юг
@@ -2235,7 +2361,7 @@ int start()
             Vost_1=0;
             Sev_1=0;
             Yug_1=0;
-          
+
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -2244,10 +2370,10 @@ int start()
             ChekDIr=false;
             BlockNum="Y 5";
             errorprint[41]=1;
-         Var1_Be_0=2;
-		 Var1_Be_1=0;
-            
-            
+            Var1_Be_0=2;
+            Var1_Be_1=0;
+
+
            }
          // 6
          if(yug==1 && Var1_Bo_1==0 && Var2_Be_0==1 && ChekDIr==true)  //Смещение по регистру с Юга на .| на Восток -» 9 часов
@@ -2267,9 +2393,9 @@ int start()
             BlockNum="Y 6";
             errorprint[42]=1;
             Var1_Bo_1=2;
-			Var1_Bo_0=0;
-            
-            
+            Var1_Bo_0=0;
+
+
            }
          // 7
          if(yug==1 && Var1_Bo_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на  Запад «- 3 часа
@@ -2280,7 +2406,7 @@ int start()
             Sev_1=0;
             Zap_1=0;
             Yug_1=0;
-            
+
             //Проверка значения направления
             sev=0;
             zap=0;
@@ -2290,9 +2416,9 @@ int start()
             BlockNum="Y 7";
             errorprint[43]=1;
             Var1_Bo_0=2;
-			Var1_Bo_1=0;
-            
-            
+            Var1_Bo_1=0;
+
+
            }
          // 8
          if(yug==1 && Var1_Be_1==0 && Var2_Bo_0==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Запад «- 3 часа
@@ -2303,7 +2429,7 @@ int start()
             Sev_1=0;
             Vost_1=0;
             Yug_1=0;
-       
+
             //Проверка значения направления
             sev=0;
             zap=1;
@@ -2312,10 +2438,10 @@ int start()
             ChekDIr=false;
             BlockNum="Y 8";
             errorprint[44]=1;
-           Var1_Be_1=2;
-		   Var1_Be_0=0;
-            
-            
+            Var1_Be_1=2;
+            Var1_Be_0=0;
+
+
            }
          // 9
          if(yug==1 && Var1_Bo_0==0 && Var2_Bo_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
@@ -2336,8 +2462,8 @@ int start()
             BlockNum="Y 9";
             errorprint[45]=1;
             Var1_Bo_0=2;
-			Var1_Be_1=0;
-            
+            Var1_Be_1=0;
+
            }
          // 10
          if(yug==1 && Var1_Bo_1==0 && Var2_Bo_0==1 && ChekDIr==true) // Смещение по регистру с Юга на .| на Север *| 6 часов
@@ -2357,8 +2483,8 @@ int start()
             BlockNum="Y 10";
             errorprint[46]=1;
             Var1_Bo_1=2;
-			Var1_Be_0=0;
-            
+            Var1_Be_0=0;
+
            }
          // 11
          if(yug==1 && Var1_Be_0==0 && Var2_Be_1==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
@@ -2370,7 +2496,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
 
-           //Проверка значения направления
+            //Проверка значения направления
             sev=1;
             zap=0;
             yug=0;
@@ -2378,10 +2504,10 @@ int start()
             ChekDIr=false;
             BlockNum="Y 11";
             errorprint[47]=1;
-			Var1_Be_0=2;
-			Var1_Bo_1=0;
-            
-          
+            Var1_Be_0=2;
+            Var1_Bo_1=0;
+
+
            }
          // 12
          if(yug==1 && Var1_Be_1==0 && Var2_Be_0==1 && ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
@@ -2392,7 +2518,7 @@ int start()
             Zap_1=0;
             Vost_1=0;
             Yug_1=0;
-         
+
             //Проверка значения направления
             sev=1;
             zap=0;
@@ -2401,9 +2527,9 @@ int start()
             ChekDIr=false;
             BlockNum="Y 12";
             errorprint[48]=1;
-			Var1_Be_1=2;
-			Var1_Bo_0=0;
-           
+            Var1_Be_1=2;
+            Var1_Bo_0=0;
+
            }
 
          //Проверка шаг 3
@@ -2461,6 +2587,9 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[1]=1;//Proverka zapuska bloka
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
+
                  }
                if(Sev[1,2]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2480,6 +2609,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[2]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -2506,6 +2637,9 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[3]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
+
                  }
                if(Sev[1,6]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2525,6 +2659,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[4]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
@@ -2540,6 +2676,7 @@ int start()
                   Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
+
                   //Перераспределение разрешений переменных
                   Var1_Be_0=0;
                   Var1_Bo_0=2;
@@ -2553,6 +2690,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[5]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
                if(Sev[1,1]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2572,6 +2711,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[6]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -2598,6 +2739,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[6]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
                if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2617,6 +2760,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[7]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// izn==1 фин
 
@@ -2645,6 +2790,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[8]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
                if(Sev[1,4]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2664,6 +2811,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[9]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -2690,6 +2839,9 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[10]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
+
                  }
                if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2709,6 +2861,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[11]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// izn==1 фин
 
@@ -2737,6 +2891,9 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[12]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
+
                  }
                if(Sev[1,3]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2756,6 +2913,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[13]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -2782,6 +2941,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[14]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
                if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2801,10 +2962,12 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[15]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
-            
+
 
 
            }// Sever фин
@@ -2837,6 +3000,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[32]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
                if(Sev[1,4]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2856,6 +3021,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[33]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -2882,6 +3049,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[34]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
                if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2901,6 +3070,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[35]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// izn==1 фин
 
@@ -2929,6 +3100,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[36]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
                if(Sev[1,3]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2948,6 +3121,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[37]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -2974,6 +3149,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[38]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
                if(Sev[1,7]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2993,6 +3170,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[39]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
@@ -3021,6 +3200,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[40]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
                if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3040,6 +3221,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[41]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -3066,6 +3249,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[42]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
                if(Sev[1,6]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3085,6 +3270,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[43]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
@@ -3113,6 +3300,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[44]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
                if(Sev[1,1]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3132,6 +3321,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[45]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -3158,6 +3349,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[46]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
                if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3177,10 +3370,12 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[47]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// izn==1 фин
 
-            
+
 
 
            }// Yug фин
@@ -3213,6 +3408,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[64]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
                if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3232,6 +3429,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[65]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -3258,6 +3457,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[66]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
                if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3277,6 +3478,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[67]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// izn==1 фин
 
@@ -3305,6 +3508,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[68]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
                if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3324,6 +3529,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[69]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -3350,6 +3557,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[70]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
                if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3369,6 +3578,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[71]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// izn==1 фин
 
@@ -3397,6 +3608,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[72]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
                if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3416,6 +3629,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[73]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -3442,6 +3657,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[74]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
                if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3461,6 +3678,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[75]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
@@ -3489,6 +3708,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[76]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
                if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3508,6 +3729,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[77]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -3534,9 +3757,11 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[78]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
                if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
-                 { 
+                 {
                   Sev[1,4]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
@@ -3553,10 +3778,12 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[79]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
-            
+
 
 
            }// Zapad фин
@@ -3590,6 +3817,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[96]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
                if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3609,6 +3838,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[97]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -3635,6 +3866,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[98]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
                if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3654,6 +3887,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[99]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
@@ -3682,6 +3917,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[100]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
                if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3701,6 +3938,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[101]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -3727,6 +3966,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[102]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
                if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3746,6 +3987,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[103]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
@@ -3774,6 +4017,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[104]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
                if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3793,6 +4038,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[105]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -3819,6 +4066,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[106]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
                if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3838,6 +4087,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[107]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// izn==1 фин
 
@@ -3866,6 +4117,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[108]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
                if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3885,6 +4138,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[109]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -3911,6 +4166,8 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[110]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
                if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3930,10 +4187,12 @@ int start()
                   Var2_Bo_1=2;
                   BlockPermis=false;
                   errorprint2[111]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// izn==1 фин
 
-            
+
 
            }// Vostok фин
          //Праверка шаг 4
@@ -4143,7 +4402,7 @@ int start()
             z_Sev_1=0;
             z_Zap_1=0;
             z_Yug_1=1;
-            
+
             //Проверка значения направления
             z_sev=0;
             z_zap=0;
@@ -4153,9 +4412,9 @@ int start()
             z_BlockNum="S 5";
             z_errorprint[5]=1;
             z_Var1_Be_0=2;
-			z_Var1_Be_1=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Be_1=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4168,7 +4427,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 6
          if(z_sev==1 && z_Var1_Bo_1==0 && z_Var2_Be_0==1 && z_ChekDIr==true)  // Смещение по регистру с Севера *| на Запад «-
@@ -4178,7 +4437,7 @@ int start()
             z_Sev_1=0;
             z_Vost_1=0;
             z_Yug_1=1;
-            
+
             //Проверка значения направления
             z_sev=0;
             z_zap=0;
@@ -4188,9 +4447,9 @@ int start()
             z_BlockNum="S 6";
             z_errorprint[6]=1;
             z_Var1_Bo_1=2;
-			z_Var1_Bo_0=0;
+            z_Var1_Bo_0=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4203,7 +4462,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 7
          if(z_sev==1 && z_Var1_Bo_0==0 && z_Var2_Be_1==1 && z_ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
@@ -4214,7 +4473,7 @@ int start()
             z_Zap_1=0;
             z_Sev_1=0;
             z_Yug_1=1;
-            
+
             //Проверка значения направления
             z_sev=0;
             z_zap=0;
@@ -4223,10 +4482,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="S 7";
             z_errorprint[7]=1;
-           z_Var1_Bo_0=2;
-		   z_Var1_Bo_1=0;
+            z_Var1_Bo_0=2;
+            z_Var1_Bo_1=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4239,7 +4498,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 8
          if(z_sev==1 && z_Var1_Be_1==0 && z_Var2_Bo_0==1 && z_ChekDIr==true)  // Смещение по регистру с Севера *| на Восток -»
@@ -4250,7 +4509,7 @@ int start()
             z_Zap_1=0;
             z_Sev_1=0;
             z_Yug_1=1;
-            
+
             //Проверка значения направления
             z_sev=0;
             z_zap=0;
@@ -4260,9 +4519,9 @@ int start()
             z_BlockNum="S 8";
             z_errorprint[8]=1;
             z_Var1_Be_1=2;
-			z_Var1_Be_0=0;
+            z_Var1_Be_0=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4275,7 +4534,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 9
          if(z_sev==1 && z_Var1_Bo_0==0 && z_Var2_Bo_1==1 && z_ChekDIr==true)  // Смещение по регистру с Севера *| на Юг .|
@@ -4294,8 +4553,8 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="S 9";
             z_errorprint[9]=1;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4308,7 +4567,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 10
          if(z_sev==1 && z_Var1_Bo_1==0 && z_Var2_Bo_0==1 && z_ChekDIr==true) // Смещение по регистру с Севера *|  на Юг .|
@@ -4331,9 +4590,9 @@ int start()
             z_BlockNum="S 10";
             z_errorprint[10]=1;
             z_Var1_Bo_1=2;
-			z_Var1_Be_0=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Be_0=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4356,7 +4615,7 @@ int start()
             //Запрет для 3 направлений
             z_Zap_1=0;
             z_Vost_1=1;
-             
+
             //Проверка значения направления
             z_sev=0;
             z_zap=0;
@@ -4365,10 +4624,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="S 11";
             z_errorprint[11]=1;
-			z_Var1_Be_0=2;
-			z_Var1_Bo_1=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Be_0=2;
+            z_Var1_Bo_1=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4381,7 +4640,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 12
          if(z_sev==1 && z_Var1_Be_1==0 && z_Var2_Be_0==1 && z_ChekDIr==true)  // Смещение по регистру с Севера *|  на Юг .|
@@ -4400,10 +4659,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="S 12";
             z_errorprint[12]=1;
-			z_Var1_Be_1=2;
-			z_Var1_Bo_0=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Be_1=2;
+            z_Var1_Bo_0=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4416,7 +4675,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
 
          //__________________________________
@@ -4495,7 +4754,7 @@ int start()
             z_Zap_1=0;
             z_Vost_1=1;
             z_Sev_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=0;
             z_yug=0;
@@ -4505,8 +4764,8 @@ int start()
             z_errorprint[17]=1;
             z_Var1_Be_0=2;
             z_Var1_Be_1=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4529,7 +4788,7 @@ int start()
             z_Zap_1=0;
             z_Vost_1=1;
             z_Yug_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=0;
             z_yug=0;
@@ -4538,9 +4797,9 @@ int start()
             z_BlockNum="Z 6";
             z_errorprint[18]=1;
             z_Var1_Bo_1=2;
-			z_Var1_Bo_0=0;
+            z_Var1_Bo_0=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4563,7 +4822,7 @@ int start()
             z_Zap_1=0;
             z_Vost_1=1;
             z_Yug_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=0;
             z_yug=0;
@@ -4572,9 +4831,9 @@ int start()
             z_BlockNum="Z 7";
             z_errorprint[19]=1;
             z_Var1_Bo_0=2;
-			z_Var1_Bo_1=0;
+            z_Var1_Bo_1=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4598,7 +4857,7 @@ int start()
             z_Vost_1=1;
             z_Sev_1=0;
             //Varz_Be_0=1;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=0;
             z_yug=0;
@@ -4607,9 +4866,9 @@ int start()
             z_BlockNum="Z 8";
             z_errorprint[20]=1;
             z_Var1_Be_1=2;
-			z_Var1_Be_0=0;
+            z_Var1_Be_0=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4642,9 +4901,9 @@ int start()
             z_BlockNum="Z 9";
             z_errorprint[21]=1;
             z_Var1_Bo_0=2;
-			z_Var1_Be_1=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Be_1=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4668,7 +4927,7 @@ int start()
             //Запрет для 3 направлений
             z_Sev_1=1;
             z_Yug_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=1;
             z_zap=0;
             z_yug=0;
@@ -4676,10 +4935,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="Z 10";
             z_errorprint[22]=1;
-			z_Var1_Bo_1=2;
-			z_Var1_Be_0=0;
-//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Bo_1=2;
+            z_Var1_Be_0=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4702,7 +4961,7 @@ int start()
             //Запрет для 3 направлений
             z_Sev_1=0;
             z_Yug_1=1;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=0;
             z_yug=1;
@@ -4710,10 +4969,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="Z 11";
             z_errorprint[23]=1;
-           z_Var1_Be_0=2;
-		   z_Var1_Bo_1=0;
-		   //Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Be_0=2;
+            z_Var1_Bo_1=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4745,9 +5004,9 @@ int start()
             z_BlockNum="Z 12";
             z_errorprint[24]=1;
             z_Var1_Be_1=2;
-			z_Var1_Bo_0=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Bo_0=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4841,7 +5100,7 @@ int start()
             z_Zap_1=1;
             z_Vost_1=0;
             z_Yug_1=0;
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=1;
             z_yug=0;
@@ -4850,9 +5109,9 @@ int start()
             z_BlockNum="V 5";
             z_errorprint[29]=1;
             z_Var1_Be_0=2;
-			z_Var1_Be_1=0;
+            z_Var1_Be_1=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4865,7 +5124,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 6
          if(z_vost==1 && z_Var1_Bo_1==0 && z_Var2_Be_0==1 && z_ChekDIr==true)  //Смещение по регистру с Востока -» на Север *|   9 часов
@@ -4885,9 +5144,9 @@ int start()
             z_BlockNum="V 6";
             z_errorprint[30]=1;
             z_Var1_Bo_1=2;
-			z_Var1_Bo_0=0;
+            z_Var1_Bo_0=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4918,10 +5177,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="V 7";
             z_errorprint[31]=1;
-           z_Var1_Bo_0=2;
-		   z_Var1_Bo_1=0;
+            z_Var1_Bo_0=2;
+            z_Var1_Bo_1=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4952,10 +5211,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="V 8";
             z_errorprint[32]=1;
-             z_Var1_Be_1=2;
-			 z_Var1_Be_0=0;
+            z_Var1_Be_1=2;
+            z_Var1_Be_0=0;
             //Смена Оси для правил Z
-			z_CheFe=1;
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -4986,10 +5245,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="V 9";
             z_errorprint[33]=1;
-			z_Var1_Bo_0=2;
-			z_Var1_Be_1=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Bo_0=2;
+            z_Var1_Be_1=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -5020,10 +5279,10 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="V 10";
             z_errorprint[34]=1;
-			z_Var1_Bo_1=2;
-			z_Var1_Be_0=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Bo_1=2;
+            z_Var1_Be_0=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -5036,7 +5295,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-           
+
            }
          // 11
          if(z_vost==1 && z_Var1_Be_0==0 && z_Var2_Be_1==1 && z_ChekDIr==true)  // Смещение по регистру с Востока -» на Запад «- 6 часов
@@ -5056,9 +5315,9 @@ int start()
             z_BlockNum="V 11";
             z_errorprint[35]=1;
             z_Var1_Be_0=2;
-			z_Var1_Bo_1=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Bo_1=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -5081,7 +5340,7 @@ int start()
             //Запрет для 3 направлений
             z_Sev_1=0;
             z_Yug_1=1;
-            
+
             //Проверка значения направления
             z_sev=0;
             z_zap=0;
@@ -5091,9 +5350,9 @@ int start()
             z_BlockNum="V 12";
             z_errorprint[36]=1;
             z_Var1_Be_1=2;
-		    z_Var1_Bo_0=0;
-			//Смена Оси для правил Z
-			z_CheFe=1;
+            z_Var1_Bo_0=0;
+            //Смена Оси для правил Z
+            z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
                z_izn=1;
@@ -5188,7 +5447,7 @@ int start()
             z_Vost_1=0;
             z_Sev_1=1;
             z_Yug_1=0;
-          
+
             //Проверка значения направления
             z_sev=1;
             z_zap=0;
@@ -5198,7 +5457,7 @@ int start()
             z_BlockNum="Y 5";
             z_errorprint[41]=1;
             z_Var1_Be_0=2;
-		    z_Var1_Be_1=0;
+            z_Var1_Be_1=0;
             z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
@@ -5212,7 +5471,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 6
          if(z_yug==1 && z_Var1_Bo_1==0 && z_Var2_Be_0==1 && z_ChekDIr==true)  //Смещение по регистру с Юга на .| на Восток -» 9 часов
@@ -5232,7 +5491,7 @@ int start()
             z_BlockNum="Y 6";
             z_errorprint[42]=1;
             z_Var1_Bo_1=2;
-			z_Var1_Bo_0=0;
+            z_Var1_Bo_0=0;
             z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
@@ -5246,7 +5505,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 7
          if(z_yug==1 && z_Var1_Bo_0==0 && z_Var2_Be_1==1 && z_ChekDIr==true)  // Смещение по регистру с Юга на .| на  Запад «- 3 часа
@@ -5257,7 +5516,7 @@ int start()
             z_Sev_1=1;
             z_Zap_1=0;
             z_Yug_1=0;
-            
+
             //Проверка значения направления
             z_sev=1;
             z_zap=0;
@@ -5267,42 +5526,7 @@ int start()
             z_BlockNum="Y 7";
             z_errorprint[43]=1;
             z_Var1_Bo_0=2;
-			z_Var1_Bo_1=0;
-          z_CheFe=1;
-            if(z_CheFe==1 && z_lic==1)
-              {
-               z_izn=1;
-               z_lic=0;
-               z_CheFe=0;
-              }
-            if(z_CheFe==1 && z_izn==1)
-              {
-               z_izn=0;
-               z_lic=1;
-               z_CheFe=0;
-              }
-            
-           }
-         // 8
-         if(z_yug==1 && z_Var1_Be_1==0 && z_Var2_Bo_0==1 && z_ChekDIr==true)  // Смещение по регистру с Юга на .| на Запад «- 3 часа
-           {
-            // разрешение на обработку события.
-            z_Zap_1=0;
-            //Запрет для 3 направлений
-            z_Sev_1=1;
-            z_Vost_1=0;
-            z_Yug_1=0;
-       
-            //Проверка значения направления
-            z_sev=1;
-            z_zap=0;
-            z_yug=0;
-            z_vost=0;
-            z_ChekDIr=false;
-            z_BlockNum="Y 8";
-            z_errorprint[44]=1;
-           z_Var1_Be_1=2;
-		   z_Var1_Be_0=0;
+            z_Var1_Bo_1=0;
             z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
@@ -5316,7 +5540,42 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
+           }
+         // 8
+         if(z_yug==1 && z_Var1_Be_1==0 && z_Var2_Bo_0==1 && z_ChekDIr==true)  // Смещение по регистру с Юга на .| на Запад «- 3 часа
+           {
+            // разрешение на обработку события.
+            z_Zap_1=0;
+            //Запрет для 3 направлений
+            z_Sev_1=1;
+            z_Vost_1=0;
+            z_Yug_1=0;
+
+            //Проверка значения направления
+            z_sev=1;
+            z_zap=0;
+            z_yug=0;
+            z_vost=0;
+            z_ChekDIr=false;
+            z_BlockNum="Y 8";
+            z_errorprint[44]=1;
+            z_Var1_Be_1=2;
+            z_Var1_Be_0=0;
+            z_CheFe=1;
+            if(z_CheFe==1 && z_lic==1)
+              {
+               z_izn=1;
+               z_lic=0;
+               z_CheFe=0;
+              }
+            if(z_CheFe==1 && z_izn==1)
+              {
+               z_izn=0;
+               z_lic=1;
+               z_CheFe=0;
+              }
+
            }
          // 9
          if(z_yug==1 && z_Var1_Bo_0==0 && z_Var2_Bo_1==1 && z_ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
@@ -5336,8 +5595,8 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="Y 9";
             z_errorprint[45]=1;
-			z_Var1_Bo_0=2;
-			z_Var1_Be_1=0;
+            z_Var1_Bo_0=2;
+            z_Var1_Be_1=0;
             z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
@@ -5351,7 +5610,7 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-            
+
            }
          // 10
          if(z_yug==1 && z_Var1_Bo_1==0 && z_Var2_Bo_0==1 && z_ChekDIr==true) // Смещение по регистру с Юга на .| на Север *| 6 часов
@@ -5371,7 +5630,7 @@ int start()
             z_BlockNum="Y 10";
             z_errorprint[46]=1;
             z_Var1_Bo_1=2;
-			z_Var1_Be_0=0;
+            z_Var1_Be_0=0;
             z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
@@ -5396,7 +5655,7 @@ int start()
             z_Zap_1=1;
             z_Vost_1=0;
 
-           //Проверка значения направления
+            //Проверка значения направления
             z_sev=0;
             z_zap=1;
             z_yug=0;
@@ -5404,44 +5663,8 @@ int start()
             z_ChekDIr=false;
             z_BlockNum="Y 11";
             z_errorprint[47]=1;
-			z_Var1_Be_0=2;
-			z_Var1_Bo_1=0;
-          z_CheFe=1;
-            if(z_CheFe==1 && z_lic==1)
-              {
-               z_izn=1;
-               z_lic=0;
-               z_CheFe=0;
-              }
-            if(z_CheFe==1 && z_izn==1)
-              {
-               z_izn=0;
-               z_lic=1;
-               z_CheFe=0;
-              }
-          
-           }
-         // 12
-         if(z_yug==1 && z_Var1_Be_1==0 && z_Var2_Be_0==1 && z_ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
-           {
-            // разрешение на обработку события.
-            z_Sev_1=0;
-            //Запрет для 3 направлений
-            z_Zap_1=1;
-            z_Vost_1=0;
-            z_Yug_1=0;
-         
-            //Проверка значения направления
-            z_sev=0;
-            z_zap=1;
-            z_yug=0;
-            z_vost=0;
-            z_ChekDIr=false;
-            z_BlockNum="Y 12";
-            z_errorprint[48]=1;
-			z_Var1_Be_1=2;
-			z_Var1_Bo_0=0;
-			
+            z_Var1_Be_0=2;
+            z_Var1_Bo_1=0;
             z_CheFe=1;
             if(z_CheFe==1 && z_lic==1)
               {
@@ -5455,8 +5678,44 @@ int start()
                z_lic=1;
                z_CheFe=0;
               }
-			
-           
+
+           }
+         // 12
+         if(z_yug==1 && z_Var1_Be_1==0 && z_Var2_Be_0==1 && z_ChekDIr==true)  // Смещение по регистру с Юга на .| на Север *| 6 часов
+           {
+            // разрешение на обработку события.
+            z_Sev_1=0;
+            //Запрет для 3 направлений
+            z_Zap_1=1;
+            z_Vost_1=0;
+            z_Yug_1=0;
+
+            //Проверка значения направления
+            z_sev=0;
+            z_zap=1;
+            z_yug=0;
+            z_vost=0;
+            z_ChekDIr=false;
+            z_BlockNum="Y 12";
+            z_errorprint[48]=1;
+            z_Var1_Be_1=2;
+            z_Var1_Bo_0=0;
+
+            z_CheFe=1;
+            if(z_CheFe==1 && z_lic==1)
+              {
+               z_izn=1;
+               z_lic=0;
+               z_CheFe=0;
+              }
+            if(z_CheFe==1 && z_izn==1)
+              {
+               z_izn=0;
+               z_lic=1;
+               z_CheFe=0;
+              }
+
+
            }
 
          //Проверка шаг 3
@@ -5496,9 +5755,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -5514,8 +5773,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[1]=1;//Proverka zapuska bloka
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -5533,6 +5794,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[2]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -5540,9 +5803,9 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,6]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -5559,8 +5822,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[3]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
-               if(z_Sev[1,6]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
@@ -5578,6 +5843,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[4]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// izn==1 фин
 
@@ -5587,10 +5854,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5606,10 +5873,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[5]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,1]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5625,6 +5894,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[6]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -5632,10 +5903,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,6]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5651,10 +5922,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[6]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,6]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5670,6 +5943,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[7]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
@@ -5679,10 +5954,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5698,10 +5973,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[8]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,4]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5717,6 +5994,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[9]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -5724,10 +6003,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,7]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5743,10 +6022,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[10]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,7]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5762,6 +6043,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[11]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
@@ -5771,9 +6054,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -5790,8 +6073,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[12]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -5809,6 +6094,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[13]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -5816,9 +6103,9 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,7]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -5835,8 +6122,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[14]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
-               if(z_Sev[1,7]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
@@ -5854,10 +6143,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[15]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// izn==1 фин
 
-            
+
 
 
            }// Sever фин
@@ -5871,10 +6162,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5890,10 +6181,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[32]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,4]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5909,6 +6202,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[33]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -5916,10 +6211,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,7]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5935,10 +6230,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[34]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,7]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5954,6 +6251,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[35]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
@@ -5963,9 +6262,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -5982,8 +6281,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[36]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -6001,6 +6302,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[37]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -6008,9 +6311,9 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,7]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6027,8 +6330,9 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[38]=1;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
-               if(z_Sev[1,7]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
@@ -6046,6 +6350,7 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[39]=1;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// izn==1 фин
 
@@ -6055,9 +6360,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6074,8 +6379,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[40]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -6093,6 +6400,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[41]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -6100,9 +6409,9 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,6]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6119,8 +6428,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[42]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
-               if(z_Sev[1,6]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
@@ -6138,6 +6449,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[43]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// izn==1 фин
 
@@ -6147,10 +6460,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6166,10 +6479,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[44]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,1]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6185,6 +6500,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[45]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -6192,10 +6509,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,6]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6211,10 +6528,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[46]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,6]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6230,10 +6549,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[47]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
-            
+
            }// Yug фин
          //___________________________________
          // Поведение Запад
@@ -6245,10 +6566,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6264,10 +6585,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[64]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,1]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6283,6 +6606,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[65]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -6290,9 +6615,9 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6309,8 +6634,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[66]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
@@ -6328,6 +6655,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[67]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// izn==1 фин
 
@@ -6337,10 +6666,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6356,10 +6685,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[68]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,4]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6375,6 +6706,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[69]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -6382,9 +6715,9 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6401,8 +6734,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[70]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
@@ -6420,6 +6755,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[71]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// izn==1 фин
 
@@ -6429,9 +6766,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6448,8 +6785,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[72]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -6467,6 +6806,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[73]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -6474,10 +6815,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,7]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,6]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6493,10 +6834,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[74]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
-               if(z_Sev[1,7]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,6]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6512,6 +6855,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[75]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
@@ -6521,9 +6866,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//ПРОВЕРИТъ Должно быть 1,4 Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=1;//ПРОВЕРИТъ Должно быть 1,4 Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6540,8 +6885,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[76]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -6559,6 +6906,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[77]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -6566,10 +6915,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,6]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,7]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,6]=1;//Проверить 1,7 Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,7]=1;//Проверить 1,7 Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6585,10 +6934,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[78]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
-               if(z_Sev[1,6]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
-                 { 
-                  z_Sev[1,4]=0;
+               if(z_Sev[1,7]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+                 {
+                  z_Sev[1,8]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6604,10 +6955,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[79]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
-            
+
 
 
            }// Zapad фин
@@ -6622,9 +6975,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6641,8 +6994,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[96]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -6660,6 +7015,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[97]=1;
+                  kubo_8++;
+                  Text_Kubo_8=IntegerToString(kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -6667,10 +7024,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,7]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,6]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6686,10 +7043,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[98]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
-               if(z_Sev[1,7]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,6]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6705,6 +7064,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[99]=1;
+                  kubo_6++;
+                  Text_Kubo_6=IntegerToString(kubo_6);
                  }
               }// izn==1 фин
 
@@ -6714,9 +7075,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6733,8 +7094,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[100]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -6752,6 +7115,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[101]=1;
+                  kubo_5++;
+                  Text_Kubo_5=IntegerToString(kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -6759,10 +7124,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,6]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,7]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6778,10 +7143,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[102]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
-               if(z_Sev[1,6]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,7]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6797,6 +7164,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[103]=1;
+                  kubo_7++;
+                  Text_Kubo_7=IntegerToString(kubo_7);
                  }
               }// izn==1 фин
 
@@ -6806,10 +7175,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6825,10 +7194,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[104]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,1]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6844,6 +7215,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[105]=1;
+                  kubo_2++;
+                  Text_Kubo_2=IntegerToString(kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -6851,9 +7224,9 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6870,8 +7243,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[106]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
@@ -6889,6 +7264,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[107]=1;
+                  kubo_4++;
+                  Text_Kubo_4=IntegerToString(kubo_4);
                  }
               }// izn==1 фин
 
@@ -6898,10 +7275,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6917,10 +7294,12 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[108]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,4]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6936,6 +7315,8 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[109]=1;
+                  kubo_3++;
+                  Text_Kubo_3=IntegerToString(kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -6943,9 +7324,9 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6962,8 +7343,10 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[110]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
@@ -6981,15 +7364,17 @@ int start()
                   z_Var2_Bo_1=2;
                   z_BlockPermis=false;
                   z_errorprint2[111]=1;
+                  kubo_1++;
+                  Text_Kubo_1=IntegerToString(kubo_1);
                  }
               }// izn==1 фин
 
-            
+
 
            }// Vostok фин
          //--Конец Вращение Оси Z
-         
-         
+
+
          //-----I write the received data into a Binary File for drawing data using the Histogram method
          int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
          if(file_handle15>0)
@@ -7042,7 +7427,7 @@ int start()
         }
       Print(" PR ",bodypips[MaxInd_bodypips,0]);
 
-      Comment(" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8], " PR ",bodypips[MaxInd_bodypips,0] ," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]);
+      Comment(" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8], " PR ",bodypips[MaxInd_bodypips,0]," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]);
 
       //---Были определены синапсные связи которые могут показывать на смену тенденции---//
       //---Тип 1 Bo_0/Bo_1
@@ -8533,4 +8918,3 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 
 //+------------------------------------------------------------------+
-
