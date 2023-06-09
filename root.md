@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 1.9.2.mq4 |
+//|                                             Nucleo   v 1.9.3.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -12,11 +12,11 @@
 
 
 //-----EXTERNAL VAR-----
-extern bool LongPosition=false;//Long
-extern bool ShortPosition=false;//Short
-extern bool BinIndWRITE=false;
-extern bool ALLtoARRAYWRITE=false;
-extern bool BODYHorizont=false;
+extern bool LongPosition=false;//Long   moneda
+extern bool ShortPosition=false;//Short moneda
+extern bool BinIndWRITE=false;//moneda
+extern bool ALLtoARRAYWRITE=false;//moneda
+extern bool BODYHorizont=false;//moneda
 
 //--END---EXTERNAL VAR-----
 
@@ -35,11 +35,11 @@ extern bool BODYHorizont=false;
 //#import
 //---END---Importing TELEGRAM library - Sending messages to a channel------------------------------
 
-
+//Все массивы double заполняютя по 5 знакам после запятой. Пример 99999 = 0,001€ в итоге весь массив = 1€
 //------ARRAYS-----
 double body[99999,20];//m
 //double BinaryKeys[9999,2000];
-int MaxMinArr[99999];//m
+int MaxMinArr[99999];//
 double kompa[10000];
 double kompa1[10000];
 datetime PIPS_COL_DT[99999];
@@ -76,20 +76,20 @@ double bodypips[99999,5];// Array for data analysis using the Sunflower method
 double comp_bodypips[99999];
 //---END---ARRAYS----
 //------DOUBLE VARS-----
-double normalLevel;
-double center;
-double DoublspredPoint;
-double LEVELUP;
-double LEVELDOWN;
-double PriceZero;
-double CopenRes;
-double CcloseRes;
-double Level;
-double LEVELK=1;
-double Onda1;
-double CurPips;
+double normalLevel;//moneda
+double center;//moneda
+double DoublspredPoint;//moneda
+double LEVELUP;//moneda
+double LEVELDOWN;//moneda
+double PriceZero;//moneda
+double CopenRes;//moneda
+double CcloseRes;//moneda
+double Level;//moneda
+double LEVELK=1;//moneda
+double Onda1;//moneda
+double CurPips;//moneda
 double price_Menus_one,pips_Menus_one;
-double restanteminimum;
+double restanteminimum;//moneda
 double restantemaximum;
 double Str_Pr_Bar=0;
 double Price1;
@@ -265,7 +265,14 @@ string Text_Kubo_8="0";
 // kube_6 - Bo_o_x_izn / Be_0_Z_izn
 // kube_7 - Be_1_x_izn / Bo_1_Z_izn
 // kube_8 - Bo_o_x_izn / Be_1_Z_lic
-
+string obiekt502="502";
+string obiekt503="503";
+string obiekt504="504";
+string obiekt505="505";
+string obiekt506="506";
+string obiekt507="507";
+string obiekt508="508";
+string obiekt509="509";
 
 
 extern bool Compens=true;
@@ -321,6 +328,42 @@ int Zap_1;
 //   Sev[1,8]=1; Bo_0
 
 //---
+int Andryuschenko_I;
+int Antipenko_P;
+int Buyakov_D;
+int Ryabashtan_N;
+int Krivenko_L;
+int Kopanitskyy_E;
+int Elizarova_G;
+int Cima_I;
+int Konyahina_A;
+int Parmuzina_N;
+int Matvienko_L;
+int Zhulickaya_L;
+int Pravda_Y;
+int Furina_N;
+int Zotov_V;
+int Jarkina_T;
+int Moroz_I;
+int Turasov_Y;
+int Macola_A;
+int Sarapin_Y;
+int Nasypaiko_O;
+int Prityupa_V;
+int Golovchuk_D;
+int Shpilevoy_R;
+int Vaskevich_L;
+int Yurchenko_D;
+int Vinokurov_R;
+int Taran_R;
+int Plasovenko_A;
+int Bilichenko_V;
+int Romanyuk_I;
+int Malaya_A_S;
+int Dunaeva_V_A;
+int Kamashko_V;
+int Zimuha_V;
+int Galushko_R;
 //------STRING VARS-----
 string File_Name="File.csv";
 string FR_Nm=".csv";
@@ -398,7 +441,7 @@ int init()
    ObjectSetInteger(0,obiekt501,OBJPROP_XDISTANCE,CHWPX+1450);
    ObjectSetInteger(0,obiekt501,OBJPROP_YDISTANCE,330);
 
-   string obiekt502="502";
+
    ObjectDelete(0,obiekt502);
 
    ObjectDelete(obiekt502);
@@ -409,7 +452,7 @@ int init()
    ObjectSetInteger(0,obiekt502,OBJPROP_XDISTANCE,CHWPX+1565);
    ObjectSetInteger(0,obiekt502,OBJPROP_YDISTANCE,450);
 
-   string obiekt503="503";
+
    ObjectDelete(0,obiekt503);
 
    ObjectDelete(obiekt503);
@@ -420,7 +463,7 @@ int init()
    ObjectSetInteger(0,obiekt503,OBJPROP_XDISTANCE,CHWPX+1665);
    ObjectSetInteger(0,obiekt503,OBJPROP_YDISTANCE,450);
 
-   string obiekt504="504";
+
    ObjectDelete(0,obiekt504);
 
    ObjectDelete(obiekt504);
@@ -431,7 +474,7 @@ int init()
    ObjectSetInteger(0,obiekt504,OBJPROP_XDISTANCE,CHWPX+1665);
    ObjectSetInteger(0,obiekt504,OBJPROP_YDISTANCE,540);
 
-   string obiekt505="505";
+
    ObjectDelete(0,obiekt505);
 
    ObjectDelete(obiekt505);
@@ -442,7 +485,7 @@ int init()
    ObjectSetInteger(0,obiekt505,OBJPROP_XDISTANCE,CHWPX+1565);
    ObjectSetInteger(0,obiekt505,OBJPROP_YDISTANCE,540);
 
-   string obiekt506="506";
+
    ObjectDelete(0,obiekt506);
 
    ObjectDelete(obiekt506);
@@ -453,7 +496,7 @@ int init()
    ObjectSetInteger(0,obiekt506,OBJPROP_XDISTANCE,CHWPX+1710);
    ObjectSetInteger(0,obiekt506,OBJPROP_YDISTANCE,350);
 
-   string obiekt507="507";
+
    ObjectDelete(0,obiekt507);
 
    ObjectDelete(obiekt507);
@@ -461,10 +504,10 @@ int init()
    ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
    ObjectSetInteger(0,obiekt507,OBJPROP_COLOR,clrRed);
    ObjectSetInteger(0,obiekt507,OBJPROP_FONTSIZE,9);
-   ObjectSetInteger(0,obiekt507,OBJPROP_XDISTANCE,CHWPX+1610);
+   ObjectSetInteger(0,obiekt507,OBJPROP_XDISTANCE,CHWPX+1590);
    ObjectSetInteger(0,obiekt507,OBJPROP_YDISTANCE,350);
 
-   string obiekt508="508";
+
    ObjectDelete(0,obiekt508);
 
    ObjectDelete(obiekt508);
@@ -472,10 +515,10 @@ int init()
    ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
    ObjectSetInteger(0,obiekt508,OBJPROP_COLOR,clrRed);
    ObjectSetInteger(0,obiekt508,OBJPROP_FONTSIZE,9);
-   ObjectSetInteger(0,obiekt508,OBJPROP_XDISTANCE,CHWPX+1510);
+   ObjectSetInteger(0,obiekt508,OBJPROP_XDISTANCE,CHWPX+1470);
    ObjectSetInteger(0,obiekt508,OBJPROP_YDISTANCE,520);
 
-   string obiekt509="509";
+
    ObjectDelete(0,obiekt509);
 
    ObjectDelete(obiekt509);
@@ -1381,7 +1424,7 @@ int start()
          // Присваивание значений из подсолнуха. Нужно определить в какую из 4 переменных произведено присваивание.
 
          // Исходное положение Свеча компинсации. Переустановка начений
-         if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && Maximum>0 && Minimum>0 && Rez_BE==0&& Compens==true)
+         if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && Maximum>0 && Minimum>0 && Rez_BE==0 && Compens==true)
            {
             // Установка позиции маховика на Север
             sev=1;// обработка события Север
@@ -2561,6 +2604,7 @@ int start()
          ArrayInitialize(errorprint2,0);
          //}
          //Поведение северной стороны
+         //Поведение северной стороны
          if(Sev_1==1)
            {
             //Подача значения на Лицо номер 1
@@ -2589,6 +2633,7 @@ int start()
                   errorprint2[1]=1;//Proverka zapuska bloka
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
 
                  }
                if(Sev[1,2]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
@@ -2611,6 +2656,7 @@ int start()
                   errorprint2[2]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -2618,10 +2664,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,6]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,5]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2639,11 +2685,12 @@ int start()
                   errorprint2[3]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
 
                  }
-               if(Sev[1,6]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,2]=0;
+                  Sev[1,1]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2661,6 +2708,7 @@ int start()
                   errorprint2[4]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -2692,6 +2740,7 @@ int start()
                   errorprint2[5]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
                if(Sev[1,1]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2713,6 +2762,7 @@ int start()
                   errorprint2[6]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -2720,10 +2770,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,5]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,6]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2741,10 +2791,11 @@ int start()
                   errorprint2[6]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,1]=0;
+                  Sev[1,2]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2762,6 +2813,7 @@ int start()
                   errorprint2[7]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// izn==1 фин
 
@@ -2792,6 +2844,7 @@ int start()
                   errorprint2[8]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
                if(Sev[1,4]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -2813,6 +2866,7 @@ int start()
                   errorprint2[9]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -2820,10 +2874,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,8]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,7]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2841,11 +2895,12 @@ int start()
                   errorprint2[10]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
 
                  }
-               if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,4]=0;
+                  Sev[1,3]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2863,6 +2918,7 @@ int start()
                   errorprint2[11]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// izn==1 фин
 
@@ -2893,6 +2949,7 @@ int start()
                   errorprint2[12]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
 
                  }
                if(Sev[1,3]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
@@ -2915,6 +2972,7 @@ int start()
                   errorprint2[13]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -2922,10 +2980,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,7]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,8]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2943,10 +3001,11 @@ int start()
                   errorprint2[14]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
-               if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,3]=0;
+                  Sev[1,4]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -2964,6 +3023,7 @@ int start()
                   errorprint2[15]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -3002,6 +3062,7 @@ int start()
                   errorprint2[32]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
                if(Sev[1,4]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3023,6 +3084,7 @@ int start()
                   errorprint2[33]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -3030,10 +3092,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,8]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,7]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3051,10 +3113,11 @@ int start()
                   errorprint2[34]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,4]=0;
+                  Sev[1,3]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3072,6 +3135,7 @@ int start()
                   errorprint2[35]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// izn==1 фин
 
@@ -3102,6 +3166,7 @@ int start()
                   errorprint2[36]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
                if(Sev[1,3]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3123,6 +3188,7 @@ int start()
                   errorprint2[37]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -3130,10 +3196,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,7]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,8]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3151,10 +3217,11 @@ int start()
                   errorprint2[38]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
-               if(Sev[1,7]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,3]=0;
+                  Sev[1,4]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3172,6 +3239,7 @@ int start()
                   errorprint2[39]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -3202,6 +3270,7 @@ int start()
                   errorprint2[40]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
                if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3223,6 +3292,7 @@ int start()
                   errorprint2[41]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -3230,10 +3300,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,6]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,5]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3251,10 +3321,11 @@ int start()
                   errorprint2[42]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
-               if(Sev[1,6]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,2]=0;
+                  Sev[1,1]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3272,6 +3343,7 @@ int start()
                   errorprint2[43]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -3302,6 +3374,7 @@ int start()
                   errorprint2[44]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
                if(Sev[1,1]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
@@ -3323,6 +3396,7 @@ int start()
                   errorprint2[45]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -3330,10 +3404,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,5]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,6]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3351,10 +3425,11 @@ int start()
                   errorprint2[46]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,1]=0;
+                  Sev[1,2]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3372,6 +3447,7 @@ int start()
                   errorprint2[47]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// izn==1 фин
 
@@ -3389,9 +3465,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,3]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,1]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -3410,8 +3486,9 @@ int start()
                   errorprint2[64]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
-               if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,5]=0;
                   lic=0;//Смена Стороны
@@ -3431,6 +3508,7 @@ int start()
                   errorprint2[65]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -3438,9 +3516,9 @@ int start()
                //1/1 Be_0 && Bo_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,5]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,7]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
@@ -3459,8 +3537,9 @@ int start()
                   errorprint2[66]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(Sev[1,5]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,3]=0;
                   lic=1;//Смена Стороны
@@ -3480,6 +3559,7 @@ int start()
                   errorprint2[67]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// izn==1 фин
 
@@ -3489,9 +3569,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,2]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,4]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -3510,8 +3590,9 @@ int start()
                   errorprint2[68]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
-               if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,8]=0;
                   lic=0;//Смена Стороны
@@ -3531,6 +3612,7 @@ int start()
                   errorprint2[69]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -3538,9 +3620,9 @@ int start()
                //1/1 Bo_0 && Be_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,8]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,6]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
@@ -3559,8 +3641,9 @@ int start()
                   errorprint2[70]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(Sev[1,8]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,2]=0;
                   lic=1;//Смена Стороны
@@ -3580,6 +3663,7 @@ int start()
                   errorprint2[71]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// izn==1 фин
 
@@ -3589,9 +3673,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,1]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,3]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -3610,8 +3694,9 @@ int start()
                   errorprint2[72]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
-               if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,7]=0;
                   lic=0;//Смена Стороны
@@ -3631,6 +3716,7 @@ int start()
                   errorprint2[73]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -3638,10 +3724,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,7]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,8]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3659,10 +3745,11 @@ int start()
                   errorprint2[74]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
-               if(Sev[1,7]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,8]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,1]=0;
+                  Sev[1,4]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3680,6 +3767,7 @@ int start()
                   errorprint2[75]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -3689,9 +3777,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,4]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,2]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,4]=1;//ПРОВЕРИТъ Должно быть 1,4 Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=1;//ПРОВЕРИТъ Должно быть 1,4 Смена в регистре на противоположное значение на лице
                   Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -3710,8 +3798,9 @@ int start()
                   errorprint2[76]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
-               if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,6]=0;
                   lic=0;//Смена Стороны
@@ -3731,6 +3820,7 @@ int start()
                   errorprint2[77]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -3738,10 +3828,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,6]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,5]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,6]=1;//Проверить 1,7 Смена в регистре на противоположное значение на лице
-                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,5]=1;//Проверить 1,7 Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3759,10 +3849,11 @@ int start()
                   errorprint2[78]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
-               if(Sev[1,6]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,5]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,4]=0;
+                  Sev[1,1]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3780,6 +3871,7 @@ int start()
                   errorprint2[79]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -3798,9 +3890,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,1]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,3]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -3819,8 +3911,9 @@ int start()
                   errorprint2[96]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
-               if(Sev[1,1]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,3]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,7]=0;
                   lic=0;//Смена Стороны
@@ -3840,6 +3933,7 @@ int start()
                   errorprint2[97]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_0==0 && Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -3847,10 +3941,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,7]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,8]==0 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3868,10 +3962,11 @@ int start()
                   errorprint2[98]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
-               if(Sev[1,7]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,8]==1 && Var2_Bo_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,1]=0;
+                  Sev[1,4]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3889,6 +3984,7 @@ int start()
                   errorprint2[99]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -3898,9 +3994,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,4]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,2]==0 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -3919,8 +4015,9 @@ int start()
                   errorprint2[100]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
-               if(Sev[1,4]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,2]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,6]=0;
                   lic=0;//Смена Стороны
@@ -3940,6 +4037,7 @@ int start()
                   errorprint2[101]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_0==0 && Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -3947,10 +4045,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,6]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,5]==0 && Var2_Be_0==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3968,10 +4066,11 @@ int start()
                   errorprint2[102]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
-               if(Sev[1,6]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,5]==1 && Var2_Be_0==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,4]=0;
+                  Sev[1,1]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -3989,6 +4088,7 @@ int start()
                   errorprint2[103]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -3998,9 +4098,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,3]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,1]==0 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -4019,8 +4119,9 @@ int start()
                   errorprint2[104]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
-               if(Sev[1,3]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,1]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,5]=0;
                   lic=0;//Смена Стороны
@@ -4040,6 +4141,7 @@ int start()
                   errorprint2[105]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Be_1==0 && Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -4047,10 +4149,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,5]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,6]==0 && Var2_Bo_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -4068,10 +4170,11 @@ int start()
                   errorprint2[106]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(Sev[1,5]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,2]==1 && Var2_Bo_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,3]=0;
+                  Sev[1,2]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -4089,6 +4192,7 @@ int start()
                   errorprint2[107]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// izn==1 фин
 
@@ -4098,9 +4202,9 @@ int start()
               {
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,2]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,4]==0 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
                   Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=0;//Смена Стороны
                   izn=1;//Смена Стороны
@@ -4119,8 +4223,9 @@ int start()
                   errorprint2[108]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
-               if(Sev[1,2]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,4]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   Sev[1,8]=0;
                   lic=0;//Смена Стороны
@@ -4140,6 +4245,7 @@ int start()
                   errorprint2[109]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(izn==1 && Var1_Bo_1==0 && Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -4147,10 +4253,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(Sev[1,8]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(Sev[1,7]==0 && Var2_Be_1==1 && BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
-                  Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -4168,10 +4274,11 @@ int start()
                   errorprint2[110]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(Sev[1,8]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(Sev[1,7]==1 && Var2_Be_1==1 && BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  Sev[1,2]=0;
+                  Sev[1,3]=0;
                   lic=1;//Смена Стороны
                   izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -4189,12 +4296,10 @@ int start()
                   errorprint2[111]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// izn==1 фин
-
-
-
-           }// Vostok фин
+			  }// Vostok фин
          //Праверка шаг 4
          string face;
          if(lic==1)
@@ -4585,7 +4690,7 @@ int start()
             z_sev=0;
             z_zap=1;
             z_yug=0;
-            z_vost=1;
+            z_vost=0;
             z_ChekDIr=false;
             z_BlockNum="S 10";
             z_errorprint[10]=1;
@@ -5755,9 +5860,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -5775,8 +5880,9 @@ int start()
                   z_errorprint2[1]=1;//Proverka zapuska bloka
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -5796,6 +5902,7 @@ int start()
                   z_errorprint2[2]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -5803,10 +5910,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5824,10 +5931,11 @@ int start()
                   z_errorprint2[3]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=0;
+                  z_Sev[1,1]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5845,6 +5953,7 @@ int start()
                   z_errorprint2[4]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// izn==1 фин
 
@@ -5854,10 +5963,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5875,10 +5984,11 @@ int start()
                   z_errorprint2[5]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5896,6 +6006,7 @@ int start()
                   z_errorprint2[6]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -5906,7 +6017,7 @@ int start()
                if(z_Sev[1,6]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5924,10 +6035,11 @@ int start()
                   z_errorprint2[6]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
                if(z_Sev[1,6]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5945,6 +6057,7 @@ int start()
                   z_errorprint2[7]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -5954,10 +6067,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5975,10 +6088,11 @@ int start()
                   z_errorprint2[8]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -5996,6 +6110,7 @@ int start()
                   z_errorprint2[9]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -6006,7 +6121,7 @@ int start()
                if(z_Sev[1,7]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6024,10 +6139,11 @@ int start()
                   z_errorprint2[10]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
                if(z_Sev[1,7]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6045,6 +6161,7 @@ int start()
                   z_errorprint2[11]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -6054,9 +6171,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6075,8 +6192,9 @@ int start()
                   z_errorprint2[12]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -6096,6 +6214,7 @@ int start()
                   z_errorprint2[13]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -6103,10 +6222,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6124,10 +6243,11 @@ int start()
                   z_errorprint2[14]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=0;
+                  z_Sev[1,4]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6145,6 +6265,7 @@ int start()
                   z_errorprint2[15]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// izn==1 фин
 
@@ -6162,10 +6283,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6183,10 +6304,11 @@ int start()
                   z_errorprint2[32]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6204,6 +6326,7 @@ int start()
                   z_errorprint2[33]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -6214,7 +6337,7 @@ int start()
                if(z_Sev[1,7]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6232,10 +6355,11 @@ int start()
                   z_errorprint2[34]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
                if(z_Sev[1,7]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6253,6 +6377,7 @@ int start()
                   z_errorprint2[35]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -6262,9 +6387,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6283,8 +6408,9 @@ int start()
                   z_errorprint2[36]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -6304,6 +6430,7 @@ int start()
                   z_errorprint2[37]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -6311,10 +6438,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6331,10 +6458,11 @@ int start()
                   z_BlockPermis=false;
                   z_errorprint2[38]=1;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=0;
+                  z_Sev[1,4]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6351,6 +6479,7 @@ int start()
                   z_BlockPermis=false;
                   z_errorprint2[39]=1;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// izn==1 фин
 
@@ -6360,9 +6489,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6381,8 +6510,9 @@ int start()
                   z_errorprint2[40]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -6402,6 +6532,7 @@ int start()
                   z_errorprint2[41]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -6409,10 +6540,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6430,10 +6561,11 @@ int start()
                   z_errorprint2[42]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=0;
+                  z_Sev[1,1]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6451,6 +6583,7 @@ int start()
                   z_errorprint2[43]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// izn==1 фин
 
@@ -6460,10 +6593,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6481,10 +6614,11 @@ int start()
                   z_errorprint2[44]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6502,6 +6636,7 @@ int start()
                   z_errorprint2[45]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -6512,7 +6647,7 @@ int start()
                if(z_Sev[1,6]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6530,10 +6665,11 @@ int start()
                   z_errorprint2[46]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
                if(z_Sev[1,6]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6551,6 +6687,7 @@ int start()
                   z_errorprint2[47]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -6566,10 +6703,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6587,10 +6724,11 @@ int start()
                   z_errorprint2[64]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6608,6 +6746,7 @@ int start()
                   z_errorprint2[65]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -6615,9 +6754,9 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,7]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6636,8 +6775,9 @@ int start()
                   z_errorprint2[66]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,7]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
@@ -6657,6 +6797,7 @@ int start()
                   z_errorprint2[67]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// izn==1 фин
 
@@ -6666,10 +6807,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6687,10 +6828,11 @@ int start()
                   z_errorprint2[68]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6708,6 +6850,7 @@ int start()
                   z_errorprint2[69]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -6715,9 +6858,9 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,6]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
@@ -6736,8 +6879,9 @@ int start()
                   z_errorprint2[70]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,6]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
@@ -6757,6 +6901,7 @@ int start()
                   z_errorprint2[71]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// izn==1 фин
 
@@ -6766,9 +6911,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6787,8 +6932,9 @@ int start()
                   z_errorprint2[72]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -6808,6 +6954,7 @@ int start()
                   z_errorprint2[73]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -6815,10 +6962,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,6]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6836,10 +6983,11 @@ int start()
                   z_errorprint2[74]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
-               if(z_Sev[1,6]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,4]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6857,6 +7005,7 @@ int start()
                   z_errorprint2[75]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -6866,9 +7015,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//ПРОВЕРИТъ Должно быть 1,4 Смена в регистре на противоположное значение на лице
+                  z_Sev[1,2]=1;//ПРОВЕРИТъ Должно быть 1,4 Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6887,8 +7036,9 @@ int start()
                   z_errorprint2[76]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -6908,6 +7058,7 @@ int start()
                   z_errorprint2[77]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -6915,10 +7066,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,7]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,7]=1;//Проверить 1,7 Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,5]=1;//Проверить 1,7 Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6936,10 +7087,11 @@ int start()
                   z_errorprint2[78]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
-               if(z_Sev[1,7]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,1]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -6957,6 +7109,7 @@ int start()
                   z_errorprint2[79]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -6975,9 +7128,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,8]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,3]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,7]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -6996,8 +7149,9 @@ int start()
                   z_errorprint2[96]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
-               if(z_Sev[1,8]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,3]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,7]=0;
                   z_lic=0;//Смена Стороны
@@ -7017,6 +7171,7 @@ int start()
                   z_errorprint2[97]=1;
                   kubo_8++;
                   Text_Kubo_8=IntegerToString(kubo_8);
+                  ObjectSetString(0,obiekt509,OBJPROP_TEXT,Text_Kubo_8);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_0==0 && z_Var2_Bo_0==1) //Праверка регистра Bo_0 Изнанки
@@ -7024,10 +7179,10 @@ int start()
                //1/1 Be_0 && Bo_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,6]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,8]==0 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,8]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7045,10 +7200,11 @@ int start()
                   z_errorprint2[98]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
-               if(z_Sev[1,6]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,8]==1 && z_Var2_Bo_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=0;
+                  z_Sev[1,4]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7066,6 +7222,7 @@ int start()
                   z_errorprint2[99]=1;
                   kubo_6++;
                   Text_Kubo_6=IntegerToString(kubo_6);
+                  ObjectSetString(0,obiekt507,OBJPROP_TEXT,Text_Kubo_6);
                  }
               }// izn==1 фин
 
@@ -7075,9 +7232,9 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,5]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,2]==0 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
                   z_Sev[1,6]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
@@ -7096,8 +7253,9 @@ int start()
                   z_errorprint2[100]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
-               if(z_Sev[1,5]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,2]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
                   z_Sev[1,6]=0;
                   z_lic=0;//Смена Стороны
@@ -7117,6 +7275,7 @@ int start()
                   z_errorprint2[101]=1;
                   kubo_5++;
                   Text_Kubo_5=IntegerToString(kubo_5);
+                  ObjectSetString(0,obiekt506,OBJPROP_TEXT,Text_Kubo_5);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_0==0 && z_Var2_Be_0==1) //Праверка регистра Be_0 Изнанки
@@ -7124,10 +7283,10 @@ int start()
                //1/1 Bo_0 && Be_0
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,7]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,5]==0 && z_Var2_Be_0==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,5]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7145,10 +7304,11 @@ int start()
                   z_errorprint2[102]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
-               if(z_Sev[1,7]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,5]==1 && z_Var2_Be_0==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,8]=0;
+                  z_Sev[1,1]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7166,6 +7326,7 @@ int start()
                   z_errorprint2[103]=1;
                   kubo_7++;
                   Text_Kubo_7=IntegerToString(kubo_7);
+                  ObjectSetString(0,obiekt508,OBJPROP_TEXT,Text_Kubo_7);
                  }
               }// izn==1 фин
 
@@ -7175,10 +7336,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,2]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,1]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,1]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,5]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7196,10 +7357,11 @@ int start()
                   z_errorprint2[104]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
-               if(z_Sev[1,2]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,1]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=0;
+                  z_Sev[1,5]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7217,6 +7379,7 @@ int start()
                   z_errorprint2[105]=1;
                   kubo_2++;
                   Text_Kubo_2=IntegerToString(kubo_2);
+                  ObjectSetString(0,obiekt503,OBJPROP_TEXT,Text_Kubo_2);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Be_1==0 && z_Var2_Bo_1==1) //Праверка регистра Bo_1 Изнанки
@@ -7224,10 +7387,10 @@ int start()
                //1/1 Be_1 && Bo_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,4]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,6]==0 && z_Var2_Bo_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,6]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7245,10 +7408,11 @@ int start()
                   z_errorprint2[106]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
-               if(z_Sev[1,4]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,6]==1 && z_Var2_Bo_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=0;
+                  z_Sev[1,2]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7266,6 +7430,7 @@ int start()
                   z_errorprint2[107]=1;
                   kubo_4++;
                   Text_Kubo_4=IntegerToString(kubo_4);
+                  ObjectSetString(0,obiekt505,OBJPROP_TEXT,Text_Kubo_4);
                  }
               }// izn==1 фин
 
@@ -7275,10 +7440,10 @@ int start()
               {
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,3]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,4]==0 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,3]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,4]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,4]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,8]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7296,10 +7461,11 @@ int start()
                   z_errorprint2[108]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
-               if(z_Sev[1,3]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,4]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,4]=0;
+                  z_Sev[1,8]=0;
                   z_lic=0;//Смена Стороны
                   z_izn=1;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7317,6 +7483,7 @@ int start()
                   z_errorprint2[109]=1;
                   kubo_3++;
                   Text_Kubo_3=IntegerToString(kubo_3);
+                  ObjectSetString(0,obiekt504,OBJPROP_TEXT,Text_Kubo_3);
                  }
               }// lic==1 фин
             if(z_izn==1 && z_Var1_Bo_1==0 && z_Var2_Be_1==1) //Праверка регистра Be_1 Изнанки
@@ -7324,10 +7491,10 @@ int start()
                //1/1 Bo_1 && Be_1
                bool z_BlockPermis=true;
                // Сравнение состояния 2 регистров лица и изнанки по поданному значению
-               if(z_Sev[1,1]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
+               if(z_Sev[1,7]==0 && z_Var2_Be_1==1 && z_BlockPermis==true)// Смена в регистре на противоположное значение и Смена Лица на Изнанку
                  {
-                  z_Sev[1,1]=1;//Смена в регистре на противоположное значение на лице
-                  z_Sev[1,2]=0;//Смена в регистре на противоположное значение на изнанке
+                  z_Sev[1,7]=1;//Смена в регистре на противоположное значение на лице
+                  z_Sev[1,3]=0;//Смена в регистре на противоположное значение на изнанке
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7345,10 +7512,11 @@ int start()
                   z_errorprint2[110]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
-               if(z_Sev[1,1]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
+               if(z_Sev[1,7]==1 && z_Var2_Be_1==1 && z_BlockPermis==true) // Смена в регистре не производитсяи Смена Лица на Изнанку
                  {
-                  z_Sev[1,2]=0;
+                  z_Sev[1,3]=0;
                   z_lic=1;//Смена Стороны
                   z_izn=0;//Смена Стороны
                   //Перераспределение разрешений переменных
@@ -7366,6 +7534,7 @@ int start()
                   z_errorprint2[111]=1;
                   kubo_1++;
                   Text_Kubo_1=IntegerToString(kubo_1);
+                  ObjectSetString(0,obiekt502,OBJPROP_TEXT,Text_Kubo_1);
                  }
               }// izn==1 фин
 
@@ -7376,26 +7545,26 @@ int start()
 
 
          //-----I write the received data into a Binary File for drawing data using the Histogram method
-         int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
-         if(file_handle15>0)
-           {
+         //-----int file_handle15=FileOpen(FileName15,FILE_READ|FILE_WRITE|FILE_BIN);
+         //-----if(file_handle15>0)
+         //----- {
 
-            FileSeek(file_handle15,0,SEEK_CUR);
+         //-----  FileSeek(file_handle15,0,SEEK_CUR);
 
-            FileWriteArray(file_handle15,PIPS_COL_DT,0,WHOLE_ARRAY);
-            FileClose(file_handle15);
+         //-----  FileWriteArray(file_handle15,PIPS_COL_DT,0,WHOLE_ARRAY);
+         //----- FileClose(file_handle15);
 
-           }
-         int file_handle16=FileOpen(FileName16,FILE_READ|FILE_WRITE|FILE_BIN);
-         if(file_handle16>0)
-           {
+         //----- }
+         //-----int file_handle16=FileOpen(FileName16,FILE_READ|FILE_WRITE|FILE_BIN);
+         //-----if(file_handle16>0)
+         //-----  {
 
-            FileSeek(file_handle16,0,SEEK_CUR);
+         //-----  FileSeek(file_handle16,0,SEEK_CUR);
 
-            FileWriteArray(file_handle16,PIPS_COL_Price,0,WHOLE_ARRAY);
-            FileClose(file_handle16);
+         //-----  FileWriteArray(file_handle16,PIPS_COL_Price,0,WHOLE_ARRAY);
+         //-----  FileClose(file_handle16);
 
-           }
+         //----- }
 
          // ------ Printing Collected Values ​​to File ------
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one && (bodypips[MaxInd_bodypips,0]>price_plus ||bodypips[MaxInd_bodypips,0]<price_plus))
@@ -7406,7 +7575,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",Bo," Dir ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," Var1Wr ",Var1Wr," B 3 ",Bo," Dir ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -7419,7 +7588,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",Be,/*"Face",face,*//*" Dir ",napravlenie,/*" BlockNum ",BlockNum,*/" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1)," Var1Wr ",Var1Wr," B 3 ",Be,/*"Face",face,*/" Dir ",napravlenie,/*" BlockNum ",BlockNum,*/" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -8883,6 +9052,592 @@ void Bars_Z(double iBid)
 
 
   }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void paralell_1_4(int paralell)//ункция паралель. Возвращает текущее значение паралели хода цены
+  {
+   if(Rez_BE==36)//Проводим вычисления с 15 паралелями.Каждая паралель это одноклассник.
+     {
+      //При первом сигнале происходит присваивание первой паралели по часавой стрелке.
+      // Бинарб=ный код не фиксирует исходное значение семечки при спуске и подьёме цены
+      if(Andryuschenko_I==0)
+        {
+         Andryuschenko_I=1;
+         paralell=1;
+        }
+      if(Andryuschenko_I==1)//
+        {
+         // Складываем 0 и 1 и опеределяем равенство или не равенство
+         int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+         int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+         int SumBalance=BalansLic+BalansIzn;
+         if(SumBalance!=4)//Выявить в какую сторону сдвиг на Лицо или Изнанку.осможно нужно сравнивать с предыдущим значением
+           {
+
+            if(BalansLic==1 && BalansIzn==4)//Баланс 4+
+              {
+               paralell--;//Если предыдущее значение было в балансе то добавилась 1 в лицо а значит сдвиг в центр
+
+              }
+            if(BalansLic==2 && BalansIzn==4)//Баланс 4+
+              {
+               paralell=paralell-2;//Если предыдущее значение было в балансе то добавилась 2 в лицо а значит сдвиг в центр
+
+              }
+
+
+            if(BalansLic==3 && BalansIzn==4)//Баланс 4+
+              {
+               paralell=paralell-3;//Если предыдущее значение было в балансе то добавилась 3 в лицо а значит сдвиг в центр
+
+              }
+            if(BalansLic==4 && BalansIzn==4)//Баланс 4+
+              {
+               paralell=paralell-4;//Если предыдущее значение было в балансе то добавилась 4 в лицо а значит сдвиг в центр
+
+              }
+            if(paralell==0)
+              {
+               paralell=36;
+              }
+            if(paralell<0)
+              {
+               paralell=36-paralell;//Проверить значение
+              }
+            //Изнаночное значение
+            if(BalansLic==4 && BalansIzn==1)//Баланс 4-
+              {
+               paralell++;//Если предыдущее значение было в балансе то добавилась 1 в изнанку а значит сдвиг в центр в результате минусуется по паралели
+
+              }
+            if(BalansLic==4 && BalansIzn==2)//Баланс 4-
+              {
+               paralell=paralell+2;//Если предыдущее значение было в балансе то добавилась 2 в изнанку а значит сдвиг в центр в результате минусуется по паралели
+
+              }
+            if(BalansLic==4 && BalansIzn==3)//Баланс 4-
+              {
+               paralell=paralell+3;//Если предыдущее значение было в балансе то добавилась 3 в изнанку а значит сдвиг в центр в результате минусуется по паралели
+
+              }
+            if(BalansLic==4 && BalansIzn==4)//Баланс 4-
+              {
+               paralell=paralell+4;//Если предыдущее значение было в балансе то добавилась 4 в изнанку а значит сдвиг в центр в результате минусуется по паралели
+
+              }
+
+           }
+         //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+         //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+
+         if(paralell!=1)
+           {
+            Andryuschenko_I=0;
+           }
+        }
+
+
+      if(paralell==2)
+        {
+         Antipenko_P=1;
+         if(Antipenko_P==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==3)
+        {
+         Buyakov_D=1;
+         if(Buyakov_D==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==4)
+        {
+         Ryabashtan_N=1;
+         if(Ryabashtan_N==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==5)
+        {
+         Krivenko_L=1;
+         if(Krivenko_L==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==6)
+        {
+         Kopanitskyy_E=1;
+         if(Kopanitskyy_E==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==7)
+        {
+         Elizarova_G=1;
+         if(Elizarova_G==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==8)
+        {
+         Cima_I=1;
+         if(Cima_I==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==9)
+        {
+         Konyahina_A=1;
+         if(Konyahina_A==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==10)
+        {
+         Parmuzina_N=1;
+         if(Parmuzina_N==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==11)
+        {
+         Matvienko_L=1;
+         if(Matvienko_L==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==12)
+        {
+         Zhulickaya_L=1;
+         if(Zhulickaya_L==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==13)
+        {
+         Pravda_Y=1;
+         if(Pravda_Y==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==14)
+        {
+         Furina_N=1;
+         if(Furina_N==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==15)
+        {
+         Zotov_V=1;
+         if(Zotov_V==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==16)
+        {
+         Jarkina_T=1;
+         if(Jarkina_T==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==17)
+        {
+         Moroz_I=1;
+         if(Moroz_I==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==18)
+        {
+         Turasov_Y=1;
+         if(Turasov_Y==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==19)
+        {
+         Macola_A=1;
+         if(Macola_A==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==20)
+        {
+         Sarapin_Y=1;
+         if(Sarapin_Y==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==21)
+        {
+         Nasypaiko_O=1;
+         if(Nasypaiko_O==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==22)
+        {
+         Prityupa_V=1;
+         if(Prityupa_V==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==23)
+        {
+         Golovchuk_D=1;
+         if(Golovchuk_D==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==24)
+        {
+         Shpilevoy_R=1;
+         if(Shpilevoy_R==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==25)
+        {
+         Vaskevich_L=1;
+         if(Vaskevich_L==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==26)
+        {
+         Yurchenko_D=1;
+         if(Yurchenko_D==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==27)
+        {
+         Vinokurov_R=1;
+         if(Vinokurov_R==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==28)
+        {
+         Taran_R=1;
+         if(Taran_R==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==29)
+        {
+         Plasovenko_A=1;
+         if(Plasovenko_A==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==30)
+        {
+         Bilichenko_V=1;
+         if(Bilichenko_V==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==31)
+        {
+         Romanyuk_I=1;
+         if(Romanyuk_I==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==32)
+        {
+         Malaya_A_S=1;
+         if(Malaya_A_S==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==33)
+        {
+         Dunaeva_V_A=1;
+         if(Dunaeva_V_A==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==34)
+        {
+         Kamashko_V=1;
+         if(Kamashko_V==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==35)
+        {
+         Zimuha_V=1;
+         if(Zimuha_V==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+      if(paralell==36)
+        {
+         Galushko_R=1;
+         if(Galushko_R==1)//
+           {
+            // Складываем 0 и 1 и опеределяем равенство или не равенство
+            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
+            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
+            int SumBalance=BalansLic+BalansIzn;
+            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
+            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
+           }
+
+        }
+
+
+     }
+  }
+
+
+
+
+
 //+------------------------------------------------------------------+
 //| Expert deinitialization function                                 |
 //+------------------------------------------------------------------+
