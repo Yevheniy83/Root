@@ -1,13 +1,13 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.0.0.mq4 |
+//|                                             Nucleo   v 2.1.0.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
 
 #property copyright "Yevheniy Kopanitskyy"
 #property link      "https://www.mql5.com/en/users/eugeniokp"
-#property version   "2.0"
+#property version   "2.1"
 #property strict
 
 
@@ -173,7 +173,7 @@ int Rez_BE,one_BE;
 //---Переменные индикатора Маховик Времени
 double comp_Sev[9,9];//Массив для сравнения после пересчёта
 double Form_Patern_Finder[1001,120];//Массив для отслеживания формации Патернов на купольной архитектуре
-datetime DT_Form_Patern_Finder[1001,20];//Массив для отслеживания времени формации Патернов на купольной архитектуре
+datetime DT_Form_Patern_Finder[1001,120];//Массив для отслеживания времени формации Патернов на купольной архитектуре
 int PipsNumber; //1,2,3,4,5
 int N_Centro_r;
 //Часы 1
@@ -9556,13 +9556,7 @@ int start()
               }
 
            }
-         //Print("PriceExist ",PriceExist);//ok
-         //Print("w ",w);//ok
-         //Print("Price ",bodypips[MaxInd_bodypips,0]);
-         // Конец функции .Произвести расчёт с InternalPat_1==2 InternalPat_1==3 InternalPat_1==4 InternalPat_1==5 InternalPat_1==6 InternalPat_1==7 InternalPat_1==8
 
-         // ----- Ески нет цены в массиве для просмотра
-         // Print("PriceExist ",PriceExist," InternalPat_1",InternalPat_1);
          int WriteData=1;
          for(int z=1; z<1000; z++)
            {
@@ -9577,15 +9571,25 @@ int start()
 
          if(PriceExist==0 &&  InternalPat_1==1 && WriteData==1)  //Еси нет цены в массиве для просмотра
            {
+            // int WRinLine=0;
             int t;
             for(t=1; t<1000; t++)
               {
-               if(Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0)//Последнее пустое место в массиве
+               if(Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/) //Последнее пустое место в массиве
                  {
-
+                  //  WRinLine=1;
                   break;
                  }
               }
+
+            // for(t=1; t<1000; t++)
+            // {
+            // if(WRinLine=0 && Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0)  //Последнее пустое место в массиве
+            //  {
+
+            //   break;
+            //  }
+            // }
             //Зацикливание процеса на остановке записывания в Массив данных
             //int BlockPermis1=0;
             // if(w==1000 && Form_Patern_Finder[t,1]>0)
@@ -9600,50 +9604,572 @@ int start()
             //ok Print(" Form_Patern_Finder[t,1] ", Form_Patern_Finder[t,1]);
             //ok Print(" N_Centro ",N_Centro_r);
             //Print("t ",t);
-            
-               if(N_Centro_r==1)
-                 {
-                  // Print("N_Centro_r ",N_Centro_r);
-                  Form_Patern_Finder[t,5]=1;
-                  Form_Patern_Finder[t,1]=bodypips[MaxInd_bodypips,0];
-                  DT_Form_Patern_Finder[t,1]=iTime(Symbol(),PERIOD_M1,1);
-                  //Print(" Form_Patern_Finder[t,1] " ,Form_Patern_Finder[t,1]);
-                  //ok Print(" Form_Patern_Finder[t,2] ", Form_Patern_Finder[t,2]);
-                 }
-               if(N_Centro_r==2)
-                 {
-                  //Print("N_Centro_r ",N_Centro_r);
-                  Form_Patern_Finder[t,6]=1;
-                  Form_Patern_Finder[t,2]=bodypips[MaxInd_bodypips,0];
-                  DT_Form_Patern_Finder[t,2]=iTime(Symbol(),PERIOD_M1,1);
-                  //Print("Form_Patern_Finder[t,2] ",Form_Patern_Finder[t,2]);
-                  //ok Print(" Form_Patern_Finder[t,3] ", Form_Patern_Finder[t,2]);
-                 }
-               if(N_Centro_r==3)
-                 {
-                  //Print("N_Centro_r ",N_Centro_r);
-                  Form_Patern_Finder[t,7]=1;
-                  Form_Patern_Finder[t,3]=bodypips[MaxInd_bodypips,0];
-                  DT_Form_Patern_Finder[t,3]=iTime(Symbol(),PERIOD_M1,1);
-                  //Print("Form_Patern_Finder[t,3] ",Form_Patern_Finder[t,3]);
-                  //ok Print(" Form_Patern_Finder[t,4] ", Form_Patern_Finder[t,4]);
-                 }
-               if(N_Centro_r==4)
-                 {
-                  //Print("N_Centro_r ",N_Centro_r);
-                  Form_Patern_Finder[t,8]=1;
-                  Form_Patern_Finder[t,4]=bodypips[MaxInd_bodypips,0];
-                  DT_Form_Patern_Finder[t,4]=iTime(Symbol(),PERIOD_M1,1);
-                  // Print("Form_Patern_Finder[t,4] ",Form_Patern_Finder[t,4]);
-                  //ok Print(" Form_Patern_Finder[t,5] ", Form_Patern_Finder[t,5]);
-                 }
-               Form_Patern_Finder[t,12]=PipsNumber;//Номер Семечки . имеет значение от 1 до 5
-               Form_Patern_Finder[t,13]=N_Gr20;//Номер блока ценавой 20-ки
-               Form_Patern_Finder[t,14]=N_Centro;//Номер центра архитектуры
-               //Произвести запись массива в Бинарнйы фаил.Фаил загружается в массив при запуске программы
-              
+
+            if(N_Centro_r==1)
+              {
+               // Print("N_Centro_r ",N_Centro_r);
+               Form_Patern_Finder[t,5]=1;
+               Form_Patern_Finder[t,1]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t,1]=iTime(Symbol(),PERIOD_M1,1);
+               //Print(" Form_Patern_Finder[t,1] " ,Form_Patern_Finder[t,1]);
+               //ok Print(" Form_Patern_Finder[t,2] ", Form_Patern_Finder[t,2]);
+              }
+            if(N_Centro_r==2)
+              {
+               //Print("N_Centro_r ",N_Centro_r);
+               Form_Patern_Finder[t,6]=1;
+               Form_Patern_Finder[t,2]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t,2]=iTime(Symbol(),PERIOD_M1,1);
+               //Print("Form_Patern_Finder[t,2] ",Form_Patern_Finder[t,2]);
+               //ok Print(" Form_Patern_Finder[t,3] ", Form_Patern_Finder[t,2]);
+              }
+            if(N_Centro_r==3)
+              {
+               //Print("N_Centro_r ",N_Centro_r);
+               Form_Patern_Finder[t,7]=1;
+               Form_Patern_Finder[t,3]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t,3]=iTime(Symbol(),PERIOD_M1,1);
+               //Print("Form_Patern_Finder[t,3] ",Form_Patern_Finder[t,3]);
+               //ok Print(" Form_Patern_Finder[t,4] ", Form_Patern_Finder[t,4]);
+              }
+            if(N_Centro_r==4)
+              {
+               //Print("N_Centro_r ",N_Centro_r);
+               Form_Patern_Finder[t,8]=1;
+               Form_Patern_Finder[t,4]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t,4]=iTime(Symbol(),PERIOD_M1,1);
+               // Print("Form_Patern_Finder[t,4] ",Form_Patern_Finder[t,4]);
+               //ok Print(" Form_Patern_Finder[t,5] ", Form_Patern_Finder[t,5]);
+              }
+            Form_Patern_Finder[t,12]=PipsNumber;//Номер Семечки . имеет значение от 1 до 5
+            Form_Patern_Finder[t,13]=N_Gr20;//Номер блока ценавой 20-ки
+            Form_Patern_Finder[t,14]=N_Centro;//Номер центра архитектуры
+            //Произвести запись массива в Бинарнйы фаил.Фаил загружается в массив при запуске программы
+
            }
-         //Print(" R2 "," Per_Sev1 ",Per_Sev1," Per_Sev2 ",Per_Sev2," Per_Sev3 ",Per_Sev3," Per_Sev4 ",Per_Sev4," N_Centro_r ",N_Centro_r," Bo_0_C ",Bo_0_C," Be_0_C ",Be_0_C," Be_1_C ",Be_1_C," Bo_1_C ",Bo_1_C," InternalPat_1 ",InternalPat_1," Form_Patern_Finder[w3,19] ",Form_Patern_Finder[w3,19]);
+         //BO_0
+         int newPrise1=0;
+         int PriceExist1=0;
+
+
+         for(w1=1; w1<1000; w1++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+           {
+            if((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,16]!=0 || Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,17]!=0 || Form_Patern_Finder[w1,18]==bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,18]!=0|| Form_Patern_Finder[w1,19]==bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,19]!=0)/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)//Поиск цены . Возвращает индекс в массиве
+              {
+
+               PriceExist1=1;
+               if(PriceExist==1/*"Указывает на найденную цену Функцией выше"*/ && InternalPat_1==2/*"Указывает на соеденение в ячейке цены и абьёма"*/ && Form_Patern_Finder[w,26]!=1)//Если цена существует и w не равен 0 и Патерн не был собран. Если w равен налю произвести новую запись то доступ в функцию открыт
+                 {
+
+                  int Change1_1=0,Change2_1=0,Change3_1=0,Change4_1=0;
+                  if(Form_Patern_Finder[w1,20]==0 && N_Centro_r==1 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w1,20]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w1,16]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w1,16]=iTime(Symbol(),PERIOD_M1,1);
+                     Change1_1=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w1,20]==1 && Form_Patern_Finder[w1,21]==1 && Form_Patern_Finder[w1,22]==1 && Form_Patern_Finder[w1,23]==1)
+                       {
+                        Form_Patern_Finder[w1,26]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 2 Красный
+
+                  if(Form_Patern_Finder[w1,21]==0 && N_Centro_r==2 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w1,21]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w1,17]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w1,17]=iTime(Symbol(),PERIOD_M1,1);
+                     Change2_1=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w1,20]==1 && Form_Patern_Finder[w1,21]==1 && Form_Patern_Finder[w1,22]==1 && Form_Patern_Finder[w1,23]==1)
+                       {
+                        Form_Patern_Finder[w1,26]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 3 Зелёный
+
+                  if(Form_Patern_Finder[w1,22]==0 && N_Centro_r==3 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w1,22]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w1,18]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w1,18]=iTime(Symbol(),PERIOD_M1,1);
+                     Change3_1=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w1,20]==1 && Form_Patern_Finder[w1,21]==1 && Form_Patern_Finder[w1,22]==1 && Form_Patern_Finder[w1,23]==1)
+                       {
+                        Form_Patern_Finder[w1,26]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 4 Синий
+
+                  if(Form_Patern_Finder[w1,23]==0 && N_Centro_r==4 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w1,23]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w1,19]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w1,19]=iTime(Symbol(),PERIOD_M1,1);
+                     Change4_1=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w1,20]==1 && Form_Patern_Finder[w1,21]==1 && Form_Patern_Finder[w1,22]==1 && Form_Patern_Finder[w1,23]==1)
+                       {
+                        Form_Patern_Finder[w1,26]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+
+                  if(Change1_1==0 && Change2_1==0 && Change3_1==0 && Change4_1==0)//Если изменения не произошли в 4 блоках то занести новую цену
+                    {
+                     PriceExist1=0;//Смена разрешения на занесение новой цены
+
+                    }
+                 }
+
+
+               // break;
+
+              }
+
+           }
+
+
+         // ----- Ески нет цены в массиве для просмотра
+
+         int WriteData1=1;
+         for(int z1=1; z1<1000; z1++)
+           {
+            if(PriceExist1==0 && (Form_Patern_Finder[z1,16]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z1,17]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,18]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,19]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+              {
+               WriteData1=0;
+               break;
+              }
+
+           }
+
+
+         if(PriceExist1==0 &&  InternalPat_1==2 && WriteData1==1)  //Еси нет цены в массиве для просмотра
+           {
+            //int WRinLine1=0;
+            int t1;
+            for(t1=1; t1<1000; t1++)
+              {
+               if(Form_Patern_Finder[t1,16]==0 && Form_Patern_Finder[t1,17]==0 && Form_Patern_Finder[t1,18]==0 && Form_Patern_Finder[t1,19]==0 /*&& (Form_Patern_Finder[t1,12]==PipsNumber && Form_Patern_Finder[t1,13]==N_Gr20 ||Form_Patern_Finder[t1,27]==PipsNumber && Form_Patern_Finder[t1,28]==N_Gr20 || Form_Patern_Finder[t1,42]==PipsNumber && Form_Patern_Finder[t1,43]==N_Gr20 || Form_Patern_Finder[t1,57]==PipsNumber && Form_Patern_Finder[t1,58]==N_Gr20)*/)   //Последнее пустое место в массиве
+                 {
+                  // WRinLine1=1;
+                  break;
+                 }
+              }
+            //for(t1=1; t1<1000; t1++)
+            //  {
+            // if(WRinLine1=0 && Form_Patern_Finder[t1,17]==0 && Form_Patern_Finder[t1,18]==0 && Form_Patern_Finder[t1,19]==0 && Form_Patern_Finder[t1,20]==0)  //Последнее пустое место в массиве
+            // {
+
+            //  break;
+            // }
+            //  }
+
+
+            if(N_Centro_r==1)
+              {
+
+               Form_Patern_Finder[t1,20]=1;
+               Form_Patern_Finder[t1,16]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t1,16]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==2)
+              {
+
+               Form_Patern_Finder[t1,21]=1;
+               Form_Patern_Finder[t1,17]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t1,17]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==3)
+              {
+
+               Form_Patern_Finder[t1,22]=1;
+               Form_Patern_Finder[t1,18]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t1,18]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==4)
+              {
+
+               Form_Patern_Finder[t1,23]=1;
+               Form_Patern_Finder[t1,19]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t1,19]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            Form_Patern_Finder[t1,27]=PipsNumber;//Номер Семечки . имеет значение от 1 до 5
+            Form_Patern_Finder[t1,28]=N_Gr20;//Номер блока ценавой 20-ки
+            Form_Patern_Finder[t1,29]=N_Centro;//Номер центра архитектуры
+            //Произвести запись массива в Бинарнйы фаил.Фаил загружается в массив при запуске программы
+
+           }
+         //Be_1
+         int newPrise2=0;
+         int PriceExist2=0;
+
+
+         for(w2=1; w2<1000; w2++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+           {
+            if((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,31]!=0 || Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,32]!=0 || Form_Patern_Finder[w2,33]==bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,33]!=0|| Form_Patern_Finder[w2,34]==bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,34]!=0)/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3)//Поиск цены . Возвращает индекс в массиве
+              {
+
+               PriceExist2=1;
+               if(PriceExist2==1/*"Указывает на найденную цену Функцией выше"*/ && InternalPat_1==3/*"Указывает на соеденение в ячейке цены и абьёма"*/ && Form_Patern_Finder[w2,41]!=1)//Если цена существует и w не равен 0 и Патерн не был собран. Если w равен налю произвести новую запись то доступ в функцию открыт
+                 {
+
+                  int Change1_2=0,Change2_2=0,Change3_2=0,Change4_2=0;
+                  if(Form_Patern_Finder[w2,35]==0 && N_Centro_r==1 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w2,35]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w2,31]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w2,31]=iTime(Symbol(),PERIOD_M1,1);
+                     Change1_2=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w2,35]==1 && Form_Patern_Finder[w2,36]==1 && Form_Patern_Finder[w2,37]==1 && Form_Patern_Finder[w2,38]==1)
+                       {
+                        Form_Patern_Finder[w2,41]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 2 Красный
+
+                  if(Form_Patern_Finder[w2,36]==0 && N_Centro_r==2 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w2,36]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w2,32]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w2,32]=iTime(Symbol(),PERIOD_M1,1);
+                     Change2_2=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w2,35]==1 && Form_Patern_Finder[w2,36]==1 && Form_Patern_Finder[w2,37]==1 && Form_Patern_Finder[w2,38]==1)
+                       {
+                        Form_Patern_Finder[w2,41]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 3 Зелёный
+
+                  if(Form_Patern_Finder[w2,37]==0 && N_Centro_r==3 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w2,37]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w2,33]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w2,33]=iTime(Symbol(),PERIOD_M1,1);
+                     Change3_2=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w2,35]==1 && Form_Patern_Finder[w2,36]==1 && Form_Patern_Finder[w2,37]==1 && Form_Patern_Finder[w2,38]==1)
+                       {
+                        Form_Patern_Finder[w2,41]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 4 Синий
+
+                  if(Form_Patern_Finder[w2,38]==0 && N_Centro_r==4 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w2,38]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w2,34]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w2,34]=iTime(Symbol(),PERIOD_M1,1);
+                     Change4_2=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w2,35]==1 && Form_Patern_Finder[w2,36]==1 && Form_Patern_Finder[w2,37]==1 && Form_Patern_Finder[w2,38]==1)
+                       {
+                        Form_Patern_Finder[w2,41]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+
+                  if(Change1_2==0 && Change2_2==0 && Change3_2==0 && Change4_2==0)//Если изменения не произошли в 4 блоках то занести новую цену
+                    {
+                     PriceExist2=0;//Смена разрешения на занесение новой цены
+
+                    }
+                 }
+
+
+               // break;
+
+              }
+
+           }
+
+
+         // ----- Ески нет цены в массиве для просмотра
+
+         int WriteData2=1;
+         for(int z2=1; z2<1000; z2++)
+           {
+            if(PriceExist2==0 && (Form_Patern_Finder[z2,31]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z2,32]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,33]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,34]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+              {
+               WriteData2=0;
+               break;
+              }
+
+           }
+
+
+         if(PriceExist2==0 &&  InternalPat_1==3 && WriteData2==1)  //Еси нет цены в массиве для просмотра
+           {
+            // int WRinLine2=0;
+            int t2;
+            for(t2=1; t2<1000; t2++)
+              {
+               if(Form_Patern_Finder[t2,31]==0 && Form_Patern_Finder[t2,32]==0 && Form_Patern_Finder[t2,33]==0 && Form_Patern_Finder[t2,34]==0 /*&& (Form_Patern_Finder[t2,12]==PipsNumber && Form_Patern_Finder[t2,13]==N_Gr20 ||Form_Patern_Finder[t2,27]==PipsNumber && Form_Patern_Finder[t2,28]==N_Gr20 || Form_Patern_Finder[t2,42]==PipsNumber && Form_Patern_Finder[t2,43]==N_Gr20 || Form_Patern_Finder[t2,57]==PipsNumber && Form_Patern_Finder[t2,58]==N_Gr20)*/)   //Последнее пустое место в массиве
+                 {
+                  //  WRinLine2=1;
+                  break;
+                 }
+              }
+
+            // for(t2=1; t2<1000; t2++)
+            // {
+            //  if(WRinLine2=0 && Form_Patern_Finder[t2,31]==0 && Form_Patern_Finder[t2,32]==0 && Form_Patern_Finder[t2,33]==0 && Form_Patern_Finder[t2,34]==0)  //Последнее пустое место в массиве
+            //   {
+
+            //  break;
+            //  }
+            //  }
+
+            if(N_Centro_r==1)
+              {
+
+               Form_Patern_Finder[t2,35]=1;
+               Form_Patern_Finder[t2,31]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t2,31]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==2)
+              {
+
+               Form_Patern_Finder[t2,36]=1;
+               Form_Patern_Finder[t2,32]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t2,32]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==3)
+              {
+
+               Form_Patern_Finder[t2,37]=1;
+               Form_Patern_Finder[t2,33]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t2,33]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==4)
+              {
+
+               Form_Patern_Finder[t2,38]=1;
+               Form_Patern_Finder[t2,34]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t2,34]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            Form_Patern_Finder[t2,42]=PipsNumber;//Номер Семечки . имеет значение от 1 до 5
+            Form_Patern_Finder[t2,43]=N_Gr20;//Номер блока ценавой 20-ки
+            Form_Patern_Finder[t2,44]=N_Centro;//Номер центра архитектуры
+            //Произвести запись массива в Бинарнйы фаил.Фаил загружается в массив при запуске программы
+
+           }
+
+
+         //Bo_1
+         int newPrise3=0;
+         int PriceExist3=0;
+
+
+         for(w3=1; w3<1000; w3++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+           {
+            if((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,46]!=0 || Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,47]!=0 || Form_Patern_Finder[w3,48]==bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,48]!=0|| Form_Patern_Finder[w3,49]==bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,49]!=0)&& InternalPat_1==4)//Поиск цены . Возвращает индекс в массиве
+              {
+
+               PriceExist3=1;
+               if(PriceExist3==1/*"Указывает на найденную цену Функцией выше"*/ && InternalPat_1==4/*"Указывает на соеденение в ячейке цены и абьёма"*/ && Form_Patern_Finder[w3,56]!=1)//Если цена существует и w не равен 0 и Патерн не был собран. Если w равен налю произвести новую запись то доступ в функцию открыт
+                 {
+
+                  int Change1_3=0,Change2_3=0,Change3_3=0,Change4_3=0;
+                  if(Form_Patern_Finder[w3,50]==0 && N_Centro_r==1 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w3,50]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w3,46]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w3,46]=iTime(Symbol(),PERIOD_M1,1);
+                     Change1_3=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w3,50]==1 && Form_Patern_Finder[w3,51]==1 && Form_Patern_Finder[w3,52]==1 && Form_Patern_Finder[w3,53]==1)
+                       {
+                        Form_Patern_Finder[w3,56]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 2 Красный
+
+                  if(Form_Patern_Finder[w3,51]==0 && N_Centro_r==2 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w3,51]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w3,47]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w3,47]=iTime(Symbol(),PERIOD_M1,1);
+                     Change2_3=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w3,50]==1 && Form_Patern_Finder[w3,51]==1 && Form_Patern_Finder[w3,52]==1 && Form_Patern_Finder[w3,53]==1)
+                       {
+                        Form_Patern_Finder[w3,56]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 3 Зелёный
+
+                  if(Form_Patern_Finder[w3,52]==0 && N_Centro_r==3 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w3,52]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w3,48]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w3,48]=iTime(Symbol(),PERIOD_M1,1);
+                     Change3_3=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w3,50]==1 && Form_Patern_Finder[w3,51]==1 && Form_Patern_Finder[w3,52]==1 && Form_Patern_Finder[w3,53]==1)
+                       {
+                        Form_Patern_Finder[w3,56]
+                           =1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+                  //Центр 4 Синий
+
+                  if(Form_Patern_Finder[w3,53]==0 && N_Centro_r==4 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1
+                    {
+                     //Присваиваю значение по архитектуре
+                     Form_Patern_Finder[w3,53]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
+                     Form_Patern_Finder[w3,49]=bodypips[MaxInd_bodypips,0];
+                     DT_Form_Patern_Finder[w3,49]=iTime(Symbol(),PERIOD_M1,1);
+                     Change4_3=1;
+                     //Проверяю наличие остальных архитектур в ячейке
+
+                     if(Form_Patern_Finder[w3,50]==1 && Form_Patern_Finder[w3,51]==1 && Form_Patern_Finder[w3,52]==1 && Form_Patern_Finder[w3,53]==1)
+                       {
+                        Form_Patern_Finder[w3,56]=1;//Патерн Заполнен
+                        //Вывести на график цены флаг собранного патерна
+                       }
+                    }
+
+                  if(Change1_3==0 && Change2_3==0 && Change3_3==0 && Change4_3==0)//Если изменения не произошли в 4 блоках то занести новую цену
+                    {
+                     PriceExist3=0;//Смена разрешения на занесение новой цены
+
+                    }
+                 }
+
+
+               // break;
+
+              }
+
+           }
+
+
+         // ----- Ески нет цены в массиве для просмотра
+
+         int WriteData3=1;
+         for(int z3=1; z3<1000; z3++)
+           {
+            if(PriceExist3==0 && (Form_Patern_Finder[z3,46]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z3,47]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,48]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,49]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+              {
+               WriteData3=0;
+               break;
+              }
+
+           }
+
+
+         if(PriceExist3==0 &&  InternalPat_1==4 && WriteData3==1)  //Еси нет цены в массиве для просмотра
+           {
+            //  int WRinLine3=0;
+            int t3;
+            for(t3=1; t3<1000; t3++)
+              {
+               if(Form_Patern_Finder[t3,46]==0 && Form_Patern_Finder[t3,47]==0 && Form_Patern_Finder[t3,48]==0 && Form_Patern_Finder[t3,49]==0 /*&& (Form_Patern_Finder[t3,12]==PipsNumber && Form_Patern_Finder[t3,13]==N_Gr20 ||Form_Patern_Finder[t3,27]==PipsNumber && Form_Patern_Finder[t3,28]==N_Gr20 || Form_Patern_Finder[t3,42]==PipsNumber && Form_Patern_Finder[t3,43]==N_Gr20 || Form_Patern_Finder[t3,57]==PipsNumber && Form_Patern_Finder[t3,58]==N_Gr20)*/)   //Последнее пустое место в массиве
+                 {
+                  // WRinLine3=1;
+                  break;
+                 }
+              }
+            // for(t3=1; t3<1000; t3++)
+            //   {
+            //  if(WRinLine3=0 && Form_Patern_Finder[t3,46]==0 && Form_Patern_Finder[t3,47]==0 && Form_Patern_Finder[t3,48]==0 && Form_Patern_Finder[t3,49]==0)  //Последнее пустое место в массиве
+            //   {
+
+            //   break;
+            //  }
+            //  }
+
+
+            if(N_Centro_r==1)
+              {
+
+               Form_Patern_Finder[t3,50]=1;
+               Form_Patern_Finder[t3,46]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t3,46]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==2)
+              {
+
+               Form_Patern_Finder[t3,51]=1;
+               Form_Patern_Finder[t3,47]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t3,47]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==3)
+              {
+
+               Form_Patern_Finder[t3,52]=1;
+               Form_Patern_Finder[t3,48]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t3,48]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            if(N_Centro_r==4)
+              {
+
+               Form_Patern_Finder[t3,53]=1;
+               Form_Patern_Finder[t3,49]=bodypips[MaxInd_bodypips,0];
+               DT_Form_Patern_Finder[t3,49]=iTime(Symbol(),PERIOD_M1,1);
+
+              }
+            Form_Patern_Finder[t3,57]=PipsNumber;//Номер Семечки . имеет значение от 1 до 5
+            Form_Patern_Finder[t3,58]=N_Gr20;//Номер блока ценавой 20-ки
+            Form_Patern_Finder[t3,59]=N_Centro;//Номер центра архитектуры
+            //Произвести запись массива в Бинарнйы фаил.Фаил загружается в массив при запуске программы
+
+           }
+
+
+
+
 
 
 
