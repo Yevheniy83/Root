@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.2.1.mq4 |
+//|                                             Nucleo   v 2.2.2.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -172,8 +172,8 @@ int Rez_BE,one_BE;
 //---END---INTEGER VARS-----
 //---Переменные индикатора Маховик Времени
 int comp_Sev[9,9];//Массив для сравнения после пересчёта
-double Form_Patern_Finder[1001,120];//Массив для отслеживания формации Патернов на купольной архитектуре
-datetime DT_Form_Patern_Finder[1001,120];//Массив для отслеживания времени формации Патернов на купольной архитектуре
+double Form_Patern_Finder[1001,121];//Массив для отслеживания формации Патернов на купольной архитектуре
+datetime DT_Form_Patern_Finder[1001,121];//Массив для отслеживания времени формации Патернов на купольной архитектуре
 int PipsNumber; //1,2,3,4,5
 int N_Centro_r;
 //Часы 1
@@ -9639,7 +9639,7 @@ int start()
 
          for(w=1; w<1000; w++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w,1]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w,1]!=0) ||(Form_Patern_Finder[w,2]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w,2]!=0)|| (Form_Patern_Finder[w,3]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w,3]!=0)||(Form_Patern_Finder[w,4]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w,4]!=0))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==1)   //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w,13]!=0 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber && ((Form_Patern_Finder[w,1]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w,2]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w,3]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w,4]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==1)   //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist=1;
@@ -9657,7 +9657,7 @@ int start()
                   //Центр 1 Желтый
                   int Change1=0,Change2=0,Change3=0,Change4=0;
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,2] ",Form_Patern_Finder[w,2]," N_Centro_r==1 ",N_Centro_r==1);
-                  if(Form_Patern_Finder[w,5]==0 && N_Centro_r==1 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w,5]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -9675,7 +9675,7 @@ int start()
                     }
                   //Центр 2 Красный
                   // Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,3] ",Form_Patern_Finder[w,3]," N_Centro_r==2 ",N_Centro_r==2);
-                  if(Form_Patern_Finder[w,6]==0 && N_Centro_r==2 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w,6]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w,6]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9692,7 +9692,7 @@ int start()
                     }
                   //Центр 3 Зелёный
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,4] ",Form_Patern_Finder[w,4]," N_Centro_r==3 ",N_Centro_r==3);
-                  if(Form_Patern_Finder[w,7]==0 && N_Centro_r==3 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w,7]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w,7]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9709,7 +9709,7 @@ int start()
                     }
                   //Центр 4 Синий
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,5] ",Form_Patern_Finder[w,5]," N_Centro_r==4 ",N_Centro_r==4);
-                  if(Form_Patern_Finder[w,8]==0 && N_Centro_r==4 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w,8]==0 && N_Centro_r==4) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w,8]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9725,11 +9725,7 @@ int start()
                        }
                     }
 
-                  if(Change1==0 && Change2==0 && Change3==0 && Change4==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -9742,7 +9738,7 @@ int start()
          int WriteData=1;
          for(int z=1; z<1000; z++)
            {
-            if(PriceExist==0 && (Form_Patern_Finder[z,1]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z,2]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,3]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,4]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist==0 && (Form_Patern_Finder[z,1]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z,2]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,3]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,4]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData=0;
                break;
@@ -9757,7 +9753,7 @@ int start()
             int t;
             for(t=1; t<1000; t++)
               {
-               if(Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/) //Последнее пустое место в массиве
+               if( Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/) //Последнее пустое место в массиве
                  {
                   //  WRinLine=1;
                   break;
@@ -9836,7 +9832,7 @@ int start()
 
          for(w1=1; w1<1000; w1++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,16]!=0) || (Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,17]!=0)|| (Form_Patern_Finder[w1,18]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,18]!=0)||(Form_Patern_Finder[w1,19]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w1,19]!=0))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)  //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w1,28]!=0 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber && ((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w1,18]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w1,19]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)  //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist1=1;
@@ -9844,7 +9840,7 @@ int start()
                  {
 
                   int Change1_1=0,Change2_1=0,Change3_1=0,Change4_1=0;
-                  if(Form_Patern_Finder[w1,20]==0 && N_Centro_r==1 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w1,20]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -9862,7 +9858,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w1,21]==0 && N_Centro_r==2 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w1,21]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w1,21]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9879,7 +9875,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w1,22]==0 && N_Centro_r==3 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w1,22]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w1,22]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9896,7 +9892,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w1,23]==0 && N_Centro_r==4 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w1,23]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w1,23]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9912,11 +9908,7 @@ int start()
                        }
                     }
 
-                  if(Change1_1==0 && Change2_1==0 && Change3_1==0 && Change4_1==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist1=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -9932,7 +9924,7 @@ int start()
          int WriteData1=1;
          for(int z1=1; z1<1000; z1++)
            {
-            if(PriceExist1==0 && (Form_Patern_Finder[z1,16]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z1,17]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,18]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,19]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist1==0 && (Form_Patern_Finder[z1,16]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z1,17]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,18]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,19]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData1=0;
                break;
@@ -10008,7 +10000,7 @@ int start()
 
          for(w2=1; w2<1000; w2++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,31]!=0) || (Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,32]!=0) ||(Form_Patern_Finder[w2,33]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,33]!=0)|| (Form_Patern_Finder[w2,34]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w2,34]!=0))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3) //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w2,43]!=0 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber && ((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w2,33]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w2,34]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3) //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist2=1;
@@ -10016,7 +10008,7 @@ int start()
                  {
 
                   int Change1_2=0,Change2_2=0,Change3_2=0,Change4_2=0;
-                  if(Form_Patern_Finder[w2,35]==0 && N_Centro_r==1 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w2,35]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10034,7 +10026,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w2,36]==0 && N_Centro_r==2 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w2,36]==0 && N_Centro_r==2) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w2,36]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10051,7 +10043,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w2,37]==0 && N_Centro_r==3 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w2,37]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w2,37]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10068,7 +10060,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w2,38]==0 && N_Centro_r==4 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w2,38]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w2,38]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10084,11 +10076,7 @@ int start()
                        }
                     }
 
-                  if(Change1_2==0 && Change2_2==0 && Change3_2==0 && Change4_2==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist2=0;//Смена разрешения на занесение новой цены
-
-                    }
+                 
                  }
 
 
@@ -10104,7 +10092,7 @@ int start()
          int WriteData2=1;
          for(int z2=1; z2<1000; z2++)
            {
-            if(PriceExist2==0 && (Form_Patern_Finder[z2,31]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z2,32]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,33]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,34]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist2==0 && (Form_Patern_Finder[z2,31]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z2,32]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,33]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,34]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData2=0;
                break;
@@ -10182,7 +10170,7 @@ int start()
 
          for(w3=1; w3<1000; w3++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,46]!=0) ||(Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,47]!=0)|| (Form_Patern_Finder[w3,48]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,48]!=0)|| (Form_Patern_Finder[w3,49]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w3,49]!=0))&& InternalPat_1==4)  //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w3,58]!=0 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber && ((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w3,48]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w3,49]!=bodypips[MaxInd_bodypips,0] )))&& InternalPat_1==4)  //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist3=1;
@@ -10190,7 +10178,7 @@ int start()
                  {
 
                   int Change1_3=0,Change2_3=0,Change3_3=0,Change4_3=0;
-                  if(Form_Patern_Finder[w3,50]==0 && N_Centro_r==1 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w3,50]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10208,7 +10196,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w3,51]==0 && N_Centro_r==2 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w3,51]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w3,51]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10225,7 +10213,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w3,52]==0 && N_Centro_r==3 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w3,52]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w3,52]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10242,7 +10230,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w3,53]==0 && N_Centro_r==4 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w3,53]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w3,53]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10258,11 +10246,7 @@ int start()
                        }
                     }
 
-                  if(Change1_3==0 && Change2_3==0 && Change3_3==0 && Change4_3==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist3=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -10278,7 +10262,7 @@ int start()
          int WriteData3=1;
          for(int z3=1; z3<1000; z3++)
            {
-            if(PriceExist3==0 && (Form_Patern_Finder[z3,46]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z3,47]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,48]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,49]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist3==0 && (Form_Patern_Finder[z3,46]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z3,47]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,48]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,49]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData3=0;
                break;
@@ -10353,7 +10337,7 @@ int start()
          int w4;
          for(w4=1; w4<1000; w4++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w4,61]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w4,61]!=0) || (Form_Patern_Finder[w4,62]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w4,62]!=0) || (Form_Patern_Finder[w4,63]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w4,63]!=0)||(Form_Patern_Finder[w4,64]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w4,64]!=0)) && InternalPat_1==5) //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w4,73]!=0 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber && ((Form_Patern_Finder[w4,61]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w4,62]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w4,63]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w4,64]!=bodypips[MaxInd_bodypips,0] ))) && InternalPat_1==5) //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist4=1;
@@ -10361,7 +10345,7 @@ int start()
                  {
 
                   int Change1_4=0,Change2_4=0,Change3_4=0,Change4_4=0;
-                  if(Form_Patern_Finder[w4,65]==0 && N_Centro_r==1 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w4,65]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10379,7 +10363,7 @@ int start()
                     }
                   //Центр 2 Красный
                   // Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w4,3] ",Form_Patern_Finder[w4,3]," N_Centro_r==2 ",N_Centro_r==2);
-                  if(Form_Patern_Finder[w4,66]==0 && N_Centro_r==2 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w4,66]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w4,66]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10396,7 +10380,7 @@ int start()
                     }
                   //Центр 3 Зелёный
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w4,4] ",Form_Patern_Finder[w4,4]," N_Centro_r==3 ",N_Centro_r==3);
-                  if(Form_Patern_Finder[w4,67]==0 && N_Centro_r==3 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w4,67]==0 && N_Centro_r==3) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w4,67]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10413,7 +10397,7 @@ int start()
                     }
                   //Центр 4 Синий
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w4,5] ",Form_Patern_Finder[w4,5]," N_Centro_r==4 ",N_Centro_r==4);
-                  if(Form_Patern_Finder[w4,68]==0 && N_Centro_r==4 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w4,68]==0 && N_Centro_r==4) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w4,68]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10429,11 +10413,7 @@ int start()
                        }
                     }
 
-                  if(Change1_4==0 && Change2_4==0 && Change3_4==0 && Change4_4==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist4=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -10446,7 +10426,7 @@ int start()
          int WriteData4=1;
          for(int z4=1; z4<1000; z4++)
            {
-            if(PriceExist4==0 && (Form_Patern_Finder[z4,61]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z4,62]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,63]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,64]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist4==0 && (Form_Patern_Finder[z4,61]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z4,62]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,63]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,64]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData4=0;
                break;
@@ -10539,7 +10519,7 @@ int start()
          int w5;
          for(w5=1; w5<1000; w5++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w5,76]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w5,76]!=0)|| (Form_Patern_Finder[w5,77]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w5,77]!=0)||(Form_Patern_Finder[w5,78]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w5,78]!=0)|| (Form_Patern_Finder[w5,79]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w5,79]!=0))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==6)   //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w5,88]!=0 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber && ((Form_Patern_Finder[w5,76]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w5,77]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w5,78]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w5,79]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==6)   //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist5=1;
@@ -10547,7 +10527,7 @@ int start()
                  {
 
                   int Change1_5=0,Change2_5=0,Change3_5=0,Change4_5=0;
-                  if(Form_Patern_Finder[w5,80]==0 && N_Centro_r==1 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w5,80]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10565,7 +10545,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w5,81]==0 && N_Centro_r==2 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w5,81]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w5,81]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10582,7 +10562,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w5,82]==0 && N_Centro_r==3 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w5,82]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w5,82]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10599,7 +10579,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w5,83]==0 && N_Centro_r==4 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w5,83]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w5,83]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10615,11 +10595,7 @@ int start()
                        }
                     }
 
-                  if(Change1_5==0 && Change2_5==0 && Change3_5==0 && Change4_5==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist5=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -10635,7 +10611,7 @@ int start()
          int WriteData5=1;
          for(int z5=1; z5<1000; z5++)
            {
-            if(PriceExist5==0 && (Form_Patern_Finder[z5,76]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z5,77]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,78]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,79]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist5==0 && (Form_Patern_Finder[z5,76]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z5,77]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,78]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,79]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData5=0;
                break;
@@ -10711,7 +10687,7 @@ int start()
          int w6;
          for(w6=1; w6<1000; w6++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w6,91]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w6,91]!=0) || (Form_Patern_Finder[w6,92]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w6,92]!=0) || (Form_Patern_Finder[w6,93]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w6,93]!=0)|| (Form_Patern_Finder[w6,94]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w6,94]!=0))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==7)//Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w6,103]!=0 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber && ((Form_Patern_Finder[w6,91]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w6,92]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w6,93]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w6,94]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==7)//Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist6=1;
@@ -10719,7 +10695,7 @@ int start()
                  {
 
                   int Change1_6=0,Change2_6=0,Change3_6=0,Change4_6=0;
-                  if(Form_Patern_Finder[w6,95]==0 && N_Centro_r==1 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w6,95]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10737,7 +10713,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w6,96]==0 && N_Centro_r==2 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w6,96]==0 && N_Centro_r==2) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w6,96]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10754,7 +10730,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w6,97]==0 && N_Centro_r==3 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w6,97]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w6,97]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10771,7 +10747,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w6,98]==0 && N_Centro_r==4 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w6,98]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w6,98]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10787,11 +10763,7 @@ int start()
                        }
                     }
 
-                  if(Change1_6==0 && Change2_6==0 && Change3_6==0 && Change4_6==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist6=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -10807,7 +10779,7 @@ int start()
          int WriteData6=1;
          for(int z6=1; z6<1000; z6++)
            {
-            if(PriceExist6==0 && (Form_Patern_Finder[z6,91]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z6,92]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,93]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,94]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist6==0 && (Form_Patern_Finder[z6,91]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z6,92]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,93]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,94]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData6=0;
                break;
@@ -10816,7 +10788,7 @@ int start()
            }
 
 
-         if(PriceExist6==0 &&  InternalPat_1==7 && WriteData2==1)  //Еси нет цены в массиве для просмотра
+         if(PriceExist6==0 &&  InternalPat_1==7 && WriteData6==1)  //Еси нет цены в массиве для просмотра
            {
             // int WRinLine2=0;
             int t6;
@@ -10885,7 +10857,7 @@ int start()
 
          for(w7=1; w7<1000; w7++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if(((Form_Patern_Finder[w7,106]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w7,106]!=0) ||(Form_Patern_Finder[w7,107]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w7,107]!=0) ||(Form_Patern_Finder[w7,108]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w7,108]!=0)||(Form_Patern_Finder[w7,109]!=bodypips[MaxInd_bodypips,0] && Form_Patern_Finder[w7,109]!=0))&& InternalPat_1==8)   //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w7,118]!=0 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber && ((Form_Patern_Finder[w7,106]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w7,107]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w7,108]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w7,109]!=bodypips[MaxInd_bodypips,0] )))&& InternalPat_1==8)   //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist7=1;
@@ -10893,7 +10865,7 @@ int start()
                  {
 
                   int Change1_7=0,Change2_7=0,Change3_7=0,Change4_7=0;
-                  if(Form_Patern_Finder[w7,110]==0 && N_Centro_r==1 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w7,110]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10911,7 +10883,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w7,111]==0 && N_Centro_r==2 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w7,111]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w7,111]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10928,7 +10900,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w7,112]==0 && N_Centro_r==3 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w7,112]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w7,112]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10945,7 +10917,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w7,113]==0 && N_Centro_r==4 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w7,113]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w7,113]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10961,11 +10933,7 @@ int start()
                        }
                     }
 
-                  if(Change1_7==0 && Change2_7==0 && Change3_7==0 && Change4_7==0)//Если изменения не произошли в 4 блоках то занести новую цену
-                    {
-                     PriceExist7=0;//Смена разрешения на занесение новой цены
-
-                    }
+                  
                  }
 
 
@@ -10981,7 +10949,7 @@ int start()
          int WriteData7=1;
          for(int z7=1; z7<1000; z7++)
            {
-            if(PriceExist7==0 && (Form_Patern_Finder[z7,106]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z7,107]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,108]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,109]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
+            if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist7==0 && (Form_Patern_Finder[z7,106]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z7,107]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,108]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,109]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData7=0;
                break;
@@ -11109,7 +11077,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",PrintArch," A 1 ",PrintArch_1," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " Patern Match ",Form_Patern_Finder[w,8]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",PrintArch," A 1 ",PrintArch_1," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -11122,7 +11090,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",PrintArch," A 1 ",PrintArch_1," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]," Patern Match ",Form_Patern_Finder[w,8]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",PrintArch," A 1 ",PrintArch_1," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
