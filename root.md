@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.2.2.mq4 |
+//|                                             Nucleo   v 2.2.3.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -8329,6 +8329,233 @@ int start()
          bool M2Bo0_Ar20_Vost_Azul_Bo_0=false;
          bool M3Be1_Ar20_Sev_Azul_Bo_0=false;
          bool M4Bo1_Ar20_Zap_Azul_Bo_0=false;
+         //Be_1
+         // Расчёт подачи на Be_0
+         //Семечка 1
+         //Архитектура 1
+         // Расчёт подачи на Be_0
+         //Семечка 1
+         //Архитектура 1
+         bool M1Be0_Ar1_Sev_Amarillo_Be_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar1_Vost_Amarillo_Be_1=false;
+         bool M3Be1_Ar1_Yug_Amarillo_Be_1=false;
+         bool M4Bo1_Ar1_Zap_Amarillo_Be_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar2_Zap_Rojo_Be_1=false;
+         bool M2Bo0_Ar2_Yug_Rojo_Be_1=false;
+         bool M3Be1_Ar2_Vost_Rojo_Be_1=false;
+         bool M4Bo1_Ar2_Sev_Rojo_Be_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar3_Yug_Verde_Be_1=false;
+         bool M2Bo0_Ar3_Zap_Verde_Be_1=false;
+         bool M3Be1_Ar3_Sev_Verde_Be_1=false;
+         bool M4Bo1_Ar3_Vost_Verde_Be_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar4_Vost_Azul_Be_1=false;
+         bool M2Bo0_Ar4_Sev_Azul_Be_1=false;
+         bool M3Be1_Ar4_Zap_Azul_Be_1=false;
+         bool M4Bo1_Ar4_Yug_Azul_Be_1=false;
+         //Семечка 2
+         //Архитектура 1
+         bool M1Be0_Ar5_Sev_Amarillo_Be_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar5_Vost_Amarillo_Be_1=false;
+         bool M3Be1_Ar5_Yug_Amarillo_Be_1=false;
+         bool M4Bo1_Ar5_Zap_Amarillo_Be_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar6_Zap_Rojo_Be_1=false;
+         bool M2Bo0_Ar6_Yug_Rojo_Be_1=false;
+         bool M3Be1_Ar6_Vost_Rojo_Be_1=false;
+         bool M4Bo1_Ar6_Sev_Rojo_Be_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar7_Yug_Verde_Be_1=false;
+         bool M2Bo0_Ar7_Zap_Verde_Be_1=false;
+         bool M3Be1_Ar7_Sev_Verde_Be_1=false;
+         bool M4Bo1_Ar7_Vost_Verde_Be_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar8_Vost_Azul_Be_1=false;
+         bool M2Bo0_Ar8_Sev_Azul_Be_1=false;
+         bool M3Be1_Ar8_Zap_Azul_Be_1=false;
+         bool M4Bo1_Ar8_Yug_Azul_Be_1=false;
+         //Семечка 3
+         //Архитектура 1
+         bool M1Be0_Ar9_Sev_Amarillo_Be_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar9_Vost_Amarillo_Be_1=false;
+         bool M3Be1_Ar9_Yug_Amarillo_Be_1=false;
+         bool M4Bo1_Ar9_Zap_Amarillo_Be_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar10_Zap_Rojo_Be_1=false;
+         bool M2Bo0_Ar10_Yug_Rojo_Be_1=false;
+         bool M3Be1_Ar10_Vost_Rojo_Be_1=false;
+         bool M4Bo1_Ar10_Sev_Rojo_Be_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar11_Yug_Verde_Be_1=false;
+         bool M2Bo0_Ar11_Zap_Verde_Be_1=false;
+         bool M3Be1_Ar11_Sev_Verde_Be_1=false;
+         bool M4Bo1_Ar11_Vost_Verde_Be_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar12_Vost_Azul_Be_1=false;
+         bool M2Bo0_Ar12_Sev_Azul_Be_1=false;
+         bool M3Be1_Ar12_Zap_Azul_Be_1=false;
+         bool M4Bo1_Ar12_Yug_Azul_Be_1=false;
+         //Семечка 4
+         //Архитектура 1
+         bool M1Be0_Ar13_Sev_Amarillo_Be_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar13_Vost_Amarillo_Be_1=false;
+         bool M3Be1_Ar13_Yug_Amarillo_Be_1=false;
+         bool M4Bo1_Ar13_Zap_Amarillo_Be_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar14_Zap_Rojo_Be_1=false;
+         bool M2Bo0_Ar14_Yug_Rojo_Be_1=false;
+         bool M3Be1_Ar14_Vost_Rojo_Be_1=false;
+         bool M4Bo1_Ar14_Sev_Rojo_Be_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar15_Yug_Verde_Be_1=false;
+         bool M2Bo0_Ar15_Zap_Verde_Be_1=false;
+         bool M3Be1_Ar15_Sev_Verde_Be_1=false;
+         bool M4Bo1_Ar15_Vost_Verde_Be_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar16_Vost_Azul_Be_1=false;
+         bool M2Bo0_Ar16_Sev_Azul_Be_1=false;
+         bool M3Be1_Ar16_Zap_Azul_Be_1=false;
+         bool M4Bo1_Ar16_Yug_Azul_Be_1=false;
+         //Семечка 5
+         //Архитектура 1
+         bool M1Be0_Ar17_Sev_Amarillo_Be_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar17_Vost_Amarillo_Be_1=false;
+         bool M3Be1_Ar17_Yug_Amarillo_Be_1=false;
+         bool M4Bo1_Ar17_Zap_Amarillo_Be_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar18_Zap_Rojo_Be_1=false;
+         bool M2Bo0_Ar18_Yug_Rojo_Be_1=false;
+         bool M3Be1_Ar18_Vost_Rojo_Be_1=false;
+         bool M4Bo1_Ar18_Sev_Rojo_Be_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar19_Yug_Verde_Be_1=false;
+         bool M2Bo0_Ar19_Zap_Verde_Be_1=false;
+         bool M3Be1_Ar19_Sev_Verde_Be_1=false;
+         bool M4Bo1_Ar19_Vost_Verde_Be_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar20_Vost_Azul_Be_1=false;
+         bool M2Bo0_Ar20_Sev_Azul_Be_1=false;
+         bool M3Be1_Ar20_Zap_Azul_Be_1=false;
+         bool M4Bo1_Ar20_Yug_Azul_Be_1=false;
+         //Bo_1
+         // Расчёт подачи на Bo_1
+         //Семечка 1
+         //Архитектура 1
+         bool M1Be0_Ar1_Zap_Amarillo_Bo_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar1_Sev_Amarillo_Bo_1=false;
+         bool M3Be1_Ar1_Vost_Amarillo_Bo_1=false;
+         bool M4Bo1_Ar1_Yug_Amarillo_Bo_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar2_Yug_Rojo_Bo_1=false;
+         bool M2Bo0_Ar2_Vost_Rojo_Bo_1=false;
+         bool M3Be1_Ar2_Sev_Rojo_Bo_1=false;
+         bool M4Bo1_Ar2_Zap_Rojo_Bo_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar3_Vost_Verde_Bo_1=false;
+         bool M2Bo0_Ar3_Yug_Verde_Bo_1=false;
+         bool M3Be1_Ar3_Zap_Verde_Bo_1=false;
+         bool M4Bo1_Ar3_Sev_Verde_Bo_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar4_Sev_Azul_Bo_1=false;
+         bool M2Bo0_Ar4_Zap_Azul_Bo_1=false;
+         bool M3Be1_Ar4_Yug_Azul_Bo_1=false;
+         bool M4Bo1_Ar4_Vost_Azul_Bo_1=false;
+         //Семечка 2
+
+         bool M1Be0_Ar5_Zap_Amarillo_Bo_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar5_Sev_Amarillo_Bo_1=false;
+         bool M3Be1_Ar5_Vost_Amarillo_Bo_1=false;
+         bool M4Bo1_Ar5_Yug_Amarillo_Bo_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar6_Yug_Rojo_Bo_1=false;
+         bool M2Bo0_Ar6_Vost_Rojo_Bo_1=false;
+         bool M3Be1_Ar6_Sev_Rojo_Bo_1=false;
+         bool M4Bo1_Ar6_Zap_Rojo_Bo_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar7_Vost_Verde_Bo_1=false;
+         bool M2Bo0_Ar7_Yug_Verde_Bo_1=false;
+         bool M3Be1_Ar7_Zap_Verde_Bo_1=false;
+         bool M4Bo1_Ar7_Sev_Verde_Bo_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar8_Sev_Azul_Bo_1=false;
+         bool M2Bo0_Ar8_Zap_Azul_Bo_1=false;
+         bool M3Be1_Ar8_Yug_Azul_Bo_1=false;
+         bool M4Bo1_Ar8_Vost_Azul_Bo_1=false;
+         //Семечка 3
+
+         bool M1Be0_Ar9_Zap_Amarillo_Bo_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar9_Sev_Amarillo_Bo_1=false;
+         bool M3Be1_Ar9_Vost_Amarillo_Bo_1=false;
+         bool M4Bo1_Ar9_Yug_Amarillo_Bo_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar10_Yug_Rojo_Bo_1=false;
+         bool M2Bo0_Ar10_Vost_Rojo_Bo_1=false;
+         bool M3Be1_Ar10_Sev_Rojo_Bo_1=false;
+         bool M4Bo1_Ar10_Zap_Rojo_Bo_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar11_Vost_Verde_Bo_1=false;
+         bool M2Bo0_Ar11_Yug_Verde_Bo_1=false;
+         bool M3Be1_Ar11_Zap_Verde_Bo_1=false;
+         bool M4Bo1_Ar11_Sev_Verde_Bo_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar12_Sev_Azul_Bo_1=false;
+         bool M2Bo0_Ar12_Zap_Azul_Bo_1=false;
+         bool M3Be1_Ar12_Yug_Azul_Bo_1=false;
+         bool M4Bo1_Ar12_Vost_Azul_Bo_1=false;
+         //Семечка 4
+
+         bool M1Be0_Ar13_Zap_Amarillo_Bo_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar13_Sev_Amarillo_Bo_1=false;
+         bool M3Be1_Ar13_Vost_Amarillo_Bo_1=false;
+         bool M4Bo1_Ar13_Yug_Amarillo_Bo_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar14_Yug_Rojo_Bo_1=false;
+         bool M2Bo0_Ar14_Vost_Rojo_Bo_1=false;
+         bool M3Be1_Ar14_Sev_Rojo_Bo_1=false;
+         bool M4Bo1_Ar14_Zap_Rojo_Bo_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar15_Vost_Verde_Bo_1=false;
+         bool M2Bo0_Ar15_Yug_Verde_Bo_1=false;
+         bool M3Be1_Ar15_Zap_Verde_Bo_1=false;
+         bool M4Bo1_Ar15_Sev_Verde_Bo_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar16_Sev_Azul_Bo_1=false;
+         bool M2Bo0_Ar16_Zap_Azul_Bo_1=false;
+         bool M3Be1_Ar16_Yug_Azul_Bo_1=false;
+         bool M4Bo1_Ar16_Vost_Azul_Bo_1=false;
+         //Семечка 5
+         //Архитектура 1
+         bool M1Be0_Ar17_Zap_Amarillo_Bo_1=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Be_1 Подача
+         bool M2Bo0_Ar17_Sev_Amarillo_Bo_1=false;
+         bool M3Be1_Ar17_Vost_Amarillo_Bo_1=false;
+         bool M4Bo1_Ar17_Yug_Amarillo_Bo_1=false;
+
+         //Архитектура 2
+         bool M1Be0_Ar18_Yug_Rojo_Bo_1=false;
+         bool M2Bo0_Ar18_Vost_Rojo_Bo_1=false;
+         bool M3Be1_Ar18_Sev_Rojo_Bo_1=false;
+         bool M4Bo1_Ar18_Zap_Rojo_Bo_1=false;
+         //Архитектура 3
+         bool M1Be0_Ar19_Vost_Verde_Bo_1=false;
+         bool M2Bo0_Ar19_Yug_Verde_Bo_1=false;
+         bool M3Be1_Ar19_Zap_Verde_Bo_1=false;
+         bool M4Bo1_Ar19_Sev_Verde_Bo_1=false;
+         //Архитектура 4
+         bool M1Be0_Ar20_Sev_Azul_Bo_1=false;
+         bool M2Bo0_Ar20_Zap_Azul_Bo_1=false;
+         bool M3Be1_Ar20_Yug_Azul_Bo_1=false;
+         bool M4Bo1_Ar20_Vost_Azul_Bo_1=false;
 
          //Заход в архитектуру по формуле
          string PrintArch;
@@ -9176,6 +9403,838 @@ int start()
             M4Bo1_Ar20_Zap_Azul_Bo_0=true;
             PrintArch_1=" M4Bo1_Ar20_Zap_Azul_Bo_0 ";
            }
+         //Be_1
+
+         if(N_Centro==1 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
+            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+           }
+         if(N_Centro==1 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
+            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+           }
+         if(N_Centro==1 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
+            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+           }
+         if(N_Centro==1 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
+            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+           }
+         // Семечка1
+         if(N_Centro==2 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Zap_Rojo_Be_1=true;
+            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+           }
+         if(N_Centro==2 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
+            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+           }
+         if(N_Centro==2 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Vost_Rojo_Be_1=true;
+            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+           }
+         if(N_Centro==2 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
+            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+           }// Семечка1
+         if(N_Centro==3 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Yug_Verde_Be_1=true;
+            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+           }
+         if(N_Centro==3 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Zap_Verde_Be_1=true;
+            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+           }
+         if(N_Centro==3 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Sev_Verde_Be_1=true;
+            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+           }
+         if(N_Centro==3 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Vost_Verde_Be_1=true;
+            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+           }
+         // Семечка1
+         if(N_Centro==4 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Vost_Azul_Be_1=true;
+            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+           }
+         if(N_Centro==4 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Sev_Azul_Be_1=true;
+            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+           }
+         if(N_Centro==4 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Zap_Azul_Be_1=true;
+            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+           }
+         if(N_Centro==4 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Yug_Azul_Be_1=true;
+            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+           }
+         // Семечка2
+         if(N_Centro==5 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
+            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+           }
+         if(N_Centro==5 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
+            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+           }
+         if(N_Centro==5 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
+            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+           }
+         if(N_Centro==5 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
+            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+           }
+         // Семечка1
+         if(N_Centro==6 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Zap_Rojo_Be_1=true;
+            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+           }
+         if(N_Centro==6 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
+            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+           }
+         if(N_Centro==6 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Vost_Rojo_Be_1=true;
+            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+           }
+         if(N_Centro==6 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
+            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+           }// Семечка1
+         if(N_Centro==7 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Yug_Verde_Be_1=true;
+            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+           }
+         if(N_Centro==7 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Zap_Verde_Be_1=true;
+            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+           }
+         if(N_Centro==7 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Sev_Verde_Be_1=true;
+            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+           }
+         if(N_Centro==7 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Vost_Verde_Be_1=true;
+            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+           }
+         // Семечка1
+         if(N_Centro==8 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Vost_Azul_Be_1=true;
+            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+           }
+         if(N_Centro==8 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Sev_Azul_Be_1=true;
+            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+           }
+         if(N_Centro==8 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Zap_Azul_Be_1=true;
+            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+           }
+         if(N_Centro==8 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Yug_Azul_Be_1=true;
+            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+           }
+         // Семечка3
+         if(N_Centro==9 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
+            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+           }
+         if(N_Centro==9 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
+            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+           }
+         if(N_Centro==9 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
+            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+           }
+         if(N_Centro==9 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
+            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+           }
+         // Семечка1
+         if(N_Centro==10 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Zap_Rojo_Be_1=true;
+            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+           }
+         if(N_Centro==10 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
+            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+           }
+         if(N_Centro==10 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Vost_Rojo_Be_1=true;
+            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+           }
+         if(N_Centro==10 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
+            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+           }// Семечка1
+         if(N_Centro==11 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Yug_Verde_Be_1=true;
+            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+           }
+         if(N_Centro==11 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Zap_Verde_Be_1=true;
+            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+           }
+         if(N_Centro==11 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Sev_Verde_Be_1=true;
+            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+           }
+         if(N_Centro==11 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Vost_Verde_Be_1=true;
+            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+           }
+         // Семечка1
+         if(N_Centro==12 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Vost_Azul_Be_1=true;
+            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+           }
+         if(N_Centro==12 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Sev_Azul_Be_1=true;
+            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+           }
+         if(N_Centro==12 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Zap_Azul_Be_1=true;
+            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+           }
+         if(N_Centro==12 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Yug_Azul_Be_1=true;
+            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+           }
+         // Семечка4
+         if(N_Centro==13 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
+            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+           }
+         if(N_Centro==13 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
+            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+           }
+         if(N_Centro==13 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
+            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+           }
+         if(N_Centro==13 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
+            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+           }
+         // Семечка1
+         if(N_Centro==14 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Zap_Rojo_Be_1=true;
+            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+           }
+         if(N_Centro==14 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
+            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+           }
+         if(N_Centro==14 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Vost_Rojo_Be_1=true;
+            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+           }
+         if(N_Centro==14 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
+            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+           }// Семечка1
+         if(N_Centro==15 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Yug_Verde_Be_1=true;
+            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+           }
+         if(N_Centro==15 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Zap_Verde_Be_1=true;
+            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+           }
+         if(N_Centro==15 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Sev_Verde_Be_1=true;
+            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+           }
+         if(N_Centro==15 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Vost_Verde_Be_1=true;
+            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+           }
+         // Семечка1
+         if(N_Centro==16 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Vost_Azul_Be_1=true;
+            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+           }
+         if(N_Centro==16 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Sev_Azul_Be_1=true;
+            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+           }
+         if(N_Centro==16 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Zap_Azul_Be_1=true;
+            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+           }
+         if(N_Centro==16 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Yug_Azul_Be_1=true;
+            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+           }
+         // Семечка5
+         if(N_Centro==17 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
+            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+           }
+         if(N_Centro==17 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
+            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+           }
+         if(N_Centro==17 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
+            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+           }
+         if(N_Centro==17 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
+            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+           }
+         // Семечка1
+         if(N_Centro==18 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Zap_Rojo_Be_1=true;
+            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+           }
+         if(N_Centro==18 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
+            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+           }
+         if(N_Centro==18 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Vost_Rojo_Be_1=true;
+            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+           }
+         if(N_Centro==18 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
+            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+           }// Семечка1
+         if(N_Centro==19 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Yug_Verde_Be_1=true;
+            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+           }
+         if(N_Centro==19 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Zap_Verde_Be_1=true;
+            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+           }
+         if(N_Centro==19 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Sev_Verde_Be_1=true;
+            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+           }
+         if(N_Centro==19 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Vost_Verde_Be_1=true;
+            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+           }
+         // Семечка1
+         if(N_Centro==20 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Vost_Azul_Be_1=true;
+            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+           }
+         if(N_Centro==20 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Sev_Azul_Be_1=true;
+            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+           }
+         if(N_Centro==20 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Zap_Azul_Be_1=true;
+            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+           }
+         if(N_Centro==20 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Yug_Azul_Be_1=true;
+            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+           }
+         //BO_1
+
+         if(N_Centro==1 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
+            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+           }
+         if(N_Centro==1 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
+            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+           }
+         if(N_Centro==1 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
+            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+           }
+         if(N_Centro==1 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
+            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+           }
+         // Семечка1
+         if(N_Centro==2 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
+            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+           }
+         if(N_Centro==2 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
+            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+           }
+         if(N_Centro==2 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
+            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+           }
+         if(N_Centro==2 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
+            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+           }// Семечка1
+         if(N_Centro==3 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Vost_Verde_Bo_1=true;
+            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+           }
+         if(N_Centro==3 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
+            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+           }
+         if(N_Centro==3 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Zap_Verde_Bo_1=true;
+            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+           }
+         if(N_Centro==3 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
+            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+           }
+         // Семечка1
+         if(N_Centro==4 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Sev_Azul_Bo_1=true;
+            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+           }
+         if(N_Centro==4 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
+            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+           }
+         if(N_Centro==4 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Yug_Azul_Bo_1=true;
+            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+           }
+         if(N_Centro==4 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
+            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+           }
+         // Семечка2
+         if(N_Centro==5 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
+            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+           }
+         if(N_Centro==5 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
+            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+           }
+         if(N_Centro==5 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
+            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+           }
+         if(N_Centro==5 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
+            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+           }
+         // Семечка1
+         if(N_Centro==6 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
+            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+           }
+         if(N_Centro==6 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
+            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+           }
+         if(N_Centro==6 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
+            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+           }
+         if(N_Centro==6 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
+            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+           }// Семечка1
+         if(N_Centro==7 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Vost_Verde_Bo_1=true;
+            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+           }
+         if(N_Centro==7 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
+            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+           }
+         if(N_Centro==7 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Zap_Verde_Bo_1=true;
+            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+           }
+         if(N_Centro==7 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
+            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+           }
+         // Семечка1
+         if(N_Centro==8 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Sev_Azul_Bo_1=true;
+            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+           }
+         if(N_Centro==8 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
+            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+           }
+         if(N_Centro==8 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Yug_Azul_Bo_1=true;
+            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+           }
+         if(N_Centro==8 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
+            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+           }
+         // Семечка3
+         if(N_Centro==9 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
+            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+           }
+         if(N_Centro==9 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
+            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+           }
+         if(N_Centro==9 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
+            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+           }
+         if(N_Centro==9 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
+            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+           }
+         // Семечка1
+         if(N_Centro==10 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
+            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+           }
+         if(N_Centro==10 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
+            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+           }
+         if(N_Centro==10 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
+            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+           }
+         if(N_Centro==10 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
+            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+           }// Семечка1
+         if(N_Centro==11 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Vost_Verde_Bo_1=true;
+            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+           }
+         if(N_Centro==11 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
+            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+           }
+         if(N_Centro==11 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Zap_Verde_Bo_1=true;
+            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+           }
+         if(N_Centro==11 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
+            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+           }
+         // Семечка1
+         if(N_Centro==12 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Sev_Azul_Bo_1=true;
+            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+           }
+         if(N_Centro==12 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
+            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+           }
+         if(N_Centro==12 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Yug_Azul_Bo_1=true;
+            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+           }
+         if(N_Centro==12 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
+            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+           }
+         // Семечка4
+         if(N_Centro==13 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
+            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+           }
+         if(N_Centro==13 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
+            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+           }
+         if(N_Centro==13 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
+            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+           }
+         if(N_Centro==13 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
+            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+           }
+         // Семечка1
+         if(N_Centro==14 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
+            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+           }
+         if(N_Centro==14 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
+            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+           }
+         if(N_Centro==14 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
+            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+           }
+         if(N_Centro==14 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
+            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+           }// Семечка1
+         if(N_Centro==15 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Vost_Verde_Bo_1=true;
+            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+           }
+         if(N_Centro==15 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
+            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+           }
+         if(N_Centro==15 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Zap_Verde_Bo_1=true;
+            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+           }
+         if(N_Centro==15 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
+            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+           }
+         // Семечка1
+         if(N_Centro==16 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Sev_Azul_Bo_1=true;
+            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+           }
+         if(N_Centro==16 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
+            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+           }
+         if(N_Centro==16 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Yug_Azul_Bo_1=true;
+            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+           }
+         if(N_Centro==16 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
+            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+           }
+         // Семечка5
+         if(N_Centro==17 && Be_0_C==1)
+           {
+            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
+            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+           }
+         if(N_Centro==17 && Bo_0_C==1)
+           {
+            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
+            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+           }
+         if(N_Centro==17 && Be_1_C==1)
+           {
+            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
+            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+           }
+         if(N_Centro==17 && Bo_1_C==1)
+           {
+            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
+            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+           }
+         // Семечка1
+         if(N_Centro==18 && Be_0_C==1)
+           {
+            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
+            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+           }
+         if(N_Centro==18 && Bo_0_C==1)
+           {
+            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
+            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+           }
+         if(N_Centro==18 && Be_1_C==1)
+           {
+            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
+            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+           }
+         if(N_Centro==18 && Bo_1_C==1)
+           {
+            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
+            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+           }// Семечка1
+         if(N_Centro==19 && Be_0_C==1)
+           {
+            M1Be0_Ar3_Vost_Verde_Bo_1=true;
+            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+           }
+         if(N_Centro==19 && Bo_0_C==1)
+           {
+            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
+            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+           }
+         if(N_Centro==19 && Be_1_C==1)
+           {
+            M3Be1_Ar3_Zap_Verde_Bo_1=true;
+            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+           }
+         if(N_Centro==19 && Bo_1_C==1)
+           {
+            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
+            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+           }
+         // Семечка1
+         if(N_Centro==20 && Be_0_C==1)
+           {
+            M1Be0_Ar4_Sev_Azul_Bo_1=true;
+            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+           }
+         if(N_Centro==20 && Bo_0_C==1)
+           {
+            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
+            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+           }
+         if(N_Centro==20 && Be_1_C==1)
+           {
+            M3Be1_Ar4_Yug_Azul_Bo_1=true;
+            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+           }
+         if(N_Centro==20 && Bo_1_C==1)
+           {
+            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
+            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+           }
 
          // ------ Свод Цена-Купол + Свод Цена - Крест Абьём
 
@@ -9639,7 +10698,7 @@ int start()
 
          for(w=1; w<1000; w++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w,13]!=0 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber && ((Form_Patern_Finder[w,1]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w,2]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w,3]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w,4]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==1)   //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w,13]!=0 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber && ((Form_Patern_Finder[w,1]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w,2]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w,3]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w,4]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==1)       //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist=1;
@@ -9657,7 +10716,7 @@ int start()
                   //Центр 1 Желтый
                   int Change1=0,Change2=0,Change3=0,Change4=0;
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,2] ",Form_Patern_Finder[w,2]," N_Centro_r==1 ",N_Centro_r==1);
-                  if(Form_Patern_Finder[w,5]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w,5]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -9675,7 +10734,7 @@ int start()
                     }
                   //Центр 2 Красный
                   // Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,3] ",Form_Patern_Finder[w,3]," N_Centro_r==2 ",N_Centro_r==2);
-                  if(Form_Patern_Finder[w,6]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w,6]==0 && N_Centro_r==2)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w,6]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9692,7 +10751,7 @@ int start()
                     }
                   //Центр 3 Зелёный
                   //Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w,4] ",Form_Patern_Finder[w,4]," N_Centro_r==3 ",N_Centro_r==3);
-                  if(Form_Patern_Finder[w,7]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w,7]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w,7]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9725,7 +10784,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
@@ -9753,7 +10812,7 @@ int start()
             int t;
             for(t=1; t<1000; t++)
               {
-               if( Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/) //Последнее пустое место в массиве
+               if(Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/)  //Последнее пустое место в массиве
                  {
                   //  WRinLine=1;
                   break;
@@ -9832,7 +10891,7 @@ int start()
 
          for(w1=1; w1<1000; w1++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w1,28]!=0 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber && ((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w1,18]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w1,19]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)  //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w1,28]!=0 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber && ((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w1,18]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w1,19]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)      //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist1=1;
@@ -9840,7 +10899,7 @@ int start()
                  {
 
                   int Change1_1=0,Change2_1=0,Change3_1=0,Change4_1=0;
-                  if(Form_Patern_Finder[w1,20]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w1,20]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -9858,7 +10917,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w1,21]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w1,21]==0 && N_Centro_r==2)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w1,21]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9875,7 +10934,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w1,22]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w1,22]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w1,22]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9892,7 +10951,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w1,23]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w1,23]==0 && N_Centro_r==4)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w1,23]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -9908,7 +10967,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
@@ -10000,7 +11059,7 @@ int start()
 
          for(w2=1; w2<1000; w2++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w2,43]!=0 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber && ((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w2,33]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w2,34]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3) //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w2,43]!=0 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber && ((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w2,33]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w2,34]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3)     //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist2=1;
@@ -10008,7 +11067,7 @@ int start()
                  {
 
                   int Change1_2=0,Change2_2=0,Change3_2=0,Change4_2=0;
-                  if(Form_Patern_Finder[w2,35]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w2,35]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10043,7 +11102,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w2,37]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w2,37]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w2,37]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10060,7 +11119,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w2,38]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w2,38]==0 && N_Centro_r==4)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w2,38]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10076,7 +11135,7 @@ int start()
                        }
                     }
 
-                 
+
                  }
 
 
@@ -10170,7 +11229,7 @@ int start()
 
          for(w3=1; w3<1000; w3++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w3,58]!=0 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber && ((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w3,48]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w3,49]!=bodypips[MaxInd_bodypips,0] )))&& InternalPat_1==4)  //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w3,58]!=0 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber && ((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w3,48]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w3,49]!=bodypips[MaxInd_bodypips,0])))&& InternalPat_1==4)      //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist3=1;
@@ -10178,7 +11237,7 @@ int start()
                  {
 
                   int Change1_3=0,Change2_3=0,Change3_3=0,Change4_3=0;
-                  if(Form_Patern_Finder[w3,50]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w3,50]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10196,7 +11255,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w3,51]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w3,51]==0 && N_Centro_r==2)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w3,51]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10213,7 +11272,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w3,52]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w3,52]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w3,52]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10230,7 +11289,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w3,53]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w3,53]==0 && N_Centro_r==4)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w3,53]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10246,7 +11305,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
@@ -10337,7 +11396,7 @@ int start()
          int w4;
          for(w4=1; w4<1000; w4++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w4,73]!=0 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber && ((Form_Patern_Finder[w4,61]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w4,62]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w4,63]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w4,64]!=bodypips[MaxInd_bodypips,0] ))) && InternalPat_1==5) //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w4,73]!=0 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber && ((Form_Patern_Finder[w4,61]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w4,62]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w4,63]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w4,64]!=bodypips[MaxInd_bodypips,0]))) && InternalPat_1==5)     //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist4=1;
@@ -10345,7 +11404,7 @@ int start()
                  {
 
                   int Change1_4=0,Change2_4=0,Change3_4=0,Change4_4=0;
-                  if(Form_Patern_Finder[w4,65]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w4,65]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10363,7 +11422,7 @@ int start()
                     }
                   //Центр 2 Красный
                   // Print(" Price ",bodypips[MaxInd_bodypips,0]," Form_Patern_Finder[w4,3] ",Form_Patern_Finder[w4,3]," N_Centro_r==2 ",N_Centro_r==2);
-                  if(Form_Patern_Finder[w4,66]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w4,66]==0 && N_Centro_r==2)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w4,66]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10413,7 +11472,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
@@ -10519,7 +11578,7 @@ int start()
          int w5;
          for(w5=1; w5<1000; w5++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w5,88]!=0 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber && ((Form_Patern_Finder[w5,76]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w5,77]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w5,78]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w5,79]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==6)   //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w5,88]!=0 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber && ((Form_Patern_Finder[w5,76]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w5,77]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w5,78]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w5,79]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==6)       //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist5=1;
@@ -10527,7 +11586,7 @@ int start()
                  {
 
                   int Change1_5=0,Change2_5=0,Change3_5=0,Change4_5=0;
-                  if(Form_Patern_Finder[w5,80]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w5,80]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10545,7 +11604,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w5,81]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w5,81]==0 && N_Centro_r==2)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w5,81]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10562,7 +11621,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w5,82]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w5,82]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w5,82]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10579,7 +11638,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w5,83]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w5,83]==0 && N_Centro_r==4)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w5,83]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10595,7 +11654,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
@@ -10687,7 +11746,7 @@ int start()
          int w6;
          for(w6=1; w6<1000; w6++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w6,103]!=0 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber && ((Form_Patern_Finder[w6,91]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w6,92]!=bodypips[MaxInd_bodypips,0] ) || (Form_Patern_Finder[w6,93]!=bodypips[MaxInd_bodypips,0] )|| (Form_Patern_Finder[w6,94]!=bodypips[MaxInd_bodypips,0] )))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==7)//Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w6,103]!=0 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber && ((Form_Patern_Finder[w6,91]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w6,92]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w6,93]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w6,94]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==7)    //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist6=1;
@@ -10695,7 +11754,7 @@ int start()
                  {
 
                   int Change1_6=0,Change2_6=0,Change3_6=0,Change4_6=0;
-                  if(Form_Patern_Finder[w6,95]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w6,95]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10730,7 +11789,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w6,97]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w6,97]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w6,97]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10747,7 +11806,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w6,98]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w6,98]==0 && N_Centro_r==4)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w6,98]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10763,7 +11822,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
@@ -10857,7 +11916,7 @@ int start()
 
          for(w7=1; w7<1000; w7++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
-            if((Form_Patern_Finder[w7,118]!=0 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber && ((Form_Patern_Finder[w7,106]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w7,107]!=bodypips[MaxInd_bodypips,0] ) ||(Form_Patern_Finder[w7,108]!=bodypips[MaxInd_bodypips,0] )||(Form_Patern_Finder[w7,109]!=bodypips[MaxInd_bodypips,0] )))&& InternalPat_1==8)   //Поиск цены . Возвращает индекс в массиве
+            if((Form_Patern_Finder[w7,118]!=0 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber && ((Form_Patern_Finder[w7,106]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w7,107]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w7,108]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w7,109]!=bodypips[MaxInd_bodypips,0])))&& InternalPat_1==8)       //Поиск цены . Возвращает индекс в массиве
               {
 
                PriceExist7=1;
@@ -10865,7 +11924,7 @@ int start()
                  {
 
                   int Change1_7=0,Change2_7=0,Change3_7=0,Change4_7=0;
-                  if(Form_Patern_Finder[w7,110]==0 && N_Centro_r==1 ) // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
+                  if(Form_Patern_Finder[w7,110]==0 && N_Centro_r==1)  // Параметр архитектуры 1 ;//Номер Семечки . имеет значение от 1 до 5
 
                     {
                      //Присваиваю значение по архитектуре
@@ -10883,7 +11942,7 @@ int start()
                     }
                   //Центр 2 Красный
 
-                  if(Form_Patern_Finder[w7,111]==0 && N_Centro_r==2 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w7,111]==0 && N_Centro_r==2)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w7,111]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10900,7 +11959,7 @@ int start()
                     }
                   //Центр 3 Зелёный
 
-                  if(Form_Patern_Finder[w7,112]==0 && N_Centro_r==3 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w7,112]==0 && N_Centro_r==3)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w7,112]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10917,7 +11976,7 @@ int start()
                     }
                   //Центр 4 Синий
 
-                  if(Form_Patern_Finder[w7,113]==0 && N_Centro_r==4 ) // Параметр архитектуры 1
+                  if(Form_Patern_Finder[w7,113]==0 && N_Centro_r==4)  // Параметр архитектуры 1
                     {
                      //Присваиваю значение по архитектуре
                      Form_Patern_Finder[w7,113]=1;//Присваиваю значение соеденения в архитектуре "Желтый Карсный Синий Зелёный " + Место по цене"Архитектура" + Место по полученному абьёму"00000000"
@@ -10933,7 +11992,7 @@ int start()
                        }
                     }
 
-                  
+
                  }
 
 
