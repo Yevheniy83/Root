@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.2.3.mq4 |
+//|                                             Nucleo   v 2.3.1.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -76,6 +76,7 @@ double bodypips[99999,5];// Array for data analysis using the Sunflower method
 double comp_bodypips[99999];
 //---END---ARRAYS----
 //------DOUBLE VARS-----
+int Arch3=0;
 double normalLevel;//moneda
 double center;//moneda
 double DoublspredPoint;//moneda
@@ -339,6 +340,7 @@ int kubo_5=0;
 int kubo_6=0;
 int kubo_7=0;
 int kubo_8=0;
+string Pr_Arch;
 string Text_Kubo_1="0";
 string Text_Kubo_2="0";
 string Text_Kubo_3="0";
@@ -8112,7 +8114,7 @@ int start()
             N_Gr20++;
            }
          //Print(" N_Centro ",N_Centro," N_Gr20 ",N_Gr20);
-
+         //Be_0
          //Семечка 1
          //Архитектура 1
          bool M1Be0_Ar1_Yug_Amarillo_Be_0=false;//Расшифровка M1Be0 Место 1 Переменная в ячейке относительно архитектуры 3.Yug_Amarillo_Be_0 Подача Be_0 с архитектуры 1 Цвет архитектуры жектый
@@ -8558,49 +8560,292 @@ int start()
          bool M4Bo1_Ar20_Vost_Azul_Bo_1=false;
 
          //Заход в архитектуру по формуле
+         //Be_0
+
+
+         // ------ Свод Цена-Купол + Свод Цена - Крест Абьём
+
+         // Пример. Массива Север
+         //   Sev[1,1]=0; Be_0
+         //   Sev[1,2]=0; Bo_0
+         //   Sev[1,3]=0; Be_1
+         //   Sev[1,4]=0; Bo_1
+
+         //Блок Получения Разрешений для оброботки события расчёта патернов
+         //1.Расчитывается - сравнивается предыдущие значения с текущими
+         //Print(" comp_Sev[1,1]!=Sev[1,1] ",comp_Sev[1,1]!=Sev[1,1]); //ok
+         if(comp_Sev[1,1]!=Sev[1,1])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
+           {
+            Per_Sev1=1;
+            Per_Sev2=0;
+            Per_Sev3=0;
+            Per_Sev4=0;
+            Per_Sev5=0;
+            Per_Sev6=0;
+            Per_Sev7=0;
+            Per_Sev8=0;
+            //Print("Per_Sev1 ",Per_Sev1);
+            Arch3=1;
+           }  //присвоил разрешение на оброботку события
+         if(comp_Sev[1,2]!=Sev[1,2])//Bo_0  Место 2,6,10,14,18
+           {
+            Per_Sev1=0;
+            Per_Sev2=1;
+            Per_Sev3=0;
+            Per_Sev4=0;
+            Per_Sev5=0;
+            Per_Sev6=0;
+            Per_Sev7=0;
+            Per_Sev8=0;
+            //Print("Per_Sev2 ",Per_Sev2);
+            Arch3=2;
+           }
+         if(comp_Sev[1,3]!=Sev[1,3])//Be_1 Место 3,7,11,15,19
+           {
+            Per_Sev1=0;
+            Per_Sev2=0;
+            Per_Sev3=1;
+            Per_Sev4=0;
+            Per_Sev5=0;
+            Per_Sev6=0;
+            Per_Sev7=0;
+            Per_Sev8=0;
+            //Print("Per_Sev3 ",Per_Sev3);
+            Arch3=3;
+           }
+         if(comp_Sev[1,4]!=Sev[1,4])//Bo_1 Место 4,8,12,16,20
+           {
+            Per_Sev1=0;
+            Per_Sev2=0;
+            Per_Sev3=0;
+            Per_Sev4=1;
+            Per_Sev5=0;
+            Per_Sev6=0;
+            Per_Sev7=0;
+            Per_Sev8=0;
+            //Print("Per_Sev4 ",Per_Sev4);
+            Arch3=4;
+           }
+         if(comp_Sev[1,5]!=Sev[1,5])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
+           {
+            Per_Sev1=0;
+            Per_Sev2=0;
+            Per_Sev3=0;
+            Per_Sev4=0;
+            Per_Sev5=1;
+            Per_Sev6=0;
+            Per_Sev7=0;
+            Per_Sev8=0;
+            //Print("Per_Sev1 ",Per_Sev1);
+            Arch3=5;
+           }  //присвоил разрешение на оброботку события
+         if(comp_Sev[1,6]!=Sev[1,6])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
+           {
+            Per_Sev1=0;
+            Per_Sev2=0;
+            Per_Sev3=0;
+            Per_Sev4=0;
+            Per_Sev5=0;
+            Per_Sev6=1;
+            Per_Sev7=0;
+            Per_Sev8=0;
+            //Print("Per_Sev1 ",Per_Sev1);
+            Arch3=6;
+           }  //присвоил разрешение на оброботку события
+         if(comp_Sev[1,7]!=Sev[1,7])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
+           {
+            Per_Sev1=0;
+            Per_Sev2=0;
+            Per_Sev3=0;
+            Per_Sev4=0;
+            Per_Sev5=0;
+            Per_Sev6=0;
+            Per_Sev7=1;
+            Per_Sev8=0;
+            //Print("Per_Sev1 ",Per_Sev1);
+            Arch3=7;
+           }  //присвоил разрешение на оброботку события
+         if(comp_Sev[1,8]!=Sev[1,8])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
+           {
+            Per_Sev1=0;
+            Per_Sev2=0;
+            Per_Sev3=0;
+            Per_Sev4=0;
+            Per_Sev5=0;
+            Per_Sev6=0;
+            Per_Sev7=0;
+            Per_Sev8=1;
+            //Print("Per_Sev1 ",Per_Sev1);
+            Arch3=8;
+           }  //присвоил разрешение на оброботку события
+
+         //int PermisBLock=0;
+         //if(comp_Sev[1,1]!=Sev[1,1] && comp_Sev[1,2]!=Sev[1,2] && comp_Sev[1,3]!=Sev[1,3] && comp_Sev[1,4]!=Sev[1,4] && comp_Sev[1,5]!=Sev[1,5] && comp_Sev[1,6]==Sev[1,6] && comp_Sev[1,7]==Sev[1,7] && comp_Sev[1,8]==Sev[1,8])//Если патерн после пересчёта на изменился относительно подачи абьёма
+         //{  PermisBLock=1;}
+         //if(PermisBLock==1 && Price_Compare!=bodypips[MaxInd_bodypips,0])//Если цена разная то доступ в блок открыт
+         //{
+         //2. Определяется номер центра и порядковый номер семечки
+         //Print("N_Centro 1 ",N_Centro);//test OK
+         N_Centro_r=0;
+         PipsNumber=0;
+         if(N_Centro==1)
+           {
+            N_Centro_r=1;
+            PipsNumber=1;
+           }
+         if(N_Centro==2)
+           {
+            N_Centro_r=2;
+            PipsNumber=1;
+           }
+         if(N_Centro==3)
+           {
+            N_Centro_r=3;
+            PipsNumber=1;
+           }
+         if(N_Centro==4)
+           {
+            N_Centro_r=4;
+            PipsNumber=1;
+           }
+         if(N_Centro==5)
+           {
+            N_Centro_r=1;
+            PipsNumber=2;
+           }
+         if(N_Centro==6)
+           {
+            N_Centro_r=2;
+            PipsNumber=2;
+           }
+         if(N_Centro==7)
+           {
+            N_Centro_r=3;
+            PipsNumber=2;
+           }
+         if(N_Centro==8)
+           {
+            N_Centro_r=4;
+            PipsNumber=2;
+           }
+         if(N_Centro==9)
+           {
+            N_Centro_r=1;
+            PipsNumber=3;
+           }
+         if(N_Centro==10)
+           {
+            N_Centro_r=2;
+            PipsNumber=3;
+           }
+         if(N_Centro==11)
+           {
+            N_Centro_r=3;
+            PipsNumber=3;
+           }
+         if(N_Centro==12)
+           {
+            N_Centro_r=4;
+            PipsNumber=3;
+           }
+         if(N_Centro==13)
+           {
+            N_Centro_r=1;
+            PipsNumber=4;
+           }
+         if(N_Centro==14)
+           {
+            N_Centro_r=2;
+            PipsNumber=4;
+           }
+         if(N_Centro==15)
+           {
+            N_Centro_r=3;
+            PipsNumber=4;
+           }
+         if(N_Centro==16)
+           {
+            N_Centro_r=4;
+            PipsNumber=4;
+           }
+         if(N_Centro==17)
+           {
+            N_Centro_r=1;
+            PipsNumber=5;
+           }
+         if(N_Centro==18)
+           {
+            N_Centro_r=2;
+            PipsNumber=5;
+           }
+         if(N_Centro==19)
+           {
+            N_Centro_r=3;
+            PipsNumber=5;
+           }
+         if(N_Centro==20)
+           {
+            N_Centro_r=4;
+            PipsNumber=5;
+           }
+         //Print(" N_Centro ",N_Centro); ok
+         //Print(" N_Centro_r ",N_Centro_r);ok
+         //Print(" PipsNumber ",PipsNumber);
          string PrintArch;
+         //Arch3 юто переменная указываэщаэ место куда подачётся обьём после поворотов механизма
+         //Провести нумерацию по почаче переменной Be_0-1 Bo_0 2 N_Centro_Ind=1_1;
          //Расщитать и дописать порядковый номер в 5 блоках в переменные для стандартизации
          // Семечка1
+         double N_Centro_Ind=0;
          if(N_Centro==1 && Be_0_C==1)
            {
-            M1Be0_Ar1_Yug_Amarillo_Be_0=true;
-            PrintArch="M1Be0_Ar1_Yug_Amarillo_Be_0";
+
+            PrintArch="M1Be0_Ar1_Yug_Amarillo_Be_0_1.43";
+            N_Centro_Ind=1.43;
            }
          if(N_Centro==1 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Zap_Amarillo_Be_0=true;
-            PrintArch="M2Bo0_Ar1_Zap_Amarillo_Be_0 ";
+
+            PrintArch="M2Bo0_Ar1_Zap_Amarillo_Be_0_1.14 ";
+            N_Centro_Ind=1.14;
            }
          if(N_Centro==1 && Be_1_C==1)
            {
-            M3Be1_Ar1_Sev_Amarillo_Be_0=true;
-            PrintArch="M3Be1_Ar1_Sev_Amarillo_Be_0 ";
+
+            PrintArch="M3Be1_Ar1_Sev_Amarillo_Be_0_1.21 ";
+            N_Centro_Ind=1.21;
            }
          if(N_Centro==1 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Vost_Amarillo_Be_0=true;
-            PrintArch="M4Bo1_Ar1_Vost_Amarillo_Be_0 ";
+
+            PrintArch="M4Bo1_Ar1_Vost_Amarillo_Be_0_1.32 ";
+            N_Centro_Ind=1.32;
            }
          // Семечка1
+
          if(N_Centro==2 && Be_0_C==1)
            {
             M1Be0_Ar2_Vost_Rojo_Be_0=true;
-            PrintArch="M1Be0_Ar2_Vost_Rojo_Be_0 ";
+            PrintArch="M1Be0_Ar2_Vost_Rojo_Be_0_2.22 ";
+            N_Centro_Ind=2.22;
            }
          if(N_Centro==2 && Bo_0_C==1)
            {
             M2Bo0_Ar2_Sev_Rojo_Be_0=true;
-            PrintArch="M2Bo0_Ar2_Sev_Rojo_Be_0 ";
+            PrintArch="M2Bo0_Ar2_Sev_Rojo_Be_0_2.11 ";
+            N_Centro_Ind=2.11;
            }
          if(N_Centro==2 && Be_1_C==1)
            {
             M3Be1_Ar2_Zap_Rojo_Be_0=true;
-            PrintArch="M3Be1_Ar2_Zap_Rojo_Be_0 ";
+            PrintArch="M3Be1_Ar2_Zap_Rojo_Be_0_2.14 ";
+            N_Centro_Ind=2.14;
            }
          if(N_Centro==2 && Bo_1_C==1)
            {
             M4Bo1_Ar2_Yug_Rojo_Be_0=true;
-            PrintArch="M4Bo1_Ar2_Yug_Rojo_Be_0 ";
+            PrintArch="M4Bo1_Ar2_Yug_Rojo_Be_0_2.23 ";
+            N_Centro_Ind=2.23;
            }// Семечка1
          if(N_Centro==3 && Be_0_C==1)
            {
@@ -8986,44 +9231,52 @@ int start()
          // Семечка1
          if(N_Centro==1 && Be_0_C==1)
            {
-            M1Be0_Ar1_Vost_Amarillo_Bo_0=true;
-            PrintArch_1="M1Be0_Ar1_Vost_Amarillo_Bo_0";
+
+            PrintArch_1="M1Be0_Ar1_Vost_Amarillo_Bo_0_1.42";
+            N_Centro_Ind=1.42;
            }
          if(N_Centro==1 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Yug_Amarillo_Bo_0=true;
-            PrintArch_1="M2Bo0_Ar1_Yug_Amarillo_Bo_0 ";
+
+            PrintArch_1="M2Bo0_Ar1_Yug_Amarillo_Bo_0_1.13 ";
+            N_Centro_Ind=1.13;
            }
          if(N_Centro==1 && Be_1_C==1)
            {
-            M3Be1_Ar1_Zap_Amarillo_Bo_0=true;
-            PrintArch_1="M3Be1_Ar1_Zap_Amarillo_Bo_0 ";
+
+            PrintArch_1="M3Be1_Ar1_Zap_Amarillo_Bo_01.24 ";
+            N_Centro_Ind=1.24;
            }
          if(N_Centro==1 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Sev_Amarillo_Bo_0=true;
-            PrintArch_1="M4Bo1_Ar1_Sev_Amarillo_Bo_0 ";
+
+            PrintArch_1="M4Bo1_Ar1_Sev_Amarillo_Bo_01.31 ";
+            N_Centro_Ind=1.31;
            }//ok
          // Семечка1
          if(N_Centro==2 && Be_0_C==1)
            {
             M1Be0_Ar2_Sev_Rojo_Bo_0=true;
-            PrintArch_1="M1Be0_Ar2_Sev_Rojo_Bo_0 ";
+            PrintArch_1="M1Be0_Ar2_Sev_Rojo_Bo_0_2.21 ";
+            N_Centro_Ind=2.21;
            }
          if(N_Centro==2 && Bo_0_C==1)
            {
             M2Bo0_Ar2_Zap_Rojo_Bo_0=true;
-            PrintArch_1="M2Bo0_Ar2_Zap_Rojo_Bo_0 ";
+            PrintArch_1="M2Bo0_Ar2_Zap_Rojo_Bo_0_2.14 ";
+            N_Centro_Ind=2.14;
            }
          if(N_Centro==2 && Be_1_C==1)
            {
             M3Be1_Ar2_Yug_Rojo_Bo_0=true;
-            PrintArch_1="M3Be1_Ar2_Yug_Rojo_Bo_0 ";
+            PrintArch_1="M3Be1_Ar2_Yug_Rojo_Bo_0_2.13 ";
+            N_Centro_Ind=2.13;
            }
          if(N_Centro==2 && Bo_1_C==1)
            {
             M4Bo1_Ar2_Vost_Rojo_Bo_0=true;
-            PrintArch_1="M4Bo1_Ar2_Vost_Rojo_Bo_0 ";
+            PrintArch_1="M4Bo1_Ar2_Vost_Rojo_Bo_0_2.22 ";
+            N_Centro_Ind=2.22;
            }//ok
          // Семечка1
          if(N_Centro==3 && Be_0_C==1)
@@ -9403,1060 +9656,857 @@ int start()
             M4Bo1_Ar20_Zap_Azul_Bo_0=true;
             PrintArch_1=" M4Bo1_Ar20_Zap_Azul_Bo_0 ";
            }
+
+         string PrintArch_2;
          //Be_1
 
          if(N_Centro==1 && Be_0_C==1)
            {
-            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
-            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+
+            PrintArch_2="M1Be0_Ar1_Sev_Amarillo_Be_1_1.41";
+            N_Centro_Ind=1.41;
            }
          if(N_Centro==1 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
-            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+
+            PrintArch_2="M2Bo0_Ar1_Vost_Amarillo_Be_1_1.12";
+            N_Centro_Ind=1.12;
            }
          if(N_Centro==1 && Be_1_C==1)
            {
-            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
-            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+
+            PrintArch_2="M3Be1_Ar1_Yug_Amarillo_Be_1_1.23";
+            N_Centro_Ind=1.23;
            }
          if(N_Centro==1 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
-            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+
+            PrintArch_2="M4Bo1_Ar1_Zap_Amarillo_Be_1_1.34";
+            N_Centro_Ind=1.34;
            }
          // Семечка1
          if(N_Centro==2 && Be_0_C==1)
            {
             M1Be0_Ar2_Zap_Rojo_Be_1=true;
-            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+            PrintArch_2="M1Be0_Ar2_Zap_Rojo_Be_1_2.24";
+            N_Centro_Ind=2.24;
            }
          if(N_Centro==2 && Bo_0_C==1)
            {
             M2Bo0_Ar2_Yug_Rojo_Be_1=true;
-            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+            PrintArch_2="M2Bo0_Ar2_Yug_Rojo_Be_1_2.13";
+            N_Centro_Ind=2.13;
            }
          if(N_Centro==2 && Be_1_C==1)
            {
             M3Be1_Ar2_Vost_Rojo_Be_1=true;
-            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+            PrintArch_2="M3Be1_Ar2_Vost_Rojo_Be_1_2.12";
+            N_Centro_Ind=2.12;
            }
          if(N_Centro==2 && Bo_1_C==1)
            {
             M4Bo1_Ar2_Sev_Rojo_Be_1=true;
-            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+            PrintArch_2="M4Bo1_Ar2_Sev_Rojo_Be_1_2.21";
+            N_Centro_Ind=2.21;
            }// Семечка1
          if(N_Centro==3 && Be_0_C==1)
            {
             M1Be0_Ar3_Yug_Verde_Be_1=true;
-            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+            PrintArch_2="M1Be0_Ar3_Yug_Verde_Be_1 ";
            }
          if(N_Centro==3 && Bo_0_C==1)
            {
             M2Bo0_Ar3_Zap_Verde_Be_1=true;
-            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+            PrintArch_2="M2Bo0_Ar3_Zap_Verde_Be_1 ";
            }
          if(N_Centro==3 && Be_1_C==1)
            {
             M3Be1_Ar3_Sev_Verde_Be_1=true;
-            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+            PrintArch_2="M3Be1_Ar3_Sev_Verde_Be_1 ";
            }
          if(N_Centro==3 && Bo_1_C==1)
            {
             M4Bo1_Ar3_Vost_Verde_Be_1=true;
-            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+            PrintArch_2="M4Bo1_Ar3_Vost_Verde_Be_1 ";
            }
          // Семечка1
          if(N_Centro==4 && Be_0_C==1)
            {
             M1Be0_Ar4_Vost_Azul_Be_1=true;
-            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+            PrintArch_2="M1Be0_Ar4_Vost_Azul_Be_1 ";
            }
          if(N_Centro==4 && Bo_0_C==1)
            {
             M2Bo0_Ar4_Sev_Azul_Be_1=true;
-            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+            PrintArch_2="M2Bo0_Ar4_Sev_Azul_Be_1 ";
            }
          if(N_Centro==4 && Be_1_C==1)
            {
             M3Be1_Ar4_Zap_Azul_Be_1=true;
-            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+            PrintArch_2="M3Be1_Ar4_Zap_Azul_Be_1 ";
            }
          if(N_Centro==4 && Bo_1_C==1)
            {
             M4Bo1_Ar4_Yug_Azul_Be_1=true;
-            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+            PrintArch_2=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
            }
          // Семечка2
          if(N_Centro==5 && Be_0_C==1)
            {
-            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
-            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+            M1Be0_Ar5_Sev_Amarillo_Be_1=true;
+            PrintArch_2="M1Be0_Ar5_Sev_Amarillo_Be_1";
            }
          if(N_Centro==5 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
-            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+            M2Bo0_Ar5_Vost_Amarillo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar5_Vost_Amarillo_Be_1";
            }
          if(N_Centro==5 && Be_1_C==1)
            {
-            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
-            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+            M3Be1_Ar5_Yug_Amarillo_Be_1=true;
+            PrintArch_2="M3Be1_Ar5_Yug_Amarillo_Be_1";
            }
          if(N_Centro==5 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
-            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+            M4Bo1_Ar5_Zap_Amarillo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar5_Zap_Amarillo_Be_1";
            }
          // Семечка1
          if(N_Centro==6 && Be_0_C==1)
            {
-            M1Be0_Ar2_Zap_Rojo_Be_1=true;
-            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+            M1Be0_Ar6_Zap_Rojo_Be_1=true;
+            PrintArch_2="M1Be0_Ar6_Zap_Rojo_Be_1";
            }
          if(N_Centro==6 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
-            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+            M2Bo0_Ar6_Yug_Rojo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar6_Yug_Rojo_Be_1";
            }
          if(N_Centro==6 && Be_1_C==1)
            {
-            M3Be1_Ar2_Vost_Rojo_Be_1=true;
-            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+            M3Be1_Ar6_Vost_Rojo_Be_1=true;
+            PrintArch_2="M3Be1_Ar6_Vost_Rojo_Be_1";
            }
          if(N_Centro==6 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
-            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+            M4Bo1_Ar6_Sev_Rojo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar6_Sev_Rojo_Be_1";
            }// Семечка1
          if(N_Centro==7 && Be_0_C==1)
            {
-            M1Be0_Ar3_Yug_Verde_Be_1=true;
-            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+            M1Be0_Ar7_Yug_Verde_Be_1=true;
+            PrintArch_2="M1Be0_Ar7_Yug_Verde_Be_1 ";
            }
          if(N_Centro==7 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Zap_Verde_Be_1=true;
-            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+            M2Bo0_Ar7_Zap_Verde_Be_1=true;
+            PrintArch_2="M2Bo0_Ar7_Zap_Verde_Be_1 ";
            }
          if(N_Centro==7 && Be_1_C==1)
            {
-            M3Be1_Ar3_Sev_Verde_Be_1=true;
-            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+            M3Be1_Ar7_Sev_Verde_Be_1=true;
+            PrintArch_2="M3Be1_Ar7_Sev_Verde_Be_1 ";
            }
          if(N_Centro==7 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Vost_Verde_Be_1=true;
-            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+            M4Bo1_Ar7_Vost_Verde_Be_1=true;
+            PrintArch_2="M4Bo1_Ar7_Vost_Verde_Be_1 ";
            }
          // Семечка1
          if(N_Centro==8 && Be_0_C==1)
            {
-            M1Be0_Ar4_Vost_Azul_Be_1=true;
-            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+            M1Be0_Ar8_Vost_Azul_Be_1=true;
+            PrintArch_2="M1Be0_Ar8_Vost_Azul_Be_1 ";
            }
          if(N_Centro==8 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Sev_Azul_Be_1=true;
-            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+            M2Bo0_Ar8_Sev_Azul_Be_1=true;
+            PrintArch_2="M2Bo0_Ar8_Sev_Azul_Be_1 ";
            }
          if(N_Centro==8 && Be_1_C==1)
            {
-            M3Be1_Ar4_Zap_Azul_Be_1=true;
-            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+            M3Be1_Ar8_Zap_Azul_Be_1=true;
+            PrintArch_2="M3Be1_Ar8_Zap_Azul_Be_1 ";
            }
          if(N_Centro==8 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Yug_Azul_Be_1=true;
-            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+            M4Bo1_Ar8_Yug_Azul_Be_1=true;
+            PrintArch_2=" M4Bo1_Ar8_Yug_Azul_Be_1 ";
            }
          // Семечка3
          if(N_Centro==9 && Be_0_C==1)
            {
-            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
-            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+            M1Be0_Ar9_Sev_Amarillo_Be_1=true;
+            PrintArch_2="M1Be0_Ar9_Sev_Amarillo_Be_1";
            }
          if(N_Centro==9 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
-            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+            M2Bo0_Ar9_Vost_Amarillo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar9_Vost_Amarillo_Be_1";
            }
          if(N_Centro==9 && Be_1_C==1)
            {
-            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
-            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+            M3Be1_Ar9_Yug_Amarillo_Be_1=true;
+            PrintArch_2="M3Be1_Ar9_Yug_Amarillo_Be_1";
            }
          if(N_Centro==9 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
-            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+            M4Bo1_Ar9_Zap_Amarillo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar9_Zap_Amarillo_Be_1";
            }
          // Семечка1
          if(N_Centro==10 && Be_0_C==1)
            {
-            M1Be0_Ar2_Zap_Rojo_Be_1=true;
-            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+            M1Be0_Ar10_Zap_Rojo_Be_1=true;
+            PrintArch_2="M1Be0_Ar10_Zap_Rojo_Be_1";
            }
          if(N_Centro==10 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
-            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+            M2Bo0_Ar10_Yug_Rojo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar10_Yug_Rojo_Be_1";
            }
          if(N_Centro==10 && Be_1_C==1)
            {
-            M3Be1_Ar2_Vost_Rojo_Be_1=true;
-            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+            M3Be1_Ar10_Vost_Rojo_Be_1=true;
+            PrintArch_2="M3Be1_Ar10_Vost_Rojo_Be_1";
            }
          if(N_Centro==10 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
-            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+            M4Bo1_Ar10_Sev_Rojo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar10_Sev_Rojo_Be_1";
            }// Семечка1
          if(N_Centro==11 && Be_0_C==1)
            {
-            M1Be0_Ar3_Yug_Verde_Be_1=true;
-            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+            M1Be0_Ar11_Yug_Verde_Be_1=true;
+            PrintArch_2="M1Be0_Ar11_Yug_Verde_Be_1 ";
            }
          if(N_Centro==11 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Zap_Verde_Be_1=true;
-            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+            M2Bo0_Ar11_Zap_Verde_Be_1=true;
+            PrintArch_2="M2Bo0_Ar11_Zap_Verde_Be_1 ";
            }
          if(N_Centro==11 && Be_1_C==1)
            {
-            M3Be1_Ar3_Sev_Verde_Be_1=true;
-            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+            M3Be1_Ar11_Sev_Verde_Be_1=true;
+            PrintArch_2="M3Be1_Ar11_Sev_Verde_Be_1 ";
            }
          if(N_Centro==11 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Vost_Verde_Be_1=true;
-            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+            M4Bo1_Ar11_Vost_Verde_Be_1=true;
+            PrintArch_2="M4Bo1_Ar11_Vost_Verde_Be_1 ";
            }
          // Семечка1
          if(N_Centro==12 && Be_0_C==1)
            {
-            M1Be0_Ar4_Vost_Azul_Be_1=true;
-            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+            M1Be0_Ar12_Vost_Azul_Be_1=true;
+            PrintArch_2="M1Be0_Ar12_Vost_Azul_Be_1 ";
            }
          if(N_Centro==12 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Sev_Azul_Be_1=true;
-            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+            M2Bo0_Ar12_Sev_Azul_Be_1=true;
+            PrintArch_2="M2Bo0_Ar12_Sev_Azul_Be_1 ";
            }
          if(N_Centro==12 && Be_1_C==1)
            {
-            M3Be1_Ar4_Zap_Azul_Be_1=true;
-            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+            M3Be1_Ar12_Zap_Azul_Be_1=true;
+            PrintArch_2="M3Be1_Ar12_Zap_Azul_Be_1 ";
            }
          if(N_Centro==12 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Yug_Azul_Be_1=true;
-            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+            M4Bo1_Ar12_Yug_Azul_Be_1=true;
+            PrintArch_2=" M4Bo1_Ar12_Yug_Azul_Be_1 ";
            }
          // Семечка4
          if(N_Centro==13 && Be_0_C==1)
            {
-            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
-            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+            M1Be0_Ar13_Sev_Amarillo_Be_1=true;
+            PrintArch_2="M1Be0_Ar13_Sev_Amarillo_Be_1";
            }
          if(N_Centro==13 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
-            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+            M2Bo0_Ar13_Vost_Amarillo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar13_Vost_Amarillo_Be_1";
            }
          if(N_Centro==13 && Be_1_C==1)
            {
-            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
-            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+            M3Be1_Ar13_Yug_Amarillo_Be_1=true;
+            PrintArch_2="M3Be1_Ar13_Yug_Amarillo_Be_1";
            }
          if(N_Centro==13 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
-            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+            M4Bo1_Ar13_Zap_Amarillo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar13_Zap_Amarillo_Be_1";
            }
          // Семечка1
          if(N_Centro==14 && Be_0_C==1)
            {
-            M1Be0_Ar2_Zap_Rojo_Be_1=true;
-            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+            M1Be0_Ar14_Zap_Rojo_Be_1=true;
+            PrintArch_2="M1Be0_Ar14_Zap_Rojo_Be_1";
            }
          if(N_Centro==14 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
-            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+            M2Bo0_Ar14_Yug_Rojo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar14_Yug_Rojo_Be_1";
            }
          if(N_Centro==14 && Be_1_C==1)
            {
-            M3Be1_Ar2_Vost_Rojo_Be_1=true;
-            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+            M3Be1_Ar14_Vost_Rojo_Be_1=true;
+            PrintArch_2="M3Be1_Ar14_Vost_Rojo_Be_1";
            }
          if(N_Centro==14 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
-            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+            M4Bo1_Ar14_Sev_Rojo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar14_Sev_Rojo_Be_1";
            }// Семечка1
          if(N_Centro==15 && Be_0_C==1)
            {
-            M1Be0_Ar3_Yug_Verde_Be_1=true;
-            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+            M1Be0_Ar15_Yug_Verde_Be_1=true;
+            PrintArch_2="M1Be0_Ar15_Yug_Verde_Be_1 ";
            }
          if(N_Centro==15 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Zap_Verde_Be_1=true;
-            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+            M2Bo0_Ar15_Zap_Verde_Be_1=true;
+            PrintArch_2="M2Bo0_Ar15_Zap_Verde_Be_1 ";
            }
          if(N_Centro==15 && Be_1_C==1)
            {
-            M3Be1_Ar3_Sev_Verde_Be_1=true;
-            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+            M3Be1_Ar15_Sev_Verde_Be_1=true;
+            PrintArch_2="M3Be1_Ar15_Sev_Verde_Be_1 ";
            }
          if(N_Centro==15 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Vost_Verde_Be_1=true;
-            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+            M4Bo1_Ar15_Vost_Verde_Be_1=true;
+            PrintArch_2="M4Bo1_Ar15_Vost_Verde_Be_1 ";
            }
          // Семечка1
          if(N_Centro==16 && Be_0_C==1)
            {
-            M1Be0_Ar4_Vost_Azul_Be_1=true;
-            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+            M1Be0_Ar16_Vost_Azul_Be_1=true;
+            PrintArch_2="M1Be0_Ar16_Vost_Azul_Be_1 ";
            }
          if(N_Centro==16 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Sev_Azul_Be_1=true;
-            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+            M2Bo0_Ar16_Sev_Azul_Be_1=true;
+            PrintArch_2="M2Bo0_Ar16_Sev_Azul_Be_1 ";
            }
          if(N_Centro==16 && Be_1_C==1)
            {
-            M3Be1_Ar4_Zap_Azul_Be_1=true;
-            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+            M3Be1_Ar16_Zap_Azul_Be_1=true;
+            PrintArch_2="M3Be1_Ar16_Zap_Azul_Be_1 ";
            }
          if(N_Centro==16 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Yug_Azul_Be_1=true;
-            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+            M4Bo1_Ar16_Yug_Azul_Be_1=true;
+            PrintArch_2=" M4Bo1_Ar16_Yug_Azul_Be_1 ";
            }
          // Семечка5
          if(N_Centro==17 && Be_0_C==1)
            {
-            M1Be0_Ar1_Sev_Amarillo_Be_1=true;
-            PrintArch="M1Be0_Ar1_Sev_Amarillo_Be_1";
+            M1Be0_Ar17_Sev_Amarillo_Be_1=true;
+            PrintArch_2="M1Be0_Ar17_Sev_Amarillo_Be_1";
            }
          if(N_Centro==17 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Vost_Amarillo_Be_1=true;
-            PrintArch="M2Bo0_Ar1_Vost_Amarillo_Be_1";
+            M2Bo0_Ar17_Vost_Amarillo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar17_Vost_Amarillo_Be_1";
            }
          if(N_Centro==17 && Be_1_C==1)
            {
-            M3Be1_Ar1_Yug_Amarillo_Be_1=true;
-            PrintArch="M3Be1_Ar1_Yug_Amarillo_Be_1";
+            M3Be1_Ar17_Yug_Amarillo_Be_1=true;
+            PrintArch_2="M3Be1_Ar17_Yug_Amarillo_Be_1";
            }
          if(N_Centro==17 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Zap_Amarillo_Be_1=true;
-            PrintArch="M4Bo1_Ar1_Zap_Amarillo_Be_1";
+            M4Bo1_Ar17_Zap_Amarillo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar17_Zap_Amarillo_Be_1";
            }
          // Семечка1
          if(N_Centro==18 && Be_0_C==1)
            {
-            M1Be0_Ar2_Zap_Rojo_Be_1=true;
-            PrintArch="M1Be0_Ar2_Zap_Rojo_Be_1";
+            M1Be0_Ar18_Zap_Rojo_Be_1=true;
+            PrintArch_2="M1Be0_Ar18_Zap_Rojo_Be_1";
            }
          if(N_Centro==18 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Yug_Rojo_Be_1=true;
-            PrintArch="M2Bo0_Ar2_Yug_Rojo_Be_1";
+            M2Bo0_Ar18_Yug_Rojo_Be_1=true;
+            PrintArch_2="M2Bo0_Ar18_Yug_Rojo_Be_1";
            }
          if(N_Centro==18 && Be_1_C==1)
            {
-            M3Be1_Ar2_Vost_Rojo_Be_1=true;
-            PrintArch="M3Be1_Ar2_Vost_Rojo_Be_1";
+            M3Be1_Ar18_Vost_Rojo_Be_1=true;
+            PrintArch_2="M3Be1_Ar18_Vost_Rojo_Be_1";
            }
          if(N_Centro==18 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Sev_Rojo_Be_1=true;
-            PrintArch="M4Bo1_Ar2_Sev_Rojo_Be_1";
+            M4Bo1_Ar18_Sev_Rojo_Be_1=true;
+            PrintArch_2="M4Bo1_Ar18_Sev_Rojo_Be_1";
            }// Семечка1
          if(N_Centro==19 && Be_0_C==1)
            {
-            M1Be0_Ar3_Yug_Verde_Be_1=true;
-            PrintArch="M1Be0_Ar3_Yug_Verde_Be_1 ";
+            M1Be0_Ar19_Yug_Verde_Be_1=true;
+            PrintArch_2="M1Be0_Ar19_Yug_Verde_Be_1 ";
            }
          if(N_Centro==19 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Zap_Verde_Be_1=true;
-            PrintArch="M2Bo0_Ar3_Zap_Verde_Be_1 ";
+            M2Bo0_Ar19_Zap_Verde_Be_1=true;
+            PrintArch_2="M2Bo0_Ar19_Zap_Verde_Be_1 ";
            }
          if(N_Centro==19 && Be_1_C==1)
            {
-            M3Be1_Ar3_Sev_Verde_Be_1=true;
-            PrintArch="M3Be1_Ar3_Sev_Verde_Be_1 ";
+            M3Be1_Ar19_Sev_Verde_Be_1=true;
+            PrintArch_2="M3Be1_Ar19_Sev_Verde_Be_1 ";
            }
          if(N_Centro==19 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Vost_Verde_Be_1=true;
-            PrintArch="M4Bo1_Ar3_Vost_Verde_Be_1 ";
+            M4Bo1_Ar19_Vost_Verde_Be_1=true;
+            PrintArch_2="M4Bo1_Ar19_Vost_Verde_Be_1 ";
            }
          // Семечка1
          if(N_Centro==20 && Be_0_C==1)
            {
-            M1Be0_Ar4_Vost_Azul_Be_1=true;
-            PrintArch="M1Be0_Ar4_Vost_Azul_Be_1 ";
+            M1Be0_Ar20_Vost_Azul_Be_1=true;
+            PrintArch_2="M1Be0_Ar20_Vost_Azul_Be_1 ";
            }
          if(N_Centro==20 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Sev_Azul_Be_1=true;
-            PrintArch="M2Bo0_Ar4_Sev_Azul_Be_1 ";
+            M2Bo0_Ar20_Sev_Azul_Be_1=true;
+            PrintArch_2="M2Bo0_Ar20_Sev_Azul_Be_1 ";
            }
          if(N_Centro==20 && Be_1_C==1)
            {
-            M3Be1_Ar4_Zap_Azul_Be_1=true;
-            PrintArch="M3Be1_Ar4_Zap_Azul_Be_1 ";
+            M3Be1_Ar20_Zap_Azul_Be_1=true;
+            PrintArch_2="M3Be1_Ar20_Zap_Azul_Be_1 ";
            }
          if(N_Centro==20 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Yug_Azul_Be_1=true;
-            PrintArch=" M4Bo1_Ar4_Yug_Azul_Be_1 ";
+            M4Bo1_Ar20_Yug_Azul_Be_1=true;
+            PrintArch_2=" M4Bo1_Ar20_Yug_Azul_Be_1 ";
            }
+         string PrintArch_3;
          //BO_1
 
          if(N_Centro==1 && Be_0_C==1)
            {
-            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
-            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+
+            PrintArch_3="M1Be0_Ar1_Zap_Amarillo_Bo_1_1.44";
+            N_Centro_Ind=1.44;
            }
          if(N_Centro==1 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
-            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+
+            PrintArch_3="M2Bo0_Ar1_Sev_Amarillo_Bo_1_1.11";
+            N_Centro_Ind=1.11;
            }
          if(N_Centro==1 && Be_1_C==1)
            {
-            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
-            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+
+            PrintArch_3="M3Be1_Ar1_Vost_Amarillo_Bo_1_1.22";
+            N_Centro_Ind=1.22;
            }
          if(N_Centro==1 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
-            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+
+            PrintArch_3="M4Bo1_Ar1_Yug_Amarillo_Bo_1_1.33";
+            N_Centro_Ind=1.33;
            }
          // Семечка1
          if(N_Centro==2 && Be_0_C==1)
            {
             M1Be0_Ar2_Yug_Rojo_Bo_1=true;
-            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+            PrintArch_3="M1Be0_Ar2_Yug_Rojo_Bo_1_2.23";
+            N_Centro_Ind=2.23;
            }
          if(N_Centro==2 && Bo_0_C==1)
            {
             M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
-            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+            PrintArch_3="M2Bo0_Ar2_Vost_Rojo_Bo_1_2.12";
+            N_Centro_Ind=2.12;
            }
          if(N_Centro==2 && Be_1_C==1)
            {
             M3Be1_Ar2_Sev_Rojo_Bo_1=true;
-            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+            PrintArch_3="M3Be1_Ar2_Sev_Rojo_Bo_1_2.11";
+            N_Centro_Ind=2.11;
            }
          if(N_Centro==2 && Bo_1_C==1)
            {
             M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
-            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+            PrintArch_3="M4Bo1_Ar2_Zap_Rojo_Bo_1_2.24";
+            N_Centro_Ind=2.24;
            }// Семечка1
          if(N_Centro==3 && Be_0_C==1)
            {
             M1Be0_Ar3_Vost_Verde_Bo_1=true;
-            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+            PrintArch_3="M1Be0_Ar3_Vost_Verde_Bo_1 ";
            }
          if(N_Centro==3 && Bo_0_C==1)
            {
             M2Bo0_Ar3_Yug_Verde_Bo_1=true;
-            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+            PrintArch_3="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
            }
          if(N_Centro==3 && Be_1_C==1)
            {
             M3Be1_Ar3_Zap_Verde_Bo_1=true;
-            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+            PrintArch_3="M3Be1_Ar3_Zap_Verde_Bo_1 ";
            }
          if(N_Centro==3 && Bo_1_C==1)
            {
             M4Bo1_Ar3_Sev_Verde_Bo_1=true;
-            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+            PrintArch_3="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
            }
          // Семечка1
          if(N_Centro==4 && Be_0_C==1)
            {
             M1Be0_Ar4_Sev_Azul_Bo_1=true;
-            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+            PrintArch_3="M1Be0_Ar4_Sev_Azul_Bo_1 ";
            }
          if(N_Centro==4 && Bo_0_C==1)
            {
             M2Bo0_Ar4_Zap_Azul_Bo_1=true;
-            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+            PrintArch_3="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
            }
          if(N_Centro==4 && Be_1_C==1)
            {
             M3Be1_Ar4_Yug_Azul_Bo_1=true;
-            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+            PrintArch_3="M3Be1_Ar4_Yug_Azul_Bo_1 ";
            }
          if(N_Centro==4 && Bo_1_C==1)
            {
             M4Bo1_Ar4_Vost_Azul_Bo_1=true;
-            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+            PrintArch_3=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
            }
          // Семечка2
          if(N_Centro==5 && Be_0_C==1)
            {
-            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
-            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+            M1Be0_Ar5_Zap_Amarillo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar5_Zap_Amarillo_Bo_1";
            }
          if(N_Centro==5 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
-            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+            M2Bo0_Ar5_Sev_Amarillo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar5_Sev_Amarillo_Bo_1";
            }
          if(N_Centro==5 && Be_1_C==1)
            {
-            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
-            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+            M3Be1_Ar5_Vost_Amarillo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar5_Vost_Amarillo_Bo_1";
            }
          if(N_Centro==5 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
-            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+            M4Bo1_Ar5_Yug_Amarillo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar5_Yug_Amarillo_Bo_1";
            }
          // Семечка1
          if(N_Centro==6 && Be_0_C==1)
            {
-            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
-            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+            M1Be0_Ar6_Yug_Rojo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar6_Yug_Rojo_Bo_1";
            }
          if(N_Centro==6 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
-            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+            M2Bo0_Ar6_Vost_Rojo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar6_Vost_Rojo_Bo_1";
            }
          if(N_Centro==6 && Be_1_C==1)
            {
-            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
-            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+            M3Be1_Ar6_Sev_Rojo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar6_Sev_Rojo_Bo_1";
            }
          if(N_Centro==6 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
-            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+            M4Bo1_Ar6_Zap_Rojo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar6_Zap_Rojo_Bo_1";
            }// Семечка1
          if(N_Centro==7 && Be_0_C==1)
            {
-            M1Be0_Ar3_Vost_Verde_Bo_1=true;
-            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+            M1Be0_Ar7_Vost_Verde_Bo_1=true;
+            PrintArch_3="M1Be0_Ar7_Vost_Verde_Bo_1 ";
            }
          if(N_Centro==7 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
-            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+            M2Bo0_Ar7_Yug_Verde_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar7_Yug_Verde_Bo_1 ";
            }
          if(N_Centro==7 && Be_1_C==1)
            {
-            M3Be1_Ar3_Zap_Verde_Bo_1=true;
-            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+            M3Be1_Ar7_Zap_Verde_Bo_1=true;
+            PrintArch_3="M3Be1_Ar7_Zap_Verde_Bo_1 ";
            }
          if(N_Centro==7 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
-            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+            M4Bo1_Ar7_Sev_Verde_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar7_Sev_Verde_Bo_1 ";
            }
          // Семечка1
          if(N_Centro==8 && Be_0_C==1)
            {
-            M1Be0_Ar4_Sev_Azul_Bo_1=true;
-            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+            M1Be0_Ar8_Sev_Azul_Bo_1=true;
+            PrintArch_3="M1Be0_Ar8_Sev_Azul_Bo_1 ";
            }
          if(N_Centro==8 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
-            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+            M2Bo0_Ar8_Zap_Azul_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar8_Zap_Azul_Bo_1 ";
            }
          if(N_Centro==8 && Be_1_C==1)
            {
-            M3Be1_Ar4_Yug_Azul_Bo_1=true;
-            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+            M3Be1_Ar8_Yug_Azul_Bo_1=true;
+            PrintArch_3="M3Be1_Ar8_Yug_Azul_Bo_1 ";
            }
          if(N_Centro==8 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
-            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+            M4Bo1_Ar8_Vost_Azul_Bo_1=true;
+            PrintArch_3=" M4Bo1_Ar8_Vost_Azul_Bo_1 ";
            }
          // Семечка3
          if(N_Centro==9 && Be_0_C==1)
            {
-            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
-            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+            M1Be0_Ar9_Zap_Amarillo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar9_Zap_Amarillo_Bo_1";
            }
          if(N_Centro==9 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
-            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+            M2Bo0_Ar9_Sev_Amarillo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar9_Sev_Amarillo_Bo_1";
            }
          if(N_Centro==9 && Be_1_C==1)
            {
-            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
-            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+            M3Be1_Ar9_Vost_Amarillo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar9_Vost_Amarillo_Bo_1";
            }
          if(N_Centro==9 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
-            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+            M4Bo1_Ar9_Yug_Amarillo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar9_Yug_Amarillo_Bo_1";
            }
          // Семечка1
          if(N_Centro==10 && Be_0_C==1)
            {
-            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
-            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+            M1Be0_Ar10_Yug_Rojo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar10_Yug_Rojo_Bo_1";
            }
          if(N_Centro==10 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
-            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+            M2Bo0_Ar10_Vost_Rojo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar10_Vost_Rojo_Bo_1";
            }
          if(N_Centro==10 && Be_1_C==1)
            {
-            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
-            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+            M3Be1_Ar10_Sev_Rojo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar10_Sev_Rojo_Bo_1";
            }
          if(N_Centro==10 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
-            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+            M4Bo1_Ar10_Zap_Rojo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar10_Zap_Rojo_Bo_1";
            }// Семечка1
          if(N_Centro==11 && Be_0_C==1)
            {
-            M1Be0_Ar3_Vost_Verde_Bo_1=true;
-            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+            M1Be0_Ar11_Vost_Verde_Bo_1=true;
+            PrintArch_3="M1Be0_Ar11_Vost_Verde_Bo_1 ";
            }
          if(N_Centro==11 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
-            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+            M2Bo0_Ar11_Yug_Verde_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar11_Yug_Verde_Bo_1 ";
            }
          if(N_Centro==11 && Be_1_C==1)
            {
-            M3Be1_Ar3_Zap_Verde_Bo_1=true;
-            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+            M3Be1_Ar11_Zap_Verde_Bo_1=true;
+            PrintArch_3="M3Be1_Ar11_Zap_Verde_Bo_1 ";
            }
          if(N_Centro==11 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
-            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+            M4Bo1_Ar11_Sev_Verde_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar11_Sev_Verde_Bo_1 ";
            }
          // Семечка1
          if(N_Centro==12 && Be_0_C==1)
            {
-            M1Be0_Ar4_Sev_Azul_Bo_1=true;
-            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+            M1Be0_Ar12_Sev_Azul_Bo_1=true;
+            PrintArch_3="M1Be0_Ar12_Sev_Azul_Bo_1 ";
            }
          if(N_Centro==12 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
-            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+            M2Bo0_Ar12_Zap_Azul_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar12_Zap_Azul_Bo_1 ";
            }
          if(N_Centro==12 && Be_1_C==1)
            {
-            M3Be1_Ar4_Yug_Azul_Bo_1=true;
-            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+            M3Be1_Ar12_Yug_Azul_Bo_1=true;
+            PrintArch_3="M3Be1_Ar12_Yug_Azul_Bo_1 ";
            }
          if(N_Centro==12 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
-            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+            M4Bo1_Ar12_Vost_Azul_Bo_1=true;
+            PrintArch_3=" M4Bo1_Ar12_Vost_Azul_Bo_1 ";
            }
          // Семечка4
          if(N_Centro==13 && Be_0_C==1)
            {
-            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
-            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+            M1Be0_Ar13_Zap_Amarillo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar13_Zap_Amarillo_Bo_1";
            }
          if(N_Centro==13 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
-            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+            M2Bo0_Ar13_Sev_Amarillo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar13_Sev_Amarillo_Bo_1";
            }
          if(N_Centro==13 && Be_1_C==1)
            {
-            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
-            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+            M3Be1_Ar13_Vost_Amarillo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar13_Vost_Amarillo_Bo_1";
            }
          if(N_Centro==13 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
-            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+            M4Bo1_Ar13_Yug_Amarillo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar13_Yug_Amarillo_Bo_1";
            }
          // Семечка1
          if(N_Centro==14 && Be_0_C==1)
            {
-            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
-            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+            M1Be0_Ar14_Yug_Rojo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar14_Yug_Rojo_Bo_1";
            }
          if(N_Centro==14 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
-            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+            M2Bo0_Ar14_Vost_Rojo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar14_Vost_Rojo_Bo_1";
            }
          if(N_Centro==14 && Be_1_C==1)
            {
-            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
-            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+            M3Be1_Ar14_Sev_Rojo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar14_Sev_Rojo_Bo_1";
            }
          if(N_Centro==14 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
-            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+            M4Bo1_Ar14_Zap_Rojo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar14_Zap_Rojo_Bo_1";
            }// Семечка1
          if(N_Centro==15 && Be_0_C==1)
            {
-            M1Be0_Ar3_Vost_Verde_Bo_1=true;
-            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+            M1Be0_Ar15_Vost_Verde_Bo_1=true;
+            PrintArch_3="M1Be0_Ar15_Vost_Verde_Bo_1 ";
            }
          if(N_Centro==15 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
-            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+            M2Bo0_Ar15_Yug_Verde_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar15_Yug_Verde_Bo_1 ";
            }
          if(N_Centro==15 && Be_1_C==1)
            {
-            M3Be1_Ar3_Zap_Verde_Bo_1=true;
-            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+            M3Be1_Ar15_Zap_Verde_Bo_1=true;
+            PrintArch_3="M3Be1_Ar15_Zap_Verde_Bo_1 ";
            }
          if(N_Centro==15 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
-            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+            M4Bo1_Ar15_Sev_Verde_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar15_Sev_Verde_Bo_1 ";
            }
          // Семечка1
          if(N_Centro==16 && Be_0_C==1)
            {
-            M1Be0_Ar4_Sev_Azul_Bo_1=true;
-            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+            M1Be0_Ar16_Sev_Azul_Bo_1=true;
+            PrintArch_3="M1Be0_Ar16_Sev_Azul_Bo_1 ";
            }
          if(N_Centro==16 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
-            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+            M2Bo0_Ar16_Zap_Azul_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar16_Zap_Azul_Bo_1 ";
            }
          if(N_Centro==16 && Be_1_C==1)
            {
-            M3Be1_Ar4_Yug_Azul_Bo_1=true;
-            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+            M3Be1_Ar16_Yug_Azul_Bo_1=true;
+            PrintArch_3="M3Be1_Ar16_Yug_Azul_Bo_1 ";
            }
          if(N_Centro==16 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
-            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+            M4Bo1_Ar16_Vost_Azul_Bo_1=true;
+            PrintArch_3=" M4Bo1_Ar16_Vost_Azul_Bo_1 ";
            }
          // Семечка5
          if(N_Centro==17 && Be_0_C==1)
            {
-            M1Be0_Ar1_Zap_Amarillo_Bo_1=true;
-            PrintArch="M1Be0_Ar1_Zap_Amarillo_Bo_1";
+            M1Be0_Ar17_Zap_Amarillo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar17_Zap_Amarillo_Bo_1";
            }
          if(N_Centro==17 && Bo_0_C==1)
            {
-            M2Bo0_Ar1_Sev_Amarillo_Bo_1=true;
-            PrintArch="M2Bo0_Ar1_Sev_Amarillo_Bo_1";
+            M2Bo0_Ar17_Sev_Amarillo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar17_Sev_Amarillo_Bo_1";
            }
          if(N_Centro==17 && Be_1_C==1)
            {
-            M3Be1_Ar1_Vost_Amarillo_Bo_1=true;
-            PrintArch="M3Be1_Ar1_Vost_Amarillo_Bo_1";
+            M3Be1_Ar17_Vost_Amarillo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar17_Vost_Amarillo_Bo_1";
            }
          if(N_Centro==17 && Bo_1_C==1)
            {
-            M4Bo1_Ar1_Yug_Amarillo_Bo_1=true;
-            PrintArch="M4Bo1_Ar1_Yug_Amarillo_Bo_1";
+            M4Bo1_Ar17_Yug_Amarillo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar17_Yug_Amarillo_Bo_1";
            }
          // Семечка1
          if(N_Centro==18 && Be_0_C==1)
            {
-            M1Be0_Ar2_Yug_Rojo_Bo_1=true;
-            PrintArch="M1Be0_Ar2_Yug_Rojo_Bo_1";
+            M1Be0_Ar18_Yug_Rojo_Bo_1=true;
+            PrintArch_3="M1Be0_Ar18_Yug_Rojo_Bo_1";
            }
          if(N_Centro==18 && Bo_0_C==1)
            {
-            M2Bo0_Ar2_Vost_Rojo_Bo_1=true;
-            PrintArch="M2Bo0_Ar2_Vost_Rojo_Bo_1";
+            M2Bo0_Ar18_Vost_Rojo_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar18_Vost_Rojo_Bo_1";
            }
          if(N_Centro==18 && Be_1_C==1)
            {
-            M3Be1_Ar2_Sev_Rojo_Bo_1=true;
-            PrintArch="M3Be1_Ar2_Sev_Rojo_Bo_1";
+            M3Be1_Ar18_Sev_Rojo_Bo_1=true;
+            PrintArch_3="M3Be1_Ar18_Sev_Rojo_Bo_1";
            }
          if(N_Centro==18 && Bo_1_C==1)
            {
-            M4Bo1_Ar2_Zap_Rojo_Bo_1=true;
-            PrintArch="M4Bo1_Ar2_Zap_Rojo_Bo_1";
+            M4Bo1_Ar18_Zap_Rojo_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar18_Zap_Rojo_Bo_1";
            }// Семечка1
          if(N_Centro==19 && Be_0_C==1)
            {
-            M1Be0_Ar3_Vost_Verde_Bo_1=true;
-            PrintArch="M1Be0_Ar3_Vost_Verde_Bo_1 ";
+            M1Be0_Ar19_Vost_Verde_Bo_1=true;
+            PrintArch_3="M1Be0_Ar19_Vost_Verde_Bo_1 ";
            }
          if(N_Centro==19 && Bo_0_C==1)
            {
-            M2Bo0_Ar3_Yug_Verde_Bo_1=true;
-            PrintArch="M2Bo0_Ar3_Yug_Verde_Bo_1 ";
+            M2Bo0_Ar19_Yug_Verde_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar19_Yug_Verde_Bo_1 ";
            }
          if(N_Centro==19 && Be_1_C==1)
            {
-            M3Be1_Ar3_Zap_Verde_Bo_1=true;
-            PrintArch="M3Be1_Ar3_Zap_Verde_Bo_1 ";
+            M3Be1_Ar19_Zap_Verde_Bo_1=true;
+            PrintArch_3="M3Be1_Ar19_Zap_Verde_Bo_1 ";
            }
          if(N_Centro==19 && Bo_1_C==1)
            {
-            M4Bo1_Ar3_Sev_Verde_Bo_1=true;
-            PrintArch="M4Bo1_Ar3_Sev_Verde_Bo_1 ";
+            M4Bo1_Ar19_Sev_Verde_Bo_1=true;
+            PrintArch_3="M4Bo1_Ar19_Sev_Verde_Bo_1 ";
            }
          // Семечка1
          if(N_Centro==20 && Be_0_C==1)
            {
-            M1Be0_Ar4_Sev_Azul_Bo_1=true;
-            PrintArch="M1Be0_Ar4_Sev_Azul_Bo_1 ";
+            M1Be0_Ar20_Sev_Azul_Bo_1=true;
+            PrintArch_3="M1Be0_Ar20_Sev_Azul_Bo_1 ";
            }
          if(N_Centro==20 && Bo_0_C==1)
            {
-            M2Bo0_Ar4_Zap_Azul_Bo_1=true;
-            PrintArch="M2Bo0_Ar4_Zap_Azul_Bo_1 ";
+            M2Bo0_Ar20_Zap_Azul_Bo_1=true;
+            PrintArch_3="M2Bo0_Ar20_Zap_Azul_Bo_1 ";
            }
          if(N_Centro==20 && Be_1_C==1)
            {
-            M3Be1_Ar4_Yug_Azul_Bo_1=true;
-            PrintArch="M3Be1_Ar4_Yug_Azul_Bo_1 ";
+            M3Be1_Ar20_Yug_Azul_Bo_1=true;
+            PrintArch_3="M3Be1_Ar20_Yug_Azul_Bo_1 ";
            }
          if(N_Centro==20 && Bo_1_C==1)
            {
-            M4Bo1_Ar4_Vost_Azul_Bo_1=true;
-            PrintArch=" M4Bo1_Ar4_Vost_Azul_Bo_1 ";
+            M4Bo1_Ar20_Vost_Azul_Bo_1=true;
+            PrintArch_3=" M4Bo1_Ar20_Vost_Azul_Bo_1 ";
            }
-
-         // ------ Свод Цена-Купол + Свод Цена - Крест Абьём
-
-         // Пример. Массива Север
-         //   Sev[1,1]=0; Be_0
-         //   Sev[1,2]=0; Bo_0
-         //   Sev[1,3]=0; Be_1
-         //   Sev[1,4]=0; Bo_1
-
-         //Блок Получения Разрешений для оброботки события расчёта патернов
-         //1.Расчитывается - сравнивается предыдущие значения с текущими
-         //Print(" comp_Sev[1,1]!=Sev[1,1] ",comp_Sev[1,1]!=Sev[1,1]); //ok
-         if(comp_Sev[1,1]!=Sev[1,1])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
-           {
-            Per_Sev1=1;
-            Per_Sev2=0;
-            Per_Sev3=0;
-            Per_Sev4=0;
-            Per_Sev5=0;
-            Per_Sev6=0;
-            Per_Sev7=0;
-            Per_Sev8=0;
-            //Print("Per_Sev1 ",Per_Sev1);
-           }  //присвоил разрешение на оброботку события
-         if(comp_Sev[1,2]!=Sev[1,2])//Bo_0  Место 2,6,10,14,18
-           {
-            Per_Sev1=0;
-            Per_Sev2=1;
-            Per_Sev3=0;
-            Per_Sev4=0;
-            Per_Sev5=0;
-            Per_Sev6=0;
-            Per_Sev7=0;
-            Per_Sev8=0;
-            //Print("Per_Sev2 ",Per_Sev2);
-           }
-         if(comp_Sev[1,3]!=Sev[1,3])//Be_1 Место 3,7,11,15,19
-           {
-            Per_Sev1=0;
-            Per_Sev2=0;
-            Per_Sev3=1;
-            Per_Sev4=0;
-            Per_Sev5=0;
-            Per_Sev6=0;
-            Per_Sev7=0;
-            Per_Sev8=0;
-            //Print("Per_Sev3 ",Per_Sev3);
-           }
-         if(comp_Sev[1,4]!=Sev[1,4])//Bo_1 Место 4,8,12,16,20
-           {
-            Per_Sev1=0;
-            Per_Sev2=0;
-            Per_Sev3=0;
-            Per_Sev4=1;
-            Per_Sev5=0;
-            Per_Sev6=0;
-            Per_Sev7=0;
-            Per_Sev8=0;
-            //Print("Per_Sev4 ",Per_Sev4);
-           }
-         if(comp_Sev[1,5]!=Sev[1,5])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
-           {
-            Per_Sev1=0;
-            Per_Sev2=0;
-            Per_Sev3=0;
-            Per_Sev4=0;
-            Per_Sev5=1;
-            Per_Sev6=0;
-            Per_Sev7=0;
-            Per_Sev8=0;
-            //Print("Per_Sev1 ",Per_Sev1);
-           }  //присвоил разрешение на оброботку события
-         if(comp_Sev[1,6]!=Sev[1,6])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
-           {
-            Per_Sev1=0;
-            Per_Sev2=0;
-            Per_Sev3=0;
-            Per_Sev4=0;
-            Per_Sev5=0;
-            Per_Sev6=1;
-            Per_Sev7=0;
-            Per_Sev8=0;
-            //Print("Per_Sev1 ",Per_Sev1);
-           }  //присвоил разрешение на оброботку события
-         if(comp_Sev[1,7]!=Sev[1,7])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
-           {
-            Per_Sev1=0;
-            Per_Sev2=0;
-            Per_Sev3=0;
-            Per_Sev4=0;
-            Per_Sev5=0;
-            Per_Sev6=0;
-            Per_Sev7=1;
-            Per_Sev8=0;
-            //Print("Per_Sev1 ",Per_Sev1);
-           }  //присвоил разрешение на оброботку события
-         if(comp_Sev[1,8]!=Sev[1,8])//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
-           {
-            Per_Sev1=0;
-            Per_Sev2=0;
-            Per_Sev3=0;
-            Per_Sev4=0;
-            Per_Sev5=0;
-            Per_Sev6=0;
-            Per_Sev7=0;
-            Per_Sev8=1;
-            //Print("Per_Sev1 ",Per_Sev1);
-           }  //присвоил разрешение на оброботку события
-
-         //int PermisBLock=0;
-         //if(comp_Sev[1,1]!=Sev[1,1] && comp_Sev[1,2]!=Sev[1,2] && comp_Sev[1,3]!=Sev[1,3] && comp_Sev[1,4]!=Sev[1,4] && comp_Sev[1,5]!=Sev[1,5] && comp_Sev[1,6]==Sev[1,6] && comp_Sev[1,7]==Sev[1,7] && comp_Sev[1,8]==Sev[1,8])//Если патерн после пересчёта на изменился относительно подачи абьёма
-         //{  PermisBLock=1;}
-         //if(PermisBLock==1 && Price_Compare!=bodypips[MaxInd_bodypips,0])//Если цена разная то доступ в блок открыт
-         //{
-         //2. Определяется номер центра и порядковый номер семечки
-         //Print("N_Centro 1 ",N_Centro);//test OK
-         N_Centro_r=0;
-         PipsNumber=0;
-         if(N_Centro==1)
-           {
-            N_Centro_r=1;
-            PipsNumber=1;
-           }
-         if(N_Centro==2)
-           {
-            N_Centro_r=2;
-            PipsNumber=1;
-           }
-         if(N_Centro==3)
-           {
-            N_Centro_r=3;
-            PipsNumber=1;
-           }
-         if(N_Centro==4)
-           {
-            N_Centro_r=4;
-            PipsNumber=1;
-           }
-         if(N_Centro==5)
-           {
-            N_Centro_r=1;
-            PipsNumber=2;
-           }
-         if(N_Centro==6)
-           {
-            N_Centro_r=2;
-            PipsNumber=2;
-           }
-         if(N_Centro==7)
-           {
-            N_Centro_r=3;
-            PipsNumber=2;
-           }
-         if(N_Centro==8)
-           {
-            N_Centro_r=4;
-            PipsNumber=2;
-           }
-         if(N_Centro==9)
-           {
-            N_Centro_r=1;
-            PipsNumber=3;
-           }
-         if(N_Centro==10)
-           {
-            N_Centro_r=2;
-            PipsNumber=3;
-           }
-         if(N_Centro==11)
-           {
-            N_Centro_r=3;
-            PipsNumber=3;
-           }
-         if(N_Centro==12)
-           {
-            N_Centro_r=4;
-            PipsNumber=3;
-           }
-         if(N_Centro==13)
-           {
-            N_Centro_r=1;
-            PipsNumber=4;
-           }
-         if(N_Centro==14)
-           {
-            N_Centro_r=2;
-            PipsNumber=4;
-           }
-         if(N_Centro==15)
-           {
-            N_Centro_r=3;
-            PipsNumber=4;
-           }
-         if(N_Centro==16)
-           {
-            N_Centro_r=4;
-            PipsNumber=4;
-           }
-         if(N_Centro==17)
-           {
-            N_Centro_r=1;
-            PipsNumber=5;
-           }
-         if(N_Centro==18)
-           {
-            N_Centro_r=2;
-            PipsNumber=5;
-           }
-         if(N_Centro==19)
-           {
-            N_Centro_r=3;
-            PipsNumber=5;
-           }
-         if(N_Centro==20)
-           {
-            N_Centro_r=4;
-            PipsNumber=5;
-           }
-         //Print(" N_Centro ",N_Centro); ok
-         //Print(" N_Centro_r ",N_Centro_r);ok
-         //Print(" PipsNumber ",PipsNumber);
-
 
          //3.Производится расчт по переменным  Be_0,Bo_0,Be_1,Bo_1
          //Расчёт по переменной Be_0 Место 1,5,9,13,17
@@ -12077,11 +12127,166 @@ int start()
             //Произвести запись массива в Бинарнйы фаил.Фаил загружается в массив при запуске программы
 
            }
+         Pr_Arch="0";
+         //Функция соответствия ключа в к номеру центра и полюсному состоянию
 
 
+         if(N_Centro_Ind==1.43 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M1Be0_Ar1_Yug_Amarillo_Be_0_1.43"
 
+           }
+         if(N_Centro_Ind==1.42 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M1Be0_Ar1_Vost_Amarillo_Bo_0_1.42"
 
+           }
+         if(N_Centro_Ind==1.41 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M1Be0_Ar1_Sev_Amarillo_Be_1_1.41"
 
+           }
+         if(N_Centro_Ind==1.44 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M1Be0_Ar1_Zap_Amarillo_Bo_1_1.44"
+           }
+
+         if(N_Centro_Ind==1.14 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M2Bo0_Ar1_Zap_Amarillo_Be_0_1.14"
+
+           }
+         if(N_Centro_Ind==1.13 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M2Bo0_Ar1_Yug_Amarillo_Bo_0_1.13"
+
+           }
+         if(N_Centro_Ind==1.12 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M2Bo0_Ar1_Vost_Amarillo_Be_1_1.12"
+
+           }
+         if(N_Centro_Ind==1.11 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M2Bo0_Ar1_Sev_Amarillo_Bo_1_1.11"
+           }
+
+         if(N_Centro_Ind==1.21 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M3Be1_Ar1_Sev_Amarillo_Be_0_1.21"
+
+           }
+         if(N_Centro_Ind==1.24 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M3Be1_Ar1_Zap_Amarillo_Bo_01.24"
+
+           }
+         if(N_Centro_Ind==1.23 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M3Be1_Ar1_Yug_Amarillo_Be_1_1.23"
+
+           }
+         if(N_Centro_Ind==1.22 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M3Be1_Ar1_Vost_Amarillo_Bo_1_1.22"
+           }
+
+         if(N_Centro_Ind==1.32 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M4Bo1_Ar1_Vost_Amarillo_Be_0_1.32"
+
+           }
+         if(N_Centro_Ind==1.31 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M4Bo1_Ar1_Sev_Amarillo_Bo_01.31"
+
+           }
+         if(N_Centro_Ind==1.34 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M4Bo1_Ar1_Zap_Amarillo_Be_1_1.34"
+
+           }
+         if(N_Centro_Ind==1.33 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M4Bo1_Ar1_Yug_Amarillo_Bo_1_1.33"
+           }
+         if(N_Centro_Ind==2.22 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M1Be0_Ar2_Vost_Rojo_Be_0_2.22"
+
+           }
+         if(N_Centro_Ind==2.21 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M1Be0_Ar2_Sev_Rojo_Bo_0_2.21"
+
+           }
+         if(N_Centro_Ind==2.24 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M1Be0_Ar2_Zap_Rojo_Be_1_2.24"
+
+           }
+         if(N_Centro_Ind==2.23 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M1Be0_Ar2_Yug_Rojo_Bo_1_2.23"
+           }
+         if(N_Centro_Ind==2.11 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M2Bo0_Ar2_Sev_Rojo_Be_0_2.11"
+
+           }
+         if(N_Centro_Ind==2.14 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M2Bo0_Ar2_Zap_Rojo_Bo_0_2.14"
+
+           }
+         if(N_Centro_Ind==2.13 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M2Bo0_Ar2_Yug_Rojo_Be_1_2.13"
+
+           }
+         if(N_Centro_Ind==2.12 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M2Bo0_Ar2_Vost_Rojo_Bo_1_2.12"
+           }
+
+         if(N_Centro_Ind==2.14 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M3Be1_Ar2_Zap_Rojo_Be_0_2.14"
+
+           }
+         if(N_Centro_Ind==2.13 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M3Be1_Ar2_Yug_Rojo_Bo_0_2.13"
+
+           }
+         if(N_Centro_Ind==2.12 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M3Be1_Ar2_Vost_Rojo_Be_1_2.12"
+
+           }
+         if(N_Centro_Ind==2.11 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M3Be1_Ar2_Sev_Rojo_Bo_1_2.11"
+           }
+         if(N_Centro_Ind==2.23 && Arch3==1)
+           {
+            Pr_Arch=PrintArch;//"M4Bo1_Ar2_Yug_Rojo_Be_0_2.23"
+
+           }
+         if(N_Centro_Ind==2.22 && Arch3==2)
+           {
+            Pr_Arch=PrintArch_1;//"M4Bo1_Ar2_Vost_Rojo_Bo_0_2.22"
+
+           }
+         if(N_Centro_Ind==2.21 && Arch3==3)
+           {
+            Pr_Arch=PrintArch_2;//"M4Bo1_Ar2_Sev_Rojo_Be_1_2.21"
+
+           }
+         if(N_Centro_Ind==2.24 && Arch3==4)
+           {
+            Pr_Arch=PrintArch_3;//"M4Bo1_Ar2_Zap_Rojo_Bo_1_2.24"
+           }
 
          //Произвести присваивание новых значений в Массив сравнения после проведения всего расчёта
          //Print(" Cotejamiento de Arrays antes de reasignacion",comp_Sev[1,1],comp_Sev[1,2],comp_Sev[1,3],comp_Sev[1,4]);
@@ -12125,7 +12330,12 @@ int start()
             FileClose(file_handle26);
 
            }
+         //Запись соответствия Архитектуры
+         if(N_Centro==1 && Be_1_C==1 && PipsNumber==1 && Arch3==1)
+           {
+            // Присваивание текстового значения
 
+           }
 
          // ------ Printing Collected Values ​​to File ------
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one && (bodypips[MaxInd_bodypips,0]>price_plus ||bodypips[MaxInd_bodypips,0]<price_plus))
@@ -12136,7 +12346,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",PrintArch," A 1 ",PrintArch_1," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -12149,7 +12359,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",PrintArch," A 1 ",PrintArch_1," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -14233,5 +14443,7 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 
 //+------------------------------------------------------------------+
 
+
+//+------------------------------------------------------------------+
 
 //+------------------------------------------------------------------+
