@@ -7,6 +7,8 @@ I am teaching a computer to analyze the market based on two principles. Binary c
 I invite everyone to get acquainted with TinTuit at the following link https://tintuit.ru/
 To view the image of the crown, follow this link https://www.joyeriaonline.com/blog/las-tiaras-de-la-reina-de-espana/
 To learn more about Sunflower follow the following link https://en.m.wikipedia.org/wiki/Helianthus
+I am also grateful to the teachers of secondary school 22 in the city of Kirovograd for the knowledge they invested in me in the period 1990-2000 https://my-school.kr.ua/ 
+and to the developers of the MQL4 programming environment https://docs.mql4.com/ru
 
 IMAGES!
 
