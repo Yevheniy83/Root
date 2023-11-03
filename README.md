@@ -46,3 +46,6 @@ Formulas:
 the indicator is built on the principle of price reference 1 to price 2. Price gets 2 forces "Bullish and Bearish" Each force has 2 polarities "+ and -" The sum of polarities at the end of the session and shows the price that was referenced during the trading session. function start at line 733, end function 1161
 
 * Writing indicators related to price behavior based on Binary code.
+
+Index Videos Youtube:
+Breafing Root - https://www.youtube.com/watch?v=DbKESPR435Y 
