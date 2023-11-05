@@ -27,7 +27,10 @@ IMAGES!
 # Root
 
 Index:
-1. Binary Miner " Search title in file root.md "  
+1. Binary Miner " Search title in file root.md "
+   * in data "Tic"
+   * out data "File csv" " Counter_Summa 1/0 "
 
 Index Videos Youtube:
 1. Breafing Root - https://www.youtube.com/watch?v=DbKESPR435Y 
+2. Binary Miner - https://youtu.be/-AemijjTchI
