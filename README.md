@@ -25,7 +25,9 @@ IMAGES!
 ![Girasol](https://user-images.githubusercontent.com/60549361/158072512-a1919ef1-3226-4fb2-8e0a-56c2d1466b35.png)
 
 # Root
+
+Index:
 1. Binary Miner " Search title in file root.md "  
 
 Index Videos Youtube:
-Breafing Root - https://www.youtube.com/watch?v=DbKESPR435Y 
+1. Breafing Root - https://www.youtube.com/watch?v=DbKESPR435Y 
