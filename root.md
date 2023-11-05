@@ -1764,7 +1764,7 @@ int start()
             errorprint[1]=1;
             bool ind1_Sev_Bo_0_to_Be_0_v0_0Reloj_Sev;
             //официант подаёт блюдо-заказ с правой руки дальнюю позицию
-            
+
            }
          // 2
          if(sev==1 && Var1_Bo_0==0 && Var2_Be_0==1 && ChekDIr==true)//Если официант подаёт с северной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с северной стороны  блюдо номер 1
@@ -2466,7 +2466,7 @@ int start()
             ChekDIr=false;
             BlockNum="V 1";
             errorprint[25]=1;
-            
+
             //став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
             bool ind1_Vost_Bo_0_to_Be_0_v0_0Reloj_Vost;
            }
@@ -12512,6 +12512,10 @@ int start()
       //Print(" IFb1 ",IFb1," IFb2 ", IFb2);//Мониторинг индексов массива
       //---------------------
 
+      //+------------------------------------------------------------------+
+      //|   Counter Summa 1/0                                              |
+      //+------------------------------------------------------------------+
+
       if(GetLastError()==4002)
 
         {
@@ -12547,6 +12551,9 @@ int start()
            }
 
         }
+      //+------------------------------------------------------------------+
+      //| Counter Summa 1/0 - Fibonacci ruler calculation                  |
+      //+------------------------------------------------------------------+
 
       one_BE=Counter_Summa1_AR;//Power of bears
       int zero_BE=Counter_Summa0_AR;//Power of Bull
@@ -12589,12 +12596,17 @@ int start()
       IpaintFiboLineDOWN_55=NormalizeDouble((IpaintFiboLineDOWN_34-(normalLevel*55)),NormalizaDigi);
       IpaintFiboLineDOWN_89=NormalizeDouble((IpaintFiboLineDOWN_55-(normalLevel*89)),NormalizaDigi);
       IpaintFiboLineDOWN_144=NormalizeDouble((IpaintFiboLineDOWN_89-(normalLevel*144)),NormalizaDigi);
-      // ---END-- Calculation of Fibonacci levels -----
 
+      //+------------------------------------------------------------------+
+      //| END Counter Summa 1/0 - Fibonacci ruler calculation              |
+      //+------------------------------------------------------------------+
+      //+------------------------------------------------------------------+
+      //| Counter Summa 1/0 -   Maximum , Minimum INDICARTOR               |
+      //+------------------------------------------------------------------+
 
       k=0;
       ArrayInitialize(MaxMinArr,0);
-      // ----- Calculation of  Maximum , Minimum INDICARTOR
+
       int inf;
       int ic;
       for(ic=1; ic<99999; ic++)
@@ -12641,14 +12653,17 @@ int start()
       Maximum=MathAbs(MaxMinArr[IndexMaximum]);//bool
       Minimum=MathAbs(MaxMinArr[IndexMinimum]);//bear
 
-      // ---END Calculation of  Maximum , Minimum INDICARTOR
+
 
       // --- The last digit indicates the type of resistance that formed inside the candle --- //
       int LasData=MaxMinArr[inf];// Used for the divergence indicator
 
-
-      // -----Synapsys Indicator-----
-
+      //+------------------------------------------------------------------+
+      //| END Counter Summa 1/0 -   Maximum , Minimum INDICARTOR           |
+      //+------------------------------------------------------------------+
+      //+------------------------------------------------------------------+
+      //|Counter Summa 1/0 -   Synapsys Indicator                          |
+      //+------------------------------------------------------------------+
 
       ArrayInitialize(komp1,0);
       ArrayInitialize(kompa,10);
@@ -12724,7 +12739,9 @@ int start()
          FileWrite(file_handle17,Symbol()," MinPriceSintezINDEX ",MinPriceSintezINDEX," MaxPriceSintezINDEX ",MaxPriceSintezINDEX);
          FileClose(file_handle17);
         }
-      // ---END--Synapsys Indicator-----
+      //+------------------------------------------------------------------+
+      //|END Counter Summa 1/0 -   Synapsys Indicator                      |
+      //+------------------------------------------------------------------+
 
 
       //-------Arrays------
