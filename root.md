@@ -39,7 +39,7 @@ bool BODYHorizont=true;//moneda
 //------ARRAYS-----
 double body[99999,20];//m
 //double BinaryKeys[9999,2000];
-int MaxMinArr[99999];//
+int MaxMinArr[9,3];//
 double kompa[10000];
 double kompa1[10000];
 datetime PIPS_COL_DT[99999];
@@ -12627,7 +12627,8 @@ int start()
         {
          k=0;
         };
-      MaxMinArr[1]=k;
+      MaxMinArr[1,1]=k;
+      MaxMinArr[1,2]=k;
 
       //-----------------------------
       int ina;
@@ -12637,26 +12638,25 @@ int start()
          if(body[ina,1]==1)
            {
             k++;
-           };
+            MaxMinArr[1,1]=k;
+           }
          if(body[ina,1]==0)
            {
             k--;
-           };
-         MaxMinArr[ina]=k;
-
+            MaxMinArr[1,2]=k;
+           }
+         
         }
 
-      //--Maximum - minimum INDEX ARRAY
-      IndexMaximum=ArrayMaximum(MaxMinArr,WHOLE_ARRAY,0);
-      IndexMinimum=ArrayMinimum(MaxMinArr,WHOLE_ARRAY,0);
+      
       //--------Max Min Numbers
-      Maximum=MathAbs(MaxMinArr[IndexMaximum]);//bool
-      Minimum=MathAbs(MaxMinArr[IndexMinimum]);//bear
+      Maximum=MaxMinArr[1,1];//bool
+      Minimum=MaxMinArr[1,2];//bear
 
 
 
       // --- The last digit indicates the type of resistance that formed inside the candle --- //
-      int LasData=MaxMinArr[inf];// Used for the divergence indicator
+      //int LasData=MaxMinArr[inf];// Used for the divergence indicator
 
       //+------------------------------------------------------------------+
       //| END Counter Summa 1/0 -   Maximum , Minimum INDICARTOR           |
@@ -12826,8 +12826,8 @@ int start()
 
       // ----- Compensation indicator-----
       int compensation_1,compensation_2;
-      compensation_1=MaxMinArr[IndexMaximum]-MaxBinNumber_1;
-      compensation_2=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
+      compensation_1=Maximum-MaxBinNumber_1;
+      compensation_2=Minimum+MaxBinNumber_0;
       // --------- Test of received values ​​--------
 
       //Print(" TIME ",iTime(Symbol(),0,1));
@@ -12846,7 +12846,7 @@ int start()
 
       for(i=1; i<99999; i++)
         {
-         if(MaxMinArr[i]==0)
+         if(MaxMinArr[i,1]==0)
            {
             zeroindex=i;
             break;
@@ -12870,7 +12870,7 @@ int start()
          for(ibbb=1; ibbb<1681; ibbb++)
            {
 
-            if(one_BE>15 && bbb[ibbb,0]==Maximum-MaxBinNumber_1 && bbb[ibbb,1]==MaxMinArr[IndexMinimum]+MaxBinNumber_0)
+            if(one_BE>15 && bbb[ibbb,0]==Maximum-MaxBinNumber_1 && bbb[ibbb,1]==Minimum+MaxBinNumber_0)
               {
 
                int ibb;
@@ -13167,7 +13167,7 @@ int start()
 
             string Text_Switch="No Data";
             Bool_Z=Maximum-MaxBinNumber_1;
-            Bear_Z=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
+            Bear_Z=Minimum+MaxBinNumber_0;
             //--------------------------------------------
             if(((Bool_Z>0 && Bear_Z==0)||(Bool_Z==0 && Bear_Z<0)) && Rez_BE==0 && one_BE>=1 && one_BE<=60)
               {
@@ -13197,7 +13197,7 @@ int start()
                Price5ForWrite=IpaintFiboLineDOWN_5;
                Price8ForWrite=IpaintFiboLineDOWN_8;
               }
-            if(MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
+            if(Minimum+MaxBinNumber_0==0)
               {
                Price5ForWrite=IpaintFiboLineUP_5;
                Price8ForWrite=IpaintFiboLineUP_8;
@@ -13233,7 +13233,7 @@ int start()
             // FileWrite(file_handle4,"___________________________________________________________");
             // FileWrite(file_handle4," SIMBOL |         TIME         | FONT |  BOOL-F  | BEAR-F |");
             //FileWrite(file_handle4,"¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
-            FileWrite(file_handle4,Symbol()," | ",iTime(Symbol(),0,1)," | ",ONE_BE," | ",Maximum-MaxBinNumber_1," | ",MaxMinArr[IndexMinimum]+MaxBinNumber_0," | ");
+            FileWrite(file_handle4,Symbol()," | ",iTime(Symbol(),0,1)," | ",ONE_BE," | ",Maximum-MaxBinNumber_1," | ",Minimum+MaxBinNumber_0," | ");
             // FileWrite(file_handle4,"¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
             // FileWrite(file_handle4," ",Text_Switch);
             // FileWrite(file_handle4,"¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
@@ -13258,8 +13258,8 @@ int start()
             string signalgroup=IntegerToString(zeroindex);
             string Hora1=TimeToString(iTime(Symbol(),0,1));
             string levelnotificacion1=IntegerToString(ONE_BE);
-            string Comp1=IntegerToString(MaxMinArr[IndexMaximum]-MaxBinNumber_1);
-            string Comp2=IntegerToString(MaxMinArr[IndexMinimum]+MaxBinNumber_0);
+            string Comp1=IntegerToString(Maximum-MaxBinNumber_1);
+            string Comp2=IntegerToString(Minimum+MaxBinNumber_0);
             string message2=SYmbol+" TIME "+Hora1+" SIGNAL NUMBER "+levelnotificacion1+" LONG "+" BOOL-F= "+Comp1+" BEAR-F= "+Comp2;
             SendNotification(message2); //
             LongShort=1;
@@ -13273,8 +13273,8 @@ int start()
             string signalgroup=IntegerToString(zeroindex);
             string Hora=TimeToString(iTime(Symbol(),0,1));
             string levelnotificacion=IntegerToString(ONE_BE);
-            string Comp1=IntegerToString(MaxMinArr[IndexMaximum]-MaxBinNumber_1);
-            string Comp2=IntegerToString(MaxMinArr[IndexMinimum]+MaxBinNumber_0);
+            string Comp1=IntegerToString(Maximum-MaxBinNumber_1);
+            string Comp2=IntegerToString(Minimum+MaxBinNumber_0);
             string message1=SYmbol+"-TIME "+Hora+" SIGNAL NUMBER "+levelnotificacion+" SHORT "+" BOOL-F= "+Comp1+" BEAR-F= "+Comp2;
             SendNotification(message1);
             LongShort=0;
@@ -13283,29 +13283,29 @@ int start()
          RefreshRates();
 
 
-         if(one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0 && Rez_BE==0)
+         if(one_BE>15 && Maximum-MaxBinNumber_1==0 && Minimum+MaxBinNumber_0>0 && Rez_BE==0)
            {
             LongPosition=true;
             ShortPosition=false;
            }
-         if(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0 && Rez_BE==0)
+         if(one_BE>15 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0==0 && Rez_BE==0)
            {
             ShortPosition=true;
             LongPosition=false;
            }
          //------------------------------------------------------------------------------
-         if(one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0 && Rez_BE==0)
+         if(one_BE>15 && Maximum-MaxBinNumber_1==0 && Minimum+MaxBinNumber_0<0 && Rez_BE==0)
            {
             ShortPosition=true;
             LongPosition=false;
            }
-         if(one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0 && Rez_BE==0)
+         if(one_BE>15 && Maximum-MaxBinNumber_1>0 && Minimum+MaxBinNumber_0==0 && Rez_BE==0)
            {
             LongPosition=true;
             ShortPosition=false;
            }
 
-         if(LongPosition==true && ((one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
+         if(LongPosition==true && ((one_BE>15 && Maximum-MaxBinNumber_1>0 && Minimum+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && Minimum+MaxBinNumber_0==0)
            {
 
             string  subject="From Tatiana - RootDiamond - LONG SIGNAL EURUSD";       // заголовок
@@ -13321,7 +13321,7 @@ int start()
 
 
            }
-         if(ShortPosition==true && ((one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
+         if(ShortPosition==true && ((one_BE>15 && Maximum-MaxBinNumber_1>0 && Minimum+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && Minimum+MaxBinNumber_0==0)
            {
 
             string  subject="From Tatiana - RootDiamond - SHORT SIGNAL EURUSD";       // заголовок
@@ -13339,7 +13339,7 @@ int start()
            }
 
 
-         if(((one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1==0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
+         if(((one_BE>15 && Maximum-MaxBinNumber_1==0 && Minimum+MaxBinNumber_0>0)||(one_BE>15 && Maximum-MaxBinNumber_1==0 && Minimum+MaxBinNumber_0<0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
            {
 
             string  subject="From Tatiana - RootDiamond_8 - SHORT SIGNAL EURUSD";       // заголовок
@@ -13356,7 +13356,7 @@ int start()
 
 
            }
-         if(((one_BE>15 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
+         if(((one_BE>15 && Maximum-MaxBinNumber_1>0 && Minimum+MaxBinNumber_0==0)||(one_BE>15 && Maximum-MaxBinNumber_1<0 && Minimum+MaxBinNumber_0==0)) && Rez_BE==0)//||(one_BE>25 && Maximum-MaxBinNumber_1<0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)||(one_BE>25 && Maximum-MaxBinNumber_1>0 && MaxMinArr[IndexMinimum]+MaxBinNumber_0==0)
            {
 
             string  subject="From Tatiana - RootDiamond_8 - LONG SIGNAL EURUSD";
@@ -13451,7 +13451,7 @@ int start()
             bodyAR[iar,23]=IpaintFiboLineDOWN_144;
             //--------сигналы------------
             bodyAR[iar,24]=Maximum-MaxBinNumber_1;
-            bodyAR[iar,25]=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
+            bodyAR[iar,25]=Minimum+MaxBinNumber_0;
             bodyAR[iar,26]=Maximum+MaxBinNumber_1;
             bodyAR[iar,27]=Minimum+MaxBinNumber_0;
             bodyAR[iar,28]=BoolInd;
@@ -13514,14 +13514,14 @@ int start()
          AllAnalisysData[i,6]=MinPriceSintezINDEX;
          AllAnalisysData[i,7]=MaxBinNumber_1;
          AllAnalisysData[i,8]=MaxBinNumber_0;
-         AllAnalisysData[i,9]=MaxMinArr[IndexMaximum]-MaxBinNumber_1;
-         AllAnalisysData[i,10]=MaxMinArr[IndexMinimum]+MaxBinNumber_0;
+         AllAnalisysData[i,9]=Minimum-MaxBinNumber_1;
+         AllAnalisysData[i,10]=Minimum+MaxBinNumber_0;
          AllAnalisysData[i,11]=bodypips[MaxInd_bodypips,0];
          AllAnalisysData[i,12]=bodypips[MaxInd_bodypips,1];
          AllAnalisysData[i,13]=BinInd3BO;
          AllAnalisysData[i,14]=BinInd3BE;
          AllAnalisysData[i,15]=Onda1;
-         AllAnalisysData[i,16]=LasData;
+         
 
 
 
