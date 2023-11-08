@@ -1097,7 +1097,7 @@ int start()
       if(BinIndWRITE==true)
         {
          //+------------------------------------------------------------------+
-         //|Sunflower Рeferencing                                             |
+         //|Sunflower Maximum Price Reference                                             |
          //+------------------------------------------------------------------+
          // ----- BigPipsFinder indicator ------
          price_Menus_one=bodypips[MaxInd_bodypips,0];
@@ -1385,7 +1385,7 @@ int start()
          MaxInd_bodypips=ArrayMaximum(comp_bodypips,WHOLE_ARRAY,0);// Get the index in the array in which the binary code for the price showed the most
 
          //+------------------------------------------------------------------+
-         //|END Sunflower Рeferencing                                         |
+         //|END Maximum Price Reference                                         |
          //+------------------------------------------------------------------+
          //+------------------------------------------------------------------+
          //|Sunflower Seed sides                                             |
