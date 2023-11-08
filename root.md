@@ -1091,10 +1091,14 @@ int start()
       // {
       //  Print("Бинкод Весь Массив ",BodyHorizont_Bin[inx,mn]);
       // }
-
+      //+------------------------------------------------------------------+
+      //|Sunflower                                                         |
+      //+------------------------------------------------------------------+
       if(BinIndWRITE==true)
         {
-
+         //+------------------------------------------------------------------+
+         //|Sunflower Рeferencing                                             |
+         //+------------------------------------------------------------------+
          // ----- BigPipsFinder indicator ------
          price_Menus_one=bodypips[MaxInd_bodypips,0];
          pips_Menus_one=bodypips[MaxInd_bodypips,1];
@@ -1380,6 +1384,13 @@ int start()
            }
          MaxInd_bodypips=ArrayMaximum(comp_bodypips,WHOLE_ARRAY,0);// Get the index in the array in which the binary code for the price showed the most
 
+         //+------------------------------------------------------------------+
+         //|END Sunflower Рeferencing                                         |
+         //+------------------------------------------------------------------+
+         //+------------------------------------------------------------------+
+         //|Sunflower Seed sides                                             |
+         //+------------------------------------------------------------------+
+
          // ----- Formula 2 - If the new price is higher than the previous one, then the resulting maximum is translated into pips and summed up to the previous price (price + 1) price
          // If the new price is less than the previous one, then the resulting maximum is translated into pips and minus the previous price (price-1) price.
          // The obtained result is compared with the current price. If the price has risen and the current price is less than price-1 plus pips, then the price is inside
@@ -1467,6 +1478,12 @@ int start()
 
               }
            }
+         //+------------------------------------------------------------------+
+         //|END Sunflower Seed sides                                          |
+         //+------------------------------------------------------------------+
+         //+------------------------------------------------------------------+
+         //|Sunflower Cupol                                            |
+         //+------------------------------------------------------------------+
 
          //-----Rotation-----
          //-----Ротация оси базируется на делении семечки подоснуха на 4 части.Присваиваются следующие индексы
@@ -1563,7 +1580,9 @@ int start()
 
 
          // Присваивание значений из подсолнуха. Нужно определить в какую из 4 переменных произведено присваивание.
-
+         //+------------------------------------------------------------------+
+         //|Sunflower 8 bit volume feed - start calculation                   |
+         //+------------------------------------------------------------------+
          // Исходное положение Свеча компинсации. Переустановка начений
          if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && Maximum>0 && Minimum>0 && Rez_BE==0 && Compens==true)
            {
@@ -1633,9 +1652,14 @@ int start()
               }
             //Установка в 0 исходных переменных при лице
 
+
             //Print(" Fly INIT ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]);
             //Print(" Step 0 "," sev ",sev," zap ",zap," yug ",yug," vost ",vost );
            }//Fin init
+
+         //+------------------------------------------------------------------+
+         //|Sunflower 8 bit volume feed  side X calculation                   |
+         //+------------------------------------------------------------------+
          //Print("Step2 ",Be_0," -Be_0 ",Bo_0," -Bo_0 ",Be_1," -Be_1 ",Bo_1," -Bo_1 ");
          //Print("Nueva ronda ",Var1_Be_0," Var1_Be_0 ",Var1_Bo_0," Var1_Bo_0 ",Var1_Be_1," Var1_Be_1 ",Var1_Bo_1," Var1_Bo_ ");
          //Подача значений
@@ -3540,7 +3564,7 @@ int start()
             SZBV_1=0;
             //Print(" Tiempo de Llenado Contra_Reloj_1 ",iTime(Symbol(),0,1));
            }
-         Comment(" Reloj ",Reloj," Contra Reloj ", Contra_Reloj," Reloj_1 ",Reloj_1," Contra Reloj_1 ", Contra_Reloj_1," Vost_1 ",Vost_1," Yug_1 ",Yug_1," Zap_1 ",Zap_1," Sev_1 ",Sev_1);
+         //Comment(" Reloj ",Reloj," Contra Reloj ", Contra_Reloj," Reloj_1 ",Reloj_1," Contra Reloj_1 ", Contra_Reloj_1," Vost_1 ",Vost_1," Yug_1 ",Yug_1," Zap_1 ",Zap_1," Sev_1 ",Sev_1);
 
          //Функция купольного вращения 2
 
@@ -5294,6 +5318,12 @@ int start()
            }
          string Sterr2;
          Sterr2=IntegerToString(err2);
+         //+------------------------------------------------------------------+
+         //|END Sunflower 8 bit volume feed  side X calculation               |
+         //+------------------------------------------------------------------+
+         //+------------------------------------------------------------------+
+         //|Sunflower 8 bit volume feed  side Z calculation                   |
+         //+------------------------------------------------------------------+
 
          //--Вращение Оси Z
          if(z_Be_0==1)
@@ -8514,7 +8544,11 @@ int start()
 
 
            }// Vostok фин
-         //--Конец Вращение Оси Z
+
+         //+------------------------------------------------------------------+
+         //|END Sunflower 8 bit volume feed  side Z calculation                   |
+         //+------------------------------------------------------------------+
+
 
 
          //-----I write the received data into a Binary File for drawing data using the Histogram method
@@ -8538,6 +8572,9 @@ int start()
          //-----  FileClose(file_handle16);
 
          //----- }
+         //+------------------------------------------------------------------+
+         //|Sunflower -  5 cells of the church dome                           |
+         //+------------------------------------------------------------------+
          //-Купол - Расчёт базируется на 5 семечках и 4 архитектурах. Используется ценавая привязка к 20 центрам в 5 семечках
          //-Формула расчёта привязки семечки
          //Модуль позиционирования цены в купол
@@ -8554,6 +8591,10 @@ int start()
             N_Centro=20;
             N_Gr20++;
            }
+         //+------------------------------------------------------------------+
+         //|END Sunflower -  5 cells of the church dome                       |
+         //+------------------------------------------------------------------+
+
          //Print(" N_Centro ",N_Centro," N_Gr20 ",N_Gr20);
          //Be_0
          //Семечка 1
@@ -8563,6 +8604,9 @@ int start()
          //Заход в архитектуру по формуле
          //Be_0
 
+         //+------------------------------------------------------------------+
+         //|Sunflower -  sunflower seeds architecture                         |
+         //+------------------------------------------------------------------+
 
          // ------ Свод Цена-Купол + Свод Цена - Крест Абьём
 
@@ -8575,8 +8619,8 @@ int start()
          //Блок Получения Разрешений для оброботки события расчёта патернов
          //1.Расчитывается - сравнивается предыдущие значения с текущими
          //Print(" comp_Sev[1,1]!=Sev[1,1] ",comp_Sev[1,1]!=Sev[1,1]); //
-         Print(" comp_Sev ",comp_Sev[1,1],comp_Sev[1,2],comp_Sev[1,3],comp_Sev[1,4],comp_Sev[1,5],comp_Sev[1,6],comp_Sev[1,7],comp_Sev[1,8]);
-         Print("      Sev ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]);
+         //Print(" comp_Sev ",comp_Sev[1,1],comp_Sev[1,2],comp_Sev[1,3],comp_Sev[1,4],comp_Sev[1,5],comp_Sev[1,6],comp_Sev[1,7],comp_Sev[1,8]);
+         //Print("      Sev ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]);
          if(comp_Sev[1,1]!=Sev[1,1] && Sev[1,1]==1)//Be_0 Место 1,5,9,13,17 Если в массиве  появились изменения после пересчёта с массивом сравнения то выявляется место в котором появились изменения и присваиваются разрешения на оброботку
            {
             Per_Sev1=1;
@@ -12511,6 +12555,9 @@ int start()
       // }
       //Print(" IFb1 ",IFb1," IFb2 ", IFb2);//Мониторинг индексов массива
       //---------------------
+      //+------------------------------------------------------------------+
+      //|END Sunflower -  sunflower seeds architecture                     |
+      //+------------------------------------------------------------------+
 
       //+------------------------------------------------------------------+
       //|   Counter Summa 1/0                                              |
@@ -12639,16 +12686,19 @@ int start()
            {
             k++;
             MaxMinArr[1,1]=k;
+            //Print(" k++ ",k);
+
            }
          if(body[ina,1]==0)
            {
             k--;
             MaxMinArr[1,2]=k;
+            // Print(" k-- ",k);
            }
-         
-        }
 
-      
+        }
+      //Print(" k++ Ar",MaxMinArr[1,1]," k-- Ar",MaxMinArr[1,2]);
+
       //--------Max Min Numbers
       Maximum=MaxMinArr[1,1];//bool
       Minimum=MaxMinArr[1,2];//bear
@@ -12742,7 +12792,9 @@ int start()
       //+------------------------------------------------------------------+
       //|END Counter Summa 1/0 -   Synapsys Indicator                      |
       //+------------------------------------------------------------------+
-
+      //+------------------------------------------------------------------+
+      //|    Counter Summa 1/0 - MaxBinNumber 1/0                          |
+      //+------------------------------------------------------------------+
 
       //-------Arrays------
 
@@ -12828,6 +12880,10 @@ int start()
       int compensation_1,compensation_2;
       compensation_1=Maximum-MaxBinNumber_1;
       compensation_2=Minimum+MaxBinNumber_0;
+      //+------------------------------------------------------------------+
+      //| END Counter Summa 1/0 - MaxBinNumber 1/0                          |
+      //+------------------------------------------------------------------+
+
       // --------- Test of received values ​​--------
 
       //Print(" TIME ",iTime(Symbol(),0,1));
@@ -12863,6 +12919,9 @@ int start()
          FileClose(file_handle17);
         }
 
+      //+------------------------------------------------------------------+
+      //|    Counter Summa 1/0 - MaxBinNumber 1/0   Signal processing      |
+      //+------------------------------------------------------------------+
       // ------------- Signal processing with classification and writing to the bbb_compare array ----------------- //
       if(Rez_BE==0)
         {
@@ -12910,14 +12969,11 @@ int start()
         }
 
 
-      //-----------------------------------
+      //+------------------------------------------------------------------+
+      //| END Counter Summa 1/0 - MaxBinNumber 1/0   Signal processing     |
+      //+------------------------------------------------------------------+
 
-      if(body[zeroindex,0]>0 && body[zeroindex,0]<2)
-        {
-         PriceZero=body[zeroindex,0];//Цена первого 0
-        }
-      else
-         PriceZero=body[zeroindex,3];
+
       //-----брос переменных и массива
       Counter1=0;      //obnulyaem peremennye
       Counter1_1     = 0;
@@ -12927,11 +12983,22 @@ int start()
       Counter_Summa0 = 0;
       Counter=0;
 
+
+      //+------------------------------------------------------------------+
+      //|Counter Summa 1/0 - Generation of initial data                    |
+      //+------------------------------------------------------------------+
       ArrayInitialize(body,10);
 
       ///-----------------------------
       double operandopen=iOpen(Symbol(),PERIOD_M1,1);
       double operandclose=iClose(Symbol(),PERIOD_M1,1);
+      if(body[zeroindex,0]>0 && body[zeroindex,0]<2)
+        {
+         PriceZero=body[zeroindex,0];//Цена первого 0
+        }
+      else
+         PriceZero=body[zeroindex,3];
+
 
       //----------Индикатор сложения бинарного кода с ценой зеро-----------------
       if(Maximum!=0)
@@ -13034,74 +13101,6 @@ int start()
          FileWrite(file_handle17,Symbol()," MaxBinNumber_1 ",MaxBinNumber_1," MaxBinNumber_0 ",MaxBinNumber_0);
          FileClose(file_handle17);
         }
-
-
-
-      //if(BinIndWRITE==true)
-      //{
-      // int ih;//index
-      // for(ih=1; ih<99999; ih++)
-      //  {
-      //   if(body[ih,0]==10)
-      //    {
-      //    break;
-      //   }
-
-      //  }
-
-      //  int iprint1=ih-1;//index
-
-      // int iha;//index
-      // for(iha=1; iha<10000; iha++)
-      //  {
-      //  if(ArrayMaximum_1[iha]==0)
-      //   {
-      //   break;
-      //  }
-
-      //  }
-      //int iprint2a=iha-1;
-
-      // int ihb;//index
-      // for(ihb=1; ihb<10000; ihb++)
-      //  {
-      // if(ArrayMaximum_0[ihb]==0)
-      // {
-      //  break;
-      // }
-
-      //   }
-      // int iprint3b=ihb-1;
-      // for(int iprint=1; iprint<iprint1; iprint++)
-      // {
-
-
-      // Print("BODY ",body[iprint,1]);
-
-
-      //   }
-      //--------------------------------------
-
-      //for(int iprint2=1; iprint2<iprint2a; iprint2++)
-      // {
-
-
-      //Print("ArrayMaximum_1 ",ArrayMaximum_1[iprint2]);
-
-
-      //}
-      //--------------------------------------
-
-      //for(int iprint3=1; iprint3<iprint3b; iprint3++)
-      // {
-
-
-      //Print("ArrayMaximum_0 ",ArrayMaximum_0[iprint3]);
-
-
-      //  }
-      // }
-      //---------------------
 
       if((resOperandMin==PriceZero || resOperandMax==PriceZero) && Maximum>0 && Minimum>0)
         {
@@ -13521,7 +13520,7 @@ int start()
          AllAnalisysData[i,13]=BinInd3BO;
          AllAnalisysData[i,14]=BinInd3BE;
          AllAnalisysData[i,15]=Onda1;
-         
+
 
 
 
@@ -13663,8 +13662,12 @@ int start()
 
       //  }
       // }
-
-
+      //+------------------------------------------------------------------+
+      //|END Counter Summa 1/0 - Generation of initial data                |
+      //+------------------------------------------------------------------+
+      //+------------------------------------------------------------------+
+      //|Grafic indicator                                                  |
+      //+------------------------------------------------------------------+
 
      }
 
@@ -13691,16 +13694,16 @@ int start()
       //Handle=FileOpen(File_Name_Close,FILE_CSV|FILE_WRITE,";");
      }
 
-//+------------------------------------------------------------------+
-//|                                                                  |
-//+------------------------------------------------------------------+
+
    Bars_Z(Bid);
    Text_OBJ_LABEL("Tx_FM",1,1,50,"l",28,"Wingdings",clrOrange);
 
 
    return(0);
   }
-
+//+------------------------------------------------------------------+
+//|Grafic indicator                                                  |
+//+------------------------------------------------------------------+
 
 //+------------------------------------------------------------------+
 //|       Binary Miner                                               |
