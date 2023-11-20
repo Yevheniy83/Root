@@ -1,13 +1,13 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.3.4.mq4 |
+//|                                             Nucleo   v 2.3.5.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
 
 #property copyright "Yevheniy Kopanitskyy"
 #property link      "https://www.mql5.com/en/users/eugeniokp"
-#property version   "2.2"
+#property version   "2.3"
 #property strict
 
 
@@ -1388,6 +1388,115 @@ int start()
          //|END Maximum Price Reference                                         |
          //+------------------------------------------------------------------+
          //+------------------------------------------------------------------+
+         //| Counter Summa 1/0 -   Maximum , Minimum INDICARTOR               |
+         //+------------------------------------------------------------------+
+
+         k=0;
+         ArrayInitialize(MaxMinArr,0);
+
+         int inf;
+         int ic;
+         for(ic=1; ic<99999; ic++)
+           {
+            if(body[ic,0]==10)
+              {
+               break;
+              }
+           }
+         inf=ic-1;
+
+         int b1=(int)body[1,1];
+         if(b1==1)
+           {
+            k=1;
+           };
+         if(b1==0)
+           {
+            k=0;
+           };
+         MaxMinArr[1,1]=k;
+         MaxMinArr[1,2]=k;
+
+         //-----------------------------
+         int ina;
+         for(ina=2; ina<=inf; ina++)
+           {
+
+            if(body[ina,1]==1)
+              {
+               k++;
+               MaxMinArr[1,1]=k;
+               //Print(" k++ ",k);
+
+              }
+            if(body[ina,1]==0)
+              {
+               k--;
+               MaxMinArr[1,2]=k;
+               // Print(" k-- ",k);
+              }
+
+           }
+         //Print(" k++ Ar",MaxMinArr[1,1]," k-- Ar",MaxMinArr[1,2]);
+
+         //--------Max Min Numbers
+         Maximum=MaxMinArr[1,1];//bool
+         Minimum=MaxMinArr[1,2];//bear
+         //Print(" Maximum ",Maximum," Minimum ",Minimum);
+         ///-----------------------------
+         double operandopen=iOpen(Symbol(),PERIOD_M1,1);
+         double operandclose=iClose(Symbol(),PERIOD_M1,1);
+         if(body[zeroindex,0]>0 && body[zeroindex,0]<2)
+           {
+            PriceZero=body[zeroindex,0];//Цена первого 0
+           }
+         else
+            PriceZero=body[zeroindex,3];
+         //Print(" PriceZero ",PriceZero);
+
+         //----------Индикатор сложения бинарного кода с ценой зеро-----------------
+         if(Maximum>0)
+           {
+            restantemaximum=NormalizeDouble(Maximum*Point,5);
+            resOperandMax=operandopen-restantemaximum;
+
+           }
+         if(Maximum<0)
+           {
+            Maximum=MathAbs(Maximum);
+            restantemaximum=NormalizeDouble(Maximum*Point,5);
+            resOperandMax=operandopen-restantemaximum;
+
+           }
+         //Print(" restantemaximum ",restantemaximum," Maximum ",Maximum," operandopen ",operandopen," resOperandMax ",resOperandMax);
+         if(Minimum>0)
+           {
+            restanteminimum=NormalizeDouble(Minimum*Point,5);
+            resOperandMin=operandclose+restanteminimum;
+           }
+         if(Minimum<0)
+           {
+            Minimum=MathAbs(Minimum);
+            restanteminimum=NormalizeDouble(Minimum*Point,5);
+            resOperandMin=operandclose+restanteminimum;
+           }
+         //Print(" restanteminimum ",restanteminimum," Minimum ",Minimum," operandclose ",operandclose," resOperandMin ",resOperandMin);
+
+         bool tr=false;
+         if(resOperandMax==PriceZero || resOperandMin==PriceZero)
+           {
+            tr=true;
+           }
+
+         //Print( " tr ",tr);
+
+         // --- The last digit indicates the type of resistance that formed inside the candle --- //
+         //int LasData=MaxMinArr[inf];// Used for the divergence indicator
+
+         //+------------------------------------------------------------------+
+         //| END Counter Summa 1/0 -   Maximum , Minimum INDICARTOR           |
+         //+------------------------------------------------------------------+
+         //+------------------------------------------------------------------+
          //|Sunflower Seed sides                                             |
          //+------------------------------------------------------------------+
 
@@ -1403,6 +1512,7 @@ int start()
 
          BinInd3BO=10;
          BinInd3BE=10;
+         //Указатель Мама Папа и Крёсный и Крёсная
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one)
            {
             price_plus=price_Menus_one+PipsPrice;// Summed to the price -1 pips of the maximum -1
@@ -1412,7 +1522,7 @@ int start()
               {
                BinInd3=0;
                BinInd3BO=0;
-
+               //Андрей Владимировичь Копаницкий
                Bo="Bo_"+IntegerToString(BinInd3);
                //Подача значений на маховик
                Bo_0=1;//Подача значений для X
@@ -1426,6 +1536,7 @@ int start()
               }
             if(bodypips[MaxInd_bodypips,0]>price_plus)
               {
+               //Салко Гриша
                BinInd3=1;
                BinInd3BO=1;
                Bo="Bo_"+IntegerToString(BinInd3);
@@ -1448,6 +1559,7 @@ int start()
             price_minus=price_Menus_one-PipsPrice;
             if(bodypips[MaxInd_bodypips,0]>price_minus)
               {
+               //ЛАврова Ольга Сергеевна
                BinInd3=0;
                BinInd3BE=0;
                Be="Be_"+IntegerToString(BinInd3);
@@ -1464,6 +1576,7 @@ int start()
               }
             if(bodypips[MaxInd_bodypips,0]<price_minus)
               {
+               //Дюкарева Людмила Николаевна
                BinInd3=1;
                BinInd3BE=1;
                Be="Be_"+IntegerToString(BinInd3);
@@ -1482,7 +1595,7 @@ int start()
          //|END Sunflower Seed sides                                          |
          //+------------------------------------------------------------------+
          //+------------------------------------------------------------------+
-         //|Sunflower Cupol                                            |
+         //|Sunflower Cupol                                                   |
          //+------------------------------------------------------------------+
 
          //-----Rotation-----
@@ -1583,8 +1696,100 @@ int start()
          //+------------------------------------------------------------------+
          //|Sunflower 8 bit volume feed - start calculation                   |
          //+------------------------------------------------------------------+
+         //+------------------------------------------------------------------+
+         //|   Counter Summa 1/0                                              |
+         //+------------------------------------------------------------------+
+
+         if(GetLastError()==4002)
+
+           {
+            Alert(" EA ERROR- RELOAD");
+            ResetLastError();
+           }
+
+         im=im++;
+         //Compensation price calculation function
+         int ikz;
+         for(ikz=1; ikz<99999; ikz++)
+           {
+            if(body[ikz,1]==10)
+              {
+               break;
+              }
+           }
+         int Counter_Summa1_AR=0;
+         int Counter_Summa0_AR=0;
+         for(int ik=1; ik<ikz; ik++)
+           {
+            if(body[ik,1]==1)
+              {
+               Counter_Summa1_AR++;
+              }
+
+           }
+         for(int il=1; il<ikz; il++)
+           {
+            if(body[il,1]==0)
+              {
+               Counter_Summa0_AR++;
+              }
+
+           }
+
+         //+------------------------------------------------------------------+
+         //|Counter Summa 1/0 -   Synapsys Indicator                          |
+         //+------------------------------------------------------------------+
+         //+------------------------------------------------------------------+
+         //| Counter Summa 1/0 - Fibonacci ruler calculation                  |
+         //+------------------------------------------------------------------+
+
+         one_BE=Counter_Summa1_AR;//Power of bears
+         int zero_BE=Counter_Summa0_AR;//Power of Bull
+         Rez_BE=one_BE-zero_BE;
+         // ----- Calculation of Fibonacci levels -----
+         RefreshRates();
+         datetime IreceiveBarTime=iTime(Symbol(),0,1);
+         bartimeresult=IreceiveBarTime;
+         IreceiveLevelresult=one_BE;
+
+         HIGHT=iHigh(Symbol(),0,1);
+         LOW=iLow(Symbol(),0,1);
+         CLOSE=iClose(Symbol(),0,1);
+         OPEN=iOpen(Symbol(),0,1);
+         normalLevel=IreceiveLevelresult*Point;
+         center=NormalizeDouble(HIGHT-((HIGHT-LOW)/2),NormalizaDigi);
+
+         DoublspredPoint=spredpoints*Point();
+         LEVELUP=NormalizeDouble((center+normalLevel),NormalizaDigi);//1
+         LEVELDOWN=NormalizeDouble((center-normalLevel),NormalizaDigi);//1
+
+         IpaintFiboLineUP_2=NormalizeDouble((LEVELUP+(normalLevel*2)),NormalizaDigi);//2
+         IpaintFiboLineUP_3=NormalizeDouble((IpaintFiboLineUP_2+(normalLevel*3)),NormalizaDigi);//3
+         IpaintFiboLineUP_5=NormalizeDouble((IpaintFiboLineUP_3+(normalLevel*5)),NormalizaDigi);//5
+         IpaintFiboLineUP_8=NormalizeDouble((IpaintFiboLineUP_5+(normalLevel*8)),NormalizaDigi);//8
+         IpaintFiboLineUP_13=NormalizeDouble((IpaintFiboLineUP_8+(normalLevel*13)),NormalizaDigi);//13
+         IpaintFiboLineUP_21=NormalizeDouble((IpaintFiboLineUP_13+(normalLevel*21)),NormalizaDigi);//21
+         IpaintFiboLineUP_34=NormalizeDouble((IpaintFiboLineUP_21+(normalLevel*34)),NormalizaDigi);
+         IpaintFiboLineUP_55=NormalizeDouble((IpaintFiboLineUP_34+(normalLevel*55)),NormalizaDigi);
+         IpaintFiboLineUP_89=NormalizeDouble((IpaintFiboLineUP_55+(normalLevel*89)),NormalizaDigi);
+         IpaintFiboLineUP_144=NormalizeDouble((IpaintFiboLineUP_89+(normalLevel*144)),NormalizaDigi);
+
+         IpaintFiboLineDOWN_2=NormalizeDouble((LEVELDOWN-(normalLevel*2)),NormalizaDigi);
+         IpaintFiboLineDOWN_3=NormalizeDouble((IpaintFiboLineDOWN_2-(normalLevel*3)),NormalizaDigi);
+         IpaintFiboLineDOWN_5=NormalizeDouble((IpaintFiboLineDOWN_3-(normalLevel*5)),NormalizaDigi);
+         IpaintFiboLineDOWN_8=NormalizeDouble((IpaintFiboLineDOWN_5-(normalLevel*8)),NormalizaDigi);
+         IpaintFiboLineDOWN_13=NormalizeDouble((IpaintFiboLineDOWN_8-(normalLevel*13)),NormalizaDigi);
+         IpaintFiboLineDOWN_21=NormalizeDouble((IpaintFiboLineDOWN_13-(normalLevel*21)),NormalizaDigi);
+         IpaintFiboLineDOWN_34=NormalizeDouble((IpaintFiboLineDOWN_21-(normalLevel*34)),NormalizaDigi);
+         IpaintFiboLineDOWN_55=NormalizeDouble((IpaintFiboLineDOWN_34-(normalLevel*55)),NormalizaDigi);
+         IpaintFiboLineDOWN_89=NormalizeDouble((IpaintFiboLineDOWN_55-(normalLevel*89)),NormalizaDigi);
+         IpaintFiboLineDOWN_144=NormalizeDouble((IpaintFiboLineDOWN_89-(normalLevel*144)),NormalizaDigi);
+
+         //+------------------------------------------------------------------+
+         //| END Counter Summa 1/0 - Fibonacci ruler calculation              |
+         //+------------------------------------------------------------------+
          // Исходное положение Свеча компинсации. Переустановка начений
-         if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && Maximum>0 && Minimum>0 && Rez_BE==0 && Compens==true)
+         if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0 && Compens==true)
            {
             // Установка позиции маховика на Север
             sev=1;// обработка события Север
@@ -8725,7 +8930,7 @@ int start()
             //Print("Per_Sev1 ",Per_Sev1);
             Arch3=8;
            }  //присвоил разрешение на оброботку события
-         Print("Arch3 ",Arch3);
+         //Print("Arch3 ",Arch3);
          //int PermisBLock=0;
          //if(comp_Sev[1,1]!=Sev[1,1] && comp_Sev[1,2]!=Sev[1,2] && comp_Sev[1,3]!=Sev[1,3] && comp_Sev[1,4]!=Sev[1,4] && comp_Sev[1,5]!=Sev[1,5] && comp_Sev[1,6]==Sev[1,6] && comp_Sev[1,7]==Sev[1,7] && comp_Sev[1,8]==Sev[1,8])//Если патерн после пересчёта на изменился относительно подачи абьёма
          //{  PermisBLock=1;}
@@ -12348,7 +12553,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8], " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -12361,7 +12566,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -12559,161 +12764,7 @@ int start()
       //|END Sunflower -  sunflower seeds architecture                     |
       //+------------------------------------------------------------------+
 
-      //+------------------------------------------------------------------+
-      //|   Counter Summa 1/0                                              |
-      //+------------------------------------------------------------------+
 
-      if(GetLastError()==4002)
-
-        {
-         Alert(" EA ERROR- RELOAD");
-         ResetLastError();
-        }
-
-      im=im++;
-      //Compensation price calculation function
-      int ikz;
-      for(ikz=1; ikz<99999; ikz++)
-        {
-         if(body[ikz,1]==10)
-           {
-            break;
-           }
-        }
-      int Counter_Summa1_AR=0;
-      int Counter_Summa0_AR=0;
-      for(int ik=1; ik<ikz; ik++)
-        {
-         if(body[ik,1]==1)
-           {
-            Counter_Summa1_AR++;
-           }
-
-        }
-      for(int il=1; il<ikz; il++)
-        {
-         if(body[il,1]==0)
-           {
-            Counter_Summa0_AR++;
-           }
-
-        }
-      //+------------------------------------------------------------------+
-      //| Counter Summa 1/0 - Fibonacci ruler calculation                  |
-      //+------------------------------------------------------------------+
-
-      one_BE=Counter_Summa1_AR;//Power of bears
-      int zero_BE=Counter_Summa0_AR;//Power of Bull
-      Rez_BE=one_BE-zero_BE;
-      // ----- Calculation of Fibonacci levels -----
-      RefreshRates();
-      datetime IreceiveBarTime=iTime(Symbol(),0,1);
-      bartimeresult=IreceiveBarTime;
-      IreceiveLevelresult=one_BE;
-
-      HIGHT=iHigh(Symbol(),0,1);
-      LOW=iLow(Symbol(),0,1);
-      CLOSE=iClose(Symbol(),0,1);
-      OPEN=iOpen(Symbol(),0,1);
-      normalLevel=IreceiveLevelresult*Point;
-      center=NormalizeDouble(HIGHT-((HIGHT-LOW)/2),NormalizaDigi);
-
-      DoublspredPoint=spredpoints*Point();
-      LEVELUP=NormalizeDouble((center+normalLevel),NormalizaDigi);//1
-      LEVELDOWN=NormalizeDouble((center-normalLevel),NormalizaDigi);//1
-
-      IpaintFiboLineUP_2=NormalizeDouble((LEVELUP+(normalLevel*2)),NormalizaDigi);//2
-      IpaintFiboLineUP_3=NormalizeDouble((IpaintFiboLineUP_2+(normalLevel*3)),NormalizaDigi);//3
-      IpaintFiboLineUP_5=NormalizeDouble((IpaintFiboLineUP_3+(normalLevel*5)),NormalizaDigi);//5
-      IpaintFiboLineUP_8=NormalizeDouble((IpaintFiboLineUP_5+(normalLevel*8)),NormalizaDigi);//8
-      IpaintFiboLineUP_13=NormalizeDouble((IpaintFiboLineUP_8+(normalLevel*13)),NormalizaDigi);//13
-      IpaintFiboLineUP_21=NormalizeDouble((IpaintFiboLineUP_13+(normalLevel*21)),NormalizaDigi);//21
-      IpaintFiboLineUP_34=NormalizeDouble((IpaintFiboLineUP_21+(normalLevel*34)),NormalizaDigi);
-      IpaintFiboLineUP_55=NormalizeDouble((IpaintFiboLineUP_34+(normalLevel*55)),NormalizaDigi);
-      IpaintFiboLineUP_89=NormalizeDouble((IpaintFiboLineUP_55+(normalLevel*89)),NormalizaDigi);
-      IpaintFiboLineUP_144=NormalizeDouble((IpaintFiboLineUP_89+(normalLevel*144)),NormalizaDigi);
-
-      IpaintFiboLineDOWN_2=NormalizeDouble((LEVELDOWN-(normalLevel*2)),NormalizaDigi);
-      IpaintFiboLineDOWN_3=NormalizeDouble((IpaintFiboLineDOWN_2-(normalLevel*3)),NormalizaDigi);
-      IpaintFiboLineDOWN_5=NormalizeDouble((IpaintFiboLineDOWN_3-(normalLevel*5)),NormalizaDigi);
-      IpaintFiboLineDOWN_8=NormalizeDouble((IpaintFiboLineDOWN_5-(normalLevel*8)),NormalizaDigi);
-      IpaintFiboLineDOWN_13=NormalizeDouble((IpaintFiboLineDOWN_8-(normalLevel*13)),NormalizaDigi);
-      IpaintFiboLineDOWN_21=NormalizeDouble((IpaintFiboLineDOWN_13-(normalLevel*21)),NormalizaDigi);
-      IpaintFiboLineDOWN_34=NormalizeDouble((IpaintFiboLineDOWN_21-(normalLevel*34)),NormalizaDigi);
-      IpaintFiboLineDOWN_55=NormalizeDouble((IpaintFiboLineDOWN_34-(normalLevel*55)),NormalizaDigi);
-      IpaintFiboLineDOWN_89=NormalizeDouble((IpaintFiboLineDOWN_55-(normalLevel*89)),NormalizaDigi);
-      IpaintFiboLineDOWN_144=NormalizeDouble((IpaintFiboLineDOWN_89-(normalLevel*144)),NormalizaDigi);
-
-      //+------------------------------------------------------------------+
-      //| END Counter Summa 1/0 - Fibonacci ruler calculation              |
-      //+------------------------------------------------------------------+
-      //+------------------------------------------------------------------+
-      //| Counter Summa 1/0 -   Maximum , Minimum INDICARTOR               |
-      //+------------------------------------------------------------------+
-
-      k=0;
-      ArrayInitialize(MaxMinArr,0);
-
-      int inf;
-      int ic;
-      for(ic=1; ic<99999; ic++)
-        {
-         if(body[ic,0]==10)
-           {
-            break;
-           }
-        }
-      inf=ic-1;
-
-      int b1=(int)body[1,1];
-      if(b1==1)
-        {
-         k=1;
-        };
-      if(b1==0)
-        {
-         k=0;
-        };
-      MaxMinArr[1,1]=k;
-      MaxMinArr[1,2]=k;
-
-      //-----------------------------
-      int ina;
-      for(ina=2; ina<=inf; ina++)
-        {
-
-         if(body[ina,1]==1)
-           {
-            k++;
-            MaxMinArr[1,1]=k;
-            //Print(" k++ ",k);
-
-           }
-         if(body[ina,1]==0)
-           {
-            k--;
-            MaxMinArr[1,2]=k;
-            // Print(" k-- ",k);
-           }
-
-        }
-      //Print(" k++ Ar",MaxMinArr[1,1]," k-- Ar",MaxMinArr[1,2]);
-
-      //--------Max Min Numbers
-      Maximum=MaxMinArr[1,1];//bool
-      Minimum=MaxMinArr[1,2];//bear
-
-
-
-      // --- The last digit indicates the type of resistance that formed inside the candle --- //
-      //int LasData=MaxMinArr[inf];// Used for the divergence indicator
-
-      //+------------------------------------------------------------------+
-      //| END Counter Summa 1/0 -   Maximum , Minimum INDICARTOR           |
-      //+------------------------------------------------------------------+
-      //+------------------------------------------------------------------+
-      //|Counter Summa 1/0 -   Synapsys Indicator                          |
-      //+------------------------------------------------------------------+
 
       ArrayInitialize(komp1,0);
       ArrayInitialize(kompa,10);
@@ -12880,6 +12931,8 @@ int start()
       int compensation_1,compensation_2;
       compensation_1=Maximum-MaxBinNumber_1;
       compensation_2=Minimum+MaxBinNumber_0;
+      //Print(" compensation_1 ",compensation_1);
+      //Print(" compensation_2 ",compensation_2);
       //+------------------------------------------------------------------+
       //| END Counter Summa 1/0 - MaxBinNumber 1/0                          |
       //+------------------------------------------------------------------+
@@ -12988,34 +13041,9 @@ int start()
       //|Counter Summa 1/0 - Generation of initial data                    |
       //+------------------------------------------------------------------+
       ArrayInitialize(body,10);
+      Print("TEST1  WRITDATA "," resOperandMax==PriceZero ",resOperandMax==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
 
-      ///-----------------------------
-      double operandopen=iOpen(Symbol(),PERIOD_M1,1);
-      double operandclose=iClose(Symbol(),PERIOD_M1,1);
-      if(body[zeroindex,0]>0 && body[zeroindex,0]<2)
-        {
-         PriceZero=body[zeroindex,0];//Цена первого 0
-        }
-      else
-         PriceZero=body[zeroindex,3];
-
-
-      //----------Индикатор сложения бинарного кода с ценой зеро-----------------
-      if(Maximum!=0)
-        {
-         restantemaximum=NormalizeDouble(Maximum*Point,5);
-         resOperandMax=operandopen-restantemaximum;
-
-        }
-      if(Minimum!=0)
-        {
-         restanteminimum=NormalizeDouble(Minimum*Point,5);
-         resOperandMin=operandclose+restanteminimum;
-        }
-
-
-
-      if(resOperandMax==PriceZero && Maximum>0 && Minimum>0 && Rez_BE==0)
+      if(resOperandMax==PriceZero && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0)
         {
 
          //TextVisualIndicator="SHORT";
@@ -13048,7 +13076,8 @@ int start()
         }
 
       //---LONG Posicion
-      if(resOperandMin==PriceZero && Maximum>0 && Minimum>0 && Rez_BE==0)
+      Print("TEST2  WRITDATA "," resOperandMin==PriceZero ",resOperandMin==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
+      if(resOperandMin==PriceZero && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0)
         {
          //TextVisualIndicator="LONG";
          //Alert("LONG");
@@ -13102,7 +13131,7 @@ int start()
          FileClose(file_handle17);
         }
 
-      if((resOperandMin==PriceZero || resOperandMax==PriceZero) && Maximum>0 && Minimum>0)
+      if((resOperandMin==PriceZero || resOperandMax==PriceZero) && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0))
         {
 
          if(printdesc1==1)
@@ -13153,9 +13182,12 @@ int start()
       int Result_Compensation=compensation_1+compensation_2;
 
       int CompensationForGrafik=compensation_2*(-1);
-
-      if((resOperandMin==PriceZero || resOperandMax==PriceZero) && Maximum>0 && Minimum>0 && Rez_BE==0)
+      Print("TEST4  WRITDATA "," resOperandMin==PriceZero ",resOperandMin==PriceZero," resOperandMax==PriceZero ",resOperandMax==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
+      if((resOperandMin==PriceZero || resOperandMax==PriceZero) && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0)
         {
+         int fg=0;
+         fg++;
+         Print(" fg ",fg);
          file_handle4=FileOpen(FileName4,FILE_READ|FILE_WRITE," ");
          if(file_handle4>0)
            {
@@ -13250,7 +13282,7 @@ int start()
            }
 
          LongShort=10;
-         if(resOperandMin==PriceZero && Maximum>0 && Minimum>0 && one_BE>=1 && one_BE<=60 && Rez_BE==0)
+         if(resOperandMin==PriceZero && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && one_BE>=1 && one_BE<=60 && Rez_BE==0)
            {
             TextVisualIndicator="LONG";
             Alert("LONG");
@@ -13264,7 +13296,7 @@ int start()
             LongShort=1;
            }
 
-         if(resOperandMax==PriceZero && Maximum>0 && Minimum>0 && one_BE>=1 && one_BE<=60 && Rez_BE==0)
+         if(resOperandMax==PriceZero && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && one_BE>=1 && one_BE<=60 && Rez_BE==0)
            {
 
             TextVisualIndicator="SHORT";
@@ -13407,7 +13439,7 @@ int start()
 
 
             RefreshRates();
-            IreceiveBarTime=iTime(Symbol(),0,1);
+            datetime IreceiveBarTime=iTime(Symbol(),0,1);
             bartimeresult=IreceiveBarTime;
             IreceiveLevelresult=one_BE;
 
@@ -13708,7 +13740,7 @@ int start()
 //+------------------------------------------------------------------+
 //|       Binary Miner                                               |
 //+------------------------------------------------------------------+
-void Bars_Z(double iBid)
+void Bars_Z(double iBid)// Собрал я с Ирой с красочьных полей зерно и дали по горсти каждый дочери Крестине
   {
 
    int Cqt=0;
