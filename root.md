@@ -137,7 +137,7 @@ double ves_1_zerno;
 double kolvo_zeren_1_chashka_Kofe;
 int one_kg_kofe_soderzhit_chawek;
 double Kolvo_zeren_v_kilograme;
-int Kolvo_sredstv_dlya_sbora;
+extern int Kolvo_sredstv_dlya_sbora=15000;
 int Kolvo_chashek_kofe_dlya_sbora;
 int Kolvo_zeren_dlya_Sbora;
 int kolvo_zeren_sessiya;
@@ -1769,7 +1769,6 @@ int start()
          kolvo_zeren_1_chashka_Kofe=kolvo_gram_1_chashka_kofe/ves_1_zerno;//45 зерен кофе
          one_kg_kofe_soderzhit_chawek=111;
          Kolvo_zeren_v_kilograme=one_kg_kofe_soderzhit_chawek*kolvo_zeren_1_chashka_Kofe;//4.995
-         Kolvo_sredstv_dlya_sbora=15000;
          Kolvo_chashek_kofe_dlya_sbora=Kolvo_sredstv_dlya_sbora/odna_chaska_kofe;//1000
          Kolvo_zeren_dlya_Sbora=Kolvo_chashek_kofe_dlya_sbora*kolvo_zeren_1_chashka_Kofe;//45000 зёрен кофе
          kolvo_zeren_sessiya=one_BE+zero_BE;
