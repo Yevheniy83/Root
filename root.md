@@ -1780,10 +1780,11 @@ int start()
            {
             string SM_AV=IntegerToString(kolvo_zeren);
             SendNotification(SM_AV);
-            Print(" зёрна собраны с поля Приступаем к приготовлению кофе",kolvo_zeren);
+            Print(" зёрна собраны с поля Приступаем к приготовлению кофе - https://send.monobank.ua/jar/2GXP5PQZRz ",kolvo_zeren);
             kolvo_zeren=0;
+            
            }
-         //Если колво зёрен больше или равно требуемым расчёт колличества средств то вывести принт " зёрна собраны с поля Приступаем к приготовлению кофе"
+         
          RefreshRates();
          datetime IreceiveBarTime=iTime(Symbol(),0,1);
          bartimeresult=IreceiveBarTime;
