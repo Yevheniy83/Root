@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.3.5.mq4 |
+//|                                             Nucleo   v 2.3.6.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -60,6 +60,7 @@ double body_Plus[99999,20];//Массив для перезаписи
 double komp1[99999];// Array for displaying the synapse in the record
 int ArrayMaximum_0[10000];//999999
 int ArrayMaximum_1[10000];//999999
+int Directons[9999,10];//МАссив для сравнения свечьного анализа. Если подача данных соответствует получнным то 1. Если данные другие то 0 и перезапись
 //int bintoarr[1441,1001];//запись параметров бинарного кода в массив.Запись массива раз в сутки в бинарный фаил
 //int IFb1;//Индекс 1 для массива bintoarr
 //int IFb2;//Индекс 2 для массива bintoarr
@@ -129,6 +130,18 @@ double OPEN;
 double resOperandMax;
 double resOperandMin;
 //--END----DOUBLE VARS-----
+//Angelusvitae fond
+int odna_chaska_kofe;
+int kolvo_gram_1_chashka_kofe;
+double ves_1_zerno;
+double kolvo_zeren_1_chashka_Kofe;
+int one_kg_kofe_soderzhit_chawek;
+double Kolvo_zeren_v_kilograme;
+int Kolvo_sredstv_dlya_sbora;
+int Kolvo_chashek_kofe_dlya_sbora;
+int Kolvo_zeren_dlya_Sbora;
+int kolvo_zeren_sessiya;
+int kolvo_zeren;
 int Gx,Gy;
 int fgf;
 int fgi;
@@ -1747,6 +1760,30 @@ int start()
          int zero_BE=Counter_Summa0_AR;//Power of Bull
          Rez_BE=one_BE-zero_BE;
          // ----- Calculation of Fibonacci levels -----
+         //Angelusvitae fond - https://www.facebook.com/angelusvitae.fond
+         //можно провести эквивалент расчёта архитектуры семечьки подсолнуха приравнивая к 4 семечкам кофе
+         //добавить счётчик сбора зёрен с файла
+         odna_chaska_kofe=15;// грн
+         kolvo_gram_1_chashka_kofe=9;
+         ves_1_zerno=0.2;
+         kolvo_zeren_1_chashka_Kofe=kolvo_gram_1_chashka_kofe/ves_1_zerno;//45 зерен кофе
+         one_kg_kofe_soderzhit_chawek=111;
+         Kolvo_zeren_v_kilograme=one_kg_kofe_soderzhit_chawek*kolvo_zeren_1_chashka_Kofe;//4.995
+         Kolvo_sredstv_dlya_sbora=15000;
+         Kolvo_chashek_kofe_dlya_sbora=Kolvo_sredstv_dlya_sbora/odna_chaska_kofe;//1000
+         Kolvo_zeren_dlya_Sbora=Kolvo_chashek_kofe_dlya_sbora*kolvo_zeren_1_chashka_Kofe;//45000 зёрен кофе
+         kolvo_zeren_sessiya=one_BE+zero_BE;
+         kolvo_zeren=kolvo_zeren+kolvo_zeren_sessiya;//Колличество зёрен при складывании сессий
+         
+         Print("kolvo_zeren ",kolvo_zeren);
+         if(kolvo_zeren>=Kolvo_zeren_dlya_Sbora)
+           {
+            string SM_AV=IntegerToString(kolvo_zeren);
+            SendNotification(SM_AV);
+            Print(" зёрна собраны с поля Приступаем к приготовлению кофе",kolvo_zeren);
+            kolvo_zeren=0;
+           }
+         //Если колво зёрен больше или равно требуемым расчёт колличества средств то вывести принт " зёрна собраны с поля Приступаем к приготовлению кофе"
          RefreshRates();
          datetime IreceiveBarTime=iTime(Symbol(),0,1);
          bartimeresult=IreceiveBarTime;
@@ -13041,7 +13078,7 @@ int start()
       //|Counter Summa 1/0 - Generation of initial data                    |
       //+------------------------------------------------------------------+
       ArrayInitialize(body,10);
-      Print("TEST1  WRITDATA "," resOperandMax==PriceZero ",resOperandMax==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
+      //Print("TEST1  WRITDATA "," resOperandMax==PriceZero ",resOperandMax==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
 
       if(resOperandMax==PriceZero && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0)
         {
@@ -13076,7 +13113,7 @@ int start()
         }
 
       //---LONG Posicion
-      Print("TEST2  WRITDATA "," resOperandMin==PriceZero ",resOperandMin==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
+      //Print("TEST2  WRITDATA "," resOperandMin==PriceZero ",resOperandMin==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
       if(resOperandMin==PriceZero && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0)
         {
          //TextVisualIndicator="LONG";
@@ -13182,7 +13219,7 @@ int start()
       int Result_Compensation=compensation_1+compensation_2;
 
       int CompensationForGrafik=compensation_2*(-1);
-      Print("TEST4  WRITDATA "," resOperandMin==PriceZero ",resOperandMin==PriceZero," resOperandMax==PriceZero ",resOperandMax==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
+      //Print("TEST4  WRITDATA "," resOperandMin==PriceZero ",resOperandMin==PriceZero," resOperandMax==PriceZero ",resOperandMax==PriceZero," Maximum ",Maximum," Minimum ",Minimum," Rez_BE ",Rez_BE);
       if((resOperandMin==PriceZero || resOperandMax==PriceZero) && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0)
         {
          int fg=0;
