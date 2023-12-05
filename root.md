@@ -1779,7 +1779,7 @@ int start()
            {
             string SM_AV=IntegerToString(kolvo_zeren);
             SendNotification(SM_AV);
-            Print(" зёрна собраны с поля Приступаем к приготовлению кофе - https://send.monobank.ua/jar/2GXP5PQZRz https://m.facebook.com/profile.php/?id=100061828946176 https://m.facebook.com/profile.php/?id=100069337776471",kolvo_zeren);
+            Print(" зёрна собраны с поля Приступаем к приготовлению кофе - https://send.monobank.ua/jar/2GXP5PQZRz https://m.facebook.com/profile.php/?id=100061828946176 https://m.facebook.com/profile.php/?id=100069337776471 https://youtu.be/9xMScFIFcz4?si=Uqyk0CV-ZLV8zZa- ",kolvo_zeren);
             kolvo_zeren=0;
             
            }
