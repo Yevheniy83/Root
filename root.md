@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.3.7.mq4 |
+//|                                             Nucleo   v 2.3.8.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -60,7 +60,7 @@ double body_Plus[99999,20];//Массив для перезаписи
 double komp1[99999];// Array for displaying the synapse in the record
 int ArrayMaximum_0[10000];//999999
 int ArrayMaximum_1[10000];//999999
-int Directons[9999,10];//МАссив для сравнения свечьного анализа. Если подача данных соответствует получнным то 1. Если данные другие то 0 и перезапись
+int flower[99,39];//МАссив для получения архитектуры
 //int bintoarr[1441,1001];//запись параметров бинарного кода в массив.Запись массива раз в сутки в бинарный фаил
 //int IFb1;//Индекс 1 для массива bintoarr
 //int IFb2;//Индекс 2 для массива bintoarr
@@ -264,6 +264,7 @@ int z_errorprint2[150];
 int z_Gx,z_Gy;
 int N_Petalo;
 int N_Petalo_1;
+int Petalos_32=0;
 //Купол - Против Часовой Стрелки
 // ------ Свод Цена-Купол + Свод Цена - Крест Абьём
 
@@ -279,7 +280,7 @@ int w;
 int w1;
 int w2;
 int w3;
-
+bool flower_perm=false;
 int InternalPat_1;//индикатор формирования внутреннего патерна вокруг цены
 int ExternalPat_1;//индикатор формирования Внешнего патерна вокруг цены
 // Пример. Массива Север
@@ -344,7 +345,7 @@ int Sum_Yug_B_1=0;
 int Sum_Vost_B_1=0;
 int Sum_Sev_B_1=0;
 int Sum_SZBV_1=0;
-
+int flower_Plus=0;//Цветок склался 0
 //Против Часовой Bo_0
 int Contra_Reloj_1;
 int Rest_Vost_1;
@@ -1841,7 +1842,7 @@ int start()
          //+------------------------------------------------------------------+
          //| END Counter Summa 1/0 - Fibonacci ruler calculation              |
          //+------------------------------------------------------------------+
-         // Исходное положение Свеча компинсации. Переустановка начений
+         // Исходное положение Свеча компинсации. Переустановка значений
          if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0 && Compens==true)
            {
             // Установка позиции маховика на Север
@@ -1861,10 +1862,10 @@ int start()
             Sev[1,3]=0;//Be_1
             Sev[1,4]=0;//Bo_1
             // Изнанка
-            Sev[1,5]=1;//Be_0
-            Sev[1,6]=1;//Bo_0
-            Sev[1,7]=1;//Be_1
-            Sev[1,8]=1;//Bo_1
+            Sev[1,5]=0;//Be_0
+            Sev[1,6]=0;//Bo_0
+            Sev[1,7]=0;//Be_1
+            Sev[1,8]=0;//Bo_1
             Var1_Be_0=0;
             Var1_Bo_0=2;
             Var1_Be_1=2;
@@ -1897,6 +1898,9 @@ int start()
             z_Var1_Bo_0=2;
             z_Var1_Be_1=2;
             z_Var1_Bo_1=2;
+            // Массив цветок
+            ArrayInitialize(flower,0);
+            flower_perm=true;
 
             int file_handle14=FileOpen(FileName14,FILE_READ|FILE_WRITE," ");
             if(file_handle14>0)
@@ -12555,12 +12559,13 @@ int start()
             N_Petalo_1=0;
            }
          int Ch_d1=0;//Permiso para cambiar datos
-         for(int iu=1; iu<8; iu++)//Сравнение пересчёта бинарного кода. Выявление изменений в 01110110 байте 01101110
+         for(int iu=1; iu<9; iu++)//Сравнение пересчёта бинарного кода. Выявление изменений в 01110110 байте 01101110
            {
-            if(comp_Sev[1,iu]!=Sev[1,iu] && (comp_Sev[1,1]==1  || comp_Sev[1,2]==1 || comp_Sev[1,3]==1 || comp_Sev[1,4]==1 || comp_Sev[1,5]==1 || comp_Sev[1,6]==1 || comp_Sev[1,7]==1 || comp_Sev[1,8]==1))// условие если произошло изменение в структуре 8 бит
+            if(comp_Sev[1,iu]!=Sev[1,iu] && Sev[1,iu]==1)// условие если произошло изменение в структуре 8 бит
               {
                N_Petalo_1=iu;//Присвоение индекса как номер лепестка
                Ch_d1=1;
+               break;
               }
            }
          if(N_Petalo_1!=0 && Ch_d1==1)
@@ -12592,1315 +12597,1566 @@ int start()
 
 
          // Зброс параметров переменных перед расчётом
+         // flower[99,39] Обьявить массив 0. Произвести проверку на >=1 0000 Лепесток1(по архитектурно арх 1 2 3 4) 0000 Лепесток2 0000 Лепесток3 0000 лепесток4  также 5 6 7 8
          insert_chanel_1=0;
          insert_chanel_2=0;
          output_Dir=0;
          zaryad=0;
          zapret_podachi_input=0;
          zapret_podachi_output=0;
-         //
-         if(sev==1 && N_Petalo==1/* Определяется по 3 архитектуре */ && N_Centro==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+         if(flower_perm==true)
            {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+            //
+            if(sev==1 && N_Petalo==1/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //Be_1 - " - " Arhitektura
+               flower[1,1]=flower[1,1]-1;//Регистрация подачи значения
+
+              }
+            if(sev==1 && N_Petalo==2 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,5]=flower[1,5]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==3 && N_Centro_r==1 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,9]=flower[1,9]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==4 && N_Centro_r==1 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,13]=flower[1,13]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==5/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,17]=flower[1,17]-1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==2 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==3 && N_Centro==1 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==4 && N_Centro==1 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==5/* Определяется по 3 архитектуре */ && N_Centro==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==6 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,21]=flower[1,21]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==7 && N_Centro_r==1 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,25]=flower[1,25]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==8 && N_Centro_r==1 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,29]=flower[1,29]+1;//Регистрация подачи значения
+              }
+
+            //
+            if(sev==1 && N_Petalo==1 && N_Centro_r==2 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,2]=flower[1,2]+1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==6 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==7 && N_Centro==1 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==8 && N_Centro==1 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-
-         //
-         if(sev==1 && N_Petalo==1 && N_Centro==2 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(sev==1 && N_Petalo==2 && N_Centro==2 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==3 && N_Centro==2 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==4 && N_Centro==2 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==5 && N_Centro==2 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==2 && N_Centro_r==2 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,6]=flower[1,6]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==3 && N_Centro_r==2 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,10]=flower[1,10]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==4 && N_Centro_r==2 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,14]=flower[1,14]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==5 && N_Centro_r==2 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,18]=flower[1,18]+1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==6 && N_Centro==2 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==7 && N_Centro==2 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==8 && N_Centro==2 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(sev==1 && N_Petalo==1 && N_Centro==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==6 && N_Centro_r==2 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,22]=flower[1,22]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==7 && N_Centro_r==2 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,26]=flower[1,26]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==8 && N_Centro_r==2 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,30]=flower[1,30]-1;//Регистрация подачи значения
+              }
+            //
+            if(sev==1 && N_Petalo==1 && N_Centro_r==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,3]=flower[1,3]-1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==2 && N_Centro==3 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==3 && N_Centro==3 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==4 && N_Centro==3 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==5 && N_Centro==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==2 && N_Centro_r==3 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,7]=flower[1,7]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==3 && N_Centro_r==3 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,11]=flower[1,11]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==4 && N_Centro_r==3 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,15]=flower[1,15]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==5 && N_Centro_r==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,19]=flower[1,19]-1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==6 && N_Centro==3 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==7 && N_Centro==3 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==8 && N_Centro==3 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(sev==1 && N_Petalo==1 && N_Centro==4 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==6 && N_Centro_r==3 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,23]=flower[1,23]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==7 && N_Centro_r==3 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,27]=flower[1,27]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==8 && N_Centro_r==3 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,31]=flower[1,31]+1;//Регистрация подачи значения
+              }
+            //
+            if(sev==1 && N_Petalo==1 && N_Centro_r==4 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,4]=flower[1,4]+1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==2 && N_Centro==4 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==3 && N_Centro==4 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==4 && N_Centro==4 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==5 && N_Centro==4 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==2 && N_Centro_r==4 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,8]=flower[1,8]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==3 && N_Centro_r==4 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,12]=flower[1,12]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==4 && N_Centro_r==4 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,16]=flower[1,16]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==5 && N_Centro_r==4 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,20]=flower[1,20]+1;//Регистрация подачи значения
 
 
-           }
-         if(sev==1 && N_Petalo==6 && N_Centro==4 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(sev==1 && N_Petalo==7 && N_Centro==4 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(sev==1 && N_Petalo==8 && N_Centro==4 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-           //
-         if(vost==1 && N_Petalo==1 && N_Centro==1  && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(sev==1 && N_Petalo==6 && N_Centro_r==4 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,24]=flower[1,24]-1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==7 && N_Centro_r==4 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,28]=flower[1,28]+1;//Регистрация подачи значения
+              }
+            if(sev==1 && N_Petalo==8 && N_Centro_r==4 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,32]=flower[1,32]-1;//Регистрация подачи значения
+              }
+            //
+            if(vost==1 && N_Petalo==1 && N_Centro_r==1  && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,1]=flower[1,1]+1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==2 && N_Centro==1 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==3 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==4 && N_Centro==1 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==5 && N_Centro==1  && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(vost==1 && N_Petalo==2 && N_Centro_r==1 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,5]=flower[1,5]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==3 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,9]=flower[1,9]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==4 && N_Centro_r==1 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,13]=flower[1,13]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==5 && N_Centro_r==1  && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,17]=flower[1,17]+1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==6 && N_Centro==1 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==7 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==8 && N_Centro==1 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
+              }
+            if(vost==1 && N_Petalo==6 && N_Centro_r==1 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,21]=flower[1,21]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==7 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,25]=flower[1,25]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==8 && N_Centro_r==1 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,29]=flower[1,29]-1;//Регистрация подачи значения
+              }
 
-         //
-         if(vost==1 && N_Petalo==1 && N_Centro==2 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(vost==1 && N_Petalo==2 && N_Centro==2 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==3 && N_Centro==2 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==4 && N_Centro==2 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==5 && N_Centro==2 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+            //
+            if(vost==1 && N_Petalo==1 && N_Centro_r==2 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,2]=flower[1,2]-1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==6 && N_Centro==2 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==7 && N_Centro==2 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==8 && N_Centro==2 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(vost==1 && N_Petalo==1 && N_Centro==3 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(vost==1 && N_Petalo==2 && N_Centro_r==2 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,6]=flower[1,6]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==3 && N_Centro_r==2 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,10]=flower[1,10]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==4 && N_Centro_r==2 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,14]=flower[1,14]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==5 && N_Centro_r==2 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,18]=flower[1,18]-1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==2 && N_Centro==3 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==3 && N_Centro==3 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==4 && N_Centro==3 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==5 && N_Centro==3 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(vost==1 && N_Petalo==6 && N_Centro_r==2 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,22]=flower[1,22]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==7 && N_Centro_r==2 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,26]=flower[1,26]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==8 && N_Centro_r==2 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,30]=flower[1,30]+1;//Регистрация подачи значения
+              }
+            //
+            if(vost==1 && N_Petalo==1 && N_Centro_r==3 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,3]=flower[1,3]+1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==6 && N_Centro==3 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==7 && N_Centro==3 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==8 && N_Centro==3 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(vost==1 && N_Petalo==1 && N_Centro==4 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(vost==1 && N_Petalo==2 && N_Centro_r==3 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,7]=flower[1,7]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==3 && N_Centro_r==3 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,11]=flower[1,11]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==4 && N_Centro_r==3 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,15]=flower[1,15]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==5 && N_Centro_r==3 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,19]=flower[1,19]+1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==2 && N_Centro==4 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==3 && N_Centro==4 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==4 && N_Centro==4 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==5 && N_Centro==4 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//vostok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+              }
+            if(vost==1 && N_Petalo==6 && N_Centro_r==3 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,23]=flower[1,23]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==7 && N_Centro_r==3 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,27]=flower[1,27]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==8 && N_Centro_r==3 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,31]=flower[1,31]-1;//Регистрация подачи значения
+              }
+            //
+            if(vost==1 && N_Petalo==1 && N_Centro_r==4 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,4]=flower[1,4]-1;//Регистрация подачи значения
 
 
-           }
-         if(vost==1 && N_Petalo==6 && N_Centro==4 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(vost==1 && N_Petalo==7 && N_Centro==4 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//vostok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(vost==1 && N_Petalo==8 && N_Centro==4 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//vostok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
+              }
+            if(vost==1 && N_Petalo==2 && N_Centro_r==4 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,8]=flower[1,8]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==3 && N_Centro_r==4 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,12]=flower[1,12]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==4 && N_Centro_r==4 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,16]=flower[1,16]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==5 && N_Centro_r==4 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//vostok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,20]=flower[1,20]-1;//Регистрация подачи значения
+
+
+              }
+            if(vost==1 && N_Petalo==6 && N_Centro_r==4 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,24]=flower[1,24]+1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==7 && N_Centro_r==4 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//vostok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,28]=flower[1,28]-1;//Регистрация подачи значения
+              }
+            if(vost==1 && N_Petalo==8 && N_Centro_r==4 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//vostok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,32]=flower[1,32]+1;//Регистрация подачи значения
+              }
+
+            //
+            if(yug==1 && N_Petalo==1 && N_Centro_r==1  && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,1]=flower[1,1]-1;//Регистрация подачи значения
+
+
+              }
+            if(yug==1 && N_Petalo==2 && N_Centro_r==1 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,5]=flower[1,5]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==3 && N_Centro_r==1 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,9]=flower[1,9]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==4 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,13]=flower[1,13]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==5 && N_Centro_r==1  && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,17]=flower[1,17]-1;//Регистрация подачи значения
+
+
+              }
+            if(yug==1 && N_Petalo==6 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,21]=flower[1,21]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==7 && N_Centro_r==1 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,25]=flower[1,25]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==8 && N_Centro_r==1 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,29]=flower[1,29]+1;//Регистрация подачи значения
+              }
+
+            //
+            if(yug==1 && N_Petalo==1 && N_Centro_r==2 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,2]=flower[1,2]+1;//Регистрация подачи значения
+
+
+              }
+            if(yug==1 && N_Petalo==2 && N_Centro_r==2 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,6]=flower[1,6]-1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==3 && N_Centro_r==2 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,10]=flower[1,10]+1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==4 && N_Centro_r==2 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,14]=flower[1,14]-1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==5 && N_Centro_r==2 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,18]=flower[1,18]+1;//Регистрация подачи значения
+
+
+
+              }
+            if(yug==1 && N_Petalo==6 && N_Centro_r==2 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,22]=flower[1,22]-1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==7 && N_Centro_r==2 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,26]=flower[1,26]+1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==8 && N_Centro_r==2 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,30]=flower[1,30]-1;//Регистрация подачи значения
+
+              }
+            //
+            if(yug==1 && N_Petalo==1 && N_Centro_r==3 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,3]=flower[1,3]-1;//Регистрация подачи значения
+
+
+
+              }
+            if(yug==1 && N_Petalo==2 && N_Centro_r==3 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,7]=flower[1,7]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==3 && N_Centro_r==3 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,11]=flower[1,11]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==4 && N_Centro_r==3 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,15]=flower[1,15]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==5 && N_Centro_r==3 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,19]=flower[1,19]-1;//Регистрация подачи значения
+
+
+              }
+            if(yug==1 && N_Petalo==6 && N_Centro_r==3 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,23]=flower[1,23]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==7 && N_Centro_r==3 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,27]=flower[1,27]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==8 && N_Centro_r==3 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,31]=flower[1,31]+1;//Регистрация подачи значения
+              }
+            //
+            if(yug==1 && N_Petalo==1 && N_Centro_r==4 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,4]=flower[1,4]+1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==2 && N_Centro_r==4 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,8]=flower[1,8]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==3 && N_Centro_r==4 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,12]=flower[1,12]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==4 && N_Centro_r==4 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,16]=flower[1,16]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==5 && N_Centro_r==4 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//yugok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,20]=flower[1,20]+1;//Регистрация подачи значения
+
+              }
+            if(yug==1 && N_Petalo==6 && N_Centro_r==4 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,24]=flower[1,24]-1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==7 && N_Centro_r==4 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//yugok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,28]=flower[1,228]+1;//Регистрация подачи значения
+              }
+            if(yug==1 && N_Petalo==8 && N_Centro_r==4 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//yugok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,32]=flower[1,32]-1;//Регистрация подачи значения
+              }
+
+            //
+            if(zap==1 && N_Petalo==1 && N_Centro_r==1  && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,1]=flower[1,1]+1;//Регистрация подачи значения
+
+              }
+            if(zap==1 && N_Petalo==2 && N_Centro_r==1 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,5]=flower[1,5]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==3 && N_Centro_r==1 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,9]=flower[1,9]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==4 && N_Centro_r==1 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,13]=flower[1,13]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==5 && N_Centro_r==1  && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,17]=flower[1,17]+1;//Регистрация подачи значения
+
+
+              }
+            if(zap==1 && N_Petalo==6 && N_Centro_r==1 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,21]=flower[1,21]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==7 && N_Centro_r==1 && f_Bo_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,25]=flower[1,25]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==8 && N_Centro_r==1 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,29]=flower[1,29]-1;//Регистрация подачи значения
+              }
+
+            //
+            if(zap==1 && N_Petalo==1 && N_Centro_r==2 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,2]=flower[1,2]-1;//Регистрация подачи значения
+
+
+              }
+            if(zap==1 && N_Petalo==2 && N_Centro_r==2 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,6]=flower[1,6]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==3 && N_Centro_r==2 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,10]=flower[1,10]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==4 && N_Centro_r==2 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,14]=flower[1,14]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==5 && N_Centro_r==2 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,18]=flower[1,18]-1;//Регистрация подачи значения
+
+
+              }
+            if(zap==1 && N_Petalo==6 && N_Centro_r==2 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,22]=flower[1,22]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==7 && N_Centro_r==2 && f_Be_0==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,26]=flower[1,26]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==8 && N_Centro_r==2 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,30]=flower[1,30]+1;//Регистрация подачи значения
+              }
+            //
+            if(zap==1 && N_Petalo==1 && N_Centro_r==3 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,3]=flower[1,3]+1;//Регистрация подачи значения
+
+
+              }
+            if(zap==1 && N_Petalo==2 && N_Centro_r==3 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,7]=flower[1,7]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==3 && N_Centro_r==3 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,11]=flower[1,11]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==4 && N_Centro_r==3 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,15]=flower[1,15]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==5 && N_Centro_r==3 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,19]=flower[1,19]+1;//Регистрация подачи значения
+
+
+              }
+            if(zap==1 && N_Petalo==6 && N_Centro_r==3 && f_Be_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,23]=flower[1,23]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==7 && N_Centro_r==3 && f_Bo_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" + " Arhitektura
+               flower[1,27]=flower[1,27]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==8 && N_Centro_r==3 && f_Be_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" - " Arhitektura
+               flower[1,31]=flower[1,31]-1;//Регистрация подачи значения
+              }
+            //
+            if(zap==1 && N_Petalo==1 && N_Centro_r==4 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,4]=flower[1,4]-1;//Регистрация подачи значения
+
+
+              }
+            if(zap==1 && N_Petalo==2 && N_Centro_r==4 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,8]=flower[1,8]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==3 && N_Centro_r==4 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,12]=flower[1,12]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==4 && N_Centro_r==4 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,16]=flower[1,16]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==5 && N_Centro_r==4 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
+              {
+               // Arch 1
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=2;//zapok
+               zaryad=1;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,20]=flower[1,20]-1;//Регистрация подачи значения
+
+              }
+            if(zap==1 && N_Petalo==6 && N_Centro_r==4 && f_Bo_1==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=3;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,24]=flower[1,24]+1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==7 && N_Centro_r==4 && f_Be_1==1)
+              {
+               insert_chanel_1=4;
+               insert_chanel_2=2;
+               output_Dir=4;//zapok
+               zaryad=0;
+               zapret_podachi_input=2;
+               zapret_podachi_output=4;
+               //" - " Arhitektura
+               flower[1,28]=flower[1,28]-1;//Регистрация подачи значения
+              }
+            if(zap==1 && N_Petalo==8 && N_Centro_r==4 && f_Bo_0==1)
+              {
+               insert_chanel_1=2;
+               insert_chanel_2=4;
+               output_Dir=1;//zapok
+               zaryad=1;
+               zapret_podachi_input=4;
+               zapret_podachi_output=2;
+               //" + " Arhitektura
+               flower[1,32]=flower[1,32]+1;//Регистрация подачи значения
+              }
+              
+            Petalos_32=0;
+            for(int ia=1; ia<33; ia++)
+              {
+               
+               if(flower[1,ia]>=1)
+                 {
+                  Petalos_32=Petalos_32+1;//Складывание 32 истин в массиве
+
+                 }
+
+              }
+            //После сравнения массива выявляем число 32 если достигнуто то цветок склался
+            if(Petalos_32==32)
+              {
+               flower_Plus=1;
+              }
+
            }
            
-           //
-         if(yug==1 && N_Petalo==1 && N_Centro==1  && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
+         //Проверка на сбор архитектурной ячейки
 
-
-           }
-         if(yug==1 && N_Petalo==2 && N_Centro==1 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==3 && N_Centro==1 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==4 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==5 && N_Centro==1  && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==6 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==7 && N_Centro==1 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==8 && N_Centro==1 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-
-         //
-         if(yug==1 && N_Petalo==1 && N_Centro==2 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==2 && N_Centro==2 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==3 && N_Centro==2 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==4 && N_Centro==2 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==5 && N_Centro==2 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==6 && N_Centro==2 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==7 && N_Centro==2 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==8 && N_Centro==2 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(yug==1 && N_Petalo==1 && N_Centro==3 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==2 && N_Centro==3 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==3 && N_Centro==3 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==4 && N_Centro==3 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==5 && N_Centro==3 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==6 && N_Centro==3 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==7 && N_Centro==3 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==8 && N_Centro==3 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(yug==1 && N_Petalo==1 && N_Centro==4 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==2 && N_Centro==4 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==3 && N_Centro==4 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==4 && N_Centro==4 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==5 && N_Centro==4 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//yugok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(yug==1 && N_Petalo==6 && N_Centro==4 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(yug==1 && N_Petalo==7 && N_Centro==4 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//yugok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(yug==1 && N_Petalo==8 && N_Centro==4 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//yugok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-           
-          //
-         if(zap==1 && N_Petalo==1 && N_Centro==1  && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==2 && N_Centro==1 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==3 && N_Centro==1 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==4 && N_Centro==1 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==5 && N_Centro==1  && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==6 && N_Centro==1 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==7 && N_Centro==1 && f_Bo_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==8 && N_Centro==1 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-
-         //
-         if(zap==1 && N_Petalo==1 && N_Centro==2 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==2 && N_Centro==2 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==3 && N_Centro==2 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==4 && N_Centro==2 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==5 && N_Centro==2 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==6 && N_Centro==2 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==7 && N_Centro==2 && f_Be_0==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==8 && N_Centro==2 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(zap==1 && N_Petalo==1 && N_Centro==3 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==2 && N_Centro==3 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==3 && N_Centro==3 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==4 && N_Centro==3 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==5 && N_Centro==3 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==6 && N_Centro==3 && f_Be_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==7 && N_Centro==3 && f_Bo_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==8 && N_Centro==3 && f_Be_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         //
-         if(zap==1 && N_Petalo==1 && N_Centro==4 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==2 && N_Centro==4 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==3 && N_Centro==4 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==4 && N_Centro==4 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==5 && N_Centro==4 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
-           {
-            // Arch 1
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=2;//zapok
-            zaryad=1;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-            //Arch 3
-
-
-           }
-         if(zap==1 && N_Petalo==6 && N_Centro==4 && f_Bo_1==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=3;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           }
-         if(zap==1 && N_Petalo==7 && N_Centro==4 && f_Be_1==1)
-           {
-            insert_chanel_1=4;
-            insert_chanel_2=2;
-            output_Dir=4;//zapok
-            zaryad=0;
-            zapret_podachi_input=2;
-            zapret_podachi_output=4;
-           }
-         if(zap==1 && N_Petalo==8 && N_Centro==4 && f_Bo_0==1)
-           {
-            insert_chanel_1=2;
-            insert_chanel_2=4;
-            output_Dir=1;//zapok
-            zaryad=1;
-            zapret_podachi_input=4;
-            zapret_podachi_output=2;
-           } 
-         //Directons[9999,10];
          //----- Произвожу запись массивива в Бинарный Фаил
          int file_handle25=FileOpen(FileName18,FILE_READ|FILE_WRITE|FILE_BIN);
          if(file_handle25>0)
@@ -13938,7 +14194,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo," In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -13951,7 +14207,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo," In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad," Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
