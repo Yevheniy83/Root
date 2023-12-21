@@ -60,7 +60,7 @@ double body_Plus[99999,20];//Массив для перезаписи
 double komp1[99999];// Array for displaying the synapse in the record
 int ArrayMaximum_0[10000];//999999
 int ArrayMaximum_1[10000];//999999
-int flower[99,39];//МАссив для получения архитектуры
+int flower[99,99];//Мaссив для получения архитектуры
 //int bintoarr[1441,1001];//запись параметров бинарного кода в массив.Запись массива раз в сутки в бинарный фаил
 //int IFb1;//Индекс 1 для массива bintoarr
 //int IFb2;//Индекс 2 для массива bintoarr
@@ -366,6 +366,9 @@ int kubo_5=0;
 int kubo_6=0;
 int kubo_7=0;
 int kubo_8=0;
+
+int Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko;
+int Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy;
 string Pr_Arch;
 string Text_Kubo_1="0";
 string Text_Kubo_2="0";
@@ -375,6 +378,8 @@ string Text_Kubo_5="0";
 string Text_Kubo_6="0";
 string Text_Kubo_7="0";
 string Text_Kubo_8="0";
+string Obiekt3001="3001";
+
 //Класификация части куба
 // kube_1 - Be_o_x_Lic / Bo_0_Z_izn
 // kube_2 - Bo_o_x_Lic / Bo_0_Z_lic
@@ -551,15 +556,33 @@ int init()
 
 //-------imag fibanachi-----
    string   Kubo_Img="\\Images\\Kubo_Mql4.bmp";
+
 //-----------------------
    string obiekt501="501";
    ObjectDelete(0,obiekt501);
+   ObjectDelete(Obiekt3001);
    ObjectDelete(obiekt501);
    ObjectCreate(obiekt501,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
    ObjectSetString(0,obiekt501,OBJPROP_BMPFILE,Kubo_Img);
    ObjectSetInteger(0,obiekt501,OBJPROP_XDISTANCE,CHWPX+1450);
-   ObjectSetInteger(0,obiekt501,OBJPROP_YDISTANCE,330);
-
+   ObjectSetInteger(0,obiekt501,OBJPROP_YDISTANCE,350);
+//-------imag emoji-----
+//string   fileemoji="\\Images\\11_p.bmp";
+//for(int x; x<500; x++)
+//{
+//for(int y; y<2000; y++)
+//{
+//  Sleep(20);
+//Comment(" ",x);
+//-----------------------
+//    string Obiekt3001="3001";
+//  ObjectDelete(Obiekt3001);
+// ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+// ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+// ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+// ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+// }
+//  }
 
    ObjectDelete(0,obiekt502);
 
@@ -865,7 +888,6 @@ int start()
       // --- I write to 3 arrays using the index. Array 1 Binary sequence Array 2 price corresponding to the binary sequence 3 candle open time
       // --- It is necessary to combine the array data with a separate script
       // --- arrays are 7210 lines in size and 10000 width
-
 
       int inx;
       for(inx=1; inx<7210; inx++)
@@ -3452,8 +3474,7 @@ int start()
          // Соединение контура иконы Божей Матери "Кропивницкая церковь"
          //Звёздочек вокруг иконы "Божей матери"  Верикаль 2*12 Горизонталь 2*4 Всего 32
          // Индекс BM - "Молитва божей матери"
-         int Gr1_A1x1y1_A2x1y2_Be_0_Olga_Gucalenko;
-         int Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy;
+         
          int Gr1_A1x1y1_A2x2y1_Be_1_Inna_Cima;
          int Gr1_A1x1y1_A2x1y1_Bo_1_Sergei_Dolzhikov;
          //Grupo2 - Группа определяет центр расчёта квадрата семечки. 2 других учасника с текущими 2 из этой группы могут определить другой центр и обьявить
@@ -3568,267 +3589,9 @@ int start()
 
 
 
-         if(Vost_1==1 && Var2_Be_0==1 && Sum_Vost_B==0)
-           {
-            Gr3_A1x1y2_A2x2y3_Bo_0_Marcelo_Arandano=1;
-            Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres=0;
-            Sum_Vost=Gr3_A1x1y2_A2x2y3_Bo_0_Marcelo_Arandano+Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres;
-            Print(Sum_Vost);
-            Sum_Vost_B=1;
-            if(Sum_Sev_B==1 && Sum_Zap_B==1 && Sum_Yug_B==1 &&  Sum_Vost_B==1)
-              {
-               Sum_SZBV=1;
-              }
-           }
-
-
-         if(Sev_1==1 && Var2_Be_0==1 && Sum_Sev_B==0)
-           {
-            Gr1_A1x1y1_A2x1y2_Be_0_Olga_Gucalenko=1;
-            Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy=0;
-            Sum_Sever=Gr1_A1x1y1_A2x1y2_Be_0_Olga_Gucalenko+Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy;
-            Print(Sum_Sever);
-            Sum_Sev_B=1;
-            if(Sum_Sev_B==1 && Sum_Zap_B==1 && Sum_Yug_B==1 &&  Sum_Vost_B==1)
-              {
-               Sum_SZBV=1;
-              }
-
-           }
-
-         if(Zap_1==1 && Var2_Be_0==1 && Sum_Zap_B==0)
-           {
-            Gr2_A1x2y1_A2x2y1_Bo_1_Sergey_Soloviov=1;
-            Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya=0;
-            Sum_Zap=Gr2_A1x2y1_A2x2y1_Bo_1_Sergey_Soloviov+Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya;
-            Sum_Zap_B=1;
-            Print(Sum_Zap);
-            if(Sum_Sev_B==1 && Sum_Zap_B==1 && Sum_Yug_B==1 &&  Sum_Vost_B==1)
-              {
-               Sum_SZBV=1;
-              }
-           }
-
-         if(Yug_1==1 && Var2_Be_0==1 && Sum_Yug_B==0)
-           {
-            Gr4_A1x2y2_A2x3y2_Be_1_Natalia_Furina=1;
-            Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin=0;
-            Sum_Yug=Gr4_A1x2y2_A2x3y2_Be_1_Natalia_Furina+Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin;
-            Sum_Yug_B=1;
-            Print(Sum_Yug);
-
-            if(Sum_Sev_B==1 && Sum_Zap_B==1 && Sum_Yug_B==1 &&  Sum_Vost_B==1)
-              {
-               Sum_SZBV=1;
-              }
-           }
-
-         if(Sum_SZBV==1)
-           {
-            Reloj=Sum_Vost+Sum_Sever+Sum_Yug+Sum_Zap;
-
-            Sum_SZBV=0;
-            Print(" Tiempo de Llenado Reloj ",iTime(Symbol(),0,1));
-           }
-
-         //Против Часовой Стрелки Be_0+
-
-         if(Vost_1==1 && Var2_Be_0==1 && Vost_B==0)
-           {
-            Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy=1;
-            Gr1_A1x1y1_A2x2y1_Be_1_Inna_Cima=0;
-            Rest_Vost=Gr1_A1x1y1_A2x2y1_Be_1_Inna_Cima-Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy;
-            Print(Rest_Vost);
-            Vost_B=1;
-            if(Sev_B==1 && Zap_B==1 && Yug_B==1 &&  Vost_B==1)
-              {
-               SZBV=1;
-              }
-           }
-
-
-         if(Sev_1==1 && Var2_Be_0==1 && Sev_B==0)
-           {
-            Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya=1;
-            Gr2_A1x2y1_A2x3y2_Bo_0_Sergey_Zavidnyy=0;
-            //Так как геометрическое движение проходит против часовой стрелки то производим отнмимание Bo_0 - Be_0
-            Rest_Sever=Gr2_A1x2y1_A2x3y2_Bo_0_Sergey_Zavidnyy-Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya;
-            Print(Rest_Sever);
-            Sev_B=1;
-            if(Sev_B==1 && Zap_B==1 && Yug_B==1 &&  Vost_B==1)
-              {
-               SZBV=1;
-              }
-
-           }
-
-         if(Zap_1==1 && Var2_Be_0==1 && Zap_B==0)
-           {
-            Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin=1;
-            Gr4_A1x2y2_A2x2y3_Be_0_Masha_Didenko=0;
-            Rest_Zap=Gr4_A1x2y2_A2x2y3_Be_0_Masha_Didenko-Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin;
-            Zap_B=1;
-            Print(Rest_Zap);
-            if(Sev_B==1 && Zap_B==1 && Yug_B==1 &&  Vost_B==1)
-              {
-               SZBV=1;
-              }
-           }
-
-         if(Yug_1==1 && Var2_Be_0==1 && Yug_B==0)
-           {
-            Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres=1;
-            Gr2_A1x1y2_A2x1y2_Be_1_Angel_Del_Rosario=0;
-            Rest_Yug=Gr2_A1x1y2_A2x1y2_Be_1_Angel_Del_Rosario-Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres;
-            Yug_B=1;
-            Print(Rest_Yug);
-
-            if(Sev_B==1 && Zap_B==1 && Yug_B==1 &&  Vost_B==1)
-              {
-               SZBV=1;
-              }
-           }
-
-         if(SZBV==1)
-           {
-            Contra_Reloj=Rest_Vost+Rest_Sever+Rest_Yug+Rest_Zap;
-
-            SZBV=0;
-            //Print(" Tiempo de Llenado Contra_Reloj ",iTime(Symbol(),0,1));
-           }
-
-         //По часовой стрелке Bo_0
 
 
 
-         if(Vost_1==1 && Var2_Bo_0==1 && Sum_Vost_B_1==0)
-           {
-            Gr3_A1x1y2_A2x2y3_Bo_0_Marcelo_Arandano=0;
-            Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres=1;
-            Sum_Vost_1=Gr3_A1x1y2_A2x2y3_Bo_0_Marcelo_Arandano+Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres;
-            Print(Sum_Vost_1);
-            Sum_Vost_B_1=1;
-            if(Sum_Sev_B_1==1 && Sum_Zap_B_1==1 && Sum_Yug_B_1==1 &&  Sum_Vost_B_1==1)
-              {
-               Sum_SZBV_1=1;
-              }
-           }
-
-
-         if(Sev_1==1 && Var2_Bo_0==1 && Sum_Sev_B_1==0)
-           {
-            Gr1_A1x1y1_A2x1y2_Be_0_Olga_Gucalenko=0;
-            Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy=1;
-            Sum_Sever_1=Gr1_A1x1y1_A2x1y2_Be_0_Olga_Gucalenko+Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy;
-            Print(Sum_Sever_1);
-            Sum_Sev_B_1=1;
-            if(Sum_Sev_B_1==1 && Sum_Zap_B_1==1 && Sum_Yug_B_1==1 &&  Sum_Vost_B_1==1)
-              {
-               Sum_SZBV_1=1;
-              }
-
-           }
-
-         if(Zap_1==1 && Var2_Bo_0==1 && Sum_Zap_B_1==0)
-           {
-            Gr2_A1x2y1_A2x2y1_Bo_1_Sergey_Soloviov=0;
-            Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya=1;
-            Sum_Zap_1=Gr2_A1x2y1_A2x2y1_Bo_1_Sergey_Soloviov+Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya;
-            Sum_Zap_B_1=1;
-            Print(Sum_Zap_1);
-            if(Sum_Sev_B_1==1 && Sum_Zap_B_1==1 && Sum_Yug_B_1==1 &&  Sum_Vost_B_1==1)
-              {
-               Sum_SZBV_1=1;
-              }
-           }
-
-         if(Yug_1==1 && Var2_Bo_0==1 && Sum_Yug_B_1==0)
-           {
-            Gr4_A1x2y2_A2x3y2_Be_1_Natalia_Furina=0;
-            Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin=1;
-            Sum_Yug_1=Gr4_A1x2y2_A2x3y2_Be_1_Natalia_Furina+Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin;
-            Sum_Yug_B_1=1;
-            Print(Sum_Yug_1);
-
-            if(Sum_Sev_B_1==1 && Sum_Zap_B_1==1 && Sum_Yug_B_1==1 &&  Sum_Vost_B_1==1)
-              {
-               Sum_SZBV_1=1;
-              }
-           }
-
-         if(Sum_SZBV_1==1)
-           {
-            Reloj_1=Sum_Vost_1+Sum_Sever_1+Sum_Yug_1+Sum_Zap_1;
-
-            Sum_SZBV_1=0;
-            //Print(" Tiempo de Llenado Reloj_1 ",iTime(Symbol(),0,1));
-           }
-
-         //Против Часовой Стрелки Bo_0
-
-         if(Vost_1==1 && Var2_Bo_0==1 && Vost_B_1==0)
-           {
-            Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy=0;
-            Gr1_A1x1y1_A2x2y1_Be_1_Inna_Cima=1;
-            Rest_Vost_1=Gr1_A1x1y1_A2x2y1_Be_1_Inna_Cima-Gr1_A1x1y1_A2x2y2_Bo_0_Yevheniy_Kopanitskyy;
-            Print(Rest_Vost_1);
-            Vost_B_1=1;
-            if(Sev_B_1==1 && Zap_B_1==1 && Yug_B_1==1 &&  Vost_B_1==1)
-              {
-               SZBV_1=1;
-              }
-           }
-
-
-         if(Sev_1==1 && Var2_Bo_0==1 && Sev_B_1==0)
-           {
-            Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya=0;
-            Gr2_A1x2y1_A2x3y2_Bo_0_Sergey_Zavidnyy=1;
-            //Так как геометрическое движение проходит против часовой стрелки то производим отнмимание Bo_0 - Be_0
-            Rest_Sever_1=Gr2_A1x2y1_A2x3y2_Bo_0_Sergey_Zavidnyy-Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya;
-            Print(Rest_Sever_1);
-            Sev_B_1=1;
-            if(Sev_B_1==1 && Zap_B_1==1 && Yug_B_1==1 &&  Vost_B_1==1)
-              {
-               SZBV_1=1;
-              }
-
-           }
-
-         if(Zap_1==1 && Var2_Bo_0==1 && Zap_B_1==0)
-           {
-            Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin=0;
-            Gr4_A1x2y2_A2x2y3_Be_0_Masha_Didenko=1;
-            Rest_Zap_1=Gr4_A1x2y2_A2x2y3_Be_0_Masha_Didenko-Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin;
-            Zap_B_1=1;
-            Print(Rest_Zap_1);
-            if(Sev_B_1==1 && Zap_B_1==1 && Yug_B_1==1 &&  Vost_B_1==1)
-              {
-               SZBV_1=1;
-              }
-           }
-
-         if(Yug_1==1 && Var2_Bo_0==1 && Yug_B_1==0)
-           {
-            Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres=0;
-            Gr2_A1x1y2_A2x1y2_Be_1_Angel_Del_Rosario=1;
-            Rest_Yug_1=Gr2_A1x1y2_A2x1y2_Be_1_Angel_Del_Rosario-Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres;
-            Yug_B_1=1;
-            Print(Rest_Yug_1);
-
-            if(Sev_B_1==1 && Zap_B_1==1 && Yug_B_1==1 &&  Vost_B_1==1)
-              {
-               SZBV_1=1;
-              }
-           }
-
-         if(SZBV_1==1)
-           {
-            Contra_Reloj_1=Rest_Vost_1+Rest_Sever_1+Rest_Yug_1+Rest_Zap_1;
-
-            SZBV_1=0;
-            //Print(" Tiempo de Llenado Contra_Reloj_1 ",iTime(Symbol(),0,1));
-           }
          //Comment(" Reloj ",Reloj," Contra Reloj ", Contra_Reloj," Reloj_1 ",Reloj_1," Contra Reloj_1 ", Contra_Reloj_1," Vost_1 ",Vost_1," Yug_1 ",Yug_1," Zap_1 ",Zap_1," Sev_1 ",Sev_1);
 
          //Функция купольного вращения 2
@@ -12540,14 +12303,7 @@ int start()
          //Функция соответствия ключа в к номеру центра и полюсному состоянию
          //Print("TEST1 Print "," N_Centro_Ind ",N_Centro_Ind," Arch3 ",Arch3);
          // клас для складывания и раскладывания архитектуры. Управляющие элементы
-         bool Circulo_1;// Выворот на изнанку
-         bool Estrella_2;// Выворот на Лицо
-         bool Pal_Vertical_3;// Деление на 2 и смещение по вертикали 2 половин в в противоположнуэ сторону
-         bool Pal_Orizontal_4;// Деление на 2 и смещение по горизонтали 2 половин в в противоположнуэ сторону
-         bool Fle_Dos_5;// Указывает на переменную Bo_0
-         bool Fle_Cinco_6;// Указывает на переменную Be_1
-         bool Fle_Ocho_7;// Указывает на переменную Bo_1
-         bool Fle_Once_8;// Указывает на переменную Be_0
+
          //Существует Подклас для Деления с указанием на переменную
          //Подкласы:Kлас деления, Указание на перемнную и Подклас Деление с Указанием на переменную поочерёдно накладываются на Круг и Звезду и выводят следующие подкласы.
          // 1. Звесда с Переменной. 2. Звезда с вертикальным разделением 3. Звезда с горизонтальным разделением.4. Звезда с вертикальным разделением и указателем Переменной 5.Звезда с горизонтальным разделением и указателем Переменной
@@ -12604,6 +12360,8 @@ int start()
          zaryad=0;
          zapret_podachi_input=0;
          zapret_podachi_output=0;
+
+
          if(flower_perm==true)
            {
             //
@@ -12618,6 +12376,19 @@ int start()
                zapret_podachi_output=4;
                //Be_1 - " - " Arhitektura
                flower[1,1]=flower[1,1]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\11_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko=-1;
+               Print(" Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko ",Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko);
+
 
               }
             if(sev==1 && N_Petalo==2 && N_Centro_r==1 && f_Bo_1==1)
@@ -12630,6 +12401,18 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,5]=flower[1,5]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\11_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy=+1;
+               Print(" Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy ",Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==1 && f_Be_0==1)
               {
@@ -12641,6 +12424,16 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,9]=flower[1,9]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\12_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==1 && f_Bo_0==1)
               {
@@ -12652,6 +12445,16 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,13]=flower[1,13]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\12_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==5/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -12664,6 +12467,16 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,17]=flower[1,17]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\13_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
 
 
               }
@@ -12677,6 +12490,16 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,21]=flower[1,21]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\13_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==7 && N_Centro_r==1 && f_Be_0==1)
               {
@@ -12688,6 +12511,16 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,25]=flower[1,25]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\14_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==8 && N_Centro_r==1 && f_Bo_0==1)
               {
@@ -12699,6 +12532,16 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,29]=flower[1,29]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\14_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
 
             //
@@ -12713,7 +12556,19 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,2]=flower[1,2]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\15_p.bmp";
 
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko=+1;
+               Print(" Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko ",Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko);
 
               }
             if(sev==1 && N_Petalo==2 && N_Centro_r==2 && f_Be_0==1)
@@ -12726,6 +12581,18 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,6]=flower[1,6]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\15_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy=-1;
+               Print(" Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy ",Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==2 && f_Bo_1==1)
               {
@@ -12737,6 +12604,16 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,10]=flower[1,10]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\16_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==2 && f_Be_1==1)
               {
@@ -12748,6 +12625,16 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,14]=flower[1,14]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\16_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==5 && N_Centro_r==2 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -12760,6 +12647,16 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,18]=flower[1,18]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\17_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
 
 
               }
@@ -12773,6 +12670,16 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,22]=flower[1,22]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\17_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==7 && N_Centro_r==2 && f_Bo_1==1)
               {
@@ -12784,6 +12691,16 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,26]=flower[1,26]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\18_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==8 && N_Centro_r==2 && f_Be_1==1)
               {
@@ -12795,6 +12712,16 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,30]=flower[1,30]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\18_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             //
             if(sev==1 && N_Petalo==1 && N_Centro_r==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
@@ -12808,7 +12735,19 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,3]=flower[1,3]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\19_m.bmp";
 
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko=-1;
+               Print(" Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko ",Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko);
 
               }
             if(sev==1 && N_Petalo==2 && N_Centro_r==3 && f_Bo_0==1)
@@ -12821,6 +12760,18 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,7]=flower[1,7]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\19_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy=+1;
+               Print(" Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy ",Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==3 && f_Be_1==1)
               {
@@ -12832,6 +12783,16 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,11]=flower[1,11]-1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\20_m.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==3 && f_Bo_1==1)
               {
@@ -12843,6 +12804,16 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,15]=flower[1,15]+1;//Регистрация подачи значения
+               //
+               string   fileemoji="\\Images\\20_p.bmp";
+
+               //-----------------------
+
+               ObjectDelete(Obiekt3001);
+               ObjectCreate(Obiekt3001,OBJ_BITMAP_LABEL,0,BrTime,HIGHT+0.00015);
+               ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
+               ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
               }
             if(sev==1 && N_Petalo==5 && N_Centro_r==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13742,7 +13713,7 @@ int start()
                zapret_podachi_input=2;
                zapret_podachi_output=4;
                //" + " Arhitektura
-               flower[1,28]=flower[1,228]+1;//Регистрация подачи значения
+               flower[1,28]=flower[1,28]+1;//Регистрация подачи значения
               }
             if(yug==1 && N_Petalo==8 && N_Centro_r==4 && f_Be_1==1)
               {
@@ -14135,15 +14106,15 @@ int start()
                //" + " Arhitektura
                flower[1,32]=flower[1,32]+1;//Регистрация подачи значения
               }
-              
+
             Petalos_32=0;
             for(int ia=1; ia<33; ia++)
               {
-               
+
                if(flower[1,ia]>=1)
                  {
                   Petalos_32=Petalos_32+1;//Складывание 32 истин в массиве
-
+                  Print("Petalos_32 ",Petalos_32);
                  }
 
               }
@@ -14154,7 +14125,7 @@ int start()
               }
 
            }
-           
+
          //Проверка на сбор архитектурной ячейки
 
          //----- Произвожу запись массивива в Бинарный Фаил
@@ -14194,7 +14165,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -14207,7 +14178,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," A ",Pr_Arch," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
