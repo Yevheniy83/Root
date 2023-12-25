@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.3.8.mq4 |
+//|                                             Nucleo   v 2.4.0.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
@@ -366,9 +366,48 @@ int kubo_5=0;
 int kubo_6=0;
 int kubo_7=0;
 int kubo_8=0;
+//указать в ссылке обратную индексацию
+// Расшифровка символов. 1 число Архитектура 2 число x коордената 3 число y коордената
+int G111211311411Be0l111221311421Bo0iOlgGuclenko;
+int G111221311421Bo0l111211311411Be0iYevheniKopnitsk;
+int G111211311411Be0i111221311421Bo0lInnCim;
+int G111221311421Bo0i111211311411Be0lSergeiDolzhikov;
 
-int Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko;
-int Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy;
+int G111222312421Be1l111212312411Bo1iElenZhulitsk;
+int G111212312411Bo1l111222312421Be1iSergeZvidn;
+int G111222312421Be1i111212312411Bo1lIrinDzhuli;
+int G111212312411Bo1i111222312421Be1lSergeSoloviov;
+
+int G111221311421Be0l111222312421Bo0iAlinaPriimak;
+int G111222312421Bo0l111221311421Be0iMarceloArandano;
+int G111221311421Be0i111222312421Bo0lConchaTorres;             
+int G111222312421Bo0i111221311421Be0lAngelDelRosario;
+
+
+int G111212312411Be1l111211311411Bo1iMashaDidenko;
+int G111211311411Bo1l111212312411Be1iAnatoliMacola;
+int G111212312411Be1i111211311411Bo1lNataliaFurina;
+int G111211311411Bo1i111212312411Be1lYuriSarapin; 
+int G111222312421Be0l11121231241iValentinaShavritskaa;
+int G111212312411Bo0l111222312421BeiViktorZotov;
+int G111222312421Be0111212312411lViktoriaDunaeva;
+int G111212312411Bo0i111222312421BelOlegDunaev;
+
+int G111211311411Be1l111221311421Bo1iMarinaGudimenko;
+int G111221311421Bo1l111211311411Be1iDimaGudimenko;
+int G111211311411Be1i111221311421Bo1lSvetlanaVarazhko;
+int G111221311421Bo1i111211311411Be1lArtemVarazhko;
+
+int G111212312411Be0l111211311411Bo0iRozaBerioza;
+int G111211311411Bo0l111212312411Be0iYuriTurasov;
+int G111211311411Be0i111211311411Bo0lAnnaDanko;
+int G111211311411Bo0i111212312411Be0lRomanTischenko;
+
+int G111221311421Be1l111222312421Bo1iMarinaEletskaa;
+int G111222312421Bo1l111221311421Be1iDenisVinnikov;
+int G111221311421Be1i111222312421Bo1lTetianaPalchkova;
+int G111222312421Bo1i111221311421Be1lAndrePalchkov;
+
 string Pr_Arch;
 string Text_Kubo_1="0";
 string Text_Kubo_2="0";
@@ -3474,61 +3513,26 @@ int start()
          // Соединение контура иконы Божей Матери "Кропивницкая церковь"
          //Звёздочек вокруг иконы "Божей матери"  Верикаль 2*12 Горизонталь 2*4 Всего 32
          // Индекс BM - "Молитва божей матери"
+
+
          
-         int Gr1_A1x1y1_A2x2y1_Be_1_Inna_Cima;
-         int Gr1_A1x1y1_A2x1y1_Bo_1_Sergei_Dolzhikov;
-         //Grupo2 - Группа определяет центр расчёта квадрата семечки. 2 других учасника с текущими 2 из этой группы могут определить другой центр и обьявить
-         //другое семечко по иным координатам. Пример в Архитектуре
-         int Gr2_A1x2y1_A2x2y2_Be_0_Elena_Zhulitskaya;
-         int Gr2_A1x2y1_A2x3y2_Bo_0_Sergey_Zavidnyy;
-         int Gr2_A1x2y1_A2x3y1_Be_1_Irina_Dzhulai;
-         int Gr2_A1x2y1_A2x2y1_Bo_1_Sergey_Soloviov;
-         //Grupo3 -
-         int Gr3_A1x1y2_A2x1y3_Be_0_Alina_Pryymak;
-         int Gr3_A1x1y2_A2x2y3_Bo_0_Marcelo_Arandano;
-         int Gr3_A1x1y2_A2x2y2_Be_1_Concha_Torres;
-         int Gr2_A1x1y2_A2x1y2_Be_1_Angel_Del_Rosario;
-         //Grupo4 -
-         int Gr4_A1x2y2_A2x2y3_Be_0_Masha_Didenko;
-         int Gr4_A1x2y2_A2x3y3_Bo_0_Anatoliy_Macola;
-         int Gr4_A1x2y2_A2x3y2_Be_1_Natalia_Furina;
-         int Gr4_A1x2y2_A2x2y2_Bo_0_Yuriy_Sarapin; ;//Masha Didenko. Anatolii Macola Yurii Sarapin Natasha Furina
-         //Grupo5 -
-         int Gr5_A1x3y1_A2x3y2_Be_0_Evgeniya_Kopanitskaya;
-         int Gr5_A1x3y1_A2x4y2_Bo_0_Vladimyr_Kopanitskyy;
-         int Gr5_A1x3y1_A2x4y1_Be_1_Dyukoreva_Natalia;
-         int Gr5_A1x3y1_A2x3y1_Bo_1_Sergey_Lavrov;
+                 
          //Grupo6 -
          int Gr6_A1x3y2_A2x3y3_Olga_Lavrova;
-         int Gr6_A1x3y2_A2x4y3_Andrey_Kopanitsyy;
-         int Gr6_A1x3y2_A2x4y2_Lusia_Kopanitska;
-         int Gr6_A1x3y2_A2x3y2_Valery_Kopanitskyy;
+          int Gr7_A1x4y1_A2x5y1_Be_1_Lyudmila_Dyukoreva;
          //Grupo7 -
          int Gr7_A1x4y1_A2x4y2_Be_0_Alla_Dyukareva;
-         int Gr7_A1x4y1_A2x5y2_Bo_0_Nikolay_Dyukorev;
-         int Gr7_A1x4y1_A2x5y1_Be_1_Lyudmila_Dyukoreva;
-         int Gr7_A1x4y1_A2x4y1_Bo_1_Oleg_;
+         
+        
+         
          //Grupo8 -
-         int Gr8_A1x4y2_A2x4y3_Be_0_Lyudmila_Polivanova;
-         int Gr8_A1x4y2_A2x5y3_Bo_0_Nikolay_Lyadskiy;
+         
          int Gr8_A1x4y2_A2x5y2_Be_1_Natalia_Chebotareva;
          int Gr8_A1x4y2_A2x4y2_Bo_0_Valentin_Lyadskyy;
          //Grupo9 -
          int Gr9_A1x5y1_A2x5y2_Be_0_Olena_Dyukoreva;
          int Gr9_A1x5y1_A2x6y2_Bo_0_Denis_Deriy;
-         int Gr9_A1x5y1_A2x6y1_Be_1_Roza_Beriyoza;
-         int Gr9_A1x5y1_A2x5y1_Bo_1_Yuriy_Turasov;
-         //Grupo10 -
-         int Gr10_A1x5y2_A2x5y3_Be_0_Valentina_Shavritskaya;
-         int Gr10_A1x5y2_A2x6y3_Bo_0_Viktor_Zotov;
-         int Gr10_A1x5y2_A2x6y2_Be_1_Viktoria_Dunaeva;
-         int Gr10_A1x5y2_A2x5y2_Bo_1_Oleg_Dunaev;
-         //Grupo11 -
-         int Gr11_A1x1y3_A2x1y4_Be_0_Marina_Gudimenko;
-         int Gr11_A1x1y3_A2x2y4_Bo_0_Dima_Gudimenko;
-         int Gr11_A1x1y3_A2x2y3_Be_1_Svetlana_Varazhko;
-         int Gr11_A1x1y3_A2x1y3_Bo_1_Artem_Varazhko;
-         //Grupo12 -
+         
          int Gr12_A1x2y3_A2x2y4_Be_0_Yulia_Kopanitska;
          int Gr12_A1x2y3_A2x3y4_Bo_0_Mijail_Kopanitskyy;
          int Gr12_A1x2y3_A2x3y3_Be_1_Tetiana_Palchykova;
@@ -3542,12 +3546,11 @@ int start()
          int Gr14_A1x4y3_A2x4y4_Be_0_Inna_Korolchuk;
          int Gr14_A1x4y3_A2x5y4_Bo_0_Vadym_Prokopchuk;
          int Gr14_A1x4y3_A2x5y3_Be_1_Maryna_Lebedenko;
-         int Gr14_A1x4y3_A2x4y3_Bo_1_Valeriy_Lebedenko;
+       
          //Grupo15 -
          int Gr15_A1x5y3_A2x5y4_Be_0_Maryna_Eletskaya;
          int Gr15_A1x5y3_A2x6y4_Bo_0_Denis_Vinnikova;
-         int Gr15_A1x5y3_A2x6y3_Be_1_Anna_Danko;
-         int Gr15_A1x5y3_A2x5y3_Bo_1_Roman_Tischenko;
+         
 
          //4 квадрата исходных координат содержат 16 элементов. С ходе смены полярностей, 16 пар формируют 9 центров.
          //Присваивание значений.Простые функции.Вычисление формирования центров.Выводить все комбинации центров по 4 группам в 4 полярностях
@@ -12386,8 +12389,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-               Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko=-1;
-               Print(" Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko ",Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko);
+               G111211311411Be0l111221311421Bo0iOlgGuclenko--;
+               Print(" G111211311411Be0l111221311421Bo0iOlgGuclenko ",G111211311411Be0l111221311421Bo0iOlgGuclenko);
 
 
               }
@@ -12411,8 +12414,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-               Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy=+1;
-               Print(" Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy ",Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy);
+               G111221311421Bo0l111211311411Be0iYevheniKopnitsk++;
+               Print(" G111221311421Bo0l111211311411Be0iYevheniKopnitsk ",G111221311421Bo0l111211311411Be0iYevheniKopnitsk);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==1 && f_Be_0==1)
               {
@@ -12434,6 +12437,9 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111222312421Be1l111212312411Bo1iElenZhulitsk--;
+               Print(" G111222312421Be1l111212312411Bo1iElenZhulitsk ",G111222312421Be1l111212312411Bo1iElenZhulitsk);
+
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==1 && f_Bo_0==1)
               {
@@ -12455,6 +12461,9 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111212312411Bo1l111222312421Be1iSergeZvidn++;
+               Print(" G111212312411Bo1l111222312421Be1iSergeZvidn ",G111212312411Bo1l111222312421Be1iSergeZvidn);
+
               }
             if(sev==1 && N_Petalo==5/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -12477,7 +12486,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-
+               G111211311411Be0i111221311421Bo0lInnCim--;
+               Print(" G111211311411Be0i111221311421Bo0lInnCim ",G111211311411Be0i111221311421Bo0lInnCim);
 
               }
             if(sev==1 && N_Petalo==6 && N_Centro_r==1 && f_Bo_1==1)
@@ -12500,6 +12510,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111221311421Bo0i111211311411Be0lSergeiDolzhikov++;
+               Print(" G111221311421Bo0i111211311411Be0lSergeiDolzhikov ",G111221311421Bo0i111211311411Be0lSergeiDolzhikov);
               }
             if(sev==1 && N_Petalo==7 && N_Centro_r==1 && f_Be_0==1)
               {
@@ -12521,6 +12533,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111222312421Be1i111212312411Bo1lIrinDzhuli--;
+               Print(" G111222312421Be1i111212312411Bo1lIrinDzhuli ",G111222312421Be1i111212312411Bo1lIrinDzhuli);
               }
             if(sev==1 && N_Petalo==8 && N_Centro_r==1 && f_Bo_0==1)
               {
@@ -12542,6 +12556,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111212312411Bo1i111222312421Be1lSergeSoloviov++;
+               Print(" G111212312411Bo1i111222312421Be1lSergeSoloviov ",G111212312411Bo1i111222312421Be1lSergeSoloviov);
               }
 
             //
@@ -12567,8 +12583,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-               Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko=+1;
-               Print(" Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko ",Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko);
+               G111211311411Be0l111221311421Bo0iOlgGuclenko++;
+               Print(" G111211311411Be0l111221311421Bo0iOlgGuclenko ",G111211311411Be0l111221311421Bo0iOlgGuclenko);
 
               }
             if(sev==1 && N_Petalo==2 && N_Centro_r==2 && f_Be_0==1)
@@ -12591,8 +12607,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-               Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy=-1;
-               Print(" Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy ",Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy);
+               G111221311421Bo0l111211311411Be0iYevheniKopnitsk--;
+               Print(" G111221311421Bo0l111211311411Be0iYevheniKopnitsk ",G111221311421Bo0l111211311411Be0iYevheniKopnitsk);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==2 && f_Bo_1==1)
               {
@@ -12614,6 +12630,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111211311411Be0i111221311421Bo0lInnCim++;
+               Print(" G111211311411Be0i111221311421Bo0lInnCim ",G111211311411Be0i111221311421Bo0lInnCim);
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==2 && f_Be_1==1)
               {
@@ -12635,6 +12653,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111221311421Bo0i111211311411Be0lSergeiDolzhikov--;
+               Print(" G111221311421Bo0i111211311411Be0lSergeiDolzhikov ",G111221311421Bo0i111211311411Be0lSergeiDolzhikov);
               }
             if(sev==1 && N_Petalo==5 && N_Centro_r==2 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -12657,6 +12677,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111211311411Be0i111221311421Bo0lInnCim++;
+               Print(" G111211311411Be0i111221311421Bo0lInnCim ",G111211311411Be0i111221311421Bo0lInnCim);
 
 
               }
@@ -12680,6 +12702,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111221311421Bo0i111211311411Be0lSergeiDolzhikov--;
+               Print(" G111221311421Bo0i111211311411Be0lSergeiDolzhikov ",G111221311421Bo0i111211311411Be0lSergeiDolzhikov);
               }
             if(sev==1 && N_Petalo==7 && N_Centro_r==2 && f_Bo_1==1)
               {
@@ -12701,6 +12725,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111222312421Be1i111212312411Bo1lIrinDzhuli++;
+               Print(" G111222312421Be1i111212312411Bo1lIrinDzhuli ",G111222312421Be1i111212312411Bo1lIrinDzhuli);
               }
             if(sev==1 && N_Petalo==8 && N_Centro_r==2 && f_Be_1==1)
               {
@@ -12722,6 +12748,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111212312411Bo1i111222312421Be1lSergeSoloviov--;
+               Print(" G111212312411Bo1i111222312421Be1lSergeSoloviov ",G111212312411Bo1i111222312421Be1lSergeSoloviov);
               }
             //
             if(sev==1 && N_Petalo==1 && N_Centro_r==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
@@ -12746,8 +12774,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-               Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko=-1;
-               Print(" Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko ",Gr1_A1x1y1_A2x1y1_A3x1y1_A4x1y1_Be_0_Olga_Gucalenko);
+               G111211311411Be0l111221311421Bo0iOlgGuclenko--;
+               Print(" G111211311411Be0l111221311421Bo0iOlgGuclenko ",G111211311411Be0l111221311421Bo0iOlgGuclenko);
 
               }
             if(sev==1 && N_Petalo==2 && N_Centro_r==3 && f_Bo_0==1)
@@ -12770,8 +12798,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
-               Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy=+1;
-               Print(" Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy ",Gr1_A1x1y1_A2x2y1_A3x1y1_A4x2y1_Bo_0_Yevheniy_Kopanitskyy);
+               G111221311421Bo0l111211311411Be0iYevheniKopnitsk++;
+               Print(" G111221311421Bo0l111211311411Be0iYevheniKopnitsk ",G111221311421Bo0l111211311411Be0iYevheniKopnitsk);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==3 && f_Be_1==1)
               {
@@ -12793,6 +12821,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111211311411Be0i111221311421Bo0lInnCim--;
+               Print(" G111211311411Be0i111221311421Bo0lInnCim ",G111211311411Be0i111221311421Bo0lInnCim);
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==3 && f_Bo_1==1)
               {
@@ -12814,6 +12844,8 @@ int start()
                ObjectSetString(0,Obiekt3001,OBJPROP_BMPFILE,fileemoji);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_XDISTANCE,CHWPX+500);
                ObjectSetInteger(0,Obiekt3001,OBJPROP_YDISTANCE,100);
+               G111221311421Bo0i111211311411Be0lSergeiDolzhikov++;
+               Print(" G111221311421Bo0i111211311411Be0lSergeiDolzhikov ",G111221311421Bo0i111211311411Be0lSergeiDolzhikov);
               }
             if(sev==1 && N_Petalo==5 && N_Centro_r==3 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -12826,6 +12858,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,19]=flower[1,19]-1;//Регистрация подачи значения
+               G111211311411Be0i111221311421Bo0lInnCim--;
+               Print(" G111211311411Be0i111221311421Bo0lInnCim ",G111211311411Be0i111221311421Bo0lInnCim);
 
 
               }
@@ -12839,6 +12873,9 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,23]=flower[1,23]+1;//Регистрация подачи значения
+               G111221311421Bo0i111211311411Be0lSergeiDolzhikov++;
+               Print(" G111221311421Bo0i111211311411Be0lSergeiDolzhikov ",G111221311421Bo0i111211311411Be0lSergeiDolzhikov);
+
               }
             if(sev==1 && N_Petalo==7 && N_Centro_r==3 && f_Be_1==1)
               {
@@ -12850,6 +12887,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,27]=flower[1,27]-1;//Регистрация подачи значения
+               G111222312421Be1i111212312411Bo1lIrinDzhuli--;
+               Print(" G111222312421Be1i111212312411Bo1lIrinDzhuli ",G111222312421Be1i111212312411Bo1lIrinDzhuli);
               }
             if(sev==1 && N_Petalo==8 && N_Centro_r==3 && f_Bo_1==1)
               {
@@ -12861,6 +12900,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,31]=flower[1,31]+1;//Регистрация подачи значения
+               G111212312411Bo1i111222312421Be1lSergeSoloviov++;
+               Print(" G111212312411Bo1i111222312421Be1lSergeSoloviov ",G111212312411Bo1i111222312421Be1lSergeSoloviov);
               }
             //
             if(sev==1 && N_Petalo==1 && N_Centro_r==4 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
@@ -12874,6 +12915,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,4]=flower[1,4]+1;//Регистрация подачи значения
+               G111211311411Be0l111221311421Bo0iOlgGuclenko++;
+               Print(" G111211311411Be0l111221311421Bo0iOlgGuclenko ",G111211311411Be0l111221311421Bo0iOlgGuclenko);
 
 
               }
@@ -12887,6 +12930,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,8]=flower[1,8]-1;//Регистрация подачи значения
+               G111221311421Bo0l111211311411Be0iYevheniKopnitsk--;
+               Print(" G111221311421Bo0l111211311411Be0iYevheniKopnitsk ",G111221311421Bo0l111211311411Be0iYevheniKopnitsk);
               }
             if(sev==1 && N_Petalo==3 && N_Centro_r==4 && f_Bo_0==1)
               {
@@ -12898,6 +12943,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,12]=flower[1,12]+1;//Регистрация подачи значения
+               G111211311411Be0i111221311421Bo0lInnCim++;
+               Print(" G111211311411Be0i111221311421Bo0lInnCim ",G111211311411Be0i111221311421Bo0lInnCim);
               }
             if(sev==1 && N_Petalo==4 && N_Centro_r==4 && f_Be_0==1)
               {
@@ -12909,6 +12956,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,16]=flower[1,16]-1;//Регистрация подачи значения
+               G111221311421Bo0i111211311411Be0lSergeiDolzhikov--;
+               Print(" G111221311421Bo0i111211311411Be0lSergeiDolzhikov ",G111221311421Bo0i111211311411Be0lSergeiDolzhikov);
               }
             if(sev==1 && N_Petalo==5 && N_Centro_r==4 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -12921,7 +12970,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,20]=flower[1,20]+1;//Регистрация подачи значения
-
+               G111222312421Be1l111212312411Bo1iElenZhulitsk++;
+               Print(" G111222312421Be1l111212312411Bo1iElenZhulitsk ",G111222312421Be1l111212312411Bo1iElenZhulitsk);
 
               }
             if(sev==1 && N_Petalo==6 && N_Centro_r==4 && f_Be_1==1)
@@ -12934,6 +12984,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,24]=flower[1,24]-1;//Регистрация подачи значения
+               G111212312411Bo1l111222312421Be1iSergeZvidn--;
+               Print(" G111212312411Bo1l111222312421Be1iSergeZvidn ",G111212312411Bo1l111222312421Be1iSergeZvidn);
               }
             if(sev==1 && N_Petalo==7 && N_Centro_r==4 && f_Bo_0==1)
               {
@@ -12945,6 +12997,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,28]=flower[1,28]+1;//Регистрация подачи значения
+               G111222312421Be1i111212312411Bo1lIrinDzhuli++;
+               Print(" G111222312421Be1i111212312411Bo1lIrinDzhuli ",G111222312421Be1i111212312411Bo1lIrinDzhuli);
               }
             if(sev==1 && N_Petalo==8 && N_Centro_r==4 && f_Be_0==1)
               {
@@ -12956,6 +13010,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,32]=flower[1,32]-1;//Регистрация подачи значения
+               G111212312411Bo1i111222312421Be1lSergeSoloviov--;
+               Print(" G111212312411Bo1i111222312421Be1lSergeSoloviov ",G111212312411Bo1i111222312421Be1lSergeSoloviov);
               }
             //
             if(vost==1 && N_Petalo==1 && N_Centro_r==1  && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
@@ -12969,6 +13025,9 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,1]=flower[1,1]+1;//Регистрация подачи значения
+               G111211311411Bo1l111212312411Be1iAnatoliMacola++;
+               Print(" G111211311411Bo1l111212312411Be1iAnatoliMacola ",G111211311411Bo1l111212312411Be1iAnatoliMacola);
+               
 
 
               }
@@ -12982,6 +13041,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,5]=flower[1,5]-1;//Регистрация подачи значения
+               G111221311421Be0l111222312421Bo0iAlinaPriimak--;
+               Print(" G111221311421Be0l111222312421Bo0iAlinaPriimak ",G111221311421Be0l111222312421Bo0iAlinaPriimak);
               }
             if(vost==1 && N_Petalo==3 && N_Centro_r==1 && f_Bo_1==1)
               {
@@ -12993,6 +13054,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,9]=flower[1,9]+1;//Регистрация подачи значения
+               G111222312421Bo0l111221311421Be0iMarceloArandano++;
+               Print(" G111222312421Bo0l111221311421Be0iMarceloArandano ",G111222312421Bo0l111221311421Be0iMarceloArandano);
               }
             if(vost==1 && N_Petalo==4 && N_Centro_r==1 && f_Be_0==1)
               {
@@ -13004,6 +13067,9 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,13]=flower[1,13]-1;//Регистрация подачи значения
+               G111212312411Be1l111211311411Bo1iMashaDidenko--;
+               Print(" G111212312411Be1l111211311411Bo1iMashaDidenko ",G111212312411Be1l111211311411Bo1iMashaDidenko);
+               
               }
             if(vost==1 && N_Petalo==5 && N_Centro_r==1  && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13016,6 +13082,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,17]=flower[1,17]+1;//Регистрация подачи значения
+               G111211311411Bo1i111212312411Be1lYuriSarapin++;
+               Print(" G111211311411Bo1i111212312411Be1lYuriSarapin ",G111211311411Bo1i111212312411Be1lYuriSarapin);
 
 
               }
@@ -13029,6 +13097,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,21]=flower[1,21]-1;//Регистрация подачи значения
+               G111221311421Be0i111222312421Bo0lConchaTorres--;
+               Print(" G111221311421Be0i111222312421Bo0lConchaTorres ",G111221311421Be0i111222312421Bo0lConchaTorres);
               }
             if(vost==1 && N_Petalo==7 && N_Centro_r==1 && f_Bo_1==1)
               {
@@ -13040,6 +13110,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,25]=flower[1,25]+1;//Регистрация подачи значения
+               G111222312421Bo0i111221311421Be0lAngelDelRosario++;
+               Print(" G111222312421Bo0i111221311421Be0lAngelDelRosario ",G111222312421Bo0i111221311421Be0lAngelDelRosario);
               }
             if(vost==1 && N_Petalo==8 && N_Centro_r==1 && f_Be_0==1)
               {
@@ -13051,6 +13123,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,29]=flower[1,29]-1;//Регистрация подачи значения
+               G111212312411Be1i111211311411Bo1lNataliaFurina--;
+               Print(" G111212312411Be1i111211311411Bo1lNataliaFurina ",G111212312411Be1i111211311411Bo1lNataliaFurina);
               }
 
             //
@@ -13065,6 +13139,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,2]=flower[1,2]-1;//Регистрация подачи значения
+               G111211311411Bo1l111212312411Be1iAnatoliMacola--;
+               Print(" G111211311411Bo1l111212312411Be1iAnatoliMacola ",G111211311411Bo1l111212312411Be1iAnatoliMacola);
 
 
               }
@@ -13078,6 +13154,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,6]=flower[1,6]+1;//Регистрация подачи значения
+               G111221311421Be0l111222312421Bo0iAlinaPriimak++;
+               Print(" G111221311421Be0l111222312421Bo0iAlinaPriimak ",G111221311421Be0l111222312421Bo0iAlinaPriimak);
               }
             if(vost==1 && N_Petalo==3 && N_Centro_r==2 && f_Be_1==1)
               {
@@ -13089,6 +13167,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,10]=flower[1,10]-1;//Регистрация подачи значения
+               G111222312421Bo0l111221311421Be0iMarceloArandano--;
+               Print(" G111222312421Bo0l111221311421Be0iMarceloArandano ",G111222312421Bo0l111221311421Be0iMarceloArandano);
               }
             if(vost==1 && N_Petalo==4 && N_Centro_r==2 && f_Bo_0==1)
               {
@@ -13100,6 +13180,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,14]=flower[1,14]+1;//Регистрация подачи значения
+               G111212312411Be1l111211311411Bo1iMashaDidenko++;
+               Print(" G111212312411Be1l111211311411Bo1iMashaDidenko ",G111212312411Be1l111211311411Bo1iMashaDidenko);
               }
             if(vost==1 && N_Petalo==5 && N_Centro_r==2 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13112,6 +13194,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,18]=flower[1,18]-1;//Регистрация подачи значения
+               G111211311411Bo1i111212312411Be1lYuriSarapin--;
+               Print(" G111211311411Bo1i111212312411Be1lYuriSarapin ",G111211311411Bo1i111212312411Be1lYuriSarapin);
 
 
               }
@@ -13125,6 +13209,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,22]=flower[1,22]+1;//Регистрация подачи значения
+               G111221311421Be0i111222312421Bo0lConchaTorres++;
+               Print(" G111221311421Be0i111222312421Bo0lConchaTorres ",G111221311421Be0i111222312421Bo0lConchaTorres);
               }
             if(vost==1 && N_Petalo==7 && N_Centro_r==2 && f_Be_1==1)
               {
@@ -13136,6 +13222,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,26]=flower[1,26]-1;//Регистрация подачи значения
+               G111222312421Bo0i111221311421Be0lAngelDelRosario--;
+               Print(" G111222312421Bo0i111221311421Be0lAngelDelRosario ",G111222312421Bo0i111221311421Be0lAngelDelRosario);
               }
             if(vost==1 && N_Petalo==8 && N_Centro_r==2 && f_Bo_0==1)
               {
@@ -13147,6 +13235,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,30]=flower[1,30]+1;//Регистрация подачи значения
+               G111212312411Be1i111211311411Bo1lNataliaFurina++;
+               Print(" G111212312411Be1i111211311411Bo1lNataliaFurina ",G111212312411Be1i111211311411Bo1lNataliaFurina);
               }
             //
             if(vost==1 && N_Petalo==1 && N_Centro_r==3 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
@@ -13160,6 +13250,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,3]=flower[1,3]+1;//Регистрация подачи значения
+               G111211311411Bo1l111212312411Be1iAnatoliMacola++;
+               Print(" G111211311411Bo1l111212312411Be1iAnatoliMacola ",G111211311411Bo1l111212312411Be1iAnatoliMacola);
 
 
               }
@@ -13173,6 +13265,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,7]=flower[1,7]-1;//Регистрация подачи значения
+               G111221311421Be0l111222312421Bo0iAlinaPriimak--;
+               Print(" G111221311421Be0l111222312421Bo0iAlinaPriimak ",G111221311421Be0l111222312421Bo0iAlinaPriimak);
               }
             if(vost==1 && N_Petalo==3 && N_Centro_r==3 && f_Bo_0==1)
               {
@@ -13184,6 +13278,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,11]=flower[1,11]+1;//Регистрация подачи значения
+               G111222312421Bo0l111221311421Be0iMarceloArandano++;
+               Print(" G111222312421Bo0l111221311421Be0iMarceloArandano ",G111222312421Bo0l111221311421Be0iMarceloArandano);
               }
             if(vost==1 && N_Petalo==4 && N_Centro_r==3 && f_Be_1==1)
               {
@@ -13195,6 +13291,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,15]=flower[1,15]-1;//Регистрация подачи значения
+               G111212312411Be1l111211311411Bo1iMashaDidenko--;
+               Print(" G111212312411Be1l111211311411Bo1iMashaDidenko ",G111212312411Be1l111211311411Bo1iMashaDidenko);
               }
             if(vost==1 && N_Petalo==5 && N_Centro_r==3 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13207,6 +13305,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,19]=flower[1,19]+1;//Регистрация подачи значения
+               G111211311411Bo1i111212312411Be1lYuriSarapin++;
+               Print(" G111211311411Bo1i111212312411Be1lYuriSarapin ",G111211311411Bo1i111212312411Be1lYuriSarapin);
 
 
               }
@@ -13220,6 +13320,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,23]=flower[1,23]-1;//Регистрация подачи значения
+               G111221311421Be0i111222312421Bo0lConchaTorres--;
+               Print(" G111221311421Be0i111222312421Bo0lConchaTorres ",G111221311421Be0i111222312421Bo0lConchaTorres);
               }
             if(vost==1 && N_Petalo==7 && N_Centro_r==3 && f_Bo_0==1)
               {
@@ -13231,6 +13333,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,27]=flower[1,27]+1;//Регистрация подачи значения
+               G111222312421Bo0i111221311421Be0lAngelDelRosario++;
+               Print(" G111222312421Bo0i111221311421Be0lAngelDelRosario ",G111222312421Bo0i111221311421Be0lAngelDelRosario);
               }
             if(vost==1 && N_Petalo==8 && N_Centro_r==3 && f_Be_1==1)
               {
@@ -13242,6 +13346,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,31]=flower[1,31]-1;//Регистрация подачи значения
+               G111212312411Be1i111211311411Bo1lNataliaFurina--;
+               Print(" G111212312411Be1i111211311411Bo1lNataliaFurina ",G111212312411Be1i111211311411Bo1lNataliaFurina);
               }
             //
             if(vost==1 && N_Petalo==1 && N_Centro_r==4 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
@@ -13255,6 +13361,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,4]=flower[1,4]-1;//Регистрация подачи значения
+               G111211311411Bo1l111212312411Be1iAnatoliMacola--;
+               Print(" G111211311411Bo1l111212312411Be1iAnatoliMacola ",G111211311411Bo1l111212312411Be1iAnatoliMacola);
 
 
               }
@@ -13268,6 +13376,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,8]=flower[1,8]+1;//Регистрация подачи значения
+               G111221311421Be0l111222312421Bo0iAlinaPriimak++;
+               Print(" G111221311421Be0l111222312421Bo0iAlinaPriimak ",G111221311421Be0l111222312421Bo0iAlinaPriimak);
               }
             if(vost==1 && N_Petalo==3 && N_Centro_r==4 && f_Be_0==1)
               {
@@ -13279,6 +13389,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,12]=flower[1,12]-1;//Регистрация подачи значения
+               G111222312421Bo0l111221311421Be0iMarceloArandano--;
+               Print(" G111222312421Bo0l111221311421Be0iMarceloArandano ",G111222312421Bo0l111221311421Be0iMarceloArandano);
               }
             if(vost==1 && N_Petalo==4 && N_Centro_r==4 && f_Bo_1==1)
               {
@@ -13290,6 +13402,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,16]=flower[1,16]+1;//Регистрация подачи значения
+               G111212312411Be1l111211311411Bo1iMashaDidenko++;
+               Print(" G111212312411Be1l111211311411Bo1iMashaDidenko ",G111212312411Be1l111211311411Bo1iMashaDidenko);
               }
             if(vost==1 && N_Petalo==5 && N_Centro_r==4 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13302,6 +13416,9 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,20]=flower[1,20]-1;//Регистрация подачи значения
+               G111211311411Bo1i111212312411Be1lYuriSarapin--;
+               Print(" G111211311411Bo1i111212312411Be1lYuriSarapin ",G111211311411Bo1i111212312411Be1lYuriSarapin);
+               
 
 
               }
@@ -13315,6 +13432,9 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,24]=flower[1,24]+1;//Регистрация подачи значения
+               G111221311421Be0i111222312421Bo0lConchaTorres++;
+               Print(" G111221311421Be0i111222312421Bo0lConchaTorres ",G111221311421Be0i111222312421Bo0lConchaTorres);
+               
               }
             if(vost==1 && N_Petalo==7 && N_Centro_r==4 && f_Be_0==1)
               {
@@ -13326,6 +13446,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,28]=flower[1,28]-1;//Регистрация подачи значения
+               G111222312421Bo0i111221311421Be0lAngelDelRosario--;
+               Print(" G111222312421Bo0i111221311421Be0lAngelDelRosario ",G111222312421Bo0i111221311421Be0lAngelDelRosario);
               }
             if(vost==1 && N_Petalo==8 && N_Centro_r==4 && f_Bo_1==1)
               {
@@ -13337,6 +13459,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,32]=flower[1,32]+1;//Регистрация подачи значения
+               G111212312411Be1i111211311411Bo1lNataliaFurina++;
+               Print(" G111212312411Be1i111211311411Bo1lNataliaFurina ",G111212312411Be1i111211311411Bo1lNataliaFurina);
               }
 
             //
@@ -13351,6 +13475,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,1]=flower[1,1]-1;//Регистрация подачи значения
+               G111211311411Be1l111221311421Bo1iMarinaGudimenko--;
+               Print(" G111211311411Be1l111221311421Bo1iMarinaGudimenko ",G111211311411Be1l111221311421Bo1iMarinaGudimenko);
 
 
               }
@@ -13364,6 +13490,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,5]=flower[1,5]+1;//Регистрация подачи значения
+               G111221311421Bo1l111211311411Be1iDimaGudimenko++;
+               Print(" G111221311421Bo1l111211311411Be1iDimaGudimenko ",G111221311421Bo1l111211311411Be1iDimaGudimenko);
               }
             if(yug==1 && N_Petalo==3 && N_Centro_r==1 && f_Be_1==1)
               {
@@ -13375,6 +13503,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,9]=flower[1,9]-1;//Регистрация подачи значения
+               G111222312421Be0l11121231241iValentinaShavritskaa--;
+               Print(" G111222312421Be0l11121231241iValentinaShavritskaa ",G111222312421Be0l11121231241iValentinaShavritskaa);
               }
             if(yug==1 && N_Petalo==4 && N_Centro_r==1 && f_Bo_1==1)
               {
@@ -13386,6 +13516,9 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,13]=flower[1,13]-1;//Регистрация подачи значения
+               G111212312411Bo0l111222312421BeiViktorZotov--;
+               Print(" G111212312411Bo0l111222312421BeiViktorZotov ",G111212312411Bo0l111222312421BeiViktorZotov);
+              
               }
             if(yug==1 && N_Petalo==5 && N_Centro_r==1  && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13398,6 +13531,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,17]=flower[1,17]-1;//Регистрация подачи значения
+               G111211311411Be1i111221311421Bo1lSvetlanaVarazhko--;
+               Print(" G111211311411Be1i111221311421Bo1lSvetlanaVarazhko ",G111211311411Be1i111221311421Bo1lSvetlanaVarazhko);
 
 
               }
@@ -13411,6 +13546,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,21]=flower[1,21]+1;//Регистрация подачи значения
+               G111221311421Bo1i111211311411Be1lArtemVarazhko++;
+               Print(" G111221311421Bo1i111211311411Be1lArtemVarazhko ",G111221311421Bo1i111211311411Be1lArtemVarazhko);
               }
             if(yug==1 && N_Petalo==7 && N_Centro_r==1 && f_Be_1==1)
               {
@@ -13422,6 +13559,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,25]=flower[1,25]-1;//Регистрация подачи значения
+               G111222312421Be0111212312411lViktoriaDunaeva--;
+               Print(" G111222312421Be0111212312411lViktoriaDunaeva ",G111222312421Be0111212312411lViktoriaDunaeva);
               }
             if(yug==1 && N_Petalo==8 && N_Centro_r==1 && f_Bo_1==1)
               {
@@ -13433,6 +13572,9 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,29]=flower[1,29]+1;//Регистрация подачи значения
+               G111212312411Bo0i111222312421BelOlegDunaev++;
+               Print(" G111212312411Bo0i111222312421BelOlegDunaev ",G111212312411Bo0i111222312421BelOlegDunaev);
+               
               }
 
             //
@@ -13447,6 +13589,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,2]=flower[1,2]+1;//Регистрация подачи значения
+               G111211311411Be1l111221311421Bo1iMarinaGudimenko++;
+               Print(" G111211311411Be1l111221311421Bo1iMarinaGudimenko ",G111211311411Be1l111221311421Bo1iMarinaGudimenko);
 
 
               }
@@ -13460,6 +13604,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,6]=flower[1,6]-1;//Регистрация подачи значения
+               G111221311421Bo1l111211311411Be1iDimaGudimenko--;
+               Print(" G111221311421Bo1l111211311411Be1iDimaGudimenko ",G111221311421Bo1l111211311411Be1iDimaGudimenko);
 
               }
             if(yug==1 && N_Petalo==3 && N_Centro_r==2 && f_Bo_0==1)
@@ -13472,6 +13618,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,10]=flower[1,10]+1;//Регистрация подачи значения
+               G111222312421Be0l11121231241iValentinaShavritskaa++;
+               Print(" G111222312421Be0l11121231241iValentinaShavritskaa ",G111222312421Be0l11121231241iValentinaShavritskaa);
 
               }
             if(yug==1 && N_Petalo==4 && N_Centro_r==2 && f_Be_0==1)
@@ -13484,6 +13632,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,14]=flower[1,14]-1;//Регистрация подачи значения
+               G111212312411Bo0l111222312421BeiViktorZotov--;
+               Print(" G111212312411Bo0l111222312421BeiViktorZotov ",G111212312411Bo0l111222312421BeiViktorZotov);
 
               }
             if(yug==1 && N_Petalo==5 && N_Centro_r==2 && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
@@ -13497,6 +13647,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,18]=flower[1,18]+1;//Регистрация подачи значения
+               G111211311411Be1i111221311421Bo1lSvetlanaVarazhko++;
+               Print(" G111211311411Be1i111221311421Bo1lSvetlanaVarazhko ",G111211311411Be1i111221311421Bo1lSvetlanaVarazhko);
 
 
 
@@ -13511,6 +13663,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,22]=flower[1,22]-1;//Регистрация подачи значения
+               G111221311421Bo1i111211311411Be1lArtemVarazhko--;
+               Print(" G111221311421Bo1i111211311411Be1lArtemVarazhko ",G111221311421Bo1i111211311411Be1lArtemVarazhko);
 
               }
             if(yug==1 && N_Petalo==7 && N_Centro_r==2 && f_Bo_0==1)
@@ -13523,6 +13677,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,26]=flower[1,26]+1;//Регистрация подачи значения
+               G111222312421Be0111212312411lViktoriaDunaeva++;
+               Print(" G111222312421Be0111212312411lViktoriaDunaeva ",G111222312421Be0111212312411lViktoriaDunaeva);
 
               }
             if(yug==1 && N_Petalo==8 && N_Centro_r==2 && f_Be_0==1)
@@ -13535,6 +13691,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,30]=flower[1,30]-1;//Регистрация подачи значения
+               G111212312411Bo0i111222312421BelOlegDunaev--;
+               Print(" G111212312411Bo0i111222312421BelOlegDunaev ",G111212312411Bo0i111222312421BelOlegDunaev);
 
               }
             //
@@ -13549,6 +13707,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,3]=flower[1,3]-1;//Регистрация подачи значения
+               G111211311411Be1l111221311421Bo1iMarinaGudimenko--;
+               Print(" G111211311411Be1l111221311421Bo1iMarinaGudimenko ",G111211311411Be1l111221311421Bo1iMarinaGudimenko);
 
 
 
@@ -13563,6 +13723,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,7]=flower[1,7]+1;//Регистрация подачи значения
+               G111221311421Bo1l111211311411Be1iDimaGudimenko++;
+               Print(" G111221311421Bo1l111211311411Be1iDimaGudimenko ",G111221311421Bo1l111211311411Be1iDimaGudimenko);
               }
             if(yug==1 && N_Petalo==3 && N_Centro_r==3 && f_Be_0==1)
               {
@@ -13574,6 +13736,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,11]=flower[1,11]-1;//Регистрация подачи значения
+               G111222312421Be0l11121231241iValentinaShavritskaa--;
+               Print(" G111222312421Be0l11121231241iValentinaShavritskaa ",G111222312421Be0l11121231241iValentinaShavritskaa);
               }
             if(yug==1 && N_Petalo==4 && N_Centro_r==3 && f_Bo_0==1)
               {
@@ -13585,6 +13749,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,15]=flower[1,15]+1;//Регистрация подачи значения
+               G111212312411Bo0l111222312421BeiViktorZotov++;
+               Print(" G111212312411Bo0l111222312421BeiViktorZotov ",G111212312411Bo0l111222312421BeiViktorZotov);
               }
             if(yug==1 && N_Petalo==5 && N_Centro_r==3 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13597,6 +13763,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,19]=flower[1,19]-1;//Регистрация подачи значения
+               G111211311411Be1i111221311421Bo1lSvetlanaVarazhko--;
+               Print(" G111211311411Be1i111221311421Bo1lSvetlanaVarazhko ",G111211311411Be1i111221311421Bo1lSvetlanaVarazhko);
 
 
               }
@@ -13610,6 +13778,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,23]=flower[1,23]+1;//Регистрация подачи значения
+               G111221311421Bo1i111211311411Be1lArtemVarazhko++;
+               Print(" G111221311421Bo1i111211311411Be1lArtemVarazhko ",G111221311421Bo1i111211311411Be1lArtemVarazhko);
               }
             if(yug==1 && N_Petalo==7 && N_Centro_r==3 && f_Be_0==1)
               {
@@ -13621,6 +13791,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,27]=flower[1,27]-1;//Регистрация подачи значения
+               G111222312421Be0111212312411lViktoriaDunaeva--;
+               Print(" G111222312421Be0111212312411lViktoriaDunaeva ",G111222312421Be0111212312411lViktoriaDunaeva);
               }
             if(yug==1 && N_Petalo==8 && N_Centro_r==3 && f_Bo_0==1)
               {
@@ -13632,6 +13804,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,31]=flower[1,31]+1;//Регистрация подачи значения
+               G111212312411Bo0i111222312421BelOlegDunaev++;
+               Print(" G111212312411Bo0i111222312421BelOlegDunaev ",G111212312411Bo0i111222312421BelOlegDunaev);
               }
             //
             if(yug==1 && N_Petalo==1 && N_Centro_r==4 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
@@ -13645,6 +13819,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,4]=flower[1,4]+1;//Регистрация подачи значения
+               G111211311411Be1l111221311421Bo1iMarinaGudimenko++;
+               Print(" G111211311411Be1l111221311421Bo1iMarinaGudimenko ",G111211311411Be1l111221311421Bo1iMarinaGudimenko);
 
               }
             if(yug==1 && N_Petalo==2 && N_Centro_r==4 && f_Be_0==1)
@@ -13657,6 +13833,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,8]=flower[1,8]-1;//Регистрация подачи значения
+               G111221311421Bo1l111211311411Be1iDimaGudimenko--;
+               Print(" G111221311421Bo1l111211311411Be1iDimaGudimenko ",G111221311421Bo1l111211311411Be1iDimaGudimenko);
               }
             if(yug==1 && N_Petalo==3 && N_Centro_r==4 && f_Bo_1==1)
               {
@@ -13668,6 +13846,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,12]=flower[1,12]+1;//Регистрация подачи значения
+               G111222312421Be0l11121231241iValentinaShavritskaa++;
+               Print(" G111222312421Be0l11121231241iValentinaShavritskaa ",G111222312421Be0l11121231241iValentinaShavritskaa);
               }
             if(yug==1 && N_Petalo==4 && N_Centro_r==4 && f_Be_1==1)
               {
@@ -13679,6 +13859,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,16]=flower[1,16]-1;//Регистрация подачи значения
+               G111212312411Bo0l111222312421BeiViktorZotov--;
+               Print(" G111212312411Bo0l111222312421BeiViktorZotov ",G111212312411Bo0l111222312421BeiViktorZotov);
               }
             if(yug==1 && N_Petalo==5 && N_Centro_r==4 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13691,6 +13873,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,20]=flower[1,20]+1;//Регистрация подачи значения
+               G111211311411Be1i111221311421Bo1lSvetlanaVarazhko++;
+               Print(" G111211311411Be1i111221311421Bo1lSvetlanaVarazhko ",G111211311411Be1i111221311421Bo1lSvetlanaVarazhko);
 
               }
             if(yug==1 && N_Petalo==6 && N_Centro_r==4 && f_Be_0==1)
@@ -13703,6 +13887,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,24]=flower[1,24]-1;//Регистрация подачи значения
+               G111221311421Bo1i111211311411Be1lArtemVarazhko--;
+               Print(" G111221311421Bo1i111211311411Be1lArtemVarazhko ",G111221311421Bo1i111211311411Be1lArtemVarazhko);
               }
             if(yug==1 && N_Petalo==7 && N_Centro_r==4 && f_Bo_1==1)
               {
@@ -13714,6 +13900,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,28]=flower[1,28]+1;//Регистрация подачи значения
+               G111222312421Be0111212312411lViktoriaDunaeva++;
+               Print(" G111222312421Be0111212312411lViktoriaDunaeva ",G111222312421Be0111212312411lViktoriaDunaeva);
               }
             if(yug==1 && N_Petalo==8 && N_Centro_r==4 && f_Be_1==1)
               {
@@ -13725,6 +13913,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,32]=flower[1,32]-1;//Регистрация подачи значения
+               G111212312411Bo0i111222312421BelOlegDunaev--;
+               Print(" G111212312411Bo0i111222312421BelOlegDunaev ",G111212312411Bo0i111222312421BelOlegDunaev);
               }
 
             //
@@ -13739,6 +13929,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,1]=flower[1,1]+1;//Регистрация подачи значения
+               G111211311411Bo0l111212312411Be0iYuriTurasov++;
+               Print(" G111211311411Bo0l111212312411Be0iYuriTurasov ",G111211311411Bo0l111212312411Be0iYuriTurasov);
 
               }
             if(zap==1 && N_Petalo==2 && N_Centro_r==1 && f_Be_0==1)
@@ -13751,6 +13943,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,5]=flower[1,5]-1;//Регистрация подачи значения
+               G111221311421Be1l111222312421Bo1iMarinaEletskaa--;
+               Print(" G111221311421Be1l111222312421Bo1iMarinaEletskaa ",G111221311421Be1l111222312421Bo1iMarinaEletskaa);
               }
             if(zap==1 && N_Petalo==3 && N_Centro_r==1 && f_Bo_0==1)
               {
@@ -13762,6 +13956,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,9]=flower[1,9]+1;//Регистрация подачи значения
+               G111222312421Bo1l111221311421Be1iDenisVinnikov++;
+               Print(" G111222312421Bo1l111221311421Be1iDenisVinnikov ",G111222312421Bo1l111221311421Be1iDenisVinnikov);
               }
             if(zap==1 && N_Petalo==4 && N_Centro_r==1 && f_Be_1==1)
               {
@@ -13773,6 +13969,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,13]=flower[1,13]-1;//Регистрация подачи значения
+               G111212312411Be0l111211311411Bo0iRozaBerioza--;
+               Print(" G111212312411Be0l111211311411Bo0iRozaBerioza ",G111212312411Be0l111211311411Bo0iRozaBerioza);
               }
             if(zap==1 && N_Petalo==5 && N_Centro_r==1  && f_Bo_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13785,6 +13983,9 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,17]=flower[1,17]+1;//Регистрация подачи значения
+               G111211311411Bo0i111212312411Be0lRomanTischenko++;
+               Print(" G111211311411Bo0i111212312411Be0lRomanTischenko ",G111211311411Bo0i111212312411Be0lRomanTischenko);
+               
 
 
               }
@@ -13798,6 +13999,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,21]=flower[1,21]-1;//Регистрация подачи значения
+               G111221311421Be1i111222312421Bo1lTetianaPalchkova--;
+               Print(" G111221311421Be1i111222312421Bo1lTetianaPalchkova ",G111221311421Be1i111222312421Bo1lTetianaPalchkova);
               }
             if(zap==1 && N_Petalo==7 && N_Centro_r==1 && f_Bo_0==1)
               {
@@ -13809,6 +14012,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,25]=flower[1,25]+1;//Регистрация подачи значения
+               G111222312421Bo1i111221311421Be1lAndrePalchkov++;
+               Print(" G111222312421Bo1i111221311421Be1lAndrePalchkov ",G111222312421Bo1i111221311421Be1lAndrePalchkov);
               }
             if(zap==1 && N_Petalo==8 && N_Centro_r==1 && f_Be_1==1)
               {
@@ -13820,6 +14025,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,29]=flower[1,29]-1;//Регистрация подачи значения
+               G111211311411Be0i111211311411Bo0lAnnaDanko--;
+               Print(" G111211311411Be0i111211311411Bo0lAnnaDanko ",G111211311411Be0i111211311411Bo0lAnnaDanko);
               }
 
             //
@@ -13834,6 +14041,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,2]=flower[1,2]-1;//Регистрация подачи значения
+               G111211311411Bo0l111212312411Be0iYuriTurasov--;
+               Print(" G111211311411Bo0l111212312411Be0iYuriTurasov ",G111211311411Bo0l111212312411Be0iYuriTurasov);
 
 
               }
@@ -13847,6 +14056,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,6]=flower[1,6]+1;//Регистрация подачи значения
+                G111221311421Be1l111222312421Bo1iMarinaEletskaa++;
+               Print(" G111221311421Be1l111222312421Bo1iMarinaEletskaa ",G111221311421Be1l111222312421Bo1iMarinaEletskaa);
               }
             if(zap==1 && N_Petalo==3 && N_Centro_r==2 && f_Be_0==1)
               {
@@ -13858,6 +14069,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,10]=flower[1,10]-1;//Регистрация подачи значения
+               G111222312421Bo1l111221311421Be1iDenisVinnikov--;
+               Print(" G111222312421Bo1l111221311421Be1iDenisVinnikov ",G111222312421Bo1l111221311421Be1iDenisVinnikov);
               }
             if(zap==1 && N_Petalo==4 && N_Centro_r==2 && f_Bo_1==1)
               {
@@ -13869,6 +14082,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,14]=flower[1,14]+1;//Регистрация подачи значения
+               G111212312411Be0l111211311411Bo0iRozaBerioza++;
+               Print(" G111212312411Be0l111211311411Bo0iRozaBerioza ",G111212312411Be0l111211311411Bo0iRozaBerioza);
               }
             if(zap==1 && N_Petalo==5 && N_Centro_r==2 && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13881,6 +14096,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,18]=flower[1,18]-1;//Регистрация подачи значения
+               G111211311411Bo0i111212312411Be0lRomanTischenko--;
+               Print(" G111211311411Bo0i111212312411Be0lRomanTischenko ",G111211311411Bo0i111212312411Be0lRomanTischenko);
 
 
               }
@@ -13894,6 +14111,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,22]=flower[1,22]+1;//Регистрация подачи значения
+               G111221311421Be1i111222312421Bo1lTetianaPalchkova++;
+               Print(" G111221311421Be1i111222312421Bo1lTetianaPalchkova ",G111221311421Be1i111222312421Bo1lTetianaPalchkova);
               }
             if(zap==1 && N_Petalo==7 && N_Centro_r==2 && f_Be_0==1)
               {
@@ -13905,6 +14124,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,26]=flower[1,26]-1;//Регистрация подачи значения
+               G111222312421Bo1i111221311421Be1lAndrePalchkov--;
+               Print(" G111222312421Bo1i111221311421Be1lAndrePalchkov ",G111222312421Bo1i111221311421Be1lAndrePalchkov);
               }
             if(zap==1 && N_Petalo==8 && N_Centro_r==2 && f_Bo_1==1)
               {
@@ -13916,6 +14137,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,30]=flower[1,30]+1;//Регистрация подачи значения
+               G111211311411Be0i111211311411Bo0lAnnaDanko++;
+               Print(" G111211311411Be0i111211311411Bo0lAnnaDanko ",G111211311411Be0i111211311411Bo0lAnnaDanko);
               }
             //
             if(zap==1 && N_Petalo==1 && N_Centro_r==3 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
@@ -13929,6 +14152,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,3]=flower[1,3]+1;//Регистрация подачи значения
+               G111211311411Bo0l111212312411Be0iYuriTurasov++;
+               Print(" G111211311411Bo0l111212312411Be0iYuriTurasov ",G111211311411Bo0l111212312411Be0iYuriTurasov);
 
 
               }
@@ -13942,6 +14167,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,7]=flower[1,7]-1;//Регистрация подачи значения
+                G111221311421Be1l111222312421Bo1iMarinaEletskaa--;
+               Print(" G111221311421Be1l111222312421Bo1iMarinaEletskaa ",G111221311421Be1l111222312421Bo1iMarinaEletskaa);
               }
             if(zap==1 && N_Petalo==3 && N_Centro_r==3 && f_Bo_1==1)
               {
@@ -13953,6 +14180,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,11]=flower[1,11]+1;//Регистрация подачи значения
+               G111222312421Bo1l111221311421Be1iDenisVinnikov++;
+               Print(" G111222312421Bo1l111221311421Be1iDenisVinnikov ",G111222312421Bo1l111221311421Be1iDenisVinnikov);
               }
             if(zap==1 && N_Petalo==4 && N_Centro_r==3 && f_Be_0==1)
               {
@@ -13964,6 +14193,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,15]=flower[1,15]-1;//Регистрация подачи значения
+               G111212312411Be0l111211311411Bo0iRozaBerioza--;
+               Print(" G111212312411Be0l111211311411Bo0iRozaBerioza ",G111212312411Be0l111211311411Bo0iRozaBerioza);
               }
             if(zap==1 && N_Petalo==5 && N_Centro_r==3 && f_Bo_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -13976,6 +14207,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,19]=flower[1,19]+1;//Регистрация подачи значения
+               G111211311411Bo0i111212312411Be0lRomanTischenko++;
+               Print(" G111211311411Bo0i111212312411Be0lRomanTischenko ",G111211311411Bo0i111212312411Be0lRomanTischenko);
 
 
               }
@@ -13989,6 +14222,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,23]=flower[1,23]-1;//Регистрация подачи значения
+               G111221311421Be1i111222312421Bo1lTetianaPalchkova--;
+               Print(" G111221311421Be1i111222312421Bo1lTetianaPalchkova ",G111221311421Be1i111222312421Bo1lTetianaPalchkova);
               }
             if(zap==1 && N_Petalo==7 && N_Centro_r==3 && f_Bo_1==1)
               {
@@ -14000,6 +14235,8 @@ int start()
                zapret_podachi_output=4;
                //" + " Arhitektura
                flower[1,27]=flower[1,27]+1;//Регистрация подачи значения
+               G111222312421Bo1i111221311421Be1lAndrePalchkov++;
+               Print(" G111222312421Bo1i111221311421Be1lAndrePalchkov ",G111222312421Bo1i111221311421Be1lAndrePalchkov);
               }
             if(zap==1 && N_Petalo==8 && N_Centro_r==3 && f_Be_0==1)
               {
@@ -14011,6 +14248,8 @@ int start()
                zapret_podachi_output=2;
                //" - " Arhitektura
                flower[1,31]=flower[1,31]-1;//Регистрация подачи значения
+               G111211311411Be0i111211311411Bo0lAnnaDanko--;
+               Print(" G111211311411Be0i111211311411Bo0lAnnaDanko ",G111211311411Be0i111211311411Bo0lAnnaDanko);
               }
             //
             if(zap==1 && N_Petalo==1 && N_Centro_r==4 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
@@ -14024,6 +14263,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,4]=flower[1,4]-1;//Регистрация подачи значения
+               G111211311411Bo0l111212312411Be0iYuriTurasov--;
+               Print(" G111211311411Bo0l111212312411Be0iYuriTurasov ",G111211311411Bo0l111212312411Be0iYuriTurasov);
 
 
               }
@@ -14037,6 +14278,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,8]=flower[1,8]+1;//Регистрация подачи значения
+                G111221311421Be1l111222312421Bo1iMarinaEletskaa++;
+               Print(" G111221311421Be1l111222312421Bo1iMarinaEletskaa ",G111221311421Be1l111222312421Bo1iMarinaEletskaa);
               }
             if(zap==1 && N_Petalo==3 && N_Centro_r==4 && f_Be_1==1)
               {
@@ -14048,6 +14291,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,12]=flower[1,12]-1;//Регистрация подачи значения
+               G111222312421Bo1l111221311421Be1iDenisVinnikov--;
+               Print(" G111222312421Bo1l111221311421Be1iDenisVinnikov ",G111222312421Bo1l111221311421Be1iDenisVinnikov);
               }
             if(zap==1 && N_Petalo==4 && N_Centro_r==4 && f_Bo_0==1)
               {
@@ -14059,6 +14304,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,16]=flower[1,16]+1;//Регистрация подачи значения
+               G111212312411Be0l111211311411Bo0iRozaBerioza++;
+               Print(" G111212312411Be0l111211311411Bo0iRozaBerioza ",G111212312411Be0l111211311411Bo0iRozaBerioza);
               }
             if(zap==1 && N_Petalo==5 && N_Centro_r==4 && f_Be_0==1)//&& N_Gr20== Необходимо писать в массив
               {
@@ -14071,6 +14318,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,20]=flower[1,20]-1;//Регистрация подачи значения
+               G111211311411Bo0i111212312411Be0lRomanTischenko--;
+               Print(" G111211311411Bo0i111212312411Be0lRomanTischenko ",G111211311411Bo0i111212312411Be0lRomanTischenko);
 
               }
             if(zap==1 && N_Petalo==6 && N_Centro_r==4 && f_Bo_1==1)
@@ -14083,6 +14332,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,24]=flower[1,24]+1;//Регистрация подачи значения
+               G111221311421Be1i111222312421Bo1lTetianaPalchkova++;
+               Print(" G111221311421Be1i111222312421Bo1lTetianaPalchkova ",G111221311421Be1i111222312421Bo1lTetianaPalchkova);
               }
             if(zap==1 && N_Petalo==7 && N_Centro_r==4 && f_Be_1==1)
               {
@@ -14094,6 +14345,8 @@ int start()
                zapret_podachi_output=4;
                //" - " Arhitektura
                flower[1,28]=flower[1,28]-1;//Регистрация подачи значения
+               G111222312421Bo1i111221311421Be1lAndrePalchkov--;
+               Print(" G111222312421Bo1i111221311421Be1lAndrePalchkov ",G111222312421Bo1i111221311421Be1lAndrePalchkov);
               }
             if(zap==1 && N_Petalo==8 && N_Centro_r==4 && f_Bo_0==1)
               {
@@ -14105,6 +14358,8 @@ int start()
                zapret_podachi_output=2;
                //" + " Arhitektura
                flower[1,32]=flower[1,32]+1;//Регистрация подачи значения
+               G111211311411Be0i111211311411Bo0lAnnaDanko++;
+               Print(" G111211311411Be0i111211311411Bo0lAnnaDanko ",G111211311411Be0i111211311411Bo0lAnnaDanko);
               }
 
             Petalos_32=0;
