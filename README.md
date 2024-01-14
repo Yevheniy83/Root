@@ -24,6 +24,8 @@ IMAGES!
 
 ![Girasol](https://user-images.githubusercontent.com/60549361/158072512-a1919ef1-3226-4fb2-8e0a-56c2d1466b35.png)
 
+![Arquitectura de CLUSTERS](https://github.com/Yevheniy83/Root/assets/60549361/ee00d039-85aa-4198-b929-b82177e80d6f)
+
 # Root
 
 Index:
