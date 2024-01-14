@@ -46,5 +46,6 @@ Index Videos Youtube:
 5. Sunflower - Maximum Price Reference https://youtu.be/uehGahfwoUU
 6. Sunflower Seed sides - https://youtu.be/DoScKwln25k
 7. Sunflower 8 bit volume feed - https://youtu.be/UkA__HA0Fn4
+8. Cluster - https://youtu.be/td_U_RbGNk8
 
 FACEBOOK - https://www.facebook.com/groups/ROOTForex/
