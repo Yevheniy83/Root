@@ -24,6 +24,10 @@ IMAGES!
 
 ![Girasol](https://user-images.githubusercontent.com/60549361/158072512-a1919ef1-3226-4fb2-8e0a-56c2d1466b35.png)
 
+
+![Cluster Meter](https://github.com/Yevheniy83/Root/assets/60549361/c5bea2f2-5a1b-4946-960c-ae29c4643aee)
+
+
 ![Arquitectura de CLUSTERS](https://github.com/Yevheniy83/Root/assets/60549361/08d66941-5cc0-4cc5-a00f-f74abe19009d)
 
 
