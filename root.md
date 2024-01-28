@@ -1,13 +1,13 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.4.0.mq4 |
+//|                                             Nucleo   v 2.4.1.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 
 
 #property copyright "Yevheniy Kopanitskyy"
 #property link      "https://www.mql5.com/en/users/eugeniokp"
-#property version   "2.3"
+#property version   "2.4"
 #property strict
 
 
@@ -1883,7 +1883,7 @@ int start()
          kolvo_zeren_sessiya=(one_BE+zero_BE)/2;//Для приведения зерна кофе к 4 граням зерна подсолнуха нужно использовать 2 зерна
          kolvo_zeren=kolvo_zeren+kolvo_zeren_sessiya;//Колличество зёрен при складывании сессий.
 
-         Print("kolvo_zeren ",kolvo_zeren);
+         //Print("kolvo_zeren ",kolvo_zeren);
          if(kolvo_zeren>=Kolvo_zeren_dlya_Sbora)
            {
             string SM_AV=IntegerToString(kolvo_zeren);
@@ -8578,6 +8578,213 @@ int start()
             N_Centro=20;
             N_Gr20++;
            }
+
+         //+------------------------------------------------------------------+
+         //|Sunflower -  cluster 16 variables of the church dome              |
+         //+------------------------------------------------------------------+
+         int Arch_Inf;
+         string Var_Inf;
+         int Cluster16_inf;
+         int AgujaReloj_inf;
+         //Print(" + -------------------------------------------+");
+         double Price_A=(bodypips[MaxInd_bodypips,0])*cienm;
+         //Print(" Price_A] ",Price_A);
+         //double CLuster_Ne=Price_A/16;
+         //Print("CLuster_Ne ",CLuster_Ne);
+         double CLuster_N=NormalizeDouble(Price_A/16,4);
+         //Print("CLuster_N ",CLuster_N);
+         int CLuster_N1=CLuster_N;
+         //Print("CLuster_N1 ",CLuster_N1);
+         double Cluster_Res=(CLuster_N-CLuster_N1)*100;
+         //Print("Cluster_Res ",Cluster_Res);
+         double Var_I=Cluster_Res/6.25;
+
+         //Print(" + -------------------------------------------+");
+         if(Var_I==0)
+           {
+            Var_I=16;
+
+           }
+         Print("Var_I ",Var_I);
+         //Comment(" Numero de Variedad ",Var_I);
+
+         if(Var_I==1)
+           {
+            Arch_Inf=1;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==2)
+           {
+            Arch_Inf=2;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==3)
+           {
+            Arch_Inf=3;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==4)
+           {
+            Arch_Inf=4;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==5)
+           {
+            Arch_Inf=1;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==6)
+           {
+            Arch_Inf=2;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==7)
+           {
+            Arch_Inf=3;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==8)
+           {
+            Arch_Inf=4;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==9)
+           {
+            Arch_Inf=1;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==10)
+           {
+            Arch_Inf=2;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==11)
+           {
+            Arch_Inf=3;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==12)
+           {
+            Arch_Inf=4;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=-1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==13)
+           {
+            Arch_Inf=1;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==14)
+           {
+            Arch_Inf=2;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==15)
+           {
+            Arch_Inf=3;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Bo_1_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+         if(Var_I==16)
+           {
+            Arch_Inf=4;
+            Print(" Arch_Inf ",Arch_Inf);
+            Var_Inf="Be_0_Sev";
+            Print(" Var_Inf ",Var_Inf);
+            Cluster16_inf=CLuster_N1+1;
+            Print(" Cluster16_inf ",Cluster16_inf);
+            AgujaReloj_inf=1;
+            Print(" AgujaReloj_inf ",AgujaReloj_inf);
+           }
+
          //+------------------------------------------------------------------+
          //|END Sunflower -  5 cells of the church dome                       |
          //+------------------------------------------------------------------+
@@ -8826,7 +9033,7 @@ int start()
          //Print(" N_Centro_r ",N_Centro_r);ok
          //Print(" PipsNumber ",PipsNumber);
          string PrintArch;
-         /
+
          //3.Производится расчт по переменным  Be_0,Bo_0,Be_1,Bo_1
          //Расчёт по переменной Be_0 Место 1,5,9,13,17
          //Print(" Be_0_C,Bo_0_C,Be_1_C,Bo_1_C" ,Be_0_C,Bo_0_C,Be_1_C,Bo_1_C);//ok
@@ -12515,7 +12722,7 @@ int start()
                if(flower[1,ia]!=0)
                  {
                   Petalos_32=Petalos_32+1;//Складывание 32 истин в массиве
-                  Print("Petalos_32 ",Petalos_32);
+                  //Print("Petalos_32 ",Petalos_32);
 
                  }
                if(flower[1,ia]==0)
@@ -12523,7 +12730,7 @@ int start()
                   break;
                  }
               }
-            Print("1 ",flower[1,1]," 2 ",flower[1,2]," 3 ",flower[1,3]," 4 ",flower[1,4]," 5 ",flower[1,5]," 6 ",flower[1,6]," 7 ",flower[1,7]," 8 ",flower[1,8]," 9 ",flower[1,9]," 10 ",flower[1,10]," 11 ",flower[1,11]," 12 ",flower[1,12]," 13 ",flower[1,13]," 14 ",flower[1,14]," 15 ",flower[1,15]," 16 ",flower[1,16]," 17 ",flower[1,17]," 18 ",flower[1,18]," 19 ",flower[1,19]," 20 ",flower[1,20]," 21 ",flower[1,21]," 22 ",flower[1,22]," 23 ",flower[1,23]," 24 ",flower[1,24]," 25 ",flower[1,25]," 26 ",flower[1,26]," 27 ",flower[1,27]," 28 ",flower[1,28]," 29 ",flower[1,29]," 30 ",flower[1,30]," 31 ",flower[1,31]," 32 ",flower[1,32]);
+            //Print("1 ",flower[1,1]," 2 ",flower[1,2]," 3 ",flower[1,3]," 4 ",flower[1,4]," 5 ",flower[1,5]," 6 ",flower[1,6]," 7 ",flower[1,7]," 8 ",flower[1,8]," 9 ",flower[1,9]," 10 ",flower[1,10]," 11 ",flower[1,11]," 12 ",flower[1,12]," 13 ",flower[1,13]," 14 ",flower[1,14]," 15 ",flower[1,15]," 16 ",flower[1,16]," 17 ",flower[1,17]," 18 ",flower[1,18]," 19 ",flower[1,19]," 20 ",flower[1,20]," 21 ",flower[1,21]," 22 ",flower[1,22]," 23 ",flower[1,23]," 24 ",flower[1,24]," 25 ",flower[1,25]," 26 ",flower[1,26]," 27 ",flower[1,27]," 28 ",flower[1,28]," 29 ",flower[1,29]," 30 ",flower[1,30]," 31 ",flower[1,31]," 32 ",flower[1,32]);
 
             //После сравнения массива выявляем число 32 если достигнуто то цветок склался
             if(Petalos_32==32)
@@ -12572,7 +12779,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie," C16V x ",Var_I,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " fP ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -12585,7 +12792,7 @@ int start()
 
 
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " flower_Plus ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie," C16V x ",Var_I,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " fP ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
 
               }
@@ -12594,7 +12801,7 @@ int start()
       //+------------------------------------------------------------------+
       //| Sunflower 1/0 - Cluster flower                                   |
       //+------------------------------------------------------------------+
-      
+
       //Print(" PR ",bodypips[MaxInd_bodypips,0]);
 
       //Comment(" Fly X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8], " PR ",bodypips[MaxInd_bodypips,0]," Fly Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]);
