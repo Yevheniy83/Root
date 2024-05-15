@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.5.0.mq4 |
+//|                                             Nucleo   v 2.5.1.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 #property copyright "Yevheniy Kopanitskyy"
@@ -535,42 +535,42 @@ int Zap_1;
 //   Sev[1,7]=1; Be_1
 //   Sev[1,8]=1; Bo_0
 //---
-int Andryuschenko_I;
-int Antipenko_P;
-int Buyakov_D;
-int Ryabashtan_N;
-int Krivenko_L;
-int Kopanitskyy_E;
-int Elizarova_G;
-int Cima_I;
-int Konyahina_A;
-int Parmuzina_N;
-int Matvienko_L;
-int Zhulickaya_L;
-int Pravda_Y;
-int Furina_N;
-int Zotov_V;
-int Jarkina_T;
-int Moroz_I;
-int Turasov_Y;
-int Macola_A;
-int Sarapin_Y;
-int Nasypaiko_O;
-int Prityupa_V;
-int Golovchuk_D;
-int Shpilevoy_R;
-int Vaskevich_L;
-int Yurchenko_D;
-int Vinokurov_R;
-int Taran_R;
-int Plasovenko_A;
-int Bilichenko_V;
-int Romanyuk_I;
-int Malaya_A_S;
-int Dunaeva_V_A;
-int Kamashko_V;
-int Zimuha_V;
-int Galushko_R;
+//int Andryuschenko_I;
+//int Antipenko_P;
+//int Buyakov_D;
+//int Ryabashtan_N;
+//int Krivenko_L;
+//int Kopanitskyy_E;
+//int Elizarova_G;
+//int Cima_I;
+//int Konyahina_A;
+//int Parmuzina_N;
+//int Matvienko_L;
+//int Zhulickaya_L;
+//int Pravda_Y;
+//int Furina_N;
+//int Zotov_V;
+//int Jarkina_T;
+//int Moroz_I;
+//int Turasov_Y;
+//int Macola_A;
+//int Sarapin_Y;
+//int Nasypaiko_O;
+//int Prityupa_V;
+//int Golovchuk_D;
+//int Shpilevoy_R;
+//int Vaskevich_L;
+//int Yurchenko_D;
+//int Vinokurov_R;
+//int Taran_R;
+//int Plasovenko_A;
+//int Bilichenko_V;
+//int Romanyuk_I;
+//int Malaya_A_S;
+//int Dunaeva_V_A;
+//int Kamashko_V;
+//int Zimuha_V;
+//int Galushko_R;
 //------STRING VARS-----
 string File_Name="File.csv";
 string FR_Nm=".csv";
@@ -939,7 +939,7 @@ int start()
       // Assigning candle time values ​​to an array
       BodyHorizont_Time[inx]=iTime(Symbol(),0,1);
       int inx_1;
-      for(inx_1=1; inx_1<99999; inx_1++)
+      for(inx_1=1; inx_1<=99998; inx_1++)
         {
          //Print("Body Init ",body[inx_1,0]);//Ошибок НЕТ
          if(body[inx_1,0]==10)// line number where writing to the array ended
@@ -962,7 +962,7 @@ int start()
          int swi=0;
          if(inx>1)// the first record in the array is skipped
            {
-            for(fg=1; fg<2000; fg++)
+            for(fg=1; fg<=1999; fg++)
               {
                //Print("fg ",fg);
                if(BodyHorizont_Bin[inx-1,fg]==10)
@@ -1011,7 +1011,7 @@ int start()
             // -----I transfer the values ​​of the body array to the body plus
             if(inx>1)// the first record in the array is skipped
               {
-               for(fgf=1; fgf<99999; fgf++)
+               for(fgf=1; fgf<=99998; fgf++)
                  {
                   //Print("fg ",fg);
                   if(body[fgf,0]==10)
@@ -1159,7 +1159,7 @@ int start()
          //Print("Price init 1  - ",bodypips[MaxInd_bodypips,0]);
          ArrayInitialize(bodypips,0);
          ArrayInitialize(comp_bodypips,0);
-         for(int imm=1; imm<99999; imm++)
+         for(int imm=1; imm<=99998; imm++)
            {
             //Print("body[imm,0] ",body[imm,0]);
             if(body[imm,0]==10)
@@ -1203,7 +1203,7 @@ int start()
            }
          // ----- Processing the loop from the second line of the array -----
          Switch1=0;// Switch between iterations
-         for(iaq=2; iaq<99999; iaq++)// Iterate through the body array
+         for(iaq=2; iaq<=99998; iaq++)// Iterate through the body array
            {
             Switch1=0;// Assign 0 when re-entering the overflow
             if(body[iaq,0]>0 && body[iaq,0]<3)
@@ -1216,7 +1216,7 @@ int start()
                   int findeprice=0;//
                   int Break1=0;//exit from enumeration 1
                   int Break2=0;//exit from enumeration 1
-                  for(ibq=1; ibq<99999; ibq++)//Perebor stolbca 1
+                  for(ibq=1; ibq<=99998; ibq++)//Perebor stolbca 1
                     {
                      //Print("Price -7 ",price);
                      if(bodypips[ibq,0]==price)
@@ -1236,7 +1236,7 @@ int start()
                   // ------ If there is no price, then add the price below ------
                   if(findeprice==0)// If the price is not found, then you need to add an entry to the arrayь
                     {
-                     for(ibq=1; ibq<99999; ibq++)
+                     for(ibq=1; ibq<=99998; ibq++)
                        {
                         if(bodypips[ibq,0]==0)
                           {
@@ -1262,7 +1262,7 @@ int start()
                   int Break1=0;
                   int Break2=0;
                   Switch1=1;
-                  for(ibq=1; ibq<99999; ibq++)
+                  for(ibq=1; ibq<=99998; ibq++)
                     {
                      //Print("Price -5 ",price);
                      if(bodypips[ibq,0]==price)
@@ -1281,7 +1281,7 @@ int start()
                   // ------ If there is no price, then add the price below -------
                   if(findeprice==0)// If the price is not found, then you need to add an entry to the array
                     {
-                     for(ibq=1; ibq<99999; ibq++)
+                     for(ibq=1; ibq<=99998; ibq++)
                        {
                         if(bodypips[ibq,0]==0)
                           {
@@ -1312,7 +1312,7 @@ int start()
                      int findeprice=0;
                      int Break1=0;
                      int Break2=0;
-                     for(ibq=1; ibq<99999; ibq++)
+                     for(ibq=1; ibq<=99998; ibq++)
                        {
                         //Print("Price -3 ",price);
                         if(bodypips[ibq,0]==price)
@@ -1331,7 +1331,7 @@ int start()
                      // ------- If there is no price, then add the price below ------
                      if(findeprice==0)//Если не найдена цена значит нужно добавить в массив запись
                        {
-                        for(ibq=1; ibq<99999; ibq++)
+                        for(ibq=1; ibq<=99998; ibq++)
                           {
                            if(bodypips[ibq,0]==0)
                              {
@@ -1355,7 +1355,7 @@ int start()
                      int findeprice=0;
                      int Break1=0;
                      int Break2=0;
-                     for(ibq=1; ibq<99999; ibq++)
+                     for(ibq=1; ibq<=99998; ibq++)
                        {
                         //Print("Price -1 ",price);
                         if(bodypips[ibq,0]==price)
@@ -1374,7 +1374,7 @@ int start()
                      // ------ If there is no price, then add the price below ------
                      if(findeprice==0)
                        {
-                        for(ibq=1; ibq<99999; ibq++)
+                        for(ibq=1; ibq<=99998; ibq++)
                           {
                            if(bodypips[ibq,0]==0)
                              {
@@ -1394,7 +1394,7 @@ int start()
                  }
               }
            }
-         for(int ic=1; ic<99999; ic++)//Perebor stolbca 1
+         for(int ic=1; ic<=99998; ic++)//Perebor stolbca 1
            {
             comp_bodypips[ic]=bodypips[ic,1];
             //Print("line 1031 ",bodypips[ic,1]);
@@ -1415,7 +1415,7 @@ int start()
          ArrayInitialize(MaxMinArr,0);
          int inf;
          int ic;
-         for(ic=1; ic<99999; ic++)
+         for(ic=1; ic<=99998; ic++)
            {
             if(body[ic,0]==10)
               {
@@ -1635,7 +1635,7 @@ int start()
             //Print(" CurPips ",CurPips," Onda1 ",Onda1);
            }
          int indmas;//Index
-         for(indmas=1; indmas<99999; indmas++)
+         for(indmas=1; indmas<=99998; indmas++)
            {
             if(PIPS_COL_Price[indmas,0]==0)
               {
@@ -1658,7 +1658,7 @@ int start()
          PIPS_COL_Price[indmas,0]=bodypips[MaxInd_bodypips,0];// Write the price to zero
          PIPS_COL_Price[indmas,1]=bodypips[MaxInd_bodypips,1];// Maximum index value-
          //-----Расчёт Маховик Времени
-         for(int il=1; il<99999; il++)
+         for(int il=1; il<=99998; il++)
            {
             //Print(bodypips[il,0]);
             if(bodypips[il,0]==0)
@@ -1687,7 +1687,7 @@ int start()
          im=im++;
          //Compensation price calculation function
          int ikz;
-         for(ikz=1; ikz<99999; ikz++)
+         for(ikz=1; ikz<=99998; ikz++)
            {
             if(body[ikz,1]==10)
               {
@@ -5091,7 +5091,7 @@ int start()
          //-----
          //--Проверка на колличество входов в блоки
          int err2=0;
-         for(int yk=0; yk<150; yk++)
+         for(int yk=0; yk<=149; yk++)
            {
             if(errorprint2[yk]==1)
               {
@@ -8985,7 +8985,7 @@ int start()
          // ------ Функция записи новой цены и отслеживание существующей на предмет складывания патерна "Внутреннего" ------
          int newPrise=0;
          int PriceExist=0;
-         for(w=1; w<1000; w++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w=1; w<=1000; w++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w,13]!=0 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber && ((Form_Patern_Finder[w,1]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w,2]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w,3]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w,4]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==1)       //Поиск цены . Возвращает индекс в массиве
               {
@@ -9071,7 +9071,7 @@ int start()
               }
            }
          int WriteData=1;
-         for(int z=1; z<1000; z++)
+         for(int z=1; z<=1000; z++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist==0 && (Form_Patern_Finder[z,1]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z,2]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,3]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,4]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9083,7 +9083,7 @@ int start()
            {
             // int WRinLine=0;
             int t;
-            for(t=1; t<1000; t++)
+            for(t=1; t<=1000; t++)
               {
                if(Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/)  //Последнее пустое место в массиве
                  {
@@ -9156,7 +9156,7 @@ int start()
          //BO_0
          int newPrise1=0;
          int PriceExist1=0;
-         for(w1=1; w1<1000; w1++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w1=1; w1<=1000; w1++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w1,28]!=0 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber && ((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w1,18]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w1,19]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)      //Поиск цены . Возвращает индекс в массиве
               {
@@ -9229,7 +9229,7 @@ int start()
            }
          // ----- Ески нет цены в массиве для просмотра
          int WriteData1=1;
-         for(int z1=1; z1<1000; z1++)
+         for(int z1=1; z1<=1000; z1++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist1==0 && (Form_Patern_Finder[z1,16]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z1,17]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,18]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,19]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9241,7 +9241,7 @@ int start()
            {
             //int WRinLine1=0;
             int t1;
-            for(t1=1; t1<1000; t1++)
+            for(t1=1; t1<=1000; t1++)
               {
                if(Form_Patern_Finder[t1,16]==0 && Form_Patern_Finder[t1,17]==0 && Form_Patern_Finder[t1,18]==0 && Form_Patern_Finder[t1,19]==0 /*&& (Form_Patern_Finder[t1,12]==PipsNumber && Form_Patern_Finder[t1,13]==N_Gr20 ||Form_Patern_Finder[t1,27]==PipsNumber && Form_Patern_Finder[t1,28]==N_Gr20 || Form_Patern_Finder[t1,42]==PipsNumber && Form_Patern_Finder[t1,43]==N_Gr20 || Form_Patern_Finder[t1,57]==PipsNumber && Form_Patern_Finder[t1,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
@@ -9288,7 +9288,7 @@ int start()
          //Be_1
          int newPrise2=0;
          int PriceExist2=0;
-         for(w2=1; w2<1000; w2++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w2=1; w2<=1000; w2++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w2,43]!=0 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber && ((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w2,33]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w2,34]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3)     //Поиск цены . Возвращает индекс в массиве
               {
@@ -9361,7 +9361,7 @@ int start()
            }
          // ----- Ески нет цены в массиве для просмотра
          int WriteData2=1;
-         for(int z2=1; z2<1000; z2++)
+         for(int z2=1; z2<=1000; z2++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist2==0 && (Form_Patern_Finder[z2,31]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z2,32]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,33]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,34]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9373,7 +9373,7 @@ int start()
            {
             // int WRinLine2=0;
             int t2;
-            for(t2=1; t2<1000; t2++)
+            for(t2=1; t2<=1000; t2++)
               {
                if(Form_Patern_Finder[t2,31]==0 && Form_Patern_Finder[t2,32]==0 && Form_Patern_Finder[t2,33]==0 && Form_Patern_Finder[t2,34]==0 /*&& (Form_Patern_Finder[t2,12]==PipsNumber && Form_Patern_Finder[t2,13]==N_Gr20 ||Form_Patern_Finder[t2,27]==PipsNumber && Form_Patern_Finder[t2,28]==N_Gr20 || Form_Patern_Finder[t2,42]==PipsNumber && Form_Patern_Finder[t2,43]==N_Gr20 || Form_Patern_Finder[t2,57]==PipsNumber && Form_Patern_Finder[t2,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
@@ -9420,7 +9420,7 @@ int start()
          //Bo_1
          int newPrise3=0;
          int PriceExist3=0;
-         for(w3=1; w3<1000; w3++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w3=1; w3<=1000; w3++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w3,58]!=0 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber && ((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w3,48]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w3,49]!=bodypips[MaxInd_bodypips,0])))&& InternalPat_1==4)      //Поиск цены . Возвращает индекс в массиве
               {
@@ -9493,7 +9493,7 @@ int start()
            }
          // ----- Ески нет цены в массиве для просмотра
          int WriteData3=1;
-         for(int z3=1; z3<1000; z3++)
+         for(int z3=1; z3<=1000; z3++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist3==0 && (Form_Patern_Finder[z3,46]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z3,47]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,48]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,49]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9505,7 +9505,7 @@ int start()
            {
             //  int WRinLine3=0;
             int t3;
-            for(t3=1; t3<1000; t3++)
+            for(t3=1; t3<=1000; t3++)
               {
                if(Form_Patern_Finder[t3,46]==0 && Form_Patern_Finder[t3,47]==0 && Form_Patern_Finder[t3,48]==0 && Form_Patern_Finder[t3,49]==0 /*&& (Form_Patern_Finder[t3,12]==PipsNumber && Form_Patern_Finder[t3,13]==N_Gr20 ||Form_Patern_Finder[t3,27]==PipsNumber && Form_Patern_Finder[t3,28]==N_Gr20 || Form_Patern_Finder[t3,42]==PipsNumber && Form_Patern_Finder[t3,43]==N_Gr20 || Form_Patern_Finder[t3,57]==PipsNumber && Form_Patern_Finder[t3,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
@@ -9552,7 +9552,7 @@ int start()
          //BE_0_IZN
          int PriceExist4=0;
          int w4;
-         for(w4=1; w4<1000; w4++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w4=1; w4<=1000; w4++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w4,73]!=0 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber && ((Form_Patern_Finder[w4,61]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w4,62]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w4,63]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w4,64]!=bodypips[MaxInd_bodypips,0]))) && InternalPat_1==5)     //Поиск цены . Возвращает индекс в массиве
               {
@@ -9625,7 +9625,7 @@ int start()
               }
            }
          int WriteData4=1;
-         for(int z4=1; z4<1000; z4++)
+         for(int z4=1; z4<=1000; z4++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist4==0 && (Form_Patern_Finder[z4,61]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z4,62]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,63]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,64]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9637,7 +9637,7 @@ int start()
            {
             // int WRinLine=0;
             int t4;
-            for(t4=1; t4<1000; t4++)
+            for(t4=1; t4<=1000; t4++)
               {
                if(Form_Patern_Finder[t4,61]==0 && Form_Patern_Finder[t4,62]==0 && Form_Patern_Finder[t4,63]==0 && Form_Patern_Finder[t4,64]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/) //Последнее пустое место в массиве
                  {
@@ -9709,7 +9709,7 @@ int start()
          int newPrise5=0;
          int PriceExist5=0;
          int w5;
-         for(w5=1; w5<1000; w5++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w5=1; w5<=1000; w5++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w5,88]!=0 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber && ((Form_Patern_Finder[w5,76]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w5,77]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w5,78]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w5,79]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==6)       //Поиск цены . Возвращает индекс в массиве
               {
@@ -9782,7 +9782,7 @@ int start()
            }
          // ----- Ески нет цены в массиве для просмотра
          int WriteData5=1;
-         for(int z5=1; z5<1000; z5++)
+         for(int z5=1; z5<=1000; z5++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist5==0 && (Form_Patern_Finder[z5,76]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z5,77]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,78]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,79]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9842,7 +9842,7 @@ int start()
          int newPrise6=0;
          int PriceExist6=0;
          int w6;
-         for(w6=1; w6<1000; w6++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w6=1; w6<=1000; w6++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w6,103]!=0 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber && ((Form_Patern_Finder[w6,91]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w6,92]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w6,93]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w6,94]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==7)    //Поиск цены . Возвращает индекс в массиве
               {
@@ -9915,7 +9915,7 @@ int start()
            }
          // ----- Ески нет цены в массиве для просмотра
          int WriteData6=1;
-         for(int z6=1; z6<1000; z6++)
+         for(int z6=1; z6<=1000; z6++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist6==0 && (Form_Patern_Finder[z6,91]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z6,92]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,93]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,94]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -9927,7 +9927,7 @@ int start()
            {
             // int WRinLine2=0;
             int t6;
-            for(t6=1; t6<1000; t6++)
+            for(t6=1; t6<=1000; t6++)
               {
                if(Form_Patern_Finder[t6,91]==0 && Form_Patern_Finder[t6,92]==0 && Form_Patern_Finder[t6,93]==0 && Form_Patern_Finder[t6,94]==0 /*&& (Form_Patern_Finder[t6,12]==PipsNumber && Form_Patern_Finder[t6,13]==N_Gr20 ||Form_Patern_Finder[t6,27]==PipsNumber && Form_Patern_Finder[t6,28]==N_Gr20 || Form_Patern_Finder[t6,42]==PipsNumber && Form_Patern_Finder[t6,43]==N_Gr20 || Form_Patern_Finder[t6,57]==PipsNumber && Form_Patern_Finder[t6,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
@@ -9975,7 +9975,7 @@ int start()
          int newPrise7=0;
          int PriceExist7=0;
          int w7;
-         for(w7=1; w7<1000; w7++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
+         for(w7=1; w7<=1000; w7++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
             if((Form_Patern_Finder[w7,118]!=0 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber && ((Form_Patern_Finder[w7,106]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w7,107]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w7,108]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w7,109]!=bodypips[MaxInd_bodypips,0])))&& InternalPat_1==8)       //Поиск цены . Возвращает индекс в массиве
               {
@@ -10048,7 +10048,7 @@ int start()
            }
          // ----- Ески нет цены в массиве для просмотра
          int WriteData7=1;
-         for(int z7=1; z7<1000; z7++)
+         for(int z7=1; z7<=1000; z7++)
            {
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist7==0 && (Form_Patern_Finder[z7,106]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z7,107]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,108]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,109]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
@@ -10060,7 +10060,7 @@ int start()
            {
             //  int WRinLine3=0;
             int t7;
-            for(t7=1; t7<1000; t7++)
+            for(t7=1; t7<=1000; t7++)
               {
                if(Form_Patern_Finder[t7,110]==0 && Form_Patern_Finder[t7,111]==0 && Form_Patern_Finder[t7,112]==0 && Form_Patern_Finder[t7,113]==0 /*&& (Form_Patern_Finder[t7,12]==PipsNumber && Form_Patern_Finder[t7,13]==N_Gr20 ||Form_Patern_Finder[t7,27]==PipsNumber && Form_Patern_Finder[t7,28]==N_Gr20 || Form_Patern_Finder[t7,42]==PipsNumber && Form_Patern_Finder[t7,43]==N_Gr20 || Form_Patern_Finder[t7,57]==PipsNumber && Form_Patern_Finder[t7,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
@@ -10117,7 +10117,7 @@ int start()
             N_Petalo_1=0;
            }
          int Ch_d1=0;//Permiso para cambiar datos
-         for(int iu=1; iu<9; iu++)//Сравнение пересчёта бинарного кода. Выявление изменений в 01110110 байте 01101110
+         for(int iu=1; iu<=8; iu++)//Сравнение пересчёта бинарного кода. Выявление изменений в 01110110 байте 01101110
            {
             if(comp_Sev[1,iu]!=Sev[1,iu] && Sev[1,iu]==1)// условие если произошло изменение в структуре 8 бит
               {
@@ -10210,7 +10210,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10222,7 +10222,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10234,7 +10234,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10267,7 +10267,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -10323,7 +10323,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10335,7 +10335,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10347,7 +10347,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10380,7 +10380,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -10436,7 +10436,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10448,7 +10448,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10460,7 +10460,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10493,7 +10493,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -10549,7 +10549,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10561,7 +10561,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10573,7 +10573,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10606,7 +10606,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -10663,7 +10663,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10675,7 +10675,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10687,7 +10687,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10720,7 +10720,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -10776,7 +10776,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10788,7 +10788,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10800,7 +10800,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10833,7 +10833,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -10889,7 +10889,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -10901,7 +10901,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -10913,7 +10913,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -10946,7 +10946,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11002,7 +11002,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11014,7 +11014,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11026,7 +11026,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11059,7 +11059,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11117,7 +11117,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11129,7 +11129,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999;ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11141,7 +11141,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,2] ",flower_Price_3[opa,2]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11174,7 +11174,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11230,7 +11230,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11242,7 +11242,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11254,7 +11254,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11287,7 +11287,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11343,7 +11343,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11355,7 +11355,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11367,7 +11367,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11400,7 +11400,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11456,7 +11456,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11468,7 +11468,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11480,7 +11480,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11513,7 +11513,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11570,7 +11570,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11582,7 +11582,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11594,7 +11594,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11627,7 +11627,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11683,7 +11683,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11695,7 +11695,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11707,7 +11707,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11740,7 +11740,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11796,7 +11796,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11808,7 +11808,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11820,7 +11820,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11853,7 +11853,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -11909,7 +11909,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -11921,7 +11921,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11933,7 +11933,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -11966,7 +11966,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -12024,7 +12024,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12036,7 +12036,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12048,7 +12048,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12119,7 +12119,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12131,7 +12131,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12143,7 +12143,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12214,7 +12214,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12226,7 +12226,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12238,7 +12238,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12309,7 +12309,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12321,7 +12321,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12333,7 +12333,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12397,7 +12397,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12409,7 +12409,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12421,7 +12421,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12484,7 +12484,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12496,7 +12496,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12508,7 +12508,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12577,7 +12577,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12589,7 +12589,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12601,7 +12601,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12664,7 +12664,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12676,7 +12676,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12688,7 +12688,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12753,7 +12753,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12765,7 +12765,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12777,7 +12777,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12810,7 +12810,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -12858,7 +12858,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12870,7 +12870,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12882,7 +12882,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -12915,7 +12915,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -12963,7 +12963,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -12975,7 +12975,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -12987,7 +12987,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13020,7 +13020,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13068,7 +13068,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13080,7 +13080,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13092,7 +13092,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13125,7 +13125,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13174,7 +13174,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13186,7 +13186,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13198,7 +13198,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13231,7 +13231,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13279,7 +13279,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13291,7 +13291,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13303,7 +13303,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13336,7 +13336,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13384,7 +13384,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13396,7 +13396,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13408,7 +13408,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13441,7 +13441,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13489,7 +13489,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13501,7 +13501,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13513,7 +13513,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13546,7 +13546,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13596,7 +13596,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13608,7 +13608,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13620,7 +13620,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13653,7 +13653,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13701,7 +13701,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13713,7 +13713,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13725,7 +13725,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13758,7 +13758,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13806,7 +13806,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13818,7 +13818,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13830,7 +13830,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13863,7 +13863,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -13911,7 +13911,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -13923,7 +13923,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -13935,7 +13935,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -13968,7 +13968,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14017,7 +14017,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14029,7 +14029,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14041,7 +14041,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14074,7 +14074,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14122,7 +14122,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14134,7 +14134,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14146,7 +14146,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14179,7 +14179,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14227,7 +14227,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14239,7 +14239,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14251,7 +14251,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14284,7 +14284,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14332,7 +14332,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14344,7 +14344,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14356,7 +14356,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14389,7 +14389,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14439,7 +14439,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14451,7 +14451,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14463,7 +14463,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,2] ",flower_Price_3[opa,2]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=999; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14496,7 +14496,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14544,7 +14544,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14556,7 +14556,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14568,7 +14568,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14601,7 +14601,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14649,7 +14649,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14661,7 +14661,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14673,7 +14673,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14706,7 +14706,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14754,7 +14754,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14766,7 +14766,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14778,7 +14778,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14811,7 +14811,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14860,7 +14860,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14872,7 +14872,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14884,7 +14884,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -14917,7 +14917,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -14965,7 +14965,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -14977,7 +14977,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -14989,7 +14989,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15022,7 +15022,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -15070,7 +15070,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15082,7 +15082,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15094,7 +15094,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15127,7 +15127,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -15175,7 +15175,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15187,7 +15187,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15199,7 +15199,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15232,7 +15232,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -15282,7 +15282,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15294,7 +15294,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15306,7 +15306,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15374,7 +15374,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15386,7 +15386,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15398,7 +15398,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15466,7 +15466,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15478,7 +15478,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15490,7 +15490,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15553,7 +15553,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15565,7 +15565,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15577,7 +15577,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15641,7 +15641,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15653,7 +15653,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15665,7 +15665,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15728,7 +15728,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15740,7 +15740,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15752,7 +15752,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15815,7 +15815,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15827,7 +15827,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15839,7 +15839,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15902,7 +15902,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -15914,7 +15914,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -15926,7 +15926,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -15996,7 +15996,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16008,7 +16008,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16020,7 +16020,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16053,7 +16053,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16101,7 +16101,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16113,7 +16113,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16125,7 +16125,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16158,7 +16158,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16206,7 +16206,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16218,7 +16218,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16230,7 +16230,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16263,7 +16263,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16311,7 +16311,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16323,7 +16323,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16335,7 +16335,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16368,7 +16368,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16417,7 +16417,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16429,7 +16429,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16441,7 +16441,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16474,7 +16474,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16522,7 +16522,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16534,7 +16534,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16546,7 +16546,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16579,7 +16579,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16627,7 +16627,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16639,7 +16639,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16651,7 +16651,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16684,7 +16684,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16732,7 +16732,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16744,7 +16744,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16756,7 +16756,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16790,7 +16790,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16840,7 +16840,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16852,7 +16852,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16864,7 +16864,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -16897,7 +16897,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -16945,7 +16945,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -16957,7 +16957,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -16969,7 +16969,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17002,7 +17002,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17050,7 +17050,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17062,7 +17062,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17074,7 +17074,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17107,7 +17107,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17155,7 +17155,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17167,7 +17167,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17179,7 +17179,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17212,7 +17212,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17261,7 +17261,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17273,7 +17273,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17285,7 +17285,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17318,7 +17318,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17366,7 +17366,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17378,7 +17378,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17390,7 +17390,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17423,7 +17423,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17471,7 +17471,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17483,7 +17483,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17495,7 +17495,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17528,7 +17528,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17576,7 +17576,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17588,7 +17588,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17600,7 +17600,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17633,7 +17633,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17683,7 +17683,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17695,7 +17695,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17707,7 +17707,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17740,7 +17740,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17788,7 +17788,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17800,7 +17800,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17812,7 +17812,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17845,7 +17845,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17893,7 +17893,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -17905,7 +17905,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -17917,7 +17917,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -17950,7 +17950,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -17998,7 +17998,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18010,7 +18010,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18022,7 +18022,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18055,7 +18055,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -18104,7 +18104,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18116,7 +18116,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18128,7 +18128,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18161,7 +18161,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -18201,7 +18201,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18213,7 +18213,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18225,7 +18225,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18258,7 +18258,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -18306,7 +18306,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18318,7 +18318,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18330,7 +18330,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18363,7 +18363,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -18411,7 +18411,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18423,7 +18423,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18435,7 +18435,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18468,7 +18468,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -18518,7 +18518,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18530,7 +18530,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18542,7 +18542,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18605,7 +18605,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18617,7 +18617,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18629,7 +18629,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18697,7 +18697,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18709,7 +18709,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18721,7 +18721,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18789,7 +18789,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18801,7 +18801,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18813,7 +18813,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18877,7 +18877,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18889,7 +18889,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18901,7 +18901,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -18964,7 +18964,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -18976,7 +18976,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -18988,7 +18988,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19056,7 +19056,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19068,7 +19068,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19080,7 +19080,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19143,7 +19143,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19155,7 +19155,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19167,7 +19167,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19237,7 +19237,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19249,7 +19249,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19261,7 +19261,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19294,7 +19294,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19342,7 +19342,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19354,7 +19354,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19366,7 +19366,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19399,7 +19399,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19447,7 +19447,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19459,7 +19459,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19471,7 +19471,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19504,7 +19504,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19552,7 +19552,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19564,7 +19564,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19576,7 +19576,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19609,7 +19609,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19658,7 +19658,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19670,7 +19670,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19682,7 +19682,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19715,7 +19715,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19763,7 +19763,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19775,7 +19775,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19787,7 +19787,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19820,7 +19820,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19868,7 +19868,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19880,7 +19880,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19892,7 +19892,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -19925,7 +19925,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -19973,7 +19973,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -19985,7 +19985,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -19997,7 +19997,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20030,7 +20030,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20080,7 +20080,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20092,7 +20092,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20104,7 +20104,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20137,7 +20137,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20185,7 +20185,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20197,7 +20197,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20209,7 +20209,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20242,7 +20242,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20290,7 +20290,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20302,7 +20302,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20314,7 +20314,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20347,7 +20347,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20395,7 +20395,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20407,7 +20407,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20419,7 +20419,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20452,7 +20452,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20501,7 +20501,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20513,7 +20513,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20525,7 +20525,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20558,7 +20558,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20606,7 +20606,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20618,7 +20618,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20630,7 +20630,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20663,7 +20663,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20711,7 +20711,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20723,7 +20723,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20735,7 +20735,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20768,7 +20768,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20816,7 +20816,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20828,7 +20828,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20840,7 +20840,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20873,7 +20873,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==1)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -20923,7 +20923,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -20935,7 +20935,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -20947,7 +20947,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,2] ",flower_Price_3[opa,2]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -20980,7 +20980,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21028,7 +21028,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21040,7 +21040,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21052,7 +21052,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21085,7 +21085,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21134,7 +21134,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21146,7 +21146,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21158,7 +21158,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21191,7 +21191,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21240,7 +21240,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21252,7 +21252,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21264,7 +21264,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21297,7 +21297,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21347,7 +21347,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21359,7 +21359,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21371,7 +21371,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21404,7 +21404,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uaa=1; uaa<=200001; uaa++)
+                     for(int uaa=1; uaa<=200000; uaa++)
                        {
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21452,7 +21452,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21464,7 +21464,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21476,7 +21476,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21509,7 +21509,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21558,7 +21558,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21570,7 +21570,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21582,7 +21582,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21615,7 +21615,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21664,7 +21664,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21676,7 +21676,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21688,7 +21688,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21721,7 +21721,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==2)
                     {
-                     for(int uae=1; uae<=200001; uae++)
+                     for(int uae=1; uae<=200000; uae++)
                        {
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -21771,7 +21771,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21783,7 +21783,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21795,7 +21795,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21865,7 +21865,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21877,7 +21877,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21889,7 +21889,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -21957,7 +21957,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -21969,7 +21969,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -21981,7 +21981,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22049,7 +22049,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22061,7 +22061,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22073,7 +22073,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22142,7 +22142,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22154,7 +22154,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22166,7 +22166,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22234,7 +22234,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22246,7 +22246,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22258,7 +22258,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22326,7 +22326,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22338,7 +22338,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22350,7 +22350,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22418,7 +22418,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22430,7 +22430,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22442,7 +22442,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22512,7 +22512,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22524,7 +22524,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22536,7 +22536,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22569,7 +22569,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -22617,7 +22617,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22629,7 +22629,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22641,7 +22641,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22674,7 +22674,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -22722,7 +22722,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22734,7 +22734,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22746,7 +22746,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22779,7 +22779,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -22827,7 +22827,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22839,7 +22839,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22851,7 +22851,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22884,7 +22884,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -22933,7 +22933,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -22945,7 +22945,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -22957,7 +22957,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -22990,7 +22990,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -23038,7 +23038,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -23050,7 +23050,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -23062,7 +23062,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -23095,7 +23095,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -23143,7 +23143,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -23155,7 +23155,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -23167,7 +23167,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -23200,7 +23200,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -23248,7 +23248,7 @@ int start()
                        {
                         flower_Price_3[opa,41]=1;//Есть записи времени в массиве flower_Price_3_TIME
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
@@ -23260,7 +23260,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=1000; ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -23272,7 +23272,7 @@ int start()
                      // формула закрытия расчёта
                      // расчётное значение по цене
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
-                     for(int hehe=1; hehe<=200001; hehe++)
+                     for(int hehe=1; hehe<=200000; hehe++)
                        {
                         //Теория.
                         //Кластер формируется из 8 цен.
@@ -23305,7 +23305,7 @@ int start()
                   // далее использовать данное правило при централизации архитектур 1 2 и 4 с соответствующими сателитами
                   if(N_Centro_r==4)
                     {
-                     for(int uau=1; uau<=200001; uau++)
+                     for(int uau=1; uau<=200000; uau++)
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
@@ -24408,531 +24408,7 @@ void Bars_Z(double iBid)// Собрал я с Ирой с красочьных �
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
-void paralell_1_4(int paralell)//ункция паралель. Возвращает текущее значение паралели хода цены
-  {
-   if(Rez_BE==36)//Проводим вычисления с 15 паралелями.Каждая паралель это одноклассник.
-     {
-      //При первом сигнале происходит присваивание первой паралели по часавой стрелке.
-      // Бинарб=ный код не фиксирует исходное значение семечки при спуске и подьёме цены
-      if(Andryuschenko_I==0)
-        {
-         Andryuschenko_I=1;
-         paralell=1;
-        }
-      if(Andryuschenko_I==1)//
-        {
-         // Складываем 0 и 1 и опеределяем равенство или не равенство
-         int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-         int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-         int SumBalance=BalansLic+BalansIzn;
-         if(SumBalance!=4)//Выявить в какую сторону сдвиг на Лицо или Изнанку.осможно нужно сравнивать с предыдущим значением
-           {
-            if(BalansLic==1 && BalansIzn==4)//Баланс 4+
-              {
-               paralell--;//Если предыдущее значение было в балансе то добавилась 1 в лицо а значит сдвиг в центр
-              }
-            if(BalansLic==2 && BalansIzn==4)//Баланс 4+
-              {
-               paralell=paralell-2;//Если предыдущее значение было в балансе то добавилась 2 в лицо а значит сдвиг в центр
-              }
-            if(BalansLic==3 && BalansIzn==4)//Баланс 4+
-              {
-               paralell=paralell-3;//Если предыдущее значение было в балансе то добавилась 3 в лицо а значит сдвиг в центр
-              }
-            if(BalansLic==4 && BalansIzn==4)//Баланс 4+
-              {
-               paralell=paralell-4;//Если предыдущее значение было в балансе то добавилась 4 в лицо а значит сдвиг в центр
-              }
-            if(paralell==0)
-              {
-               paralell=36;
-              }
-            if(paralell<0)
-              {
-               paralell=36-paralell;//Проверить значение
-              }
-            //Изнаночное значение
-            if(BalansLic==4 && BalansIzn==1)//Баланс 4-
-              {
-               paralell++;//Если предыдущее значение было в балансе то добавилась 1 в изнанку а значит сдвиг в центр в результате минусуется по паралели
-              }
-            if(BalansLic==4 && BalansIzn==2)//Баланс 4-
-              {
-               paralell=paralell+2;//Если предыдущее значение было в балансе то добавилась 2 в изнанку а значит сдвиг в центр в результате минусуется по паралели
-              }
-            if(BalansLic==4 && BalansIzn==3)//Баланс 4-
-              {
-               paralell=paralell+3;//Если предыдущее значение было в балансе то добавилась 3 в изнанку а значит сдвиг в центр в результате минусуется по паралели
-              }
-            if(BalansLic==4 && BalansIzn==4)//Баланс 4-
-              {
-               paralell=paralell+4;//Если предыдущее значение было в балансе то добавилась 4 в изнанку а значит сдвиг в центр в результате минусуется по паралели
-              }
-           }
-         //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-         //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-         if(paralell!=1)
-           {
-            Andryuschenko_I=0;
-           }
-        }
-      if(paralell==2)
-        {
-         Antipenko_P=1;
-         if(Antipenko_P==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==3)
-        {
-         Buyakov_D=1;
-         if(Buyakov_D==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==4)
-        {
-         Ryabashtan_N=1;
-         if(Ryabashtan_N==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==5)
-        {
-         Krivenko_L=1;
-         if(Krivenko_L==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==6)
-        {
-         Kopanitskyy_E=1;
-         if(Kopanitskyy_E==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==7)
-        {
-         Elizarova_G=1;
-         if(Elizarova_G==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==8)
-        {
-         Cima_I=1;
-         if(Cima_I==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==9)
-        {
-         Konyahina_A=1;
-         if(Konyahina_A==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==10)
-        {
-         Parmuzina_N=1;
-         if(Parmuzina_N==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==11)
-        {
-         Matvienko_L=1;
-         if(Matvienko_L==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==12)
-        {
-         Zhulickaya_L=1;
-         if(Zhulickaya_L==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==13)
-        {
-         Pravda_Y=1;
-         if(Pravda_Y==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==14)
-        {
-         Furina_N=1;
-         if(Furina_N==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==15)
-        {
-         Zotov_V=1;
-         if(Zotov_V==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==16)
-        {
-         Jarkina_T=1;
-         if(Jarkina_T==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==17)
-        {
-         Moroz_I=1;
-         if(Moroz_I==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==18)
-        {
-         Turasov_Y=1;
-         if(Turasov_Y==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==19)
-        {
-         Macola_A=1;
-         if(Macola_A==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==20)
-        {
-         Sarapin_Y=1;
-         if(Sarapin_Y==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==21)
-        {
-         Nasypaiko_O=1;
-         if(Nasypaiko_O==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==22)
-        {
-         Prityupa_V=1;
-         if(Prityupa_V==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==23)
-        {
-         Golovchuk_D=1;
-         if(Golovchuk_D==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==24)
-        {
-         Shpilevoy_R=1;
-         if(Shpilevoy_R==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==25)
-        {
-         Vaskevich_L=1;
-         if(Vaskevich_L==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==26)
-        {
-         Yurchenko_D=1;
-         if(Yurchenko_D==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==27)
-        {
-         Vinokurov_R=1;
-         if(Vinokurov_R==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==28)
-        {
-         Taran_R=1;
-         if(Taran_R==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==29)
-        {
-         Plasovenko_A=1;
-         if(Plasovenko_A==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==30)
-        {
-         Bilichenko_V=1;
-         if(Bilichenko_V==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==31)
-        {
-         Romanyuk_I=1;
-         if(Romanyuk_I==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==32)
-        {
-         Malaya_A_S=1;
-         if(Malaya_A_S==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==33)
-        {
-         Dunaeva_V_A=1;
-         if(Dunaeva_V_A==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==34)
-        {
-         Kamashko_V=1;
-         if(Kamashko_V==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==35)
-        {
-         Zimuha_V=1;
-         if(Zimuha_V==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-      if(paralell==36)
-        {
-         Galushko_R=1;
-         if(Galushko_R==1)//
-           {
-            // Складываем 0 и 1 и опеределяем равенство или не равенство
-            int BalansLic=Sev[1,1]+Sev[1,2]+Sev[1,3]+Sev[1,4];
-            int BalansIzn=Sev[1,5]+Sev[1,6]+Sev[1,7]+Sev[1,8];
-            int SumBalance=BalansLic+BalansIzn;
-            //Если баланса нет то нужно вычислить колличество сдвига по оси и направлению Пример При 1 сдвиге paralell++//paralell--; При 2 сдвигах paralell+2//paralell-2;
-            //Подаётся цена свечи при новом закрытии bodypips[MaxInd_bodypips,0]
-           }
-        }
-     }
-  }
+
 //+------------------------------------------------------------------+
 //| Expert deinitialization function                                 |
 //+------------------------------------------------------------------+
