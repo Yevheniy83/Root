@@ -1,0 +1,537 @@
+//+------------------------------------------------------------------+
+//|                                                 WriteToArray.mq4 |
+//|                             Copyright 2022, Yevheniy Kopanitskyy |
+//|                                             https://www.mql5.com |
+//+------------------------------------------------------------------+
+#property copyright "Copyright 2022, Yevheniy Kopanitskyy"
+#property link      "https://www.mql5.com"
+#property version   "1.00"
+#property strict
+float flower_Price_3[200001,100];
+int N_Gr20;
+int N_Centro_r;
+int PipsNumber;
+int PriceConv2;
+double PriceConv3;
+double PriceConv4;
+int N_Centro;
+float Price;
+double Veinte=20;
+double cien=100;
+double cienm=100000;
+double PriceConv1;
+string SYmbol=Symbol();
+string FileName25=SYmbol+"flower_Price_3.bin";
+
+
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+  {
+//--- create timer
+   ArrayInitialize(flower_Price_3,0);
+
+   Price=NormalizeDouble(0.00001,5);
+   Print("Price init",Price);
+   PriceConv1=(Price*cienm)/Veinte;
+   PriceConv2=PriceConv1;
+   PriceConv4=PriceConv2;
+   PriceConv3=NormalizeDouble((PriceConv1-PriceConv4),2)*cien;
+   N_Centro=PriceConv3/5;//Приведение цены к купольному центру
+   N_Gr20=PriceConv2+1;
+   if(N_Centro==0)
+     {
+      N_Centro=20;
+      N_Gr20--;
+     }
+
+   float auno=0.00001;
+   float adduno=NormalizeDouble(auno,5);
+   float Price_1=NormalizeDouble(Price,5);
+//Print(" Price_1 ",Price_1);
+
+//Расчёт группирования цены в кластер на базе 8 чисел
+
+   float cinemil=100000;
+//   float calc=NormalizeDouble(((Price_1-0.8)*cinemil),0); //деление без остатка
+   float calc=NormalizeDouble(((Price_1)*cinemil),0); //деление без остатка
+//Print(" calc ",calc);
+   double grupo_8_claster=NormalizeDouble(calc/8,3);
+//Print(" grupo_8_claster ",grupo_8_claster);ok
+   int grupo_8_claster_o=grupo_8_claster;//
+// Print(" grupo_8_claster_o ",grupo_8_claster_o);
+   float grupo_8_claster_8=grupo_8_claster-grupo_8_claster_o;
+// Print(" grupo_8_claster_8 ",grupo_8_claster_8);
+   int fract;
+   if(grupo_8_claster_8==0)
+     {
+      fract=1;
+
+     }
+
+   if(grupo_8_claster_8==0.125)
+     {
+      fract=2;
+
+     }
+   if(grupo_8_claster_8==0.250)
+     {
+      fract=3;
+
+     }
+   if(grupo_8_claster_8==0.375)
+     {
+      fract=4;
+
+     }
+   if(grupo_8_claster_8==0.500)
+     {
+      fract=5;
+
+     }
+   if(grupo_8_claster_8==0.625)
+     {
+      fract=6;
+
+     }
+   if(grupo_8_claster_8==0.750)
+     {
+      fract=7;
+
+     }
+   if(grupo_8_claster_8==0.875)
+     {
+      fract=8;
+     }
+// Print(" grupo_8_claster_o ",grupo_8_claster_o," fract ",fract);
+
+
+   N_Centro_r=0;
+   PipsNumber=0;
+   if(N_Centro==1)
+     {
+      N_Centro_r=1;
+      PipsNumber=1;
+     }
+   if(N_Centro==2)
+     {
+      N_Centro_r=2;
+      PipsNumber=1;
+     }
+   if(N_Centro==3)
+     {
+      N_Centro_r=3;
+      PipsNumber=1;
+     }
+   if(N_Centro==4)
+     {
+      N_Centro_r=4;
+      PipsNumber=1;
+     }
+   if(N_Centro==5)
+     {
+      N_Centro_r=1;
+      PipsNumber=2;
+     }
+   if(N_Centro==6)
+     {
+      N_Centro_r=2;
+      PipsNumber=2;
+     }
+   if(N_Centro==7)
+     {
+      N_Centro_r=3;
+      PipsNumber=2;
+     }
+   if(N_Centro==8)
+     {
+      N_Centro_r=4;
+      PipsNumber=2;
+     }
+   if(N_Centro==9)
+     {
+      N_Centro_r=1;
+      PipsNumber=3;
+     }
+   if(N_Centro==10)
+     {
+      N_Centro_r=2;
+      PipsNumber=3;
+     }
+   if(N_Centro==11)
+     {
+      N_Centro_r=3;
+      PipsNumber=3;
+     }
+   if(N_Centro==12)
+     {
+      N_Centro_r=4;
+      PipsNumber=3;
+     }
+   if(N_Centro==13)
+     {
+      N_Centro_r=1;
+      PipsNumber=4;
+     }
+   if(N_Centro==14)
+     {
+      N_Centro_r=2;
+      PipsNumber=4;
+     }
+   if(N_Centro==15)
+     {
+      N_Centro_r=3;
+      PipsNumber=4;
+     }
+   if(N_Centro==16)
+     {
+      N_Centro_r=4;
+      PipsNumber=4;
+     }
+   if(N_Centro==17)
+     {
+      N_Centro_r=1;
+      PipsNumber=5;
+     }
+   if(N_Centro==18)
+     {
+      N_Centro_r=2;
+      PipsNumber=5;
+     }
+   if(N_Centro==19)
+     {
+      N_Centro_r=3;
+      PipsNumber=5;
+     }
+   if(N_Centro==20)
+     {
+      N_Centro_r=4;
+      PipsNumber=5;
+     }
+
+
+   flower_Price_3[1,1]=0;
+   flower_Price_3[1,2]=0;
+   flower_Price_3[1,3]=0;
+   flower_Price_3[1,4]=0;
+   flower_Price_3[1,5]=0;
+   flower_Price_3[1,6]=0;
+   flower_Price_3[1,7]=0;
+   flower_Price_3[1,8]=0;
+   flower_Price_3[1,9]=0;
+   flower_Price_3[1,10]=0;
+   flower_Price_3[1,11]=0;
+   flower_Price_3[1,12]=0;
+   flower_Price_3[1,13]=0;
+   flower_Price_3[1,14]=0;
+   flower_Price_3[1,15]=0;
+   flower_Price_3[1,16]=0;
+   flower_Price_3[1,17]=0;
+   flower_Price_3[1,18]=0;
+   flower_Price_3[1,19]=0;
+   flower_Price_3[1,20]=0;
+   flower_Price_3[1,21]=0;
+   flower_Price_3[1,22]=0;
+   flower_Price_3[1,23]=0;
+   flower_Price_3[1,24]=0;
+   flower_Price_3[1,25]=0;
+   flower_Price_3[1,26]=0;
+   flower_Price_3[1,27]=0;
+   flower_Price_3[1,28]=0;
+   flower_Price_3[1,29]=0;
+   flower_Price_3[1,30]=0;
+   flower_Price_3[1,31]=0;
+   flower_Price_3[1,32]=0;
+   flower_Price_3[1,33]=Price;
+   flower_Price_3[1,34]=N_Centro_r;
+   flower_Price_3[1,35]=1;//номер 3 это переменная Be_1
+   flower_Price_3[1,36]=1;//Полученый полюс после расчёта блока полюса.1-2-3-4 Сев-вост-юг -Зап
+   flower_Price_3[1,37]=N_Centro;
+   flower_Price_3[1,38]=N_Gr20;
+   flower_Price_3[1,39]=grupo_8_claster_o;//группа из 8 цельное число
+   flower_Price_3[1,40]=fract;//группа 8 фракция
+flower_Price_3[1,41]=0;//Создание массива для записи времени
+flower_Price_3[1,42]=0;//Разрешение на запись данных по индексу разрешено 0, Запрет 1
+
+   Print("Print(flower_Price[1,33]) ",flower_Price_3[1,33]);
+   Print(" Price ",flower_Price_3[1,33]," claster ",grupo_8_claster," claster 8  ",flower_Price_3[1,39]," grupo_8_claster_8 ",grupo_8_claster_8," frakciya ",flower_Price_3[1,40]);
+
+   int op;
+   for(op=2; op<=200000; op++) //присвоение значения последней обрабатываемой перемеммой и полюса
+     {
+
+
+
+      float auno=0.00001;
+      float adduno=NormalizeDouble(auno,5);
+      float Price_1=NormalizeDouble(flower_Price_3[op-1,33],5);
+      //Print(" Price_1 ",Price_1);
+
+      //Расчёт группирования цены в кластер на базе 8 чисел
+
+      float cinemil=100000;
+      //float calc=NormalizeDouble(((Price_1-0.8)*cinemil),0); //деление без остатка
+      float calc=NormalizeDouble(((Price_1)*cinemil),0); //деление без остатка
+      //Print(" calc ",calc);
+      double grupo_8_claster=NormalizeDouble(calc/8,3);
+      //Print(" grupo_8_claster ",grupo_8_claster);ok
+      int grupo_8_claster_o=grupo_8_claster;//
+      // Print(" grupo_8_claster_o ",grupo_8_claster_o);
+      float grupo_8_claster_8=grupo_8_claster-grupo_8_claster_o;
+      // Print(" grupo_8_claster_8 ",grupo_8_claster_8);
+      int fract;
+      if(grupo_8_claster_8==0)
+        {
+         fract=1;
+
+        }
+
+      if(grupo_8_claster_8==0.125)
+        {
+         fract=2;
+
+        }
+      if(grupo_8_claster_8==0.250)
+        {
+         fract=3;
+
+        }
+      if(grupo_8_claster_8==0.375)
+        {
+         fract=4;
+
+        }
+      if(grupo_8_claster_8==0.500)
+        {
+         fract=5;
+
+        }
+      if(grupo_8_claster_8==0.625)
+        {
+         fract=6;
+
+        }
+      if(grupo_8_claster_8==0.750)
+        {
+         fract=7;
+
+        }
+      if(grupo_8_claster_8==0.875)
+        {
+         fract=8;
+        }
+      // Print(" grupo_8_claster_o ",grupo_8_claster_o," fract ",fract);
+
+
+
+
+
+
+
+      Price=Price_1+adduno;
+      //Print(" Price_1 ",Price_1," Print(flower_Price[op,33]) ",flower_Price_3[op-1,33], " adduno ",adduno, " Price ",Price);
+      PriceConv1=(Price*cienm)/Veinte;
+      PriceConv2=PriceConv1;
+      PriceConv4=PriceConv2;
+      PriceConv3=NormalizeDouble((PriceConv1-PriceConv4),2)*cien;
+      N_Centro=PriceConv3/5;//Приведение цены к купольному центру
+      N_Gr20=PriceConv2+1;
+      if(N_Centro==0)
+        {
+         N_Centro=20;
+         N_Gr20--;
+        }
+
+      N_Centro_r=0;
+      PipsNumber=0;
+      if(N_Centro==1)
+        {
+         N_Centro_r=1;
+         PipsNumber=1;
+        }
+      if(N_Centro==2)
+        {
+         N_Centro_r=2;
+         PipsNumber=1;
+        }
+      if(N_Centro==3)
+        {
+         N_Centro_r=3;
+         PipsNumber=1;
+        }
+      if(N_Centro==4)
+        {
+         N_Centro_r=4;
+         PipsNumber=1;
+        }
+      if(N_Centro==5)
+        {
+         N_Centro_r=1;
+         PipsNumber=2;
+        }
+      if(N_Centro==6)
+        {
+         N_Centro_r=2;
+         PipsNumber=2;
+        }
+      if(N_Centro==7)
+        {
+         N_Centro_r=3;
+         PipsNumber=2;
+        }
+      if(N_Centro==8)
+        {
+         N_Centro_r=4;
+         PipsNumber=2;
+        }
+      if(N_Centro==9)
+        {
+         N_Centro_r=1;
+         PipsNumber=3;
+        }
+      if(N_Centro==10)
+        {
+         N_Centro_r=2;
+         PipsNumber=3;
+        }
+      if(N_Centro==11)
+        {
+         N_Centro_r=3;
+         PipsNumber=3;
+        }
+      if(N_Centro==12)
+        {
+         N_Centro_r=4;
+         PipsNumber=3;
+        }
+      if(N_Centro==13)
+        {
+         N_Centro_r=1;
+         PipsNumber=4;
+        }
+      if(N_Centro==14)
+        {
+         N_Centro_r=2;
+         PipsNumber=4;
+        }
+      if(N_Centro==15)
+        {
+         N_Centro_r=3;
+         PipsNumber=4;
+        }
+      if(N_Centro==16)
+        {
+         N_Centro_r=4;
+         PipsNumber=4;
+        }
+      if(N_Centro==17)
+        {
+         N_Centro_r=1;
+         PipsNumber=5;
+        }
+      if(N_Centro==18)
+        {
+         N_Centro_r=2;
+         PipsNumber=5;
+        }
+      if(N_Centro==19)
+        {
+         N_Centro_r=3;
+         PipsNumber=5;
+        }
+      if(N_Centro==20)
+        {
+         N_Centro_r=4;
+         PipsNumber=5;
+        }
+
+      flower_Price_3[op,1]=0;
+      flower_Price_3[op,2]=0;
+      flower_Price_3[op,3]=0;
+      flower_Price_3[op,4]=0;
+      flower_Price_3[op,5]=0;
+      flower_Price_3[op,6]=0;
+      flower_Price_3[op,7]=0;
+      flower_Price_3[op,8]=0;
+      flower_Price_3[op,9]=0;
+      flower_Price_3[op,10]=0;
+      flower_Price_3[op,11]=0;
+      flower_Price_3[op,12]=0;
+      flower_Price_3[op,13]=0;
+      flower_Price_3[op,14]=0;
+      flower_Price_3[op,15]=0;
+      flower_Price_3[op,16]=0;
+      flower_Price_3[op,17]=0;
+      flower_Price_3[op,18]=0;
+      flower_Price_3[op,19]=0;
+      flower_Price_3[op,20]=0;
+      flower_Price_3[op,21]=0;
+      flower_Price_3[op,22]=0;
+      flower_Price_3[op,23]=0;
+      flower_Price_3[op,24]=0;
+      flower_Price_3[op,25]=0;
+      flower_Price_3[op,26]=0;
+      flower_Price_3[op,27]=0;
+      flower_Price_3[op,28]=0;
+      flower_Price_3[op,29]=0;
+      flower_Price_3[op,30]=0;
+      flower_Price_3[op,31]=0;
+      flower_Price_3[op,32]=0;
+
+      flower_Price_3[op,33]=Price;
+      flower_Price_3[op,34]=N_Centro_r;
+      flower_Price_3[op,35]=1;//номер 3 это переменная Be_1
+      flower_Price_3[op,36]=1;//Полученый полюс после расчёта блока полюса.1-2-3-4 Сев-вост-юг -Зап
+      flower_Price_3[op,37]=N_Centro;
+      flower_Price_3[op,38]=N_Gr20;
+      flower_Price_3[op,39]=grupo_8_claster_o;//группа из 8 цельное число
+      flower_Price_3[op,40]=fract;//группа 8 фракция
+      flower_Price_3[1,41]=0;//Создание массива для записи времени
+      flower_Price_3[1,42]=0;//Разрешение на запись данных по индексу разрешено 0, Запрет 1
+      Print(" Price ",flower_Price_3[op,33]," claster ",grupo_8_claster," claster 8  ",flower_Price_3[op,39]," grupo_8_claster_8 ",grupo_8_claster_8," frakciya ",flower_Price_3[op,40]);
+      //Print(" Price ",Price,"  ",flower_Price_3[op,32]," , ",flower_Price_3[op,33]," , ",flower_Price_3[op,34]," , ",flower_Price_3[op,35]," , ",flower_Price_3[op,36]," , ",flower_Price_3[op,37]," , ",flower_Price_3[op,38]);
+     }
+
+   int file_handle1=FileOpen(FileName25,FILE_READ|FILE_WRITE|FILE_BIN);
+   if(file_handle1>0)
+     {
+
+      FileSeek(file_handle1,0,SEEK_CUR);
+
+      uint test=FileWriteArray(file_handle1,flower_Price_3,0,WHOLE_ARRAY);
+      FileClose(file_handle1);
+     }
+
+   EventSetTimer(60);
+
+//---
+   return(INIT_SUCCEEDED);
+  }
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+  {
+//--- destroy timer
+   EventKillTimer();
+
+  }
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+  {
+//---
+
+  }
+//+------------------------------------------------------------------+
+//| Timer function                                                   |
+//+------------------------------------------------------------------+
+void OnTimer()
+  {
+//---
+
+  }
+//+------------------------------------------------------------------+
