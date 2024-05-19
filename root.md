@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                             Yevheniy             |
-//|                                             Nucleo   v 2.5.1.mq4 |
+//|                                             Nucleo   v 2.5.2.mq4 |
 //|                                                                  |
 //+------------------------------------------------------------------+
 #property copyright "Yevheniy Kopanitskyy"
@@ -610,6 +610,7 @@ string FileName22=SYmbol+"1.8BodyHorizont_Price.bin";
 string FileName23=SYmbol+"1.8BodyHorizont_Time.bin";
 string FileName25=SYmbol+"flower_Price_3.bin";
 string FileName26=SYmbol+"flower_Price_3_TIME.bin";
+string FileName27=SYmbol+"SunwlowerSignals.txt";
 //string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";
 //string chatid="-1001177290832";//654751710 bot chat
 //--END---FILE NAMES-----
@@ -928,7 +929,7 @@ int start()
       // --- It is necessary to combine the array data with a separate script
       // --- arrays are 7210 lines in size and 10000 width
       int inx;
-      for(inx=1; inx<7210; inx++)
+      for(inx=1; inx<=7209; inx++)
         {
          if(BodyHorizont_Bin[inx,1]==10)//индекс заполняемой строки в массиве
            {
@@ -1936,8 +1937,15 @@ int start()
            {
             Var2_Bo_1=1;
            }//CHeck ok
+
          //Asignacion de datos a base de calculos de Claster
-         int opa=bodypips[MaxInd_bodypips,0]*10000;//трансформация референтной цены в индекс массива
+         Print("1 - bodypips[MaxInd_bodypips,0] ",bodypips[MaxInd_bodypips,0]);
+         float opa_float=bodypips[MaxInd_bodypips,0]*100000;
+         int opa=opa_float;
+         double opa_double=bodypips[MaxInd_bodypips,0]*100000;
+         Print("1- OPA ",opa);
+         Print("1- opa_float ",opa_float);
+         Print("1- opa_double ",opa_double);
          //запуск кластерной архитектуры
          //доступ в массив по индексу
          if(flower_Price_3[opa,36]==1)
@@ -2023,7 +2031,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 1";
             errorprint[1]=1;
-            bool ind1_Sev_Bo_0_to_Be_0_v0_0Reloj_Sev;
+           
             //официант подаёт блюдо-заказ с правой руки дальнюю позицию
            }
          // 2
@@ -2042,7 +2050,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 2";
             errorprint[2]=1;
-            bool ind1_Sev_Be_0_to_Bo_0_v0_0Reloj_Sev;
+           
             //официант подаёт блюдо-заказ с левой руки дальнюю позицию
            }
          // 3
@@ -2061,7 +2069,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 3";
             errorprint[3]=1;
-            bool ind1_Sev_Bo_1_to_Be_1_v0_0Reloj_Sev;
+            
             //официант подаёт блюдо-заказ с левой руки ближнюю позицию
            }
          // 4
@@ -2080,7 +2088,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 4";
             errorprint[4]=1;
-            bool ind1_Sev_Be_1_to_Bo_1_v0_0Reloj_Sev;
+            
             //официант подаёт блюдо-заказ с правой руки ближнюю позицию
            }
          // 5
@@ -2116,7 +2124,7 @@ int start()
                // После разворота с севера на Восток, подача с Бо 1 Превращается в Бе1 а значит задействуется вторая правельна переменная для регистра обьёма Бо1
               }
             //Ссылка на инструкцию
-            bool ind1_Sev_Bo_1_to_Be_0_v1_Reloj_Vost;
+           
            }
          // 6
          //Если официант подаёт с северной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2147,7 +2155,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Sev_Be_0_to_Bo_1_v1_CReloj_Zap;
+            
            }
          // 7
          //Если официант подаёт с северной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Западной стороны  блюдо номер 3 "Используя подачи с правой руки"
@@ -2179,7 +2187,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Sev_Be_1_to_Bo_0_v1_CReloj_Zap;
+           
            }
          // 8
          //Если официант подаёт с северной стороны и предыдущее блюдо на 3-м месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Восточьной стороны  блюдо номер 2 "Используя подачи с правой руки"
@@ -2211,7 +2219,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Sev_Bo_0_to_Be_1_v1_Reloj_Vost;
+            
            }
          // 9
          //Если официант подаёт с северной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Южной стороны  блюдо номер 4 "Используя подачи с правой руки"
@@ -2244,7 +2252,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на юг официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Sev_Bo_1_to_Bo_0_v2_Reloj_Yug;
+            
            }
          // 10
          //Если официант подаёт с северной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Южной стороны  блюдо номер 2 "Используя подачи с правой руки"
@@ -2279,7 +2287,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Sev_Bo_0_to_Bo_1_v2_Reloj_Yug;
+            
            }
          // 11
          //Если официант подаёт с северной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Южной стороны  блюдо номер 3 "Используя подачи с правой руки"
@@ -2312,7 +2320,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Sev_Be_1_to_Be_0_v2_CReloj_Yug;
+            
            }
          // 12
          //Если официант подаёт с северной стороны и предыдущее блюдо на 3-eм месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2345,7 +2353,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на юг официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Sev_Be_0_to_Be_1_v2_CReloj_Yug;
+            
            }
          //__________________________________
          // Правильная конфигурация Запад
@@ -2364,7 +2372,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 1";
             errorprint[13]=1;
-            bool ind1_Zap_Bo_0_to_Be_0_v0_0Reloj_Zap;
+            
             //став лицом на запад официант подаёт блюдо-заказ с правой руки дальнюю позицию
            }
          // 2
@@ -2383,7 +2391,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 2";
             errorprint[14]=1;
-            bool ind1_Zap_Be_0_to_Bo_0_v0_0Reloj_Zap;
+           
             //став лицом на запад официант подаёт блюдо-заказ с левой руки дальнюю позицию
            }
          // 3
@@ -2402,7 +2410,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 3";
             errorprint[5]=1;
-            bool ind1_Zap_Bo_1_to_Be_1_v0_0Reloj_Zap;
+            
             //став лицом на запад официант подаёт блюдо-заказ с левой руки ближнюю позицию
            }
          // 4
@@ -2421,7 +2429,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 4";
             errorprint[16]=1;
-            bool ind1_Zap_Be_1_to_Bo_1_v0_0Reloj_Zap;
+            
             //став лицом на запад официант подаёт блюдо-заказ с правой руки ближнюю позицию
            }
          // 5
@@ -2455,7 +2463,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на север официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Zap_Bo_1_to_Be_0_v1_Reloj_Sev;
+            
            }
          // 6
          //Если официант подаёт с западной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2487,7 +2495,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Zap_Be_0_to_Bo_1_v1_CReloj_Yug;
+         
            }
          // 7
          //Если официант подаёт с западной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2519,7 +2527,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Zap_Be_1_to_Bo_0_v1_CReloj_Yug;
+          
            }
          // 8
          //Если официант подаёт с западной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2552,7 +2560,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на север официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Zap_Bo_0_to_Be_1_v1_Reloj_Sev;
+            
            }
          // 9
          //Если официант подаёт с западной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2585,7 +2593,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Zap_Bo_1_to_Bo_0_v2_Reloj_Vost;
+            
            }
          // 10
          //Если официант подаёт с западной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2618,7 +2626,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Zap_Bo_0_to_Bo_1_v2_Reloj_Vost;
+            
            }
          // 11
          //Если официант подаёт с западной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2651,7 +2659,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Zap_Be_1_to_Be_0_v2_CReloj_Vost;
+           
            }
          // 12
          //Если официант подаёт с западной стороны и предыдущее блюдо на 3-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2684,7 +2692,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на восток официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Zap_Be_0_to_Be_1_v2_CReloj_Vost;
+            
            }
          //__________________________________
          // Правильная конфигурация Восток
@@ -2705,7 +2713,7 @@ int start()
             BlockNum="V 1";
             errorprint[25]=1;
             //став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
-            bool ind1_Vost_Bo_0_to_Be_0_v0_0Reloj_Vost;
+          
            }
          // 2
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 1-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2725,7 +2733,7 @@ int start()
             BlockNum="V 2";
             errorprint[26]=1;
             //став лицом на восток официант подаёт блюдо-заказ с левой руки дальнюю позицию
-            bool ind1_Vost_Be_0_to_Bo_0_v0_0Reloj_Vost;
+            
            }
          // 3
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 4-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2745,7 +2753,7 @@ int start()
             BlockNum="V 3";
             errorprint[27]=1;
             //став лицом на восток официант подаёт блюдо-заказ с левой руки ближнюю позицию
-            bool ind1_Vost_Bo_1_to_Be_1_v0_0Reloj_Vost;
+           
            }
          // 4
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2765,7 +2773,7 @@ int start()
             BlockNum="V 4";
             errorprint[28]=1;
             //став лицом на восток официант подаёт блюдо-заказ с правой руки ближнюю позицию
-            bool ind1_Vost_Be_1_to_Bo_1_v0_0Reloj_Vost;
+           
            }
          // 5
          // Не правильная конфигурация
@@ -2798,7 +2806,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на юг официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Vost_Bo_1_to_Be_0_v1_Reloj_Yug;
+            
            }
          // 6
          //Если официант подаёт с Восрочной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2830,7 +2838,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на север официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Vost_Be_0_to_Bo_1_v1_CReloj_Sev;
+           
            }
          // 7
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2861,7 +2869,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на север официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Vost_Be_1_to_Bo_0_v1_CReloj_Sev;
+           
            }
          // 8
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 2-е место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2893,7 +2901,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Vost_Bo_0_to_Be_1_v1_Reloj_Yug;
+            
            }
          // 9
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2926,7 +2934,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Vost_Bo_1_to_Bo_0_v2_Reloj_Zap;
+          
            }
          // 10
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2959,7 +2967,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Vost_Bo_0_to_Bo_1_v2_Reloj_Zap;
+            
            }
          // 11
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2992,7 +3000,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Vost_Be_1_to_Be_0_v2_CReloj_Zap;
+            
            }
          // 12
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3025,7 +3033,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Vost_Be_0_to_Be_1_v2_CReloj_Zap;
+           
            }
          //__________________________________
          // Правильная конфигурация Юг
@@ -3047,7 +3055,7 @@ int start()
             BlockNum="Y 1";
             errorprint[37]=1;
             //став лицом на юг официант подаёт блюдо-заказ с правой руки дальнюю позицию
-            bool ind1_Yug_Bo_0_to_Be_0_v0_0Reloj_Yug;
+         
            }
          // 2
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3067,7 +3075,7 @@ int start()
             BlockNum="Y 2";
             errorprint[38]=1;
             //став лицом на юг официант подаёт блюдо-заказ с левой руки дальнюю позицию
-            bool ind1_Yug_Be_0_to_Bo_0_v0_0Reloj_Yug;
+            
            }
          // 3
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара  на 4-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3087,7 +3095,7 @@ int start()
             BlockNum="Y 3";
             errorprint[39]=1;
             //став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
-            bool ind1_Yug_Bo_1_to_Be_1_v0_0Reloj_Yug;
+            
            }
          // 4
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3107,7 +3115,7 @@ int start()
             BlockNum="Y 4";
             errorprint[40]=1;
             //став лицом на юг официант подаёт блюдо-заказ с правой руки ближнюю позицию
-            bool ind1_Yug_Be_1_to_Bo_1_v0_0Reloj_Yug;
+            
            }
          // 5
          // Не правильная конфигурация
@@ -3140,7 +3148,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Yug_Bo_1_to_Be_0_v1_Reloj_Zap;
+            
            }
          // 6
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3172,7 +3180,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Yug_Be_0_to_Bo_1_v1_CReloj_Vost;
+            
            }
          // 7
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3204,7 +3212,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Yug_Be_1_to_Bo_0_v1_CReloj_Vost;
+          
            }
          // 8
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3236,7 +3244,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Yug_Bo_0_to_Be_1_v1_Reloj_Zap;
+            
            }
          // 9
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3269,7 +3277,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на север официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            bool ind1_Yug_Bo_1_to_Bo_0_v2_Reloj_Sev;
+           
            }
          // 10
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3302,7 +3310,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на север официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            bool ind1_Yug_Bo_0_to_Bo_1_v2_Reloj_Sev;
+           
            }
          // 11
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3335,7 +3343,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на север официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            bool ind1_Yug_Be_1_to_Be_0_v2_CReloj_Sev;
+           
            }
          // 12
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3368,7 +3376,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на север официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            bool ind1_Yug_Be_0_to_Be_1_v2_CReloj_Sev;
+          
            }
          //+------------------------------------------------------------------+
          //| END - Sunflower 1/0 - Cluster meter                              |
@@ -8270,7 +8278,11 @@ int start()
          //-Купол - Расчёт базируется на 5 семечках и 4 архитектурах. Используется ценавая привязка к 20 центрам в 5 семечках
          //-Формула расчёта привязки семечки
          //Модуль позиционирования цены в купол
+         //Print(" 2 - bodypips[MaxInd_bodypips,0] ",bodypips[MaxInd_bodypips,0]);
+
          Price=bodypips[MaxInd_bodypips,0];
+         Print(" Price - ", Price);
+         //Print (" Price ",Price);
          PriceConv1=(Price*cienm)/Veinte;
          PriceConv2=PriceConv1;
          PriceConv4=PriceConv2;
@@ -8772,7 +8784,7 @@ int start()
          //Print(" N_Centro ",N_Centro); ok
          //Print(" N_Centro_r ",N_Centro_r);ok
          //Print(" PipsNumber ",PipsNumber);
-         string PrintArch;
+          //string PrintArch;
          //3.Производится расчт по переменным  Be_0,Bo_0,Be_1,Bo_1
          //Расчёт по переменной Be_0 Место 1,5,9,13,17
          //Print(" Be_0_C,Bo_0_C,Be_1_C,Bo_1_C" ,Be_0_C,Bo_0_C,Be_1_C,Bo_1_C);//ok
@@ -10130,7 +10142,7 @@ int start()
            {
             N_Petalo=N_Petalo_1;
            }
-         Print("Fractal ",flower_Price_3[opa,40]," N_Petalo_1 ",N_Petalo_1);
+         //Print("Fractal ",flower_Price_3[opa,40]," N_Petalo_1 ",N_Petalo_1);
          //Произвести присваивание новых значений в Массив сравнения после проведения всего расчёта
          //Print(" Cotejamiento de Arrays antes de reasignacion",comp_Sev[1,1],comp_Sev[1,2],comp_Sev[1,3],comp_Sev[1,4]);
          comp_Sev[1,1]=Sev[1,1];
@@ -10164,10 +10176,16 @@ int start()
          zaryad=0;
          zapret_podachi_input=0;
          zapret_podachi_output=0;
+         //----modo test
+         Print("2- OPA ",opa);
+         // Print(" flower_Price_3[opa,33] ",flower_Price_3[0,33]);
+         Print(" Precio AR ",flower_Price_3[opa,33]," precio cor ",Price," N centro AR ",flower_Price_3[opa,37]," N centro ",N_Centro," n20 arr ",flower_Price_3[opa,38]," N20 ",N_Gr20);
+
          if(flower_perm==true)
            {
             //
-            if(sev==1 && N_Petalo==1/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+            
+ if(sev==1 && N_Petalo==1/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
                // Arch 1
                insert_chanel_1=2;
@@ -10256,7 +10274,16 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
+
+
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10273,7 +10300,8 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс 
+                          
                           }
                        }
                     }
@@ -10281,6 +10309,7 @@ int start()
                else
                   Print("opa ",opa," Datos de acceso al block no coinciden Comprobar ");
               }
+
             if(sev==1 && N_Petalo==2 && N_Centro_r==1 && f_Bo_1==1)
               {
                insert_chanel_1=2;
@@ -10369,7 +10398,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10386,7 +10422,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10482,7 +10518,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10499,7 +10542,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10595,7 +10638,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10612,7 +10662,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10709,7 +10759,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10726,7 +10783,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10822,7 +10879,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10839,7 +10903,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10935,7 +10999,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -10952,7 +11023,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11048,7 +11119,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11065,7 +11143,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11129,7 +11207,7 @@ int start()
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
                         int ye;
-                        for(ye=0; ye<=999;ye++)
+                        for(ye=0; ye<=999; ye++)
                           {
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
@@ -11163,7 +11241,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11180,7 +11265,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11276,7 +11361,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11293,7 +11385,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11389,7 +11481,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11406,7 +11505,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11502,7 +11601,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11519,7 +11625,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11616,7 +11722,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11633,7 +11746,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11729,7 +11842,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11746,7 +11866,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11842,7 +11962,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11859,7 +11986,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11955,7 +12082,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -11972,7 +12106,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -12070,7 +12204,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12165,7 +12306,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12260,7 +12408,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12355,7 +12510,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12443,7 +12605,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12530,7 +12699,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -12623,7 +12799,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12710,7 +12893,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -12799,7 +12989,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -12816,7 +13013,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -12904,7 +13101,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -12921,7 +13125,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13009,7 +13213,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13026,7 +13237,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13114,7 +13325,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13131,7 +13349,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13220,7 +13438,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13237,7 +13462,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13325,7 +13550,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13342,7 +13574,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13430,7 +13662,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13447,7 +13686,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13535,7 +13774,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13552,7 +13798,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13642,7 +13888,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13659,7 +13912,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13747,7 +14000,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13764,7 +14024,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13852,7 +14112,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13869,7 +14136,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13957,7 +14224,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -13974,7 +14248,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14063,7 +14337,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14080,7 +14361,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14168,7 +14449,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14185,7 +14473,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14273,7 +14561,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14290,7 +14585,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14378,7 +14673,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14395,7 +14697,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14485,7 +14787,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14502,7 +14811,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14590,7 +14899,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14607,7 +14923,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14695,7 +15011,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14712,7 +15035,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14800,7 +15123,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14817,7 +15147,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14906,7 +15236,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -14923,7 +15260,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15011,7 +15348,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -15028,7 +15372,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15056,7 +15400,7 @@ int start()
                  {
                   Pr_C_Ar_26=" ";
                  }
-                 if(flower_Price_3[opa,42]==0)// Если запрет на запись данных снят
+               if(flower_Price_3[opa,42]==0)// Если запрет на запись данных снят
                  {
                   // Произвожу запись в массив для смены расчётч в блоке управления направлени "компас" Условие - Если центральный массив 3 то изменения вносятся только в архитектуру 3 если это 1 2 или 4 то изменения проводятся по вему массиву
                   if(flower_Price_3[opa,33]==Price && flower_Price_3[opa,37]==N_Centro &&  flower_Price_3[opa,38]==N_Gr20)
@@ -15116,7 +15460,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -15133,7 +15484,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15221,7 +15572,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -15238,7 +15596,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15328,7 +15686,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -15420,7 +15785,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -15512,7 +15884,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -15599,7 +15978,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -15687,7 +16073,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -15774,7 +16167,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -15861,7 +16261,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -15948,7 +16355,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16042,7 +16456,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16059,7 +16480,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16147,7 +16568,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16164,7 +16592,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16252,7 +16680,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16269,7 +16704,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16357,7 +16792,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16374,7 +16816,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16463,7 +16905,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16480,7 +16929,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16568,7 +17017,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16585,7 +17041,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16673,7 +17129,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16690,7 +17153,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16778,7 +17241,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                         //Произвести запось в тетрадь начала сигнала,и время отщёта и номер индекса для выведения данных на график
                        }
                     }
@@ -16796,7 +17266,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16886,7 +17356,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -16903,7 +17380,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16991,7 +17468,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17008,7 +17492,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17096,7 +17580,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17113,7 +17604,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17201,7 +17692,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17218,7 +17716,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17307,7 +17805,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17324,7 +17829,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17412,7 +17917,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17429,7 +17941,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17517,7 +18029,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17534,7 +18053,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17622,7 +18141,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17639,7 +18165,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17729,7 +18255,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17746,7 +18279,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17834,7 +18367,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17851,7 +18391,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17939,7 +18479,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -17956,7 +18503,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18044,7 +18591,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18061,7 +18615,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18150,7 +18704,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18167,7 +18728,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18247,7 +18808,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18264,7 +18832,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18352,7 +18920,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18369,7 +18944,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18457,7 +19032,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18474,7 +19056,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18564,7 +19146,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -18651,7 +19240,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18743,7 +19339,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -18835,7 +19438,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -18923,7 +19533,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -19010,7 +19627,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19102,7 +19726,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                  }
@@ -19189,7 +19820,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19283,7 +19921,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19300,7 +19945,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19388,7 +20033,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19405,7 +20057,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19493,7 +20145,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19510,7 +20169,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19598,7 +20257,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19615,7 +20281,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19704,7 +20370,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19721,7 +20394,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19809,7 +20482,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19826,7 +20506,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19914,7 +20594,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -19931,7 +20618,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20019,7 +20706,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20036,7 +20730,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20126,7 +20820,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20143,7 +20844,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20231,7 +20932,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20248,7 +20956,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20336,7 +21044,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20353,7 +21068,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20441,7 +21156,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20458,7 +21180,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20547,7 +21269,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20564,7 +21293,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20652,7 +21381,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20669,7 +21405,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20757,7 +21493,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20774,7 +21517,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20862,7 +21605,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20879,7 +21629,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20969,7 +21719,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -20986,7 +21743,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21074,7 +21831,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21091,7 +21855,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21180,7 +21944,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21197,7 +21968,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21286,7 +22057,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21303,7 +22081,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21393,7 +22171,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21410,7 +22195,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21498,7 +22283,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21515,7 +22307,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21604,7 +22396,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21621,7 +22420,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21710,7 +22509,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21727,7 +22533,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21817,7 +22623,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -21911,7 +22724,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22003,7 +22823,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22095,7 +22922,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22188,7 +23022,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22280,7 +23121,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22372,7 +23220,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22464,7 +23319,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22558,7 +23420,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22575,7 +23444,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22663,7 +23532,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22680,7 +23556,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22768,7 +23644,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22785,7 +23668,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22873,7 +23756,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22890,7 +23780,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22979,7 +23869,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -22996,7 +23893,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23084,7 +23981,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -23101,7 +24005,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23189,7 +24093,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -23206,7 +24117,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23294,7 +24205,14 @@ int start()
                      if(flower_Price_3[opa,1]!=0 && flower_Price_3[opa,2]!=0 && flower_Price_3[opa,3]!=0 && flower_Price_3[opa,4]!=0 && flower_Price_3[opa,5]!=0 && flower_Price_3[opa,6]!=0 && flower_Price_3[opa,7]!=0 && flower_Price_3[opa,8]!=0 && flower_Price_3[opa,9]!=0 && flower_Price_3[opa,10]!=0 && flower_Price_3[opa,11]!=0 && flower_Price_3[opa,12]!=0 && flower_Price_3[opa,13]!=0 && flower_Price_3[opa,14]!=0 && flower_Price_3[opa,15]!=0 && flower_Price_3[opa,16]!=0 && flower_Price_3[opa,17]!=0 && flower_Price_3[opa,18]!=0 && flower_Price_3[opa,19]!=0 && flower_Price_3[opa,20]!=0 && flower_Price_3[opa,21]!=0 && flower_Price_3[opa,22]!=0 && flower_Price_3[opa,23]!=0 && flower_Price_3[opa,24]!=0 && flower_Price_3[opa,25]!=0 && flower_Price_3[opa,26]!=0 && flower_Price_3[opa,27]!=0 && flower_Price_3[opa,28]!=0 && flower_Price_3[opa,29]!=0 && flower_Price_3[opa,30]!=0 && flower_Price_3[opa,31]!=0 && flower_Price_3[opa,32]!=0)
                        {
                         //При условии заполнении всех 32 ячеек Останока записи для анализа
-                        flower_Price_3[opa,42]=1;//Расчёт исполнен. Запись закрыта
+                        flower_Price_3[opa,42]=1;
+                        int file_handle30=FileOpen(FileName27,FILE_READ|FILE_WRITE," ");
+                        if(file_handle30>0)
+                          {
+                           FileSeek(file_handle30,0,SEEK_END);   //Расчёт исполнен. Запись закрыта
+                           FileWrite(file_handle30,Symbol()," T ",iTime(Symbol(),0,1)," check close caunt ",flower_Price_3[opa,42], " index array  flower_Price_3 ",opa);
+                           FileClose(file_handle30);
+                          }
                        }
                     }
                   //Расчёт для архитектур 1,2,4
@@ -23311,7 +24229,7 @@ int start()
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23322,7 +24240,7 @@ int start()
             // Impresion de juego de palabras
             Print(Pr_C_Ar_1," ",Pr_C_Ar_2," ",Pr_C_Ar_3," ",Pr_C_Ar_4," ",Pr_C_Ar_5," ",Pr_C_Ar_6," ",Pr_C_Ar_7," ",Pr_C_Ar_8," ",Pr_C_Ar_9," ",Pr_C_Ar_10," ",Pr_C_Ar_11," ",Pr_C_Ar_12," ",Pr_C_Ar_13," ",Pr_C_Ar_14," ",Pr_C_Ar_15," ",Pr_C_Ar_16," ",Pr_C_Ar_17," ",Pr_C_Ar_18," ",Pr_C_Ar_19," ",Pr_C_Ar_20," ",Pr_C_Ar_21," ",Pr_C_Ar_22," ",Pr_C_Ar_23," ",Pr_C_Ar_24," ",Pr_C_Ar_25," ",Pr_C_Ar_26," ",Pr_C_Ar_27," ",Pr_C_Ar_28," ",Pr_C_Ar_29," ",Pr_C_Ar_30," ",Pr_C_Ar_31," ",Pr_C_Ar_32," ");
             Petalos_32=0;
-            for(int ia=1; ia<33; ia++)
+            for(int ia=1; ia<=32; ia++)
               {
                if(flower[1,ia]!=0)
                  {
@@ -23549,7 +24467,7 @@ int start()
       ArrayInitialize(kompa,10);
       //---------------------------------------------
       int inr;
-      for(inr=1; inr<99999; inr++)
+      for(inr=1; inr<=99998; inr++)
         {
          if(body[inr,0]==10)
            {
@@ -23616,7 +24534,7 @@ int start()
       ArrayInitialize(ArrayMaximum_1,0);
       //---------------Contador  de ARRAY Identificacion de Index. Se identifica fin de relleno de datos
       int i;
-      for(i=1; i<99999; i++)
+      for(i=1; i<=99998; i++)
         {
          if(body[i,0]==10)
            {
@@ -23692,7 +24610,7 @@ int start()
       //Print("Bo ",Bo," Be ",Be);
       //Print("LasData ",LasData);
       //------resepcion de indice del 0
-      for(i=1; i<99999; i++)
+      for(i=1; i<=8; i++)
         {
          if(MaxMinArr[i,1]==0)
            {
@@ -23714,12 +24632,12 @@ int start()
       if(Rez_BE==0)
         {
          int ibbb;
-         for(ibbb=1; ibbb<1681; ibbb++)
+         for(ibbb=1; ibbb<=1680; ibbb++)
            {
             if(one_BE>15 && bbb[ibbb,0]==Maximum-MaxBinNumber_1 && bbb[ibbb,1]==Minimum+MaxBinNumber_0)
               {
                int ibb;
-               for(ibb=1; ibb<9999; ibb++)
+               for(ibb=1; ibb<=9998; ibb++)
                  {
                   if(bbb_compare[ibb,0,ibbb]==0)
                     {
@@ -23932,7 +24850,7 @@ int start()
                FileReadArray(file_handle7,bodyAR,0,WHOLE_ARRAY);
                FileClose(file_handle7);
               }
-            for(iarw=1; iarw<100000; iarw++)
+            for(iarw=1; iarw<=89999; iarw++)
               {
                if(bodyAR[iarw,0]==61)
                  {
@@ -24071,7 +24989,7 @@ int start()
               }
             //----------------------------------------------
             int iar=1;
-            for(iar=1; iar<100000; iar++)
+            for(iar=1; iar<=89999; iar++)
               {
                if(bodyAR[iar,0]==61)
                  {
@@ -24150,7 +25068,7 @@ int start()
         {
          // ---- Writing Mass to the Binary file of all indicators.
          // ---- Every minute session I write time and data into arrays using an index.
-         for(i=1; i<7205; i++)
+         for(i=1; i<=7204; i++)
            {
             if(AllAnalisysData[i,1]==1000)//получаю индекс заполненного элемента
               {
