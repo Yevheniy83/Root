@@ -11,6 +11,7 @@
 bool LongPosition=false;//Long   moneda
 bool ShortPosition=false;//Short moneda
 extern bool BinIndWRITE=true;//moneda
+extern bool Array_Errors=false;
 bool ALLtoARRAYWRITE=true;//moneda
 bool BODYHorizont=true;//moneda
 extern string NAA_1="YevheniyKopanitskyy";
@@ -215,8 +216,8 @@ int Rez_BE,one_BE;
 //---END---INTEGER VARS-----
 //---Переменные индикатора Маховик Времени
 int comp_Sev[9,9];//Массив для сравнения после пересчёта
-double Form_Patern_Finder[1001,121];//Массив для отслеживания формации Патернов на купольной архитектуре
-datetime DT_Form_Patern_Finder[1001,121];//Массив для отслеживания времени формации Патернов на купольной архитектуре
+double Form_Patern_Finder[1002,121];//Массив для отслеживания формации Патернов на купольной архитектуре
+datetime DT_Form_Patern_Finder[1002,121];//Массив для отслеживания времени формации Патернов на купольной архитектуре
 int PipsNumber; //1,2,3,4,5
 int N_Centro_r;
 //Часы 1
@@ -931,6 +932,10 @@ int start()
       int inx;
       for(inx=1; inx<=7209; inx++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",inx," Array Name BodyHorizont_Bin 937");
+           }
          if(BodyHorizont_Bin[inx,1]==10)//индекс заполняемой строки в массиве
            {
             break;
@@ -942,6 +947,10 @@ int start()
       int inx_1;
       for(inx_1=1; inx_1<=99998; inx_1++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",inx_1," Array Name Body 952");
+           }
          //Print("Body Init ",body[inx_1,0]);//Ошибок НЕТ
          if(body[inx_1,0]==10)// line number where writing to the array ended
            {
@@ -965,6 +974,10 @@ int start()
            {
             for(fg=1; fg<=1999; fg++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",fg," Array Name BodyHorizont_Bin 979");
+                 }
                //Print("fg ",fg);
                if(BodyHorizont_Bin[inx-1,fg]==10)
                  {
@@ -1014,6 +1027,10 @@ int start()
               {
                for(fgf=1; fgf<=99998; fgf++)
                  {
+                  if(Array_Errors==true)
+                    {
+                     Print(" Index Array ",fgf," Array Name Body 1032");
+                    }
                   //Print("fg ",fg);
                   if(body[fgf,0]==10)
                     {
@@ -1026,6 +1043,10 @@ int start()
               {
                for(fgi=1; fgi<fgf; fgi++)
                  {
+                  if(Array_Errors==true)
+                    {
+                     Print(" Index Array ",fgi," ind 2",fgo," Array Name Body_plus 1048");
+                    }
                   //Print("Line 613 ",body[fgi,fgo]);//ассмотреть масив по столбцам раздельно
                   body_Plus[fgi,fgo]=body[fgi,fgo];
                  }
@@ -1040,6 +1061,10 @@ int start()
                     {
                      for(int fgw=0; fgw<PipsDif+1; fgw++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",fgw," Array Name Body 1066");
+                          }
                         body[fgw,0]=BodyHorizont_Price[inx-1,fg-1]+0.00001;// Assign price values
                         body[fgw,1]=1;// Assign binary code values
                         //Print("Body Init 2 ",body[fgw,0]);
@@ -1064,12 +1089,20 @@ int start()
          int inx_2;
          for(inx_2=1; inx_2<inx_1; inx_2++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",inx," In 2",inx_2," Array Name BodyHorizont_Bin 1094");
+              }
             //Print(" Line 659 ",body[inx_2,0]);
             BodyHorizont_Bin[inx,inx_2]=body[inx_2,1];
            }
          // Assigning price values ​​to an array
          for(inx_2=1; inx_2<inx_1; inx_2++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",inx_2," Array Name Body 1104");
+              }
             if(body[inx_2,0]<2 && body[inx_2,0]!=3)// Assign a value if the value in the 0 column is less than 0
               {
                BodyHorizont_Price[inx,inx_2]=body[inx_2,0];
@@ -1162,6 +1195,10 @@ int start()
          ArrayInitialize(comp_bodypips,0);
          for(int imm=1; imm<=99998; imm++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",imm," Array Name Body 1200");
+              }
             //Print("body[imm,0] ",body[imm,0]);
             if(body[imm,0]==10)
               {
@@ -1206,6 +1243,10 @@ int start()
          Switch1=0;// Switch between iterations
          for(iaq=2; iaq<=99998; iaq++)// Iterate through the body array
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",iaq," Array Name Body 1248");
+              }
             Switch1=0;// Assign 0 when re-entering the overflow
             if(body[iaq,0]>0 && body[iaq,0]<3)
               {
@@ -1219,6 +1260,10 @@ int start()
                   int Break2=0;//exit from enumeration 1
                   for(ibq=1; ibq<=99998; ibq++)//Perebor stolbca 1
                     {
+                     if(Array_Errors==true)
+                       {
+                        Print(" Index Array ",ibq," Array Name Bodypips 1265");
+                       }
                      //Print("Price -7 ",price);
                      if(bodypips[ibq,0]==price)
                        {
@@ -1239,6 +1284,10 @@ int start()
                     {
                      for(ibq=1; ibq<=99998; ibq++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",inx,"  1289");
+                          }
                         if(bodypips[ibq,0]==0)
                           {
                            //Print("Price -6 ",price);
@@ -1265,6 +1314,10 @@ int start()
                   Switch1=1;
                   for(ibq=1; ibq<=99998; ibq++)
                     {
+                     if(Array_Errors==true)
+                       {
+                        Print(" Index Array ",ibq,"  1319");
+                       }
                      //Print("Price -5 ",price);
                      if(bodypips[ibq,0]==price)
                        {
@@ -1284,6 +1337,10 @@ int start()
                     {
                      for(ibq=1; ibq<=99998; ibq++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",ibq,"  1342");
+                          }
                         if(bodypips[ibq,0]==0)
                           {
                            //Print("Price -4 ",price);
@@ -1315,6 +1372,10 @@ int start()
                      int Break2=0;
                      for(ibq=1; ibq<=99998; ibq++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",ibq,"  1377");
+                          }
                         //Print("Price -3 ",price);
                         if(bodypips[ibq,0]==price)
                           {
@@ -1334,6 +1395,10 @@ int start()
                        {
                         for(ibq=1; ibq<=99998; ibq++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ibq,"  1400");
+                             }
                            if(bodypips[ibq,0]==0)
                              {
                               //Print("Price -2 ",price);
@@ -1358,6 +1423,10 @@ int start()
                      int Break2=0;
                      for(ibq=1; ibq<=99998; ibq++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",ibq,"  1428");
+                          }
                         //Print("Price -1 ",price);
                         if(bodypips[ibq,0]==price)
                           {
@@ -1377,6 +1446,10 @@ int start()
                        {
                         for(ibq=1; ibq<=99998; ibq++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ibq,"  1451");
+                             }
                            if(bodypips[ibq,0]==0)
                              {
                               //Print("Price ",price);
@@ -1397,6 +1470,10 @@ int start()
            }
          for(int ic=1; ic<=99998; ic++)//Perebor stolbca 1
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",ic,"  1475");
+              }
             comp_bodypips[ic]=bodypips[ic,1];
             //Print("line 1031 ",bodypips[ic,1]);
             //Print("line 1032 ",bodypips[ic,0]);
@@ -1418,6 +1495,10 @@ int start()
          int ic;
          for(ic=1; ic<=99998; ic++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",ic,"  1500");
+              }
             if(body[ic,0]==10)
               {
                break;
@@ -1439,6 +1520,10 @@ int start()
          int ina;
          for(ina=2; ina<=inf; ina++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",ina,"  1525");
+              }
             if(body[ina,1]==1)
               {
                k++;
@@ -1638,6 +1723,10 @@ int start()
          int indmas;//Index
          for(indmas=1; indmas<=99998; indmas++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",indmas,"  1728");
+              }
             if(PIPS_COL_Price[indmas,0]==0)
               {
                break;
@@ -1661,6 +1750,10 @@ int start()
          //-----Расчёт Маховик Времени
          for(int il=1; il<=99998; il++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",il,"  1755");
+              }
             //Print(bodypips[il,0]);
             if(bodypips[il,0]==0)
               {
@@ -1690,6 +1783,10 @@ int start()
          int ikz;
          for(ikz=1; ikz<=99998; ikz++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",ikz,"  1788");
+              }
             if(body[ikz,1]==10)
               {
                break;
@@ -1699,6 +1796,10 @@ int start()
          int Counter_Summa0_AR=0;
          for(int ik=1; ik<ikz; ik++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",ik,"  1801");
+              }
             if(body[ik,1]==1)
               {
                Counter_Summa1_AR++;
@@ -1706,6 +1807,10 @@ int start()
            }
          for(int il=1; il<ikz; il++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",il,"  1812");
+              }
             if(body[il,1]==0)
               {
                Counter_Summa0_AR++;
@@ -1781,6 +1886,7 @@ int start()
          // Исходное положение Свеча компинсации. Переустановка значений
          if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0 && Compens==true)
            {
+           //Array_Errors=true;
             // Установка позиции маховика на Север
             sev=1;// обработка события Север
             zap=0;
@@ -2031,7 +2137,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 1";
             errorprint[1]=1;
-           
+
             //официант подаёт блюдо-заказ с правой руки дальнюю позицию
            }
          // 2
@@ -2050,7 +2156,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 2";
             errorprint[2]=1;
-           
+
             //официант подаёт блюдо-заказ с левой руки дальнюю позицию
            }
          // 3
@@ -2069,7 +2175,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 3";
             errorprint[3]=1;
-            
+
             //официант подаёт блюдо-заказ с левой руки ближнюю позицию
            }
          // 4
@@ -2088,7 +2194,7 @@ int start()
             ChekDIr=false;
             BlockNum="S 4";
             errorprint[4]=1;
-            
+
             //официант подаёт блюдо-заказ с правой руки ближнюю позицию
            }
          // 5
@@ -2124,7 +2230,7 @@ int start()
                // После разворота с севера на Восток, подача с Бо 1 Превращается в Бе1 а значит задействуется вторая правельна переменная для регистра обьёма Бо1
               }
             //Ссылка на инструкцию
-           
+
            }
          // 6
          //Если официант подаёт с северной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2155,7 +2261,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            
+
            }
          // 7
          //Если официант подаёт с северной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Западной стороны  блюдо номер 3 "Используя подачи с правой руки"
@@ -2187,7 +2293,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-           
+
            }
          // 8
          //Если официант подаёт с северной стороны и предыдущее блюдо на 3-м месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Восточьной стороны  блюдо номер 2 "Используя подачи с правой руки"
@@ -2219,7 +2325,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            
+
            }
          // 9
          //Если официант подаёт с северной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Южной стороны  блюдо номер 4 "Используя подачи с правой руки"
@@ -2252,7 +2358,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на юг официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            
+
            }
          // 10
          //Если официант подаёт с северной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Южной стороны  блюдо номер 2 "Используя подачи с правой руки"
@@ -2287,7 +2393,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            
+
            }
          // 11
          //Если официант подаёт с северной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Южной стороны  блюдо номер 3 "Используя подачи с правой руки"
@@ -2320,7 +2426,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            
+
            }
          // 12
          //Если официант подаёт с северной стороны и предыдущее блюдо на 3-eм месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2353,7 +2459,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на юг официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            
+
            }
          //__________________________________
          // Правильная конфигурация Запад
@@ -2372,7 +2478,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 1";
             errorprint[13]=1;
-            
+
             //став лицом на запад официант подаёт блюдо-заказ с правой руки дальнюю позицию
            }
          // 2
@@ -2391,7 +2497,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 2";
             errorprint[14]=1;
-           
+
             //став лицом на запад официант подаёт блюдо-заказ с левой руки дальнюю позицию
            }
          // 3
@@ -2410,7 +2516,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 3";
             errorprint[5]=1;
-            
+
             //став лицом на запад официант подаёт блюдо-заказ с левой руки ближнюю позицию
            }
          // 4
@@ -2429,7 +2535,7 @@ int start()
             ChekDIr=false;
             BlockNum="Z 4";
             errorprint[16]=1;
-            
+
             //став лицом на запад официант подаёт блюдо-заказ с правой руки ближнюю позицию
            }
          // 5
@@ -2463,7 +2569,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на север официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            
+
            }
          // 6
          //Если официант подаёт с западной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2495,7 +2601,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-         
+
            }
          // 7
          //Если официант подаёт с западной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2527,7 +2633,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-          
+
            }
          // 8
          //Если официант подаёт с западной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2560,7 +2666,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на север официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            
+
            }
          // 9
          //Если официант подаёт с западной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2593,7 +2699,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            
+
            }
          // 10
          //Если официант подаёт с западной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"
@@ -2626,7 +2732,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            
+
            }
          // 11
          //Если официант подаёт с западной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2659,7 +2765,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-           
+
            }
          // 12
          //Если официант подаёт с западной стороны и предыдущее блюдо на 3-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2692,7 +2798,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на восток официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            
+
            }
          //__________________________________
          // Правильная конфигурация Восток
@@ -2713,7 +2819,7 @@ int start()
             BlockNum="V 1";
             errorprint[25]=1;
             //став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
-          
+
            }
          // 2
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 1-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2733,7 +2839,7 @@ int start()
             BlockNum="V 2";
             errorprint[26]=1;
             //став лицом на восток официант подаёт блюдо-заказ с левой руки дальнюю позицию
-            
+
            }
          // 3
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 4-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2753,7 +2859,7 @@ int start()
             BlockNum="V 3";
             errorprint[27]=1;
             //став лицом на восток официант подаёт блюдо-заказ с левой руки ближнюю позицию
-           
+
            }
          // 4
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2773,7 +2879,7 @@ int start()
             BlockNum="V 4";
             errorprint[28]=1;
             //став лицом на восток официант подаёт блюдо-заказ с правой руки ближнюю позицию
-           
+
            }
          // 5
          // Не правильная конфигурация
@@ -2806,7 +2912,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на юг официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            
+
            }
          // 6
          //Если официант подаёт с Восрочной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2838,7 +2944,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на север официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-           
+
            }
          // 7
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2869,7 +2975,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на север официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-           
+
            }
          // 8
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 2-е место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2901,7 +3007,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на юг официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            
+
            }
          // 9
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2934,7 +3040,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-          
+
            }
          // 10
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -2967,7 +3073,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-            
+
            }
          // 11
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3000,7 +3106,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            
+
            }
          // 12
          //Если официант подаёт с Восточной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3033,7 +3139,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-           
+
            }
          //__________________________________
          // Правильная конфигурация Юг
@@ -3055,7 +3161,7 @@ int start()
             BlockNum="Y 1";
             errorprint[37]=1;
             //став лицом на юг официант подаёт блюдо-заказ с правой руки дальнюю позицию
-         
+
            }
          // 2
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3075,7 +3181,7 @@ int start()
             BlockNum="Y 2";
             errorprint[38]=1;
             //став лицом на юг официант подаёт блюдо-заказ с левой руки дальнюю позицию
-            
+
            }
          // 3
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара  на 4-ое место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3095,7 +3201,7 @@ int start()
             BlockNum="Y 3";
             errorprint[39]=1;
             //став лицом на юг официант подаёт блюдо-заказ с левой руки ближнюю позицию
-            
+
            }
          // 4
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Южной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3115,7 +3221,7 @@ int start()
             BlockNum="Y 4";
             errorprint[40]=1;
             //став лицом на юг официант подаёт блюдо-заказ с правой руки ближнюю позицию
-            
+
            }
          // 5
          // Не правильная конфигурация
@@ -3148,7 +3254,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на запад официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-            
+
            }
          // 6
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3180,7 +3286,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на восток официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-            
+
            }
          // 7
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Восточной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3212,7 +3318,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на восток официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-          
+
            }
          // 8
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Западной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3244,7 +3350,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на запад официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-            
+
            }
          // 9
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 2-ом месте а подаваемое блюдо Катируется в списке товара на 4-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3277,7 +3383,7 @@ int start()
                Var1_Be_0=0;
                Var2_Bo_0=1;//став лицом на север официант подаёт блюдо-заказ с правой руки дальнюю позицию
               }
-           
+
            }
          // 10
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 4-ом месте а подаваемое блюдо Катируется в списке товара на 2-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3310,7 +3416,7 @@ int start()
                Var1_Be_1=0;
                Var2_Bo_1=1;//став лицом на север официант подаёт блюдо-заказ с левой руки ближнюю позицию
               }
-           
+
            }
          // 11
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 1-ом месте а подаваемое блюдо Катируется в списке товара на 3-е место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3343,7 +3449,7 @@ int start()
                Var1_Bo_0=0;
                Var2_Be_0=1;//став лицом на север официант подаёт блюдо-заказ с левой руки дальнюю позицию
               }
-           
+
            }
          // 12
          //Если официант подаёт с Южной стороны и предыдущее блюдо на 3-ем месте а подаваемое блюдо Катируется в списке товара на 1-ое место то следует подавать с Северной стороны  блюдо номер 1 "Используя подачи с правой руки"  .
@@ -3376,7 +3482,7 @@ int start()
                Var1_Bo_1=0;
                Var2_Be_1=1;//став лицом на север официант подаёт блюдо-заказ с правой руки ближнюю позицию
               }
-          
+
            }
          //+------------------------------------------------------------------+
          //| END - Sunflower 1/0 - Cluster meter                              |
@@ -5101,6 +5207,10 @@ int start()
          int err2=0;
          for(int yk=0; yk<=149; yk++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",yk,"  5211");
+              }
             if(errorprint2[yk]==1)
               {
                err2++;
@@ -8784,7 +8894,7 @@ int start()
          //Print(" N_Centro ",N_Centro); ok
          //Print(" N_Centro_r ",N_Centro_r);ok
          //Print(" PipsNumber ",PipsNumber);
-          //string PrintArch;
+         //string PrintArch;
          //3.Производится расчт по переменным  Be_0,Bo_0,Be_1,Bo_1
          //Расчёт по переменной Be_0 Место 1,5,9,13,17
          //Print(" Be_0_C,Bo_0_C,Be_1_C,Bo_1_C" ,Be_0_C,Bo_0_C,Be_1_C,Bo_1_C);//ok
@@ -8999,6 +9109,10 @@ int start()
          int PriceExist=0;
          for(w=1; w<=1000; w++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w,"  9113");
+              }
             if((Form_Patern_Finder[w,13]!=0 && Form_Patern_Finder[w,13]==N_Gr20 && Form_Patern_Finder[w,12]==PipsNumber && ((Form_Patern_Finder[w,1]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w,2]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w,3]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w,4]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==1)       //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist=1;
@@ -9085,6 +9199,10 @@ int start()
          int WriteData=1;
          for(int z=1; z<=1000; z++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z,"  9203");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist==0 && (Form_Patern_Finder[z,1]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z,2]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,3]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z,4]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData=0;
@@ -9097,6 +9215,10 @@ int start()
             int t;
             for(t=1; t<=1000; t++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t,"  9219");
+                 }
                if(Form_Patern_Finder[t,1]==0 && Form_Patern_Finder[t,2]==0 && Form_Patern_Finder[t,3]==0 && Form_Patern_Finder[t,4]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/)  //Последнее пустое место в массиве
                  {
                   //  WRinLine=1;
@@ -9170,6 +9292,11 @@ int start()
          int PriceExist1=0;
          for(w1=1; w1<=1000; w1++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w1,"  9296");
+              }
+
             if((Form_Patern_Finder[w1,28]!=0 && Form_Patern_Finder[w1,28]==N_Gr20 && Form_Patern_Finder[w1,27]==PipsNumber && ((Form_Patern_Finder[w1,16]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w1,17]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w1,18]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w1,19]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==2)      //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist1=1;
@@ -9243,6 +9370,10 @@ int start()
          int WriteData1=1;
          for(int z1=1; z1<=1000; z1++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z1,"  9374");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist1==0 && (Form_Patern_Finder[z1,16]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z1,17]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,18]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z1,19]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData1=0;
@@ -9255,6 +9386,10 @@ int start()
             int t1;
             for(t1=1; t1<=1000; t1++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t1,"  9390");
+                 }
                if(Form_Patern_Finder[t1,16]==0 && Form_Patern_Finder[t1,17]==0 && Form_Patern_Finder[t1,18]==0 && Form_Patern_Finder[t1,19]==0 /*&& (Form_Patern_Finder[t1,12]==PipsNumber && Form_Patern_Finder[t1,13]==N_Gr20 ||Form_Patern_Finder[t1,27]==PipsNumber && Form_Patern_Finder[t1,28]==N_Gr20 || Form_Patern_Finder[t1,42]==PipsNumber && Form_Patern_Finder[t1,43]==N_Gr20 || Form_Patern_Finder[t1,57]==PipsNumber && Form_Patern_Finder[t1,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
                   // WRinLine1=1;
@@ -9302,6 +9437,10 @@ int start()
          int PriceExist2=0;
          for(w2=1; w2<=1000; w2++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w2,"  9441");
+              }
             if((Form_Patern_Finder[w2,43]!=0 && Form_Patern_Finder[w2,43]==N_Gr20 && Form_Patern_Finder[w2,42]==PipsNumber && ((Form_Patern_Finder[w2,31]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w2,32]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w2,33]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w2,34]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w,9]=N_Gr20 && Form_Patern_Finder[w,6]==1 &&*/ && InternalPat_1==3)     //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist2=1;
@@ -9375,6 +9514,10 @@ int start()
          int WriteData2=1;
          for(int z2=1; z2<=1000; z2++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z2,"  9518");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist2==0 && (Form_Patern_Finder[z2,31]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z2,32]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,33]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z2,34]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData2=0;
@@ -9387,6 +9530,10 @@ int start()
             int t2;
             for(t2=1; t2<=1000; t2++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t2,"  9534");
+                 }
                if(Form_Patern_Finder[t2,31]==0 && Form_Patern_Finder[t2,32]==0 && Form_Patern_Finder[t2,33]==0 && Form_Patern_Finder[t2,34]==0 /*&& (Form_Patern_Finder[t2,12]==PipsNumber && Form_Patern_Finder[t2,13]==N_Gr20 ||Form_Patern_Finder[t2,27]==PipsNumber && Form_Patern_Finder[t2,28]==N_Gr20 || Form_Patern_Finder[t2,42]==PipsNumber && Form_Patern_Finder[t2,43]==N_Gr20 || Form_Patern_Finder[t2,57]==PipsNumber && Form_Patern_Finder[t2,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
                   //  WRinLine2=1;
@@ -9434,6 +9581,10 @@ int start()
          int PriceExist3=0;
          for(w3=1; w3<=1000; w3++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w3,"  9585");
+              }
             if((Form_Patern_Finder[w3,58]!=0 && Form_Patern_Finder[w3,58]==N_Gr20 && Form_Patern_Finder[w3,57]==PipsNumber && ((Form_Patern_Finder[w3,46]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w3,47]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w3,48]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w3,49]!=bodypips[MaxInd_bodypips,0])))&& InternalPat_1==4)      //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist3=1;
@@ -9507,6 +9658,10 @@ int start()
          int WriteData3=1;
          for(int z3=1; z3<=1000; z3++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z3,"  9662");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist3==0 && (Form_Patern_Finder[z3,46]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z3,47]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,48]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z3,49]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData3=0;
@@ -9519,6 +9674,10 @@ int start()
             int t3;
             for(t3=1; t3<=1000; t3++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t3,"  9678");
+                 }
                if(Form_Patern_Finder[t3,46]==0 && Form_Patern_Finder[t3,47]==0 && Form_Patern_Finder[t3,48]==0 && Form_Patern_Finder[t3,49]==0 /*&& (Form_Patern_Finder[t3,12]==PipsNumber && Form_Patern_Finder[t3,13]==N_Gr20 ||Form_Patern_Finder[t3,27]==PipsNumber && Form_Patern_Finder[t3,28]==N_Gr20 || Form_Patern_Finder[t3,42]==PipsNumber && Form_Patern_Finder[t3,43]==N_Gr20 || Form_Patern_Finder[t3,57]==PipsNumber && Form_Patern_Finder[t3,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
                   // WRinLine3=1;
@@ -9566,6 +9725,10 @@ int start()
          int w4;
          for(w4=1; w4<=1000; w4++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w4,"  9729");
+              }
             if((Form_Patern_Finder[w4,73]!=0 && Form_Patern_Finder[w4,73]==N_Gr20 && Form_Patern_Finder[w4,72]==PipsNumber && ((Form_Patern_Finder[w4,61]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w4,62]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w4,63]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w4,64]!=bodypips[MaxInd_bodypips,0]))) && InternalPat_1==5)     //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist4=1;
@@ -9639,6 +9802,10 @@ int start()
          int WriteData4=1;
          for(int z4=1; z4<=1000; z4++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z4,"  9806");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist4==0 && (Form_Patern_Finder[z4,61]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z4,62]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,63]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z4,64]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData4=0;
@@ -9651,6 +9818,10 @@ int start()
             int t4;
             for(t4=1; t4<=1000; t4++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t4,"  9822");
+                 }
                if(Form_Patern_Finder[t4,61]==0 && Form_Patern_Finder[t4,62]==0 && Form_Patern_Finder[t4,63]==0 && Form_Patern_Finder[t4,64]==0 /*&& (Form_Patern_Finder[t,12]==PipsNumber && Form_Patern_Finder[t,13]==N_Gr20 ||Form_Patern_Finder[t,27]==PipsNumber && Form_Patern_Finder[t,28]==N_Gr20 || Form_Patern_Finder[t,42]==PipsNumber && Form_Patern_Finder[t,43]==N_Gr20 || Form_Patern_Finder[t,57]==PipsNumber && Form_Patern_Finder[t,58]==N_Gr20)*/) //Последнее пустое место в массиве
                  {
                   //  WRinLine=1;
@@ -9723,6 +9894,10 @@ int start()
          int w5;
          for(w5=1; w5<=1000; w5++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w5,"  9898");
+              }
             if((Form_Patern_Finder[w5,88]!=0 && Form_Patern_Finder[w5,88]==N_Gr20 && Form_Patern_Finder[w5,87]==PipsNumber && ((Form_Patern_Finder[w5,76]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w5,77]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w5,78]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w5,79]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==6)       //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist5=1;
@@ -9796,6 +9971,10 @@ int start()
          int WriteData5=1;
          for(int z5=1; z5<=1000; z5++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z5,"  9975");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist5==0 && (Form_Patern_Finder[z5,76]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z5,77]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,78]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z5,79]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData5=0;
@@ -9808,6 +9987,10 @@ int start()
             int t5;
             for(t5=1; t5<1000; t5++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t5,"  9991");
+                 }
                if(Form_Patern_Finder[t5,76]==0 && Form_Patern_Finder[t5,77]==0 && Form_Patern_Finder[t5,78]==0 && Form_Patern_Finder[t5,79]==0 /*&& (Form_Patern_Finder[t5,12]==PipsNumber && Form_Patern_Finder[t5,13]==N_Gr20 ||Form_Patern_Finder[t5,27]==PipsNumber && Form_Patern_Finder[t5,28]==N_Gr20 || Form_Patern_Finder[t5,42]==PipsNumber && Form_Patern_Finder[t5,43]==N_Gr20 || Form_Patern_Finder[t5,57]==PipsNumber && Form_Patern_Finder[t5,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
                   // WRinLine1=1;
@@ -9856,6 +10039,10 @@ int start()
          int w6;
          for(w6=1; w6<=1000; w6++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w6,"  10043");
+              }
             if((Form_Patern_Finder[w6,103]!=0 && Form_Patern_Finder[w6,103]==N_Gr20 && Form_Patern_Finder[w6,102]==PipsNumber && ((Form_Patern_Finder[w6,91]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w6,92]!=bodypips[MaxInd_bodypips,0]) || (Form_Patern_Finder[w6,93]!=bodypips[MaxInd_bodypips,0])|| (Form_Patern_Finder[w6,94]!=bodypips[MaxInd_bodypips,0])))/*Form_Patern_Finder[w4,9]=N_Gr20 && Form_Patern_Finder[w4,6]==1 &&*/ && InternalPat_1==7)    //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist6=1;
@@ -9929,6 +10116,10 @@ int start()
          int WriteData6=1;
          for(int z6=1; z6<=1000; z6++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z6,"  10120");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist6==0 && (Form_Patern_Finder[z6,91]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z6,92]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,93]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z6,94]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData6=0;
@@ -9941,6 +10132,10 @@ int start()
             int t6;
             for(t6=1; t6<=1000; t6++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t6,"  10136");
+                 }
                if(Form_Patern_Finder[t6,91]==0 && Form_Patern_Finder[t6,92]==0 && Form_Patern_Finder[t6,93]==0 && Form_Patern_Finder[t6,94]==0 /*&& (Form_Patern_Finder[t6,12]==PipsNumber && Form_Patern_Finder[t6,13]==N_Gr20 ||Form_Patern_Finder[t6,27]==PipsNumber && Form_Patern_Finder[t6,28]==N_Gr20 || Form_Patern_Finder[t6,42]==PipsNumber && Form_Patern_Finder[t6,43]==N_Gr20 || Form_Patern_Finder[t6,57]==PipsNumber && Form_Patern_Finder[t6,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
                   //  WRinLine2=1;
@@ -9989,6 +10184,10 @@ int start()
          int w7;
          for(w7=1; w7<=1000; w7++)//Перебор для поиска по условию Если цена НЕ равна записаннаму значению в Массиве 1,00001!=1,00002
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",w7,"  10188");
+              }
             if((Form_Patern_Finder[w7,118]!=0 && Form_Patern_Finder[w7,118]==N_Gr20 && Form_Patern_Finder[w7,117]==PipsNumber && ((Form_Patern_Finder[w7,106]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w7,107]!=bodypips[MaxInd_bodypips,0]) ||(Form_Patern_Finder[w7,108]!=bodypips[MaxInd_bodypips,0])||(Form_Patern_Finder[w7,109]!=bodypips[MaxInd_bodypips,0])))&& InternalPat_1==8)       //Поиск цены . Возвращает индекс в массиве
               {
                PriceExist7=1;
@@ -10062,6 +10261,10 @@ int start()
          int WriteData7=1;
          for(int z7=1; z7<=1000; z7++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",z7,"  10265");
+              }
             if(bodypips[MaxInd_bodypips,0]!=0 && PriceExist7==0 && (Form_Patern_Finder[z7,106]==bodypips[MaxInd_bodypips,0] || Form_Patern_Finder[z7,107]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,108]==bodypips[MaxInd_bodypips,0]||Form_Patern_Finder[z7,109]==bodypips[MaxInd_bodypips,0]))//Если в любой из ячеек существует цена то запись данных не нужна
               {
                WriteData7=0;
@@ -10074,6 +10277,10 @@ int start()
             int t7;
             for(t7=1; t7<=1000; t7++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",t7,"  10281");
+                 }
                if(Form_Patern_Finder[t7,110]==0 && Form_Patern_Finder[t7,111]==0 && Form_Patern_Finder[t7,112]==0 && Form_Patern_Finder[t7,113]==0 /*&& (Form_Patern_Finder[t7,12]==PipsNumber && Form_Patern_Finder[t7,13]==N_Gr20 ||Form_Patern_Finder[t7,27]==PipsNumber && Form_Patern_Finder[t7,28]==N_Gr20 || Form_Patern_Finder[t7,42]==PipsNumber && Form_Patern_Finder[t7,43]==N_Gr20 || Form_Patern_Finder[t7,57]==PipsNumber && Form_Patern_Finder[t7,58]==N_Gr20)*/)   //Последнее пустое место в массиве
                  {
                   // WRinLine3=1;
@@ -10131,6 +10338,10 @@ int start()
          int Ch_d1=0;//Permiso para cambiar datos
          for(int iu=1; iu<=8; iu++)//Сравнение пересчёта бинарного кода. Выявление изменений в 01110110 байте 01101110
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",iu,"  10342");
+              }
             if(comp_Sev[1,iu]!=Sev[1,iu] && Sev[1,iu]==1)// условие если произошло изменение в структуре 8 бит
               {
                N_Petalo_1=iu;//Присвоение индекса как номер лепестка
@@ -10184,8 +10395,8 @@ int start()
          if(flower_perm==true)
            {
             //
-            
- if(sev==1 && N_Petalo==1/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
+
+            if(sev==1 && N_Petalo==1/* Определяется по 3 архитектуре */ && N_Centro_r==1/* Определяется по цене в подсолн. */  && f_Be_1==1)//&& N_Gr20== Необходимо писать в массив
               {
                // Arch 1
                insert_chanel_1=2;
@@ -10230,6 +10441,10 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",opa," index  2",ye,"  10445");
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10242,6 +10457,10 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",opa," index  2",ye,"  10445");
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10254,6 +10473,12 @@ int start()
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 10477 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -10296,12 +10521,19 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 10525 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс 
-                          
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс
+
                           }
                        }
                     }
@@ -10354,6 +10586,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 10590 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10366,6 +10604,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 10608 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10378,6 +10622,13 @@ int start()
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 10627 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -10418,11 +10669,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 673 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10474,6 +10732,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 10736 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10486,6 +10750,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 10754 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10498,6 +10768,12 @@ int start()
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 10772 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -10538,11 +10814,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 10818 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10594,6 +10877,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 10881 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10606,6 +10895,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 10899 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10618,6 +10913,12 @@ int start()
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 10917 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -10658,11 +10959,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 10963 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10715,6 +11023,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11027 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10727,6 +11041,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11045 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10739,6 +11059,12 @@ int start()
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11063 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -10779,11 +11105,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 11109 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10835,6 +11168,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11172  ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10847,6 +11186,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11190 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10859,6 +11204,12 @@ int start()
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11208 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -10899,11 +11250,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 11254 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -10955,6 +11313,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11317 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -10967,6 +11331,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11335 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -10979,6 +11349,12 @@ int start()
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11353 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11019,11 +11395,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 11399 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11075,6 +11458,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11462 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11087,6 +11476,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11480 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11099,6 +11494,12 @@ int start()
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11494 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11139,11 +11540,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 11544 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11197,6 +11605,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11609 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11209,6 +11623,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11627 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11221,6 +11641,12 @@ int start()
                      Print(" flower_Price_3[opa,2] ",flower_Price_3[opa,2]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11645 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11261,11 +11687,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 11691 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11317,6 +11750,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11754 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11329,6 +11768,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11772 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11341,6 +11786,12 @@ int start()
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11790 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11381,11 +11832,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 11836 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11437,6 +11895,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11899 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11449,6 +11913,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 11917 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11461,6 +11931,12 @@ int start()
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 11935 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11501,11 +11977,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 11981 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11557,6 +12040,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12044 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11569,6 +12058,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12062 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11581,6 +12076,12 @@ int start()
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12080 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11621,11 +12122,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 12126 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11678,6 +12186,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12190 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11690,6 +12204,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12208 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11702,6 +12222,12 @@ int start()
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12226 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11742,11 +12268,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 12272 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11798,6 +12331,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12335 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11810,6 +12349,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12353 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11822,6 +12367,12 @@ int start()
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12371 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11862,11 +12413,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 12417 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -11918,6 +12476,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12480 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -11930,6 +12494,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12498 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -11942,6 +12512,12 @@ int start()
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12516 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -11982,11 +12558,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 12562 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -12038,6 +12621,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12625 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12050,6 +12639,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12643 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12062,6 +12657,12 @@ int start()
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12657 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12102,11 +12703,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 12707 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -12160,6 +12768,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12772 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12172,6 +12786,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12790 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12184,6 +12804,12 @@ int start()
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12808 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12262,6 +12888,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12892 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12274,6 +12906,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 12910 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12286,6 +12924,12 @@ int start()
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 12928 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12364,6 +13008,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13012 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12376,6 +13026,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13030 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12388,6 +13044,12 @@ int start()
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13047 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12466,6 +13128,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13132 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12478,6 +13146,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13150 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12490,6 +13164,12 @@ int start()
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13168 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12561,6 +13241,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13245 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12573,6 +13259,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13263 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12585,6 +13277,12 @@ int start()
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13281 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12655,6 +13353,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13357 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12667,6 +13371,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13375 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12679,6 +13389,12 @@ int start()
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13393 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12755,6 +13471,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13476 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12767,6 +13489,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13492 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12779,6 +13507,12 @@ int start()
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13511 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12849,6 +13583,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13587 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12861,6 +13601,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13605 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12873,6 +13619,12 @@ int start()
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13623 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -12945,6 +13697,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13700 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -12957,6 +13715,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13719 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -12969,6 +13733,12 @@ int start()
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13737 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13009,11 +13779,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 13783 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13057,6 +13834,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13837 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13069,6 +13852,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13856 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13081,6 +13870,12 @@ int start()
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 13870 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13121,11 +13916,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 13920 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13169,6 +13971,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13975 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13181,6 +13989,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 13993 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13193,6 +14007,12 @@ int start()
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14011 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13235,9 +14055,16 @@ int start()
                        {
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",uau," 14059 ");
+
+
+                             }
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13281,6 +14108,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14112 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13293,6 +14126,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14129 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13305,6 +14144,12 @@ int start()
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14148 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13345,11 +14190,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 14194 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13394,6 +14246,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14250 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13406,6 +14264,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14268 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13418,6 +14282,12 @@ int start()
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14286 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13458,11 +14328,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 14332 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13506,6 +14383,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14387 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13518,6 +14401,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14405 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13530,6 +14419,12 @@ int start()
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14423 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13570,11 +14465,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 14469 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13618,6 +14520,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14524 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13630,6 +14538,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14542 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13642,6 +14556,12 @@ int start()
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14560 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13682,11 +14602,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 14606 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13730,6 +14657,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14661 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13742,6 +14675,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14679 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13754,6 +14693,12 @@ int start()
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14697 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13794,11 +14739,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 14743 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13844,6 +14796,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14800 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13856,6 +14814,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14818 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13868,6 +14832,12 @@ int start()
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14836 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -13908,11 +14878,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 14882 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -13956,6 +14933,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14937 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -13968,6 +14951,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 14955 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -13980,6 +14969,12 @@ int start()
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 14973 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14020,11 +15015,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15019 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14068,6 +15070,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15074 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14080,6 +15088,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15092 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14092,6 +15106,12 @@ int start()
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15110 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14132,11 +15152,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15156 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14180,6 +15207,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15211 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14192,6 +15225,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15229 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14204,6 +15243,12 @@ int start()
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15247 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14244,11 +15289,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15293 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14293,6 +15345,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15349 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14305,6 +15363,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15367 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14317,6 +15381,12 @@ int start()
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15385 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14357,11 +15427,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15431 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14405,6 +15482,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15486 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14417,6 +15500,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15504 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14429,6 +15518,12 @@ int start()
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15522 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14469,11 +15564,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15568 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14517,6 +15619,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15623 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14529,6 +15637,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15641 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14541,6 +15655,12 @@ int start()
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15659 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14581,11 +15701,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15705 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14629,6 +15756,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15760 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14641,6 +15774,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15778 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14653,6 +15792,12 @@ int start()
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15796 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14693,11 +15838,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 15842 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14743,6 +15895,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15899 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14755,6 +15913,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 15917 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14767,6 +15931,12 @@ int start()
                      Print(" flower_Price_3[opa,2] ",flower_Price_3[opa,2]);
                      for(int hehe=1; hehe<=999; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 15935 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14807,11 +15977,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 15981 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14855,6 +16032,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16036 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14867,6 +16050,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16054 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14879,6 +16068,12 @@ int start()
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16072 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -14919,11 +16114,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16118 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -14967,6 +16169,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16173 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -14979,6 +16187,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16191 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -14991,6 +16205,12 @@ int start()
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16209 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15031,11 +16251,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16255 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15079,6 +16306,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16310 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15091,6 +16324,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16328 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15103,6 +16342,12 @@ int start()
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16346 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15143,11 +16388,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16392 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15192,6 +16444,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16448 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15204,6 +16462,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16466 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15216,6 +16480,12 @@ int start()
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16484 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15256,11 +16526,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16530 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15304,6 +16581,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16585 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15316,6 +16599,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16603 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15328,6 +16617,12 @@ int start()
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16621 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15368,11 +16663,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16667 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15416,6 +16718,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16722 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15428,6 +16736,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16740 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15440,6 +16754,12 @@ int start()
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16758 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15480,11 +16800,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16804 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15528,6 +16855,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16859 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15540,6 +16873,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16877 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15552,6 +16891,12 @@ int start()
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 16895 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15592,11 +16937,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 16941 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -15642,6 +16994,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 16998 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15654,6 +17012,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17016 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15666,6 +17030,12 @@ int start()
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17034 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15741,6 +17111,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17115 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15753,6 +17129,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17133 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15765,6 +17147,12 @@ int start()
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17151 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15840,6 +17228,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17232 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15852,6 +17246,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17250 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15864,6 +17264,12 @@ int start()
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17268 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -15934,6 +17340,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17344 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -15946,6 +17358,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17363 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -15958,6 +17376,12 @@ int start()
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17380 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16029,6 +17453,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17457 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16041,6 +17471,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17475 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16053,6 +17489,12 @@ int start()
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17493 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16123,6 +17565,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17569 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16135,6 +17583,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17587 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16147,6 +17601,12 @@ int start()
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17605 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16217,6 +17677,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17681 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16229,6 +17695,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17699 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16241,6 +17713,12 @@ int start()
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17717 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16311,6 +17789,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17793 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16323,6 +17807,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17811 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16335,6 +17825,12 @@ int start()
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17829 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16412,6 +17908,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17912 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16424,6 +17926,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 17930 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16436,6 +17944,12 @@ int start()
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 17948 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16476,11 +17990,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 17994 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16524,6 +18045,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18049 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16536,6 +18063,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18067 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16548,6 +18081,12 @@ int start()
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18085 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16588,11 +18127,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18131 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16636,6 +18182,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18186 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16648,6 +18200,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18204 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16660,6 +18218,12 @@ int start()
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18222 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16700,11 +18264,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18268 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16748,6 +18319,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18323 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16760,6 +18337,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18341 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16772,6 +18355,12 @@ int start()
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18359 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16812,11 +18401,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18405 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16861,6 +18457,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18461 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16873,6 +18475,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18479 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16885,6 +18493,12 @@ int start()
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18049 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -16925,11 +18539,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18543 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -16973,6 +18594,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18598 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -16985,6 +18612,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18616 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -16997,6 +18630,12 @@ int start()
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18634 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17037,11 +18676,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18680 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17085,6 +18731,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18735 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17097,6 +18749,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18753 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17109,6 +18767,12 @@ int start()
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18771 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17149,11 +18813,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18816 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17197,6 +18868,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18872 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17209,6 +18886,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 18890 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17221,6 +18904,12 @@ int start()
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 18908 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17262,11 +18951,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 18955 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17312,6 +19008,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19012 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17324,6 +19026,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19030 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17336,6 +19044,12 @@ int start()
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19048 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17376,11 +19090,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19094 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17424,6 +19145,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19149 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17436,6 +19163,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19168 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17448,6 +19181,12 @@ int start()
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19185 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17488,11 +19227,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19231 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17536,6 +19282,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19286 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17548,6 +19300,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19304 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17560,6 +19318,12 @@ int start()
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19322 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17600,11 +19364,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19368 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17648,6 +19419,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19423 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17660,6 +19437,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19441 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17672,6 +19455,12 @@ int start()
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19459 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17712,11 +19501,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19505 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17761,6 +19557,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19561 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17773,6 +19575,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19579 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17785,6 +19593,12 @@ int start()
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19597 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17825,11 +19639,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19643 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17873,6 +19694,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19698 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17885,6 +19712,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19716 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -17897,6 +19730,12 @@ int start()
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19734 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -17937,11 +19776,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19780 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -17985,6 +19831,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19835 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -17997,6 +19849,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19853 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18009,6 +19867,12 @@ int start()
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 19871 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18049,11 +19913,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 19917 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18097,6 +19968,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19972 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18109,6 +19986,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 19990 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18121,6 +20004,12 @@ int start()
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20009 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18161,11 +20050,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 20054 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18211,6 +20107,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20111 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18223,6 +20125,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20129 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18235,6 +20143,12 @@ int start()
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20147 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18275,11 +20189,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 20193 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18323,6 +20244,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20248 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18335,6 +20262,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20266 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18347,6 +20280,12 @@ int start()
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20284 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18387,11 +20326,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 20330 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18435,6 +20381,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20385 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18447,6 +20399,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20403 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18459,6 +20417,12 @@ int start()
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20421 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18499,11 +20463,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 20467 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18547,6 +20518,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20522 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18559,6 +20536,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20540 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18571,6 +20554,12 @@ int start()
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20558 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18611,11 +20600,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 20604 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18660,6 +20656,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20660 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18672,6 +20674,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20678 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18684,6 +20692,12 @@ int start()
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20696 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18724,11 +20738,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 20742 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18764,6 +20785,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20789 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18776,6 +20803,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20807 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18788,6 +20821,12 @@ int start()
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20825 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18828,11 +20867,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 20871 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18876,6 +20922,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20926 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -18888,6 +20940,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 20944 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -18900,6 +20958,12 @@ int start()
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 20962 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -18940,11 +21004,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 21008 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -18988,6 +21059,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21063 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19000,6 +21077,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21081 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19012,6 +21095,12 @@ int start()
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21099 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19052,11 +21141,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 21144 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19102,6 +21198,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21202 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19114,6 +21216,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21220 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19126,6 +21234,12 @@ int start()
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21238 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19196,6 +21310,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21314 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19208,6 +21328,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21332 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19220,6 +21346,12 @@ int start()
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21350 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19295,6 +21427,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21431 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19307,6 +21445,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21449 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19319,6 +21463,12 @@ int start()
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21467 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19394,6 +21544,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21548 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19406,6 +21562,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21566 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19418,6 +21580,12 @@ int start()
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21584 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19489,6 +21657,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21661 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19501,6 +21675,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21679 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19513,6 +21693,12 @@ int start()
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21697 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19583,6 +21769,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21773 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19595,6 +21787,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21791 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19607,6 +21805,12 @@ int start()
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21809 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19682,6 +21886,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21890 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19694,6 +21904,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 21908 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19706,6 +21922,12 @@ int start()
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 21926 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19776,6 +21998,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22002 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19788,6 +22016,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22021 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19800,6 +22034,13 @@ int start()
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22039 ");
+
+
+                          }
+
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19877,6 +22118,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22127 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -19889,6 +22136,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22145 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -19901,6 +22154,12 @@ int start()
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22163 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -19941,11 +22200,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 22209 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -19989,6 +22255,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22264 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20001,6 +22273,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22282 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20013,6 +22291,12 @@ int start()
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22300 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20053,11 +22337,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 22346 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20101,6 +22392,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22401 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20113,6 +22410,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22419 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20125,6 +22428,12 @@ int start()
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22437 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20165,11 +22474,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 22483 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20213,6 +22529,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22538 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20225,6 +22547,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22556 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20237,6 +22565,12 @@ int start()
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22574 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20277,11 +22611,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 22620 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20326,6 +22667,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22677 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20338,6 +22685,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22693 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20350,6 +22703,12 @@ int start()
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22712 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20390,11 +22749,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 22758 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20438,6 +22804,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22813 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20450,6 +22822,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22831 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20462,6 +22840,12 @@ int start()
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22849 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20502,11 +22886,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 22895 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20550,6 +22941,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22950 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20562,6 +22959,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 22969 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20574,6 +22977,12 @@ int start()
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 22986 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20614,11 +23023,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 23032 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20662,6 +23078,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23083 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20674,6 +23096,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23100 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20686,6 +23114,12 @@ int start()
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23118 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20726,11 +23160,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 23164 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20776,6 +23217,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23221 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20788,6 +23235,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23239 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20800,6 +23253,12 @@ int start()
                      Print(" flower_Price_3[opa,1] ",flower_Price_3[opa,1]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23257 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20840,11 +23299,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 23303 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -20888,6 +23354,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23358 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -20900,6 +23372,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23376 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -20912,6 +23390,12 @@ int start()
                      Print(" flower_Price_3[opa,5] ",flower_Price_3[opa,5]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23394 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -20952,11 +23436,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 23440 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21000,6 +23491,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23495 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21012,6 +23509,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23513 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21024,6 +23527,12 @@ int start()
                      Print(" flower_Price_3[opa,9] ",flower_Price_3[opa,9]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23531 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21064,11 +23573,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 23577 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21112,6 +23628,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23632 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21124,6 +23646,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23650 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21136,6 +23664,12 @@ int start()
                      Print(" flower_Price_3[opa,13] ",flower_Price_3[opa,13]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23668 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21176,11 +23710,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 23714 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21225,6 +23766,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23770 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21237,6 +23784,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23788 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21249,6 +23802,12 @@ int start()
                      Print(" flower_Price_3[opa,17] ",flower_Price_3[opa,17]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23032 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21289,11 +23848,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 23852 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21337,6 +23903,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23907 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21349,6 +23921,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 23925 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21361,6 +23939,12 @@ int start()
                      Print(" flower_Price_3[opa,21] ",flower_Price_3[opa,21]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 23943 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21401,11 +23985,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 23989 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21449,6 +24040,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24044 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21461,6 +24058,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24062 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21473,6 +24076,12 @@ int start()
                      Print(" flower_Price_3[opa,25] ",flower_Price_3[opa,25]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24080 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21513,11 +24122,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 24126 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21561,6 +24177,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24181 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21573,6 +24195,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24199 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21585,6 +24213,12 @@ int start()
                      Print(" flower_Price_3[opa,29] ",flower_Price_3[opa,29]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24217 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21625,11 +24259,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 24263 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21675,6 +24316,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24320 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21687,6 +24334,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24338 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21699,6 +24352,12 @@ int start()
                      Print(" flower_Price_3[opa,2] ",flower_Price_3[opa,2]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24356 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21739,11 +24398,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 24402 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21787,6 +24453,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24456 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21799,6 +24471,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24475 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21811,6 +24489,12 @@ int start()
                      Print(" flower_Price_3[opa,6] ",flower_Price_3[opa,6]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24493 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21851,11 +24535,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 24539 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -21900,6 +24591,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24595 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -21912,6 +24609,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24613 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -21924,6 +24627,12 @@ int start()
                      Print(" flower_Price_3[opa,10] ",flower_Price_3[opa,10]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24631 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -21964,11 +24673,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 24677 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22013,6 +24729,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24733 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22025,6 +24747,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24751 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22037,6 +24765,12 @@ int start()
                      Print(" flower_Price_3[opa,14] ",flower_Price_3[opa,14]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24769 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22077,11 +24811,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 24815 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22127,6 +24868,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24872 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22139,6 +24886,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 24890 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22151,6 +24904,12 @@ int start()
                      Print(" flower_Price_3[opa,18] ",flower_Price_3[opa,18]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 24908 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22191,11 +24950,18 @@ int start()
                     {
                      for(int uaa=1; uaa<=200000; uaa++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uaa," 24954 ");
+
+
+                          }
                         if(flower_Price_3[uaa,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uaa,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uaa,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22239,6 +25005,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25009 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22251,6 +25023,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25027 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22263,6 +25041,12 @@ int start()
                      Print(" flower_Price_3[opa,22] ",flower_Price_3[opa,22]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25045 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22303,11 +25087,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 25091 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22352,6 +25143,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25147 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22364,6 +25161,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25165 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22376,6 +25179,12 @@ int start()
                      Print(" flower_Price_3[opa,26] ",flower_Price_3[opa,26]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25183 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22416,11 +25225,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 25229 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22465,6 +25281,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25285 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22477,6 +25299,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25303 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22489,6 +25317,12 @@ int start()
                      Print(" flower_Price_3[opa,30] ",flower_Price_3[opa,30]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25321 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22529,11 +25363,18 @@ int start()
                     {
                      for(int uae=1; uae<=200000; uae++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uae," 25367 ");
+
+
+                          }
                         if(flower_Price_3[uae,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uae,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uae,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uae,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -22579,6 +25420,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25424 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22591,6 +25438,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25442 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22603,6 +25456,12 @@ int start()
                      Print(" flower_Price_3[opa,3] ",flower_Price_3[opa,3]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25460 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22680,6 +25539,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25543 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22692,6 +25557,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25561 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22704,6 +25575,12 @@ int start()
                      Print(" flower_Price_3[opa,7] ",flower_Price_3[opa,7]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25579 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22779,6 +25656,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25660 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22791,6 +25674,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25678 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22803,6 +25692,12 @@ int start()
                      Print(" flower_Price_3[opa,11] ",flower_Price_3[opa,11]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25696 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22878,6 +25773,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25777 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22890,6 +25791,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25795 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -22902,6 +25809,12 @@ int start()
                      Print(" flower_Price_3[opa,15] ",flower_Price_3[opa,15]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25813 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -22978,6 +25891,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25895 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -22990,6 +25909,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 25913 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23002,6 +25927,12 @@ int start()
                      Print(" flower_Price_3[opa,19] ",flower_Price_3[opa,19]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 25931 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23077,6 +26008,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26012 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23089,6 +26026,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26030 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23101,6 +26044,12 @@ int start()
                      Print(" flower_Price_3[opa,23] ",flower_Price_3[opa,23]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26048 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23176,6 +26125,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26129 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23188,6 +26143,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26147 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23200,6 +26161,12 @@ int start()
                      Print(" flower_Price_3[opa,27] ",flower_Price_3[opa,27]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26165 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23275,6 +26242,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26246 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23287,6 +26260,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26264 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23299,6 +26278,12 @@ int start()
                      Print(" flower_Price_3[opa,31] ",flower_Price_3[opa,31]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26282 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23376,6 +26361,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26365 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23388,6 +26379,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26383 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23400,6 +26397,12 @@ int start()
                      Print(" flower_Price_3[opa,4] ",flower_Price_3[opa,4]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26401 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23440,11 +26443,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 26447 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23488,6 +26498,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26502 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23500,6 +26516,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26520 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23512,6 +26534,12 @@ int start()
                      Print(" flower_Price_3[opa,8] ",flower_Price_3[opa,8]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26538 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23552,11 +26580,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 26584 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23600,6 +26635,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26639 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23612,6 +26653,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26657 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23624,6 +26671,12 @@ int start()
                      Print(" flower_Price_3[opa,12] ",flower_Price_3[opa,12]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26675 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23664,11 +26717,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 26721 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23712,6 +26772,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26776 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23724,6 +26790,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26793 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23736,6 +26808,12 @@ int start()
                      Print(" flower_Price_3[opa,16] ",flower_Price_3[opa,16]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26811 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23776,11 +26854,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 26857 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23825,6 +26910,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26913 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23837,6 +26928,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 26931 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23849,6 +26946,12 @@ int start()
                      Print(" flower_Price_3[opa,20] ",flower_Price_3[opa,20]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 26949 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -23889,11 +26992,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 26995 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -23937,6 +27047,13 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 27051 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -23949,6 +27066,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 27069 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -23961,6 +27084,12 @@ int start()
                      Print(" flower_Price_3[opa,24] ",flower_Price_3[opa,24]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 27087 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -24001,11 +27130,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 27133 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -24049,6 +27185,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 27188 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -24061,6 +27203,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 27206 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -24073,6 +27221,12 @@ int start()
                      Print(" flower_Price_3[opa,28] ",flower_Price_3[opa,28]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 27224 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -24113,11 +27267,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 27270 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -24161,6 +27322,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 27325 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)
                              {
                               break;
@@ -24173,6 +27340,12 @@ int start()
                         int ye;
                         for(ye=0; ye<=999; ye++)
                           {
+                           if(Array_Errors==true)
+                             {
+                              Print(" Index Array ",ye," 27343 ");
+
+
+                             }
                            if(flower_Price_3_TIME[opa,ye]==0)// index opa определяет в массиве линию по цене, индекс ye место в массиве
                              {
                               break;
@@ -24185,6 +27358,12 @@ int start()
                      Print(" flower_Price_3[opa,32] ",flower_Price_3[opa,32]);
                      for(int hehe=1; hehe<=200000; hehe++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",hehe," 27361 ");
+
+
+                          }
                         //Теория.
                         //Кластер формируется из 8 цен.
                         //Если производится изменение в данных 1 части кластера то изменения должны быть зафиксированны в массиве
@@ -24225,11 +27404,18 @@ int start()
                     {
                      for(int uau=1; uau<=200000; uau++)
                        {
+                        if(Array_Errors==true)
+                          {
+                           Print(" Index Array ",uau," 27407 ");
+
+
+                          }
                         if(flower_Price_3[uau,37]==flower_Price_3[opa,37]) //данные по этому признаку уже изменены више
                           {
                            // Присваивание Последнего значения переменной и полюса по базе
                            flower_Price_3[uau,35]=flower_Price_3[opa,35];//Последняя переменная
-                           flower_Price_3[uau,36]=flower_Price_3[opa,36];Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
+                           flower_Price_3[uau,36]=flower_Price_3[opa,36];
+                           Print("Последняя переменная ",flower_Price_3[opa,35]," Последний Полюс ",flower_Price_3[opa,36]);//Последний Полюс//Последний Полюс
                           }
                        }
                     }
@@ -24242,6 +27428,12 @@ int start()
             Petalos_32=0;
             for(int ia=1; ia<=32; ia++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",ia," 27431 ");
+
+
+                 }
                if(flower[1,ia]!=0)
                  {
                   Petalos_32=Petalos_32+1;//Складывание 32 истин в массиве
@@ -24469,6 +27661,12 @@ int start()
       int inr;
       for(inr=1; inr<=99998; inr++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",inr," 27665 ");
+
+
+           }
          if(body[inr,0]==10)
            {
             break;
@@ -24477,6 +27675,12 @@ int start()
       int inr1=inr-1;
       for(int inb=1; inb<inr1; inb++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",inb," 27679 ");
+
+
+           }
          if(body[inb,0]>0  &&  body[inb+1,0]>0)
            {
             if(body[inb,0]==body[inb+1,0])
@@ -24536,6 +27740,12 @@ int start()
       int i;
       for(i=1; i<=99998; i++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",i," 27744 ");
+
+
+           }
          if(body[i,0]==10)
            {
             //Print(i);//index maximum donde acava array hay que restar 1 para saber ultimo dato
@@ -24554,6 +27764,12 @@ int start()
       //Print(If);
       for(in1=1; in1<If; in1++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",in1," 27768 ");
+
+
+           }
          if(Permis==1)
            {
             if(body[in1,1]==body[in1+1,1] && body[in1,1]==1 && body[in1+1,1]==1)
@@ -24612,6 +27828,13 @@ int start()
       //------resepcion de indice del 0
       for(i=1; i<=8; i++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",i," 27832 ");
+
+
+           }
+
          if(MaxMinArr[i,1]==0)
            {
             zeroindex=i;
@@ -24634,11 +27857,23 @@ int start()
          int ibbb;
          for(ibbb=1; ibbb<=1680; ibbb++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",ibbb," 27861 ");
+
+
+              }
             if(one_BE>15 && bbb[ibbb,0]==Maximum-MaxBinNumber_1 && bbb[ibbb,1]==Minimum+MaxBinNumber_0)
               {
                int ibb;
                for(ibb=1; ibb<=9998; ibb++)
                  {
+                  if(Array_Errors==true)
+                    {
+                     Print(" Index Array ",ibb," 27872 ");
+
+
+                    }
                   if(bbb_compare[ibb,0,ibbb]==0)
                     {
                      bbb_compare[ibb,0,ibbb]=iarw;
@@ -24852,6 +28087,12 @@ int start()
               }
             for(iarw=1; iarw<=89999; iarw++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",iarw," 28091 ");
+
+
+                 }
                if(bodyAR[iarw,0]==61)
                  {
                   //Print(" indexIAR = ",iar);
@@ -24991,6 +28232,12 @@ int start()
             int iar=1;
             for(iar=1; iar<=89999; iar++)
               {
+               if(Array_Errors==true)
+                 {
+                  Print(" Index Array ",iar," 28236 ");
+
+
+                 }
                if(bodyAR[iar,0]==61)
                  {
                   //Print(" indexIAR = ",iar);
@@ -25070,6 +28317,12 @@ int start()
          // ---- Every minute session I write time and data into arrays using an index.
          for(i=1; i<=7204; i++)
            {
+            if(Array_Errors==true)
+              {
+               Print(" Index Array ",i," 28321 ");
+
+
+              }
             if(AllAnalisysData[i,1]==1000)//получаю индекс заполненного элемента
               {
                break;
@@ -25249,6 +28502,12 @@ void Bars_Z(double iBid)// Собрал я с Ирой с красочьных �
      {
       for(int qt=0; qt<Cqt-1; qt++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",qt," 28507 ");
+
+
+           }
          qt_C=Counter+qt;
          body[qt_C,0]=3;
          body[qt_C,1]=1;
@@ -25272,6 +28531,12 @@ void Bars_Z(double iBid)// Собрал я с Ирой с красочьных �
      {
       for(int qt=0; qt<MathAbs(Cqt)-1; qt++)
         {
+         if(Array_Errors==true)
+           {
+            Print(" Index Array ",qt," 28535 ");
+
+
+           }
          qt_C=Counter+qt;
          body [qt_C,0]=3;
          body [qt_C,1]=0;
