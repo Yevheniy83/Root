@@ -1886,7 +1886,7 @@ int start()
          // Исходное положение Свеча компинсации. Переустановка значений
          if((resOperandMin==PriceZero || resOperandMax==PriceZero) && one_BE>=15 && one_BE<=60 && one_BE!=0 && (Maximum>0 || Maximum<0 || Maximum==0) && (Minimum>0 || Minimum<0 || Minimum==0) && Rez_BE==0 && Compens==true)
            {
-           //Array_Errors=true;
+            //Array_Errors=true;
             // Установка позиции маховика на Север
             sev=1;// обработка события Север
             zap=0;
@@ -1958,6 +1958,7 @@ int start()
          //Print("Step2 ",Be_0," -Be_0 ",Bo_0," -Bo_0 ",Be_1," -Be_1 ",Bo_1," -Bo_1 ");
          //Print("Nueva ronda ",Var1_Be_0," Var1_Be_0 ",Var1_Bo_0," Var1_Bo_0 ",Var1_Be_1," Var1_Be_1 ",Var1_Bo_1," Var1_Bo_ ");
          //Подача значений
+         int Var2_Be_0_p,Var2_Bo_0_p,Var2_Be_1_p,Var2_Bo_1_p;
          if(Be_0==1)
            {
             Var2_Be_0=1;
@@ -1968,6 +1969,8 @@ int start()
             Bo_0=0;
             Be_1=0;
             Bo_1=0;
+            //impresion
+            Var2_Be_0_p=1;
            }
          if(Bo_0==1)
            {
@@ -1979,6 +1982,8 @@ int start()
             Bo_0=0;
             Be_1=0;
             Bo_1=0;
+            //impresion
+            Var2_Bo_0_p=1;
            }
          if(Be_1==1)
            {
@@ -1990,6 +1995,8 @@ int start()
             Bo_0=0;
             Be_1=0;
             Bo_1=0;
+            //impresion
+            Var2_Be_1_p=1;
            }
          if(Bo_1==1)
            {
@@ -2001,11 +2008,86 @@ int start()
             Bo_0=0;
             Be_1=0;
             Bo_1=0;
+            //impresion
+            Var2_Bo_1_p=1;
            }
          // Варианты вращение в правильной позиции. Смена строны производится мо методу переварота страницы в книге с лева на право или с права на лево
          // Вращение производится базируясь на вторую переменную. После присваивания и расчёта значения из второй переменной перетекают в первую.
          //Перед обработкой событий нужно выявить все правила для каждого направления.
          //Переприсваивание значения в тойже плоскости и том же лице если выпало тоже самое значение.Пример Be_0 и Be_0
+
+
+         //Asignacion de datos a base de calculos de Claster
+         // Print("1 - bodypips[MaxInd_bodypips,0] ",bodypips[MaxInd_bodypips,0]);
+         float opa_float=bodypips[MaxInd_bodypips,0]*100000;
+         int opa=opa_float;
+         double opa_double=bodypips[MaxInd_bodypips,0]*100000;
+         // Print("1- OPA ",opa);
+         // Print("1- opa_float ",opa_float);
+         //  Print("1- opa_double ",opa_double);
+         //запуск кластерной архитектуры
+         //доступ в массив по индексу
+         int sev_p,zap_p,yug_p,vost_p;
+         if(flower_Price_3[opa,36]==1)
+           {
+            sev=1;
+            zap=0;
+            yug=0;
+            vost=0;
+            sev_p=1;
+           }
+         if(flower_Price_3[opa,36]==2)
+           {
+            sev=0;
+            zap=0;
+            yug=0;
+            vost=1;
+            vost_p=1;
+           }
+         if(flower_Price_3[opa,36]==3)
+           {
+            sev=0;
+            zap=0;
+            yug=1;
+            vost=0;
+            yug_p=1;
+           }
+         if(flower_Price_3[opa,36]==4)
+           {
+            sev=0;
+            zap=1;
+            yug=0;
+            vost=0;
+            zap_p=1;
+           }
+         if(flower_Price_3[opa,35]==1)
+           {
+            Var1_Be_0=0;
+            Var1_Bo_0=1;
+            Var1_Be_1=1;
+            Var1_Bo_1=1;
+           }
+         if(flower_Price_3[opa,35]==2)
+           {
+            Var1_Be_0=1;
+            Var1_Bo_0=0;
+            Var1_Be_1=1;
+            Var1_Bo_1=1;
+           }
+         if(flower_Price_3[opa,35]==3)
+           {
+            Var1_Be_0=1;
+            Var1_Bo_0=1;
+            Var1_Be_1=0;
+            Var1_Bo_1=1;
+           }
+         if(flower_Price_3[opa,35]==4)
+           {
+            Var1_Be_0=1;
+            Var1_Bo_0=1;
+            Var1_Be_1=1;
+            Var1_Bo_1=0;
+           }
          // Назначение переменной
          if(Var1_Be_0==0 && Var2_Be_0==1)
            {
@@ -2043,73 +2125,6 @@ int start()
            {
             Var2_Bo_1=1;
            }//CHeck ok
-
-         //Asignacion de datos a base de calculos de Claster
-         Print("1 - bodypips[MaxInd_bodypips,0] ",bodypips[MaxInd_bodypips,0]);
-         float opa_float=bodypips[MaxInd_bodypips,0]*100000;
-         int opa=opa_float;
-         double opa_double=bodypips[MaxInd_bodypips,0]*100000;
-         Print("1- OPA ",opa);
-         Print("1- opa_float ",opa_float);
-         Print("1- opa_double ",opa_double);
-         //запуск кластерной архитектуры
-         //доступ в массив по индексу
-         if(flower_Price_3[opa,36]==1)
-           {
-            sev=1;
-            zap=0;
-            yug=0;
-            vost=0;
-           }
-         if(flower_Price_3[opa,36]==2)
-           {
-            sev=0;
-            zap=0;
-            yug=0;
-            vost=1;
-           }
-         if(flower_Price_3[opa,36]==3)
-           {
-            sev=0;
-            zap=0;
-            yug=1;
-            vost=0;
-           }
-         if(flower_Price_3[opa,36]==4)
-           {
-            sev=0;
-            zap=1;
-            yug=0;
-            vost=0;
-           }
-         if(flower_Price_3[opa,35]==1)
-           {
-            Var1_Be_0=0;
-            Var1_Bo_0=1;
-            Var1_Be_1=1;
-            Var1_Bo_1=1;
-           }
-         if(flower_Price_3[opa,35]==2)
-           {
-            Var1_Be_0=1;
-            Var1_Bo_0=0;
-            Var1_Be_1=1;
-            Var1_Bo_1=1;
-           }
-         if(flower_Price_3[opa,35]==3)
-           {
-            Var1_Be_0=1;
-            Var1_Bo_0=1;
-            Var1_Be_1=0;
-            Var1_Bo_1=1;
-           }
-         if(flower_Price_3[opa,35]==4)
-           {
-            Var1_Be_0=1;
-            Var1_Bo_0=1;
-            Var1_Be_1=1;
-            Var1_Bo_1=0;
-           }
          //Print("Step3 ",Var1_Be_0," Var1_Be_0 ",Var1_Bo_0," Var1_Bo_0 ",Var1_Be_1," Var1_Be_1 ",Var1_Bo_1," Var1_Bo_1 ");
          //Print("Step4 ",Var2_Be_0," Var2_Be_0 ",Var2_Bo_0," Var2_Bo_0 ",Var2_Be_1," Var2_Be_1 ",Var2_Bo_1," Var2_Bo_1 ");
          ArrayInitialize(errorprint,0);
@@ -10450,7 +10465,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -10466,7 +10488,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -10597,7 +10626,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -10615,7 +10651,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -10743,7 +10786,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -10761,7 +10811,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -10888,7 +10945,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -10906,7 +10970,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11034,7 +11105,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11052,7 +11130,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11179,7 +11264,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11197,7 +11289,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11324,7 +11423,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11342,7 +11448,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11469,7 +11582,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11487,7 +11607,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11616,7 +11743,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11634,7 +11768,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11761,7 +11902,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11779,7 +11927,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -11906,7 +12061,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -11924,7 +12086,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12051,7 +12220,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12069,7 +12245,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12197,7 +12380,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12215,7 +12405,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12342,7 +12539,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12360,7 +12564,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12487,7 +12698,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12505,7 +12723,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12632,7 +12857,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12650,7 +12882,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12779,7 +13018,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12797,7 +13043,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -12899,7 +13152,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -12917,7 +13177,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13019,7 +13286,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13037,7 +13311,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13139,7 +13420,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13157,7 +13445,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13252,7 +13547,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13270,7 +13572,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13364,7 +13673,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13382,7 +13698,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13482,7 +13805,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13500,7 +13830,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13594,7 +13931,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13612,7 +13956,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13708,7 +14059,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13726,7 +14084,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13845,7 +14210,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -13863,7 +14235,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -13982,7 +14361,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14000,7 +14386,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14119,7 +14512,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14137,7 +14537,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14257,7 +14664,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14275,7 +14689,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14394,7 +14815,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14412,7 +14840,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14531,7 +14966,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14549,7 +14991,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14668,7 +15117,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14686,7 +15142,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14807,7 +15270,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14825,7 +15295,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -14944,7 +15421,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -14962,7 +15446,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15081,7 +15572,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15099,7 +15597,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15218,7 +15723,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15236,7 +15748,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15356,7 +15875,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15374,7 +15900,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15493,7 +16026,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15511,7 +16051,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15630,7 +16177,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15648,7 +16202,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15767,7 +16328,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15785,7 +16353,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -15906,7 +16481,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -15924,7 +16506,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16043,7 +16632,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16061,7 +16657,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16180,7 +16783,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16198,7 +16808,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16317,7 +16934,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16335,7 +16959,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16455,7 +17086,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16473,7 +17111,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16592,7 +17237,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16610,7 +17262,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16729,7 +17388,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16747,7 +17413,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -16866,7 +17539,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -16884,7 +17564,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17005,7 +17692,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17023,7 +17717,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17122,7 +17823,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17140,7 +17848,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17239,7 +17954,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17257,7 +17979,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17351,7 +18080,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17369,7 +18105,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17464,7 +18207,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17482,7 +18232,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17576,7 +18333,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17594,7 +18358,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17688,7 +18459,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17706,7 +18484,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17800,7 +18585,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17818,7 +18610,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -17919,7 +18718,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -17937,7 +18743,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18056,7 +18869,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18074,7 +18894,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18193,7 +19020,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18211,7 +19045,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18330,7 +19171,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18348,7 +19196,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18468,7 +19323,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18486,7 +19348,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18605,7 +19474,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18623,7 +19499,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18742,7 +19625,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18760,7 +19650,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -18879,7 +19776,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -18897,7 +19801,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19019,7 +19930,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19037,7 +19955,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19156,7 +20081,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19174,7 +20106,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19293,7 +20232,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19311,7 +20257,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19430,7 +20383,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19448,7 +20408,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19568,7 +20535,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19586,7 +20560,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19705,7 +20686,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19723,7 +20711,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19842,7 +20837,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19860,7 +20862,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -19979,7 +20988,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -19997,7 +21013,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20118,7 +21141,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20136,7 +21166,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20255,7 +21292,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20273,7 +21317,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20392,7 +21443,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20410,7 +21468,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20529,7 +21594,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20547,7 +21619,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20667,7 +21746,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20685,7 +21771,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20796,7 +21889,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20814,7 +21914,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -20933,7 +22040,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -20951,7 +22065,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21070,7 +22191,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21088,7 +22216,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21209,7 +22344,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21227,7 +22369,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21321,7 +22470,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21339,7 +22495,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21438,7 +22601,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21456,7 +22626,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21555,7 +22732,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21573,7 +22757,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21668,7 +22859,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21686,7 +22884,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21780,7 +22985,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21798,7 +23010,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -21897,7 +23116,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -21915,7 +23141,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22009,7 +23242,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22027,7 +23267,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22129,7 +23376,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22147,7 +23401,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22266,7 +23527,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22284,7 +23552,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22403,7 +23678,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22421,7 +23703,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22540,7 +23829,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22558,7 +23854,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22678,7 +23981,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22696,7 +24006,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22815,7 +24132,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22833,7 +24157,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -22952,7 +24283,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -22970,7 +24308,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23089,7 +24434,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23107,7 +24459,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23228,7 +24587,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23246,7 +24612,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23365,7 +24738,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23383,7 +24763,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23502,7 +24889,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23520,7 +24914,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23639,7 +25040,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23657,7 +25065,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23777,7 +25192,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23795,7 +25217,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -23914,7 +25343,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -23932,7 +25368,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24051,7 +25494,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24069,7 +25519,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24188,7 +25645,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24206,7 +25670,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24327,7 +25798,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24345,7 +25823,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24464,7 +25949,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24482,7 +25974,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24602,7 +26101,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24620,7 +26126,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24740,7 +26253,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24758,7 +26278,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -24879,7 +26406,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -24897,7 +26431,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25016,7 +26557,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25034,7 +26582,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25154,7 +26709,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25172,7 +26734,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25292,7 +26861,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25310,7 +26886,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25431,7 +27014,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25449,7 +27039,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25550,7 +27147,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25568,7 +27172,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25667,7 +27278,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25685,7 +27303,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25784,7 +27409,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25802,7 +27434,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -25902,7 +27541,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -25920,7 +27566,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26019,7 +27672,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26037,7 +27697,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26136,7 +27803,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26154,7 +27828,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26253,7 +27934,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26271,7 +27959,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26372,7 +28067,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26390,7 +28092,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26509,7 +28218,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26527,7 +28243,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26646,7 +28369,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26664,7 +28394,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26783,7 +28520,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26801,7 +28545,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -26921,7 +28672,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -26939,7 +28697,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -27059,7 +28824,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -27077,7 +28849,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -27196,7 +28975,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -27214,7 +29000,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -27333,7 +29126,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи для дальнейшей анаитики
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи для дальнейшей анаитики
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      if(flower_Price_3[opa,41]==1) //Временной массив существует произвести действия// заносится время свечи в массив
                        {
@@ -27351,7 +29151,14 @@ int start()
                               break;
                              }
                           }
-                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);// Присваивается время свечи
+                        flower_Price_3_TIME[opa,ye]=iTime(Symbol(),PERIOD_M1,1);
+                        int file_handle31=FileOpen(FileName26,FILE_READ|FILE_WRITE|FILE_BIN);
+                        if(file_handle31>0)
+                          {
+                           FileSeek(file_handle31,0,SEEK_CUR);   // Присваивается время свечи
+                           uint test=FileWriteArray(file_handle31,flower_Price_3_TIME,0,WHOLE_ARRAY);
+                           FileClose(file_handle31);
+                          }
                        }
                      // формула закрытия расчёта
                      // расчётное значение по цене
@@ -27479,7 +29286,7 @@ int start()
             if(file_handle14>0)
               {
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie," C16V x ",Var_I,/*"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " fP ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Bo," D x ",napravlenie," arr Napr ",sev_p,vost_p,yug_p,zap_p," Var1 ",Var1_Be_0,Var1_Bo_0,Var1_Be_1,Var1_Bo_1," Var2 ",Var2_Be_0_p,Var2_Bo_0_p,Var2_Be_1_p,Var2_Bo_1_p,/*" C16V x ",Var_I,"Face",face,*//*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " fP ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*, " PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116] " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
               }
            }
@@ -27489,7 +29296,7 @@ int start()
             if(file_handle14>0)
               {
                FileSeek(file_handle14,0,SEEK_END);
-               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie," C16V x ",Var_I,/*" BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " fP ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
+               FileWrite(file_handle14,Symbol()," T ",iTime(Symbol(),0,1),/*" Var1Wr ",Var1Wr," B 3 ",*/Be,/*"Face",face,*/" D x ",napravlenie," arr Napr ",sev_p,vost_p,yug_p,zap_p," Var1 ",Var1_Be_0,Var1_Bo_0,Var1_Be_1,Var1_Bo_1," Var2 ",Var2_Be_0_p,Var2_Bo_0_p,Var2_Be_1_p,Var2_Bo_1_p,/*" C16V x ",Var_I," BlockNum ",BlockNum,*/" F X ",Sev[1,1],Sev[1,2],Sev[1,3],Sev[1,4],Sev[1,5],Sev[1,6],Sev[1,7],Sev[1,8]," PR ",bodypips[MaxInd_bodypips,0]," N_C ",N_Centro," N_Gr20 ",N_Gr20," N_Pet ",N_Petalo, " fP ",flower_Plus,/*" In_Ch1 ",insert_chanel_1," In_Ch2 ",insert_chanel_2," out_Dir ",output_Dir," imp ",zaryad,*/" Dir z ",z_napravlenie," F Z ",z_Sev[1,1],z_Sev[1,2],z_Sev[1,3],z_Sev[1,4],z_Sev[1,5],z_Sev[1,6],z_Sev[1,7],z_Sev[1,8]/*," PM 1 ",Form_Patern_Finder[w,11]," 2 ",Form_Patern_Finder[w,26]," 3 ",Form_Patern_Finder[w,41]," 4 ",Form_Patern_Finder[w,56]," 5 ",Form_Patern_Finder[w,71]," 6 ",Form_Patern_Finder[w,86]," 7 ",Form_Patern_Finder[w,101]," 8 ",Form_Patern_Finder[w,116]/* " X ",Gx," Y ",Gy/*" I CONT ",bodypips[MaxInd_bodypips,1]," O ",Onda1/*" ERR2 ", Sterr2*/);
                FileClose(file_handle14);
               }
            }
