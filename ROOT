@@ -183,9 +183,18 @@ double OPEN;
 double resOperandMax;
 double resOperandMin;
 
- int be_0_C;int bo_0_C;
-  int be_0_C_N;int bo_0_C_N;
-  int be_1_C_N;int bo_1_C_N;
+int be_0_C;
+int bo_0_C;
+int be_0_C_N;
+int bo_0_C_N;
+int be_1_C_N;
+int bo_1_C_N;
+int be_0_C_Z;
+int bo_0_C_Z;
+int be_0_C_N_Z;
+int bo_0_C_N_Z;
+int be_1_C_N_Z;
+int bo_1_C_N_Z;
 //--END----DOUBLE VARS-----
 //--Claster Variables
 //--
@@ -421,6 +430,12 @@ int kubo_6=0;
 int kubo_7=0;
 int kubo_8=0;
 int be_0=0,be_1=0,bo_0=0,bo_1=0;
+//Hogwards
+string Griffindor_Be_0=" Griffindor";//Сила
+string Ravenclaw_Bo_0=" Ravenclaw";//Свобода
+string Hufflepuff_Be_1=" Hufflepuff";//Сила к жизни
+string Slytherin_Bo_1=" Slytherin";//Мудрость
+
 //указать в ссылке обратную индексацию
 // Расшифровка символов. 1 число Архитектура 2 число x коордената 3 число y коордената
 int C_Ar_1,C_Ar_2,C_Ar_3,C_Ar_4,C_Ar_5,C_Ar_6,C_Ar_7,C_Ar_8,C_Ar_9,C_Ar_10,C_Ar_11,C_Ar_12,C_Ar_13,C_Ar_14,C_Ar_15,C_Ar_16,C_Ar_17,C_Ar_18,C_Ar_19,C_Ar_20,C_Ar_21,C_Ar_22,C_Ar_23,C_Ar_24,C_Ar_25,C_Ar_26,C_Ar_27,C_Ar_28,C_Ar_29,C_Ar_30,C_Ar_31,C_Ar_32;
@@ -533,6 +548,14 @@ int Nucleo_180_Gr;
 int Nucleo_225_Gr;
 int Nucleo_270_Gr;
 int Nucleo_315_Gr;
+int be_0_ld;
+int bo_0_ld;
+int be_1_ld;
+int bo_1_ld;
+int be_0_ld_z;
+int bo_0_ld_z;
+int be_1_ld_z;
+int bo_1_ld_z;
 int Nucleo_Gradus[15];//Показатель направления ядра после прокручивания электронами. Исходная позиция север архитектура 3 после сигнала. 8 позиций для углов 45градусов + и 4 позиции для регистрации точьки зрения с использованием архитектур 1234
 // Разметка 4 переменных по 4 сторонам света с лицом и изнанкой и привязкой к Северной стороне как исходной позиции
 //Север
@@ -659,7 +682,7 @@ string FileName30="1.8_TimeArrSignal_Wordpress.bin";
 string FileName31="1.8_TimeArrSignal_Int_Wordpress.bin";
 string FileName40="1.8_TimeArrSignal_Wordpress_24.bin";
 string FileName41="1.8_TimeArrSignal_Wordpress_168.bin";
-
+string FileName42="1.8_4_Variable_Indicator_Param_Dev.txt";
 
 
 string apikey="630515987:AAHk0ChIBaW3aOZBP1mFQBSK-4HXsBvbB6I";//f9b317ac95d043fb843fdb6a54b84ebb
@@ -798,7 +821,7 @@ int init()
    ArrayInitialize(KlasterTime,0);
 // ---END---initialization of arrays-----
 // --- Initialization of the Telegram Bot
- //  string Testtelegr = TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.8");
+//  string Testtelegr = TelegramSendText(apikey,chatid,"Tatiana_Bot_Initialized_V_1.8");
 //Comment(Testtelegr);
 // ---END---Initialization of the Telegram Bot
 //--Индикатор бинарный код - цель получение повторений индикатора
@@ -1683,8 +1706,11 @@ int start()
          double PipsPrice=NormalizeDouble(pips_Menus_one*Point,5);
          BinInd3BO=10;
          BinInd3BE=10;
-         be_0=0;be_1=0;bo_0=0;bo_1=0;
-         
+         be_0=0;
+         be_1=0;
+         bo_0=0;
+         bo_1=0;
+
          //Указатель Мама Папа и Крёсный и Крёсная
          if(bodypips[MaxInd_bodypips,0]>price_Menus_one)
            {
@@ -1705,7 +1731,7 @@ int start()
                Be_0_C=0;
                Be_1_C=0;
                Bo_1_C=0;
-               
+
               }
             if(bodypips[MaxInd_bodypips,0]>price_plus)
               {
@@ -1723,7 +1749,7 @@ int start()
                Be_0_C=0;
                Bo_0_C=0;
                Be_1_C=0;
-               
+
               }
            }
          //------------------------------------------------
@@ -1765,35 +1791,35 @@ int start()
                Bo_1_C=0;
               }
            }
-           
-           // щётчик направления
-          
-           if(be_0==1)
+
+         // щётчик направления
+
+         if(be_0==1)
            {
-           be_0_C=be_0_C+be_0;        
-           
-           
+            be_0_C=be_0_C+be_0;
+
+
            }
-           if(be_1==1)
+         if(be_1==1)
            {
-           be_0_C=be_0_C-be_1;        
-           
-           
+            be_0_C=be_0_C-be_1;
+
+
            }
-           if(bo_0==1)
+         if(bo_0==1)
            {
-           bo_0_C=be_0_C+bo_0;        
-           
-           
+            bo_0_C=be_0_C+bo_0;
+
+
            }
-           if(bo_1==1)
+         if(bo_1==1)
            {
-           bo_0_C=bo_0_C-bo_1;        
-           
-           
+            bo_0_C=bo_0_C-bo_1;
+
+
            }
-           //Comment("  Be_0  ",be_0_C ,"  Bo_0  ", bo_0_C);
-           
+         //Comment("  Be_0  ",be_0_C ,"  Bo_0  ", bo_0_C);
+
          //+------------------------------------------------------------------+
          //|END Sunflower Seed sides                                          |
          //+------------------------------------------------------------------+
@@ -29579,112 +29605,316 @@ int start()
               }
            }
         }
+Comment(" be_0 ",be_0," bo_0 ",bo_0," be_1 ",be_1," bo_1 ",bo_1);
+      // индикатор с учётом полярности
+
+      if(be_0==1 && Sev_1==1)
+        {
+         be_0_C_N=be_0_C_N+be_0;
+
+
+        }
+      if(be_1==1 && Sev_1==1)
+        {
+         be_1_C_N=be_1_C_N-be_1;
+
+
+        }
+      if(bo_0==1 && Sev_1==1)
+        {
+         bo_0_C_N=be_0_C_N+bo_0;
+
+
+        }
+      if(bo_1==1 && Sev_1==1)
+        {
+         bo_1_C_N=bo_1_C_N-bo_1;
+
+
+        }
+
+
+
+      if(be_0==1 && Vost_1==1)
+        {
+         be_0_C_N=be_0_C_N-be_0;
+
+
+        }
+      if(be_1==1 && Vost_1==1)
+        {
+         be_1_C_N=be_1_C_N+be_1;
+
+
+        }
+      if(bo_0==1 && Vost_1==1)
+        {
+         bo_0_C_N=be_0_C_N+bo_0;
+
+
+        }
+      if(bo_1==1 && Vost_1==1)
+        {
+         bo_1_C_N=bo_1_C_N-bo_1;
+
+
+        }
+
+      if(be_0==1 && Yug_1==1)
+        {
+         be_0_C_N=be_0_C_N-be_0;
+
+
+        }
+      if(be_1==1 && Yug_1==1)
+        {
+         be_1_C_N=be_1_C_N+be_1;
+
+
+        }
+      if(bo_0==1 && Yug_1==1)
+        {
+         bo_0_C_N=be_0_C_N-bo_0;
+
+
+        }
+      if(bo_1==1 && Yug_1==1)
+        {
+         bo_1_C_N=bo_1_C_N+bo_1;
+
+
+        }
+
+      if(be_0==1 && Zap_1==1)
+        {
+         be_0_C_N=be_0_C_N+be_0;
+
+
+        }
+      if(be_1==1 && Zap_1==1)
+        {
+         be_1_C_N=be_1_C_N-be_1;
+
+
+        }
+      if(bo_0==1 && Zap_1==1)
+        {
+         bo_0_C_N=be_0_C_N-bo_0;
+
+
+        }
+      if(bo_1==1 && Zap_1==1)
+        {
+         bo_1_C_N=bo_1_C_N+bo_1;
+
+
+        }
+      // Z
+
+      if(be_0==1 && z_Sev_1==1)
+        {
+         be_0_C_N_Z=be_0_C_N_Z+be_0;
+         be_0=0;
+
+        }
+      if(be_1==1 && z_Sev_1==1)
+        {
+         be_1_C_N_Z=be_1_C_N_Z-be_1;
+         be_1=0;
+
+        }
+      if(bo_0==1 && z_Sev_1==1)
+        {
+         bo_0_C_N_Z=be_0_C_N_Z+bo_0;
+         bo_0=0;
+
+        }
+      if(bo_1==1 && z_Sev_1==1)
+        {
+         bo_1_C_N_Z=bo_1_C_N_Z-bo_1;
+         bo_1=0;
+
+        }
+
+
+
+      if(be_0==1 && z_Vost_1==1)
+        {
+         be_0_C_N_Z=be_0_C_N_Z-be_0;
+         be_0=0;
+
+        }
+      if(be_1==1 && z_Vost_1==1)
+        {
+         be_1_C_N_Z=be_1_C_N_Z+be_1;
+         be_1=0;
+
+        }
+      if(bo_0==1 && z_Vost_1==1)
+        {
+         bo_0_C_N_Z=be_0_C_N_Z+bo_0;
+         bo_0=0;
+
+        }
+      if(bo_1==1 && z_Vost_1==1)
+        {
+         bo_1_C_N_Z=bo_1_C_N_Z-bo_1;
+         bo_1=0;
+
+        }
+
+      if(be_0==1 && z_Yug_1==1)
+        {
+         be_0_C_N_Z=be_0_C_N_Z-be_0;
+         be_0=0;
+
+        }
+      if(be_1==1 && z_Yug_1==1)
+        {
+         be_1_C_N_Z=be_1_C_N_Z+be_1;
+         be_1=0;
+
+        }
+      if(bo_0==1 && z_Yug_1==1)
+        {
+         bo_0_C_N_Z=be_0_C_N_Z-bo_0;
+         bo_0=0;
+
+        }
+      if(bo_1==1 && z_Yug_1==1)
+        {
+         bo_1_C_N_Z=bo_1_C_N_Z+bo_1;
+         bo_1=0;
+
+        }
+
+      if(be_0==1 && z_Zap_1==1)
+        {
+         be_0_C_N_Z=be_0_C_N_Z+be_0;
+         be_0=0;
+
+        }
+      if(be_1==1 && z_Zap_1==1)
+        {
+         be_1_C_N_Z=be_1_C_N_Z-be_1;
+         be_1=0;
+
+        }
+      if(bo_0==1 && z_Zap_1==1)
+        {
+         bo_0_C_N_Z=be_0_C_N_Z-bo_0;
+         bo_0=0;
+
+        }
+      if(bo_1==1 && z_Zap_1==1)
+        {
+         bo_1_C_N_Z=bo_1_C_N_Z+bo_1;
+         bo_1=0;
+
+        }
+        int varnum;
+        // proverka
+        if(be_0||bo_0||be_1||bo_1>=2)
+        {
+        varnum=1;
         
-        // индикатор с учётом полярности
-        
-        if(be_0==1 && Sev_1==1)
-           {
-           be_0_C_N=be_0_C_N+be_0;        
-           
-           
-           }
-           if(be_1==1 && Sev_1==1)
-           {
-           be_1_C_N=be_1_C_N-be_1;        
-           
-           
-           }
-           if(bo_0==1 && Sev_1==1)
-           {
-           bo_0_C_N=be_0_C_N+bo_0;        
-           
-           
-           }
-           if(bo_1==1 && Sev_1==1)
-           {
-           bo_1_C_N=bo_1_C_N-bo_1;        
-           
-           
-           }
-                
-                    
-          
-           if(be_0==1 && Vost_1==1)
-           {
-           be_0_C_N=be_0_C_N-be_0;        
-           
-           
-           }
-           if(be_1==1 && Vost_1==1)
-           {
-           be_1_C_N=be_1_C_N+be_1;        
-           
-           
-           }
-           if(bo_0==1 && Vost_1==1)
-           {
-           bo_0_C_N=be_0_C_N+bo_0;        
-           
-           
-           }
-           if(bo_1==1 && Vost_1==1)
-           {
-           bo_1_C_N=bo_1_C_N-bo_1;        
-           
-           
-           }
-           
-            if(be_0==1 && Yug_1==1)
-           {
-           be_0_C_N=be_0_C_N-be_0;        
-           
-           
-           }
-           if(be_1==1 && Yug_1==1)
-           {
-           be_1_C_N=be_1_C_N+be_1;        
-           
-           
-           }
-           if(bo_0==1 && Yug_1==1)
-           {
-           bo_0_C_N=be_0_C_N-bo_0;        
-           
-           
-           }
-           if(bo_1==1 && Yug_1==1)
-           {
-           bo_1_C_N=bo_1_C_N+bo_1;        
-           
-           
-           }
-           
-           if(be_0==1 && Zap_1==1)
-           {
-           be_0_C_N=be_0_C_N+be_0;        
-           
-           
-           }
-           if(be_1==1 && Zap_1==1)
-           {
-           be_1_C_N=be_1_C_N-be_1;        
-           
-           
-           }
-           if(bo_0==1 && Zap_1==1)
-           {
-           bo_0_C_N=be_0_C_N-bo_0;        
-           
-           
-           }
-           if(bo_1==1 && Zap_1==1)
-           {
-           bo_1_C_N=bo_1_C_N+bo_1;        
-           
-           
-           }
-           
-          Comment("  Be_0  ",be_0_C ,"  Bo_0  ", bo_0_C,  "  Be_0_*  ",be_0_C_N ,"  Bo_0_*  ", bo_0_C_N,  "  Be_1_*  ",be_1_C_N ,"  Bo_1_*  ", bo_1_C_N);
+        }
+      bo_1_C_N=MathAbs(bo_1_C_N);
+      bo_1_C_N_Z=MathAbs(bo_1_C_N_Z);
+
+      int Be_Bo_0R_es;
+      int Be_Bo_1R_es;
+      int Be_Bo_0R_es_z;
+      int Be_Bo_1R_es_z;
+
+       //  ормулирование формул сводки банорности
+
+      // sravnenie parametrov var1
+      if(be_0_ld!=be_0_C_N)
+        {
+         int be_0t=be_0_ld-be_0_C_N;
+         int bo_0t=bo_0_ld-bo_0_C_N;
+         Be_Bo_0R_es=be_0t-bo_0t;
+
+        }
+
+      if(bo_0_ld!=bo_0_C_N)
+        {
+         int be_0t=be_0_ld-be_0_C_N;
+         int bo_0t=bo_0_ld-bo_0_C_N;
+         Be_Bo_0R_es=be_0t-bo_0t;
+
+        }
+
+      if(be_1_ld!=be_1_C_N)
+        {
+         int be_1t=be_1_ld-be_1_C_N;
+         int bo_1t=bo_1_ld-bo_1_C_N;
+         Be_Bo_1R_es=be_1t-bo_1t;
+
+        }
+      if(bo_1_ld!=bo_1_C_N)
+        {
+         int be_1t=be_1_ld-be_1_C_N;
+         int bo_1t=bo_1_ld-bo_1_C_N;
+         Be_Bo_1R_es=be_1t-bo_1t;
+
+        }
+      // sravnenie parametrov var2
+
+      if(be_0_ld_z!=be_0_C_N_Z)
+        {
+         int be_0t_z=be_0_ld_z-be_0_C_N_Z;
+         int bo_0t_z=bo_0_ld_z-bo_0_C_N_Z;
+         Be_Bo_0R_es_z=be_0t_z-bo_0t_z;
+
+        }
+
+      if(bo_0_ld_z!=bo_0_C_N_Z)
+        {
+         int be_0t_z=be_0_ld_z-be_0_C_N_Z;
+         int bo_0t_z=bo_0_ld_z-bo_0_C_N_Z;
+         Be_Bo_0R_es_z=be_0t_z-bo_0t_z;
+
+        }
+
+      if(be_1_ld_z!=be_1_C_N_Z)
+        {
+         int be_1t_z=be_1_ld_z-be_1_C_N_Z;
+         int bo_1t_z=bo_1_ld_z-bo_1_C_N_Z;
+         Be_Bo_1R_es_z=be_1t_z-bo_1t_z;
+
+        }
+      if(bo_1_ld_z!=bo_1_C_N_Z)
+        {
+         int be_1t_z=be_1_ld_z-be_1_C_N_Z;
+         int bo_1t_z=bo_1_ld_z-bo_1_C_N_Z;
+         Be_Bo_1R_es_z=be_1t_z-bo_1t_z;
+        }
+
+
+
+      //  ормулирование формул сводки банорности
+      //модуль приравнивания после обработки
+      int be_0_ld=be_0_C_N;
+      int bo_0_ld=bo_0_C_N;
+      int be_1_ld=be_1_C_N;
+      int bo_1_ld=bo_1_C_N;
+      int be_0_ld_z=be_0_C_N_Z;
+      int bo_0_ld_z=bo_0_C_N_Z;
+      int be_1_ld_z=be_1_C_N_Z;
+      int bo_1_ld_z=bo_1_C_N_Z;
+    //Comment("  Be_0_*  ",be_0_C_N,"  Bo_0_*  ", bo_0_C_N,  "  Be_1_*  ",be_1_C_N,"  Bo_1_*  ", bo_1_C_N,  "  Be_0_Z*  ",be_0_C_N_Z,"  Bo_0_Z*  ", bo_0_C_N_Z,  "  Be_1_Z*  ",be_1_C_N_Z,"  Bo_1_Z*  ", bo_1_C_N_Z);
+//  https://harrypotter.fandom.com/es/wiki/Ravenclaw
+      int file_handle56=FileOpen(FileName42,FILE_READ|FILE_WRITE|FILE_TXT);
+      if(file_handle56>0)
+        {
+         FileSeek(file_handle56,0,SEEK_END);
+         FileWrite(file_handle56,iTime(Symbol(),0,1)," _ ",iClose(Symbol(),0,1),Griffindor_Be_0," ",be_0_C_N," ", Ravenclaw_Bo_0," ", bo_0_C_N,"  Be_Bo_0R  ",Be_Bo_0R_es," ", Hufflepuff_Be_1," ",be_1_C_N," ",Slytherin_Bo_1," ", bo_1_C_N,"  Be_Bo_1R_es ",Be_Bo_1R_es, " Varnum ",varnum,be_0,bo_0,be_1,bo_1);
+         FileWrite(file_handle56,iTime(Symbol(),0,1)," _ ",iClose(Symbol(),0,1),"  Be_0_Z*  ",be_0_C_N_Z,"  Bo_0_Z*  ", bo_0_C_N_Z, "  Be_Bo_0R_es_z ",  Be_Bo_0R_es_z, "be_1_C_N_Z",  be_1_C_N_Z,  " bo_1_C_N_Z",bo_1_C_N_Z, " Be_Bo_1R_es_z ", Be_Bo_1R_es_z);
+         FileClose(file_handle56);
+        }
+
       //+------------------------------------------------------------------+
       //| Sunflower 1/0 - Cluster flower                                   |
       //+------------------------------------------------------------------+
@@ -30316,79 +30546,6 @@ int start()
 
 
          //WRITE SELLER .TXT
-         datetime DTTestdata=iTime(Symbol(),0,1);
-         string TestTIme=TimeToStr(DTTestdata,TIME_DATE);
-
-         datetime DTforFile=iTime(Symbol(),0,1);
-         string DTySignal=TimeToStr(DTforFile,TIME_DATE|TIME_MINUTES);
-         datetime TimeForTXT=iTime(Symbol(),0,1);
-         int PowerF=ONE_BE;
-         int BoolF=Maximum-MaxBinNumber_1;
-         int BeerF=Minimum+MaxBinNumber_0;
-
-
-         string FileName34="EurUsd-PositionData"+TestTIme+"_"+PowerF+"_"+BoolF+".txt";
-         int file_handle34=FileOpen(FileName34,FILE_READ|FILE_WRITE|FILE_TXT);
-         if(file_handle34>0)
-           {
-            FileSeek(file_handle34,0,SEEK_CUR);
-            FileWrite(file_handle34,"                                                                                  ");
-            FileWrite(file_handle34,"                                                                                  ");
-            FileWrite(file_handle34,"                                                                                  ");
-            FileWrite(file_handle34,"                                                                                  ");
-            FileWrite(file_handle34,"|---------------------------------------*----------------------------------------|");//80 punktov
-            FileWrite(file_handle34,"|-----------------------      TIME DATA FROM GLASS OK . ES ----------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Thank you for participating in our development  ----------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  You have just purchased a EURUSD signal  -----------------------------------|");
-            FileWrite(file_handle34,"|--  for FOREX on the MQL4 platform  --------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Here is the EXPERT URL that you can download for free  ---------------------|");
-            FileWrite(file_handle34,"|--  Open a position in the market using the following signal based on  ---------|");
-            FileWrite(file_handle34,"|-------------------         TIME, STRENGHT, and DENSITY        -----------------|");
-            FileWrite(file_handle34,"|--  https://www.mql5.com/en/market/product/41101  ------------------------------|");
-            FileWrite(file_handle34,"|--  You will find the Expert User Instructions at the same URL  ----------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  The following data is for integration into the Expert program  -------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Expert's exact Opening "+TimeForTXT+"  --------------------------------|");//Usar Variables
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Binary Signal Strength  "+PowerF+"  ------------------------------------------------|");//Usar Variables
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  BUFFALO Market Force   "+BoolF+"  -------------------------------------------------|");//Usar Variables
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  BEAR Market Force       "+BeerF+"  -------------------------------------------------|");//Usar Variables
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  You can open a STOP or LIMIT position  -------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  The opening volumes are decided by you under your own responsibility  ------|");
-            FileWrite(file_handle34,"|--  We also recommend opening positions with your credentials on a DEMO account |");
-            FileWrite(file_handle34,"|--If you trade on a live account, we are not responsible for any losses or gains|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Feedback  ------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Carrer Pubilla Cases 24 Atico 3 --------------------------------------------|");
-            FileWrite(file_handle34,"|--  Hospitalet de Llobregat ----------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Barcelona 08906  Spain -----------------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  EMAIL info@glassko.es  -----------------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Phone and Whatsupp +34671306552  -------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  WEB SAIT www.glassko.es  ---------------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  Profile Information  -------------------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--  https://www.mql5.com/en/users/eugeniokp  -----------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-            FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
-
-
-            FileClose(file_handle34);
-           }
-         SendFTP(FileName34,NULL);
-
          if(ONE_BE>0)
            {
 
@@ -30405,6 +30562,81 @@ int start()
                  }
 
               }//end break
+            string IN= IntegerToString(in-1);
+            datetime DTTestdata=iTime(Symbol(),0,1);
+            string TestTIme=TimeToStr(DTTestdata,TIME_DATE);
+
+            datetime DTforFile=iTime(Symbol(),0,1);
+            string DTySignal=TimeToStr(DTforFile,TIME_DATE|TIME_MINUTES);
+            datetime TimeForTXT=iTime(Symbol(),0,1);
+            int PowerF=ONE_BE;
+            int BoolF=Maximum-MaxBinNumber_1;
+            int BeerF=Minimum+MaxBinNumber_0;
+
+
+            string FileName34="EurUsd-PositionData"+TestTIme+"_"+PowerF+"_"+BoolF+"_"+IN+".txt";
+            int file_handle34=FileOpen(FileName34,FILE_READ|FILE_WRITE|FILE_TXT);
+            if(file_handle34>0)
+              {
+               FileSeek(file_handle34,0,SEEK_CUR);
+               FileWrite(file_handle34,"                                                                                  ");
+               FileWrite(file_handle34,"                                                                                  ");
+               FileWrite(file_handle34,"                                                                                  ");
+               FileWrite(file_handle34,"                                                                                  ");
+               FileWrite(file_handle34,"|---------------------------------------*----------------------------------------|");//80 punktov
+               FileWrite(file_handle34,"|-----------------------      0----------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Thank you for participating in our development  ----------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  You have just purchased a EURUSD signal  -----------------------------------|");
+               FileWrite(file_handle34,"|--  for FOREX on the MQL4 platform  --------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Here is the EXPERT URL that you can download for free  ---------------------|");
+               FileWrite(file_handle34,"|--  Open a position in the market using the following signal based on  ---------|");
+               FileWrite(file_handle34,"|-------------------         TIME, STRENGHT, and DENSITY        -----------------|");
+               FileWrite(file_handle34,"|--  https://www.mql5.com/en/market/product/41101  ------------------------------|");
+               FileWrite(file_handle34,"|--  You will find the Expert User Instructions at the same URL  ----------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  The following data is for integration into the Expert program  -------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Expert's exact Opening "+TimeForTXT+"  --------------------------------|");//Usar Variables
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Binary Signal Strength  "+PowerF+"  ------------------------------------------------|");//Usar Variables
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  BUFFALO Market Force   "+BoolF+"  -------------------------------------------------|");//Usar Variables
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  BEAR Market Force       "+BeerF+"  -------------------------------------------------|");//Usar Variables
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  You can open a STOP or LIMIT position  -------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  The opening volumes are decided by you under your own responsibility  ------|");
+               FileWrite(file_handle34,"|--  We also recommend opening positions with your credentials on a DEMO account |");
+               FileWrite(file_handle34,"|--If you trade on a live account, we are not responsible for any losses or gains|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Feedback  ------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Carrer Pubilla Cases 24 Atico 3 --------------------------------------------|");
+               FileWrite(file_handle34,"|--  Hospitalet de Llobregat ----------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Barcelona 08906  Spain -----------------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  EMAIL info@glassko.es  -----------------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Phone and Whatsupp +34671306552  -------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  WEB SAIT www.glassko.es  ---------------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  Profile Information  -------------------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--  https://www.mql5.com/en/users/eugeniokp  -----------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+               FileWrite(file_handle34,"|--------------------------------------------------------------------------------|");
+
+
+               FileClose(file_handle34);
+              }
+            SendFTP(FileName34,NULL);
+
+
 
             //Присвоение поллученных данных в массив
             TimeArrSignal_Int_Wordpress[in,1]=ONE_BE;
@@ -30461,7 +30693,7 @@ int start()
             // 3 операции с вычитанием времени
             //
 
-            
+
 
             // Запись нового сигнала в Массив - Сигнал без обработки
 
@@ -33130,3 +33362,4 @@ void Text_OBJ_LABEL(string Nm_T,int CORN,int XD,int YD,string Tx_Znk,int Sz,stri
 //+------------------------------------------------------------------+
 
 //+------------------------------------------------------------------+
+
